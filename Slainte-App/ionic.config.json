@@ -1,0 +1,7 @@
+{
+  "name": "Slainte-App",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
