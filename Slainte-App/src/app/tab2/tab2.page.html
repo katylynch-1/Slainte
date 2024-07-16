@@ -12,7 +12,8 @@
       <ion-title size="large">Explore</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-grid>
+  <!-- <ion-grid>
+    <p>The below venues are retrieved from key/value pairs in VS Code</p>
     <ion-row>
       <ng-container *ngFor="let venue of allVenues">
         <ion-col size="12" size-sm="6" size-md="4" size-lg="3" size-xl="3">
@@ -37,6 +38,34 @@
         </ion-col>
       </ng-container>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
 
+  <ion-grid>
+    <p>The below venues are retrieved from firebase</p>
+    <ion-row>
+      <ng-container *ngFor="let venue of (venues | async)">
+        <ion-col size="12" size-sm="6" size-md="4" size-lg="3" size-xl="3">
+          <ion-card class="venue-card">
+            <img [src]="venue.imageURL" alt="{{ venue.name }}">
+            <ion-card-header>
+              <ion-card-title>{{ venue.name }}</ion-card-title>
+              <ion-card-subtitle>{{ venue.type }}</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <div class="chip-container">
+                <ion-chip *ngIf="venue.atmosphere">{{ venue.atmosphere }}</ion-chip>
+                <!-- <ion-chip *ngIf="venue.drinks">{{ venue.drinks }}</ion-chip> -->
+                <ion-chip *ngIf="venue.music">{{ venue.music }}</ion-chip>
+                <ion-chip *ngIf="venue.amenities">{{ venue.amenities }}</ion-chip>
+                <ion-chip *ngIf="venue.entertainment">{{ venue.entertainment }}</ion-chip>
+                <ion-chip *ngIf="venue.goodGuinness">Good Guinness</ion-chip> 
+              </div>
+              <p>{{ venue.address }}</p>
+              <p>{{ venue.openingHours }}</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ng-container>
+    </ion-row>
+  </ion-grid>
 </ion-content>
