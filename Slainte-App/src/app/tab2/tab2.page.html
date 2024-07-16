@@ -12,6 +12,31 @@
       <ion-title size="large">Explore</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-grid>
+    <ion-row>
+      <ng-container *ngFor="let venue of allVenues">
+        <ion-col size="12" size-sm="6" size-md="4" size-lg="3" size-xl="3">
+          <ion-card class="venue-card">
+            <img [src]="" alt="">
+            <ion-card-header>
+              <ion-card-title>{{ venue.name }}</ion-card-title>
+              <ion-card-subtitle>{{ venue.type }}</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <div class="chip-container">
+                <ion-chip *ngIf="venue.atmosphere">{{ venue.atmosphere }}</ion-chip>
+                <ion-chip *ngIf="venue.drinks">{{ venue.drinks }}</ion-chip>
+                <ion-chip *ngIf="venue.music">{{ venue.music }}</ion-chip>
+                <ion-chip *ngIf="venue.amenities">{{ venue.amenities }}</ion-chip>
+                <ion-chip *ngIf="venue.entertainment">{{ venue.entertainment }}</ion-chip>
+              </div>
+              <p>{{ venue.address }}</p>
+              <p>{{ venue.openingHours }}</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ng-container>
+    </ion-row>
+  </ion-grid>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
 </ion-content>
