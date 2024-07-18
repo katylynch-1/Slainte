@@ -12,12 +12,40 @@ export interface Venue {
   type: string;
   imageURL?: string;
   imagePath: string;
+
+  // Atmosphere Tags
   traditional: boolean;
   casual: boolean;
   cosy: boolean;
+  energetic: boolean;
+  alternative: boolean;
+  relaxed: boolean;
+  fancy: boolean;
+  lgbtq: boolean;
+  loud: boolean;
+
+  // Drinks tags
   pints: boolean;
   goodGuinness: boolean;
   cocktails: boolean;
+  wine: boolean;
+  gin: boolean;
+  whiskey: boolean;
+  nonAlcoholic: boolean;
+
+  // Music tags
+  trad: boolean;
+  pop: boolean;
+  techno: boolean;
+  house: boolean;
+  indie: boolean;
+  rock: boolean;
+  rNb: boolean;
+  hipHop: boolean;
+  reggaeton: boolean;
+  jazz: boolean;
+
+
   [key: string]: any; // Add index signature
 
 }

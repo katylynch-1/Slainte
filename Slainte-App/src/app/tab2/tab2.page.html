@@ -1,81 +1,61 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Explore
-    </ion-title>
+    <ion-title>Explore</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Explore</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <!-- <ion-grid>
-    <p>The below venues are retrieved from key/value pairs in VS Code</p>
-    <ion-row>
-      <ng-container *ngFor="let venue of allVenues">
-        <ion-col size="12" size-sm="6" size-md="4" size-lg="3" size-xl="3">
-          <ion-card class="venue-card">
-            <img [src]="" alt="">
-            <ion-card-header>
-              <ion-card-title>{{ venue.name }}</ion-card-title>
-              <ion-card-subtitle>{{ venue.type }}</ion-card-subtitle>
-            </ion-card-header>
-            <ion-card-content>
-              <div class="chip-container">
-                <ion-chip *ngIf="venue.atmosphere">{{ venue.atmosphere }}</ion-chip>
-                <ion-chip *ngIf="venue.drinks">{{ venue.drinks }}</ion-chip>
-                <ion-chip *ngIf="venue.music">{{ venue.music }}</ion-chip>
-                <ion-chip *ngIf="venue.amenities">{{ venue.amenities }}</ion-chip>
-                <ion-chip *ngIf="venue.entertainment">{{ venue.entertainment }}</ion-chip>
-              </div>
-              <p>{{ venue.address }}</p>
-              <p>{{ venue.openingHours }}</p>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ng-container>
-    </ion-row>
-  </ion-grid> -->
-
-  <!-- <ion-list>
-    <ion-item>
-      <ion-select label="Atmosphere" label-placement="floating" [multiple]="true" [(ngModel)]="selectedAtmospheres" (ionChange)="applyFilters()">
-        <ion-select-option value="traditional">Traditional</ion-select-option>
-        <ion-select-option value="Casual">Casual</ion-select-option>
-        <ion-select-option value="Fancy">Fancy</ion-select-option>
-      </ion-select>
-    </ion-item>
-    
-    <ion-item>
-      <ion-select label="Drinks" label-placement="floating" [multiple]="true" [(ngModel)]="selectedDrinks" (ionChange)="applyFilters()">
-        <ion-select-option value="goodGuinness">Good Guinness</ion-select-option>
-        <ion-select-option value="Cocktails">Cocktails</ion-select-option>
-        <ion-select-option value="Whiskey">Whiskey</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </ion-list> -->
-
+<ion-content>
+  <!-- Filter UI -->
   <div>
-    <h3>Atmosphere</h3>
-    <ion-item *ngFor="let atmosphere of ['traditional', 'casual', 'cosy']">
-      <ion-label>{{ atmosphere }}</ion-label>
-      <ion-checkbox [(ngModel)]="selectedTags[atmosphere]" (ionChange)="onTagSelected(atmosphere)"></ion-checkbox>
+    <!-- Atmosphere -->
+    <ion-item>
+      <ion-select [(ngModel)]="selectedAtmospheres" label="Atmosphere" placeholder="Select" (ionChange)="applyFilters()" multiple="true">
+        <ion-select-option value="alternative">Alternative</ion-select-option>
+        <ion-select-option value="casual">Casual</ion-select-option>
+        <ion-select-option value="cosy">Cosy</ion-select-option>
+        <ion-select-option value="energetic">Energetic</ion-select-option>
+        <ion-select-option value="fancy">Fancy</ion-select-option>
+        <ion-select-option value="lgbtq">LGBTQ+</ion-select-option>
+        <ion-select-option value="loud">Loud</ion-select-option>
+        <ion-select-option value="relaxed">Relaxed</ion-select-option>
+        <ion-select-option value="traditional">Traditional</ion-select-option>
+      </ion-select>
     </ion-item>
 
-    <h3>Drinks</h3>
-    <ion-item *ngFor="let drink of ['pints', 'goodGuinness', 'cocktails']">
-      <ion-label>{{ drink }}</ion-label>
-      <ion-checkbox [(ngModel)]="selectedTags[drink]" (ionChange)="onTagSelected(drink)"></ion-checkbox>
+    <!-- Drinks -->
+    <ion-item>
+      <ion-select [(ngModel)]="selectedDrinks" label="Drinks" placeholder="Select" (ionChange)="applyFilters()" multiple="true">
+        <ion-select-option value="cocktails">Cocktails</ion-select-option>
+        <ion-select-option value="gin">Gin</ion-select-option>
+        <ion-select-option value="goodGuinness">Good Guinness</ion-select-option>
+        <ion-select-option value="nonAlcoholic">Non-Alcoholic</ion-select-option>
+        <ion-select-option value="pints">Pints</ion-select-option>
+        <ion-select-option value="whiskey">Whiskey</ion-select-option>
+        <ion-select-option value="wine">Wine</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Music -->
+    <ion-item>
+      <ion-select [(ngModel)]="selectedMusic" label="Music" placeholder="Select" (ionChange)="applyFilters()" multiple="true">
+        <ion-select-option value="hipHop">Hip-Hop</ion-select-option>
+        <ion-select-option value="house">House</ion-select-option>
+        <ion-select-option value="indie">Indie</ion-select-option>
+        <ion-select-option value="jazz">Jazz</ion-select-option>
+        <ion-select-option value="pop">Pop</ion-select-option>
+        <ion-select-option value="rNb">R&B</ion-select-option>
+        <ion-select-option value="reggaeton">Reggaeton</ion-select-option>
+        <ion-select-option value="rock">Rock</ion-select-option>
+        <ion-select-option value="techno">Techno</ion-select-option>
+        <ion-select-option value="trad">Trad</ion-select-option>
+      </ion-select>
     </ion-item>
   </div>
 
-  <!-- <ion-grid>
-    <p>The below venues are retrieved from firebase</p>
+  <!-- Venue list -->
+  <ion-grid>
     <ion-row>
-      <ng-container *ngFor="let venue of (venues | async)">
+      <ng-container *ngFor="let venue of filteredVenues">
         <ion-col size="12" size-sm="6" size-md="4" size-lg="3" size-xl="3">
           <ion-card class="venue-card">
             <img [src]="venue.imageURL" alt="{{ venue.name }}">
@@ -85,17 +65,37 @@
             </ion-card-header>
             <ion-card-content>
               <div class="chip-container">
-                <ion-chip *ngIf="venue.atmosphere">{{ venue.atmosphere }}</ion-chip>
-                <ion-chip *ngIf="venue.drinks">{{ venue.drinks }}</ion-chip>
-                <ion-chip *ngIf="venue.music">{{ venue.music }}</ion-chip>
-                <ion-chip *ngIf="venue.amenities">{{ venue.amenities }}</ion-chip>
-                <ion-chip *ngIf="venue.entertainment">{{ venue.entertainment }}</ion-chip>
-                <ion-chip *ngIf="venue.goodGuinness">Good Guinness</ion-chip> 
+                <!-- Atmosphere -->
                 <ion-chip *ngIf="venue.traditional">Traditional</ion-chip> 
                 <ion-chip *ngIf="venue.casual">Casual</ion-chip> 
                 <ion-chip *ngIf="venue.cosy">Cosy</ion-chip> 
-                <ion-chip *ngIf="venue.pints">Pints</ion-chip> 
+                <ion-chip *ngIf="venue.energetic">Energetic</ion-chip> 
+                <ion-chip *ngIf="venue.alternative">Alternative</ion-chip> 
+                <ion-chip *ngIf="venue.relaxed">Relaxed</ion-chip> 
+                <ion-chip *ngIf="venue.fancy">Fancy</ion-chip> 
+                <ion-chip *ngIf="venue.lgbtq">LGBTQ+</ion-chip> 
+                <ion-chip *ngIf="venue.loud">Loud</ion-chip> 
+
+                <!-- Drinks -->
                 <ion-chip *ngIf="venue.cocktails">Cocktails</ion-chip> 
+                <ion-chip *ngIf="venue.gin">Gin</ion-chip> 
+                <ion-chip *ngIf="venue.goodGuinness">Good Guinness</ion-chip> 
+                <ion-chip *ngIf="venue.pints">Pints</ion-chip> 
+                <ion-chip *ngIf="venue.nonAlcoholic">Non-Alcoholic</ion-chip> 
+                <ion-chip *ngIf="venue.whiskey">Whiskey</ion-chip>
+                <ion-chip *ngIf="venue.wine">Wine</ion-chip> 
+ 
+                <!-- Music -->
+                <ion-chip *ngIf="venue.hipHop">Hip-Hop</ion-chip> 
+                <ion-chip *ngIf="venue.house">House</ion-chip> 
+                <ion-chip *ngIf="venue.indie">Indie</ion-chip> 
+                <ion-chip *ngIf="venue.jazz">Jazz</ion-chip> 
+                <ion-chip *ngIf="venue.pop">Pop</ion-chip> 
+                <ion-chip *ngIf="venue.rNb">R&B</ion-chip>
+                <ion-chip *ngIf="venue.reggaeton">Reggaeton</ion-chip> 
+                <ion-chip *ngIf="venue.rock">Rock</ion-chip>
+                <ion-chip *ngIf="venue.techno">Techno</ion-chip> 
+                <ion-chip *ngIf="venue.trad">Trad</ion-chip> 
               </div>
               <p>{{ venue.address }}</p>
               <p>{{ venue.openingHours }}</p>
@@ -104,21 +104,5 @@
         </ion-col>
       </ng-container>
     </ion-row>
-  </ion-grid> -->
-
-  <ion-list>
-    <ion-item *ngFor="let venue of filteredVenues">
-      <ion-label>
-        <h2>{{ venue.name }}</h2>
-        <p>{{ venue.address }}</p>
-        <p *ngIf="venue.traditional">Tag: Traditional</p>
-        <p *ngIf="venue.casual">Tag: Casual</p>
-        <p *ngIf="venue.cosy">Tag: Cosy</p>
-        <p *ngIf="venue.pints">Tag: Pints</p>
-        <p *ngIf="venue.goodGuinness">Tag: Good Guinness</p>
-        <p *ngIf="venue.cocktails">Tag: Cocktails</p>
-      </ion-label>
-      <ion-img [src]="venue.imageURL"></ion-img>
-    </ion-item>
-  </ion-list>
+  </ion-grid>
 </ion-content>

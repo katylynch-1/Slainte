@@ -10,6 +10,32 @@ import { AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 })
 export class Tab2Page implements OnInit {
 
+  venues: Venue[] = [];
+  filteredVenues: Venue[] = [];
+  selectedAtmospheres: string[] = [];
+  selectedDrinks: string[] = [];
+  selectedMusic: string[] = [];
+
+  constructor(private venueService: VenuedataService) {}
+
+  ngOnInit() {
+    this.venueService.getVenues().subscribe(venues => {
+      this.venues = venues;
+      this.applyFilters(); 
+    });
+  }
+
+  applyFilters() {
+    this.filteredVenues = this.venues.filter(venue => {
+      const matchesAtmosphere = !this.selectedAtmospheres.length || this.selectedAtmospheres.some(tag => venue[tag]);
+      const matchesDrinks = !this.selectedDrinks.length || this.selectedDrinks.some(tag => venue[tag]);
+      const matchesMusic = !this.selectedMusic.length || this.selectedMusic.some(tag => venue[tag]);
+      return matchesAtmosphere || matchesDrinks || matchesMusic; // Unsure about the use of this operator &&
+      // it returns multiple venues within each category when multiple selections are made
+      // but if two tags from different categories dont both match a venue it wont return anything
+    });
+  }
+
   // venues = [
   //   {
   //     name: 'Chaplins',
@@ -59,43 +85,43 @@ export class Tab2Page implements OnInit {
 
   // allVenues = [...this.venues];
 
-  venues?: Observable<Venue[]>;
+  // venues?: Observable<Venue[]>;
 
-  venueData: Venue[] = [];
-  filteredVenues: Venue[] = [];
-  selectedTags: { [key: string]: boolean } = {
-    traditional: false,
-    casual: false,
-    cosy: false,
-    pints: false,
-    goodGuinness: false,
-    cocktails: false,
-  };
+  // venueData: Venue[] = [];
+  // filteredVenues: Venue[] = [];
+  // selectedTags: { [key: string]: boolean } = {
+  //   traditional: false,
+  //   casual: false,
+  //   cosy: false,
+  //   pints: false,
+  //   goodGuinness: false,
+  //   cocktails: false,
+  // };
+  
+  // constructor(private venueService: VenuedataService) { }
 
-  constructor(private venueService: VenuedataService) { }
 
+  // ngOnInit() {
+  //   // this.venues = this.venueService.getVenues();
+  //   this.venueService.getVenues().subscribe(venues => {
+  //     this.venueData = venues;
+  //     this.filteredVenues = venues; 
+  // });
+  // }
 
-  ngOnInit() {
-    // this.venues = this.venueService.getVenues();
-    this.venueService.getVenues().subscribe(venues => {
-      this.venueData = venues;
-      this.filteredVenues = venues; 
-  });
-  }
+  // applyFilters() {
+  //   this.filteredVenues = this.venueData.filter(venue => {
+  //     for (const tag in this.selectedTags) {
+  //       if (this.selectedTags[tag] && venue[tag]) {
+  //         return true;
+  //       }
+  //     }
+  //     return false;
+  //   });
+  // }
 
-  applyFilters() {
-    this.filteredVenues = this.venueData.filter(venue => {
-      for (const tag in this.selectedTags) {
-        if (this.selectedTags[tag] && venue[tag]) {
-          return true;
-        }
-      }
-      return false;
-    });
-  }
-
-  onTagSelected(tag: string) {
-    this.selectedTags[tag] = !this.selectedTags[tag];
-    this.applyFilters();
-  }  
+  // onTagSelected(tag: string) {
+  //   this.selectedTags[tag] = !this.selectedTags[tag];
+  //   this.applyFilters();
+  // }  
 }
