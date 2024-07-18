@@ -12,12 +12,14 @@ export interface Venue {
   type: string;
   imageURL?: string;
   imagePath: string;
-  atmosphere: string;
-  amenities: string;
-  drinks: string;
-  music: string;
-  entertainment: string;
-  goodGuinness: boolean; // Does this mean that all of the tags must appear here on the interface?
+  traditional: boolean;
+  casual: boolean;
+  cosy: boolean;
+  pints: boolean;
+  goodGuinness: boolean;
+  cocktails: boolean;
+  [key: string]: any; // Add index signature
+
 }
 
 @Injectable({

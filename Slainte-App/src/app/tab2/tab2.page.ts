@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Venue, VenuedataService } from '../services/venuedata.service';
 import { Observable } from 'rxjs';
+import { AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-tab2',
@@ -60,10 +61,41 @@ export class Tab2Page implements OnInit {
 
   venues?: Observable<Venue[]>;
 
+  venueData: Venue[] = [];
+  filteredVenues: Venue[] = [];
+  selectedTags: { [key: string]: boolean } = {
+    traditional: false,
+    casual: false,
+    cosy: false,
+    pints: false,
+    goodGuinness: false,
+    cocktails: false,
+  };
+
   constructor(private venueService: VenuedataService) { }
 
+
   ngOnInit() {
-    this.venues = this.venueService.getVenues();
+    // this.venues = this.venueService.getVenues();
+    this.venueService.getVenues().subscribe(venues => {
+      this.venueData = venues;
+      this.filteredVenues = venues; 
+  });
   }
 
+  applyFilters() {
+    this.filteredVenues = this.venueData.filter(venue => {
+      for (const tag in this.selectedTags) {
+        if (this.selectedTags[tag] && venue[tag]) {
+          return true;
+        }
+      }
+      return false;
+    });
+  }
+
+  onTagSelected(tag: string) {
+    this.selectedTags[tag] = !this.selectedTags[tag];
+    this.applyFilters();
+  }  
 }

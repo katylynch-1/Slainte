@@ -40,7 +40,39 @@
     </ion-row>
   </ion-grid> -->
 
-  <ion-grid>
+  <!-- <ion-list>
+    <ion-item>
+      <ion-select label="Atmosphere" label-placement="floating" [multiple]="true" [(ngModel)]="selectedAtmospheres" (ionChange)="applyFilters()">
+        <ion-select-option value="traditional">Traditional</ion-select-option>
+        <ion-select-option value="Casual">Casual</ion-select-option>
+        <ion-select-option value="Fancy">Fancy</ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+    <ion-item>
+      <ion-select label="Drinks" label-placement="floating" [multiple]="true" [(ngModel)]="selectedDrinks" (ionChange)="applyFilters()">
+        <ion-select-option value="goodGuinness">Good Guinness</ion-select-option>
+        <ion-select-option value="Cocktails">Cocktails</ion-select-option>
+        <ion-select-option value="Whiskey">Whiskey</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list> -->
+
+  <div>
+    <h3>Atmosphere</h3>
+    <ion-item *ngFor="let atmosphere of ['traditional', 'casual', 'cosy']">
+      <ion-label>{{ atmosphere }}</ion-label>
+      <ion-checkbox [(ngModel)]="selectedTags[atmosphere]" (ionChange)="onTagSelected(atmosphere)"></ion-checkbox>
+    </ion-item>
+
+    <h3>Drinks</h3>
+    <ion-item *ngFor="let drink of ['pints', 'goodGuinness', 'cocktails']">
+      <ion-label>{{ drink }}</ion-label>
+      <ion-checkbox [(ngModel)]="selectedTags[drink]" (ionChange)="onTagSelected(drink)"></ion-checkbox>
+    </ion-item>
+  </div>
+
+  <!-- <ion-grid>
     <p>The below venues are retrieved from firebase</p>
     <ion-row>
       <ng-container *ngFor="let venue of (venues | async)">
@@ -54,11 +86,16 @@
             <ion-card-content>
               <div class="chip-container">
                 <ion-chip *ngIf="venue.atmosphere">{{ venue.atmosphere }}</ion-chip>
-                <!-- <ion-chip *ngIf="venue.drinks">{{ venue.drinks }}</ion-chip> -->
+                <ion-chip *ngIf="venue.drinks">{{ venue.drinks }}</ion-chip>
                 <ion-chip *ngIf="venue.music">{{ venue.music }}</ion-chip>
                 <ion-chip *ngIf="venue.amenities">{{ venue.amenities }}</ion-chip>
                 <ion-chip *ngIf="venue.entertainment">{{ venue.entertainment }}</ion-chip>
                 <ion-chip *ngIf="venue.goodGuinness">Good Guinness</ion-chip> 
+                <ion-chip *ngIf="venue.traditional">Traditional</ion-chip> 
+                <ion-chip *ngIf="venue.casual">Casual</ion-chip> 
+                <ion-chip *ngIf="venue.cosy">Cosy</ion-chip> 
+                <ion-chip *ngIf="venue.pints">Pints</ion-chip> 
+                <ion-chip *ngIf="venue.cocktails">Cocktails</ion-chip> 
               </div>
               <p>{{ venue.address }}</p>
               <p>{{ venue.openingHours }}</p>
@@ -67,5 +104,21 @@
         </ion-col>
       </ng-container>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
+
+  <ion-list>
+    <ion-item *ngFor="let venue of filteredVenues">
+      <ion-label>
+        <h2>{{ venue.name }}</h2>
+        <p>{{ venue.address }}</p>
+        <p *ngIf="venue.traditional">Tag: Traditional</p>
+        <p *ngIf="venue.casual">Tag: Casual</p>
+        <p *ngIf="venue.cosy">Tag: Cosy</p>
+        <p *ngIf="venue.pints">Tag: Pints</p>
+        <p *ngIf="venue.goodGuinness">Tag: Good Guinness</p>
+        <p *ngIf="venue.cocktails">Tag: Cocktails</p>
+      </ion-label>
+      <ion-img [src]="venue.imageURL"></ion-img>
+    </ion-item>
+  </ion-list>
 </ion-content>
