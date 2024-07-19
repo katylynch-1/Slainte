@@ -5,10 +5,23 @@
 </ion-header>
 
 <ion-content>
+  <ion-row>
+    <ion-col>
+      <div class="headings">
+        <h2>Venues for You</h2>
+      </div>
+    </ion-col>
+     <ion-col>
+      <div class="filter">
+        <ion-icon name="filter" size="large" (click)="openFilterModal()"></ion-icon>
+      </div>
+     </ion-col>
+  </ion-row>
+  
   <!-- Filter UI -->
   <div>
     <!-- Atmosphere -->
-    <ion-item>
+    <!-- <ion-item>
       <ion-select [(ngModel)]="selectedAtmospheres" label="Atmosphere" placeholder="Select" (ionChange)="applyFilters()" multiple="true">
         <ion-select-option value="alternative">Alternative</ion-select-option>
         <ion-select-option value="casual">Casual</ion-select-option>
@@ -20,10 +33,10 @@
         <ion-select-option value="relaxed">Relaxed</ion-select-option>
         <ion-select-option value="traditional">Traditional</ion-select-option>
       </ion-select>
-    </ion-item>
+    </ion-item> -->
 
     <!-- Drinks -->
-    <ion-item>
+    <!-- <ion-item>
       <ion-select [(ngModel)]="selectedDrinks" label="Drinks" placeholder="Select" (ionChange)="applyFilters()" multiple="true">
         <ion-select-option value="cocktails">Cocktails</ion-select-option>
         <ion-select-option value="gin">Gin</ion-select-option>
@@ -33,10 +46,10 @@
         <ion-select-option value="whiskey">Whiskey</ion-select-option>
         <ion-select-option value="wine">Wine</ion-select-option>
       </ion-select>
-    </ion-item>
+    </ion-item> -->
 
     <!-- Music -->
-    <ion-item>
+    <!-- <ion-item>
       <ion-select [(ngModel)]="selectedMusic" label="Music" placeholder="Select" (ionChange)="applyFilters()" multiple="true">
         <ion-select-option value="hipHop">Hip-Hop</ion-select-option>
         <ion-select-option value="house">House</ion-select-option>
@@ -49,9 +62,15 @@
         <ion-select-option value="techno">Techno</ion-select-option>
         <ion-select-option value="trad">Trad</ion-select-option>
       </ion-select>
-    </ion-item>
+    </ion-item> -->
   </div>
-
+  <ion-row>
+    <ion-col>
+      <ion-chip *ngFor="let filter of selectedFilters" (click)="removeFilter(filter)">
+        <ion-label>{{ filter.label }}</ion-label>
+        <ion-icon name="close-outline"></ion-icon></ion-chip>
+    </ion-col>
+  </ion-row>
   <!-- Venue list -->
   <ion-grid>
     <ion-row>
