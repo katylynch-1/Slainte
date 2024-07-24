@@ -45,6 +45,27 @@ export interface Venue {
   reggaeton: boolean;
   jazz: boolean;
 
+  // Amenities Tags
+  accessible: boolean;
+  beerGarden: boolean;
+  cloakRoom: boolean;
+  danceFloor: boolean;
+  outdoorSeats: boolean;
+  smokingArea: boolean;
+
+  // Entertainment Tags
+  comedy: boolean;
+  dJ: boolean;
+  festival: boolean;
+  games: boolean;
+  karaoke: boolean;
+  liveGigs: boolean;
+  openMic: boolean;
+  pubQuiz: boolean;
+  raves: boolean;
+  specialisedEvents: boolean;
+  sports: boolean;
+
 
   [key: string]: any; // Add index signature
 

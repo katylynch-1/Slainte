@@ -10,6 +10,8 @@ export class FilterModalComponent implements OnInit {
   selectedAtmospheres: string[] = [];
   selectedDrinks: string[] = [];
   selectedMusic: string[] = [];
+  selectedAmenities: string[] = [];
+  selectedEntertainment: string[] = [];
 
   constructor(private modalController: ModalController) {}
 
@@ -22,7 +24,9 @@ export class FilterModalComponent implements OnInit {
     this.modalController.dismiss({
       selectedAtmospheres: this.selectedAtmospheres,
       selectedDrinks: this.selectedDrinks,
-      selectedMusic: this.selectedMusic
+      selectedMusic: this.selectedMusic,
+      selectedAmenities: this.selectedAmenities,
+      selectedEntertainment: this.selectedEntertainment
     });
   }
 

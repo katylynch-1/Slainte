@@ -15,6 +15,8 @@ export class Tab2Page {
   selectedAtmospheres: string[] = [];
   selectedDrinks: string[] = [];
   selectedMusic: string[] = [];
+  selectedAmenities: string[] = [];
+  selectedEntertainment: string[] = [];
   selectedFilters: { label: string, type: string }[] = []; // For displaying chips
 
 
@@ -42,6 +44,8 @@ export class Tab2Page {
         this.selectedAtmospheres = result.data.selectedAtmospheres;
         this.selectedDrinks = result.data.selectedDrinks;
         this.selectedMusic = result.data.selectedMusic;
+        this.selectedAmenities = result.data.selectedAmenities;
+        this.selectedEntertainment = result.data.selectedEntertainment;
         this.updateSelectedFilters(); // Update chips
         this.applyFilters(); // Apply filters after modal is dismissed
       }
@@ -60,7 +64,7 @@ export class Tab2Page {
   // }
 
   applyFilters() {
-    const tagGroups = [this.selectedAtmospheres, this.selectedDrinks, this.selectedMusic];
+    const tagGroups = [this.selectedAtmospheres, this.selectedDrinks, this.selectedMusic, this.selectedAmenities, this.selectedEntertainment];
     const tagsAreSelected = tagGroups.some(tags => tags.length > 0);
 
     if (!tagsAreSelected) {
@@ -96,6 +100,8 @@ export class Tab2Page {
     this.selectedAtmospheres.forEach(tag => this.selectedFilters.push({ label: tag, type: 'atmosphere' }));
     this.selectedDrinks.forEach(tag => this.selectedFilters.push({ label: tag, type: 'drink' }));
     this.selectedMusic.forEach(tag => this.selectedFilters.push({ label: tag, type: 'music' }));
+    this.selectedAmenities.forEach(tag => this.selectedAmenities.push({ label: tag, type: 'amenities'}));
+    this.selectedEntertainment.forEach(tag => this.selectedEntertainment.push({ label: tag, type: 'entertainment'}));
   }
 
   removeFilter(filter: { label: string, type: string }) {
@@ -109,6 +115,11 @@ export class Tab2Page {
       case 'music':
         this.selectedMusic = this.selectedMusic.filter(tag => tag !== filter.label);
         break;
+      case 'amenities':
+        this.selectedAmenities = this.selectedAmenities.filter(tag => tag !== filter.label);
+        break;
+      case 'entertainment':
+        this.selectedEntertainment = this.selectedEntertainment.filter(tag => tag !== filter.label);
     }
     this.updateSelectedFilters();
     this.applyFilters();
