@@ -16,7 +16,7 @@ export class FilterModalComponent implements OnInit {
   constructor(private modalController: ModalController) {}
 
   ngOnInit() {
-    // Initialization logic, if needed
+    
   }
 
   applyFilters() {

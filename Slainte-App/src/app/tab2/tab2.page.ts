@@ -23,7 +23,7 @@ export class Tab2Page {
   constructor(private venueService: VenuedataService, private modalController: ModalController) {
     this.venueService.getVenues().subscribe(venues => {
       this.venues = venues;
-      this.filteredVenues = venues; // Initialize with all venues
+      this.filteredVenues = venues; 
     });
   }
 
@@ -95,16 +95,17 @@ export class Tab2Page {
   }
 
   updateSelectedFilters() {
-    this.selectedFilters = [];
+    this.selectedFilters = []; // Initializes as an empty array originally
 
+    // Gathers the tags selected from each individual category 
     this.selectedAtmospheres.forEach(tag => this.selectedFilters.push({ label: tag, type: 'atmosphere' }));
     this.selectedDrinks.forEach(tag => this.selectedFilters.push({ label: tag, type: 'drink' }));
     this.selectedMusic.forEach(tag => this.selectedFilters.push({ label: tag, type: 'music' }));
-    this.selectedAmenities.forEach(tag => this.selectedAmenities.push({ label: tag, type: 'amenities'}));
-    this.selectedEntertainment.forEach(tag => this.selectedEntertainment.push({ label: tag, type: 'entertainment'}));
+    this.selectedAmenities.forEach(tag => this.selectedFilters.push({ label: tag, type: 'amenities'}));
+    this.selectedEntertainment.forEach(tag => this.selectedFilters.push({ label: tag, type: 'entertainment'}));
   }
 
-  removeFilter(filter: { label: string, type: string }) {
+  removeFilter(filter: { label: string, type: string }) { // Allows the user to x off tags to remove filters
     switch (filter.type) {
       case 'atmosphere':
         this.selectedAtmospheres = this.selectedAtmospheres.filter(tag => tag !== filter.label);
@@ -124,4 +125,5 @@ export class Tab2Page {
     this.updateSelectedFilters();
     this.applyFilters();
   }
+
 }

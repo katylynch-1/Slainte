@@ -66,7 +66,7 @@
   </div>
   <ion-row>
     <ion-col>
-      <ion-chip *ngFor="let filter of selectedFilters" (click)="removeFilter(filter)">
+      <ion-chip *ngFor="let filter of selectedFilters" (click)="removeFilter(filter)"> <!-- Displays selections as ion-chips with option to remove --> 
         <ion-label>{{ filter.label }}</ion-label>
         <ion-icon name="close-outline"></ion-icon></ion-chip>
     </ion-col>
