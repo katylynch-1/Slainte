@@ -74,7 +74,8 @@
   <!-- Venue list -->
   <ion-grid>
     <ion-row>
-      <ng-container *ngFor="let venue of filteredVenues">
+      <ng-container *ngFor="let venue of filteredVenues"> 
+        <div (click)="openVenueDetails(venue)">
         <ion-col size="12" size-sm="6" size-md="4" size-lg="3" size-xl="3">
           <ion-card class="venue-card">
             <img [src]="venue.imageURL" alt="{{ venue.name }}">
@@ -137,11 +138,10 @@
                 <ion-chip *ngIf="venue.specialisedEvents">Specialised Events</ion-chip>
                 <ion-chip *ngIf="venue.sports">Sports</ion-chip> 
               </div>
-              <p>{{ venue.address }}</p>
-              <p>{{ venue.openingHours }}</p>
             </ion-card-content>
           </ion-card>
         </ion-col>
+        </div>
       </ng-container>
     </ion-row>
   </ion-grid>

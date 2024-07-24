@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Venue, VenuedataService } from '../services/venuedata.service';
 import { ModalController } from '@ionic/angular';
 import { FilterModalComponent } from '../filter-modal/filter-modal.component';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-tab2',
@@ -20,7 +21,7 @@ export class Tab2Page {
   selectedFilters: { label: string, type: string }[] = []; // For displaying chips
 
 
-  constructor(private venueService: VenuedataService, private modalController: ModalController) {
+  constructor(private venueService: VenuedataService, private modalController: ModalController, private router: Router) {
     this.venueService.getVenues().subscribe(venues => {
       this.venues = venues;
       this.filteredVenues = venues; 
@@ -126,4 +127,12 @@ export class Tab2Page {
     this.applyFilters();
   }
 
+  openVenueDetails(venue: any){
+    let navigationExtras: NavigationExtras = {
+      state: {
+        venue: venue
+      }
+    };
+    this.router.navigate(['venuedetails'], navigationExtras);
+  }
 }
