@@ -18,52 +18,6 @@
      </ion-col>
   </ion-row>
   
-  <!-- Filter UI -->
-  <div>
-    <!-- Atmosphere -->
-    <!-- <ion-item>
-      <ion-select [(ngModel)]="selectedAtmospheres" label="Atmosphere" placeholder="Select" (ionChange)="applyFilters()" multiple="true">
-        <ion-select-option value="alternative">Alternative</ion-select-option>
-        <ion-select-option value="casual">Casual</ion-select-option>
-        <ion-select-option value="cosy">Cosy</ion-select-option>
-        <ion-select-option value="energetic">Energetic</ion-select-option>
-        <ion-select-option value="fancy">Fancy</ion-select-option>
-        <ion-select-option value="lgbtq">LGBTQ+</ion-select-option>
-        <ion-select-option value="loud">Loud</ion-select-option>
-        <ion-select-option value="relaxed">Relaxed</ion-select-option>
-        <ion-select-option value="traditional">Traditional</ion-select-option>
-      </ion-select>
-    </ion-item> -->
-
-    <!-- Drinks -->
-    <!-- <ion-item>
-      <ion-select [(ngModel)]="selectedDrinks" label="Drinks" placeholder="Select" (ionChange)="applyFilters()" multiple="true">
-        <ion-select-option value="cocktails">Cocktails</ion-select-option>
-        <ion-select-option value="gin">Gin</ion-select-option>
-        <ion-select-option value="goodGuinness">Good Guinness</ion-select-option>
-        <ion-select-option value="nonAlcoholic">Non-Alcoholic</ion-select-option>
-        <ion-select-option value="pints">Pints</ion-select-option>
-        <ion-select-option value="whiskey">Whiskey</ion-select-option>
-        <ion-select-option value="wine">Wine</ion-select-option>
-      </ion-select>
-    </ion-item> -->
-
-    <!-- Music -->
-    <!-- <ion-item>
-      <ion-select [(ngModel)]="selectedMusic" label="Music" placeholder="Select" (ionChange)="applyFilters()" multiple="true">
-        <ion-select-option value="hipHop">Hip-Hop</ion-select-option>
-        <ion-select-option value="house">House</ion-select-option>
-        <ion-select-option value="indie">Indie</ion-select-option>
-        <ion-select-option value="jazz">Jazz</ion-select-option>
-        <ion-select-option value="pop">Pop</ion-select-option>
-        <ion-select-option value="rNb">R&B</ion-select-option>
-        <ion-select-option value="reggaeton">Reggaeton</ion-select-option>
-        <ion-select-option value="rock">Rock</ion-select-option>
-        <ion-select-option value="techno">Techno</ion-select-option>
-        <ion-select-option value="trad">Trad</ion-select-option>
-      </ion-select>
-    </ion-item> -->
-  </div>
   <ion-row>
     <ion-col>
       <ion-chip *ngFor="let filter of selectedFilters" (click)="removeFilter(filter)"> <!-- Displays selections as ion-chips with option to remove --> 

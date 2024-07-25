@@ -55,15 +55,6 @@ export class Tab2Page {
     return await modal.present();
   }
 
-  // applyFilters() {
-  //   this.filteredVenues = this.venues.filter(venue => {
-  //     const matchesAtmosphere = !this.selectedAtmospheres.length || this.selectedAtmospheres.some(tag => venue[tag]);
-  //     const matchesDrinks = !this.selectedDrinks.length || this.selectedDrinks.some(tag => venue[tag]);
-  //     const matchesMusic = !this.selectedMusic.length || this.selectedMusic.some(tag => venue[tag]);
-  //     return matchesAtmosphere || matchesDrinks || matchesMusic;
-  //   });
-  // }
-
   applyFilters() {
     const tagGroups = [this.selectedAtmospheres, this.selectedDrinks, this.selectedMusic, this.selectedAmenities, this.selectedEntertainment];
     const tagsAreSelected = tagGroups.some(tags => tags.length > 0);
