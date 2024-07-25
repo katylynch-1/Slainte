@@ -6,6 +6,12 @@ const routes: Routes = [
     path: '',
     // loadChildren: () => import('./landingpage/landingpage.module').then( m => m.LandingpagePageModule)
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+
+  },
+  {
+    path: 'venuedetails',
+    loadChildren: () => import('./venuedetails/venuedetails.module').then( m => m.VenuedetailsPageModule)
+
     // loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
@@ -43,6 +49,7 @@ const routes: Routes = [
   {
     path: 'home-test',
     loadChildren: () => import('./home-test/home-test.module').then( m => m.HomeTestPageModule)
+
   }
 ];
 @NgModule({

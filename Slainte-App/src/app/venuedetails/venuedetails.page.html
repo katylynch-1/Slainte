@@ -1,0 +1,114 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Venue Details</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <ion-card *ngIf="venue" class="venue-card">
+        <img [src]="venue.imageURL" alt="{{ venue.name }}">
+        <ion-card-header>
+          <ion-card-title> {{venue.name}} </ion-card-title>
+          <ion-card-subtitle>{{ venue.type }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="chip-container">
+            <!-- Atmosphere -->
+            <ion-chip *ngIf="venue.traditional">Traditional</ion-chip> 
+            <ion-chip *ngIf="venue.casual">Casual</ion-chip> 
+            <ion-chip *ngIf="venue.cosy">Cosy</ion-chip> 
+            <ion-chip *ngIf="venue.energetic">Energetic</ion-chip> 
+            <ion-chip *ngIf="venue.alternative">Alternative</ion-chip> 
+            <ion-chip *ngIf="venue.relaxed">Relaxed</ion-chip> 
+            <ion-chip *ngIf="venue.fancy">Fancy</ion-chip> 
+            <ion-chip *ngIf="venue.lgbtq">LGBTQ+</ion-chip> 
+            <ion-chip *ngIf="venue.loud">Loud</ion-chip> 
+
+            <!-- Drinks -->
+            <ion-chip *ngIf="venue.cocktails">Cocktails</ion-chip> 
+            <ion-chip *ngIf="venue.gin">Gin</ion-chip> 
+            <ion-chip *ngIf="venue.goodGuinness">Good Guinness</ion-chip> 
+            <ion-chip *ngIf="venue.pints">Pints</ion-chip> 
+            <ion-chip *ngIf="venue.nonAlcoholic">Non-Alcoholic</ion-chip> 
+            <ion-chip *ngIf="venue.whiskey">Whiskey</ion-chip>
+            <ion-chip *ngIf="venue.wine">Wine</ion-chip> 
+
+            <!-- Music -->
+            <ion-chip *ngIf="venue.hipHop">Hip-Hop</ion-chip> 
+            <ion-chip *ngIf="venue.house">House</ion-chip> 
+            <ion-chip *ngIf="venue.indie">Indie</ion-chip> 
+            <ion-chip *ngIf="venue.jazz">Jazz</ion-chip> 
+            <ion-chip *ngIf="venue.pop">Pop</ion-chip> 
+            <ion-chip *ngIf="venue.rNb">R&B</ion-chip>
+            <ion-chip *ngIf="venue.reggaeton">Reggaeton</ion-chip> 
+            <ion-chip *ngIf="venue.rock">Rock</ion-chip>
+            <ion-chip *ngIf="venue.techno">Techno</ion-chip> 
+            <ion-chip *ngIf="venue.trad">Trad</ion-chip> 
+
+            <!-- Amenities -->
+            <ion-chip *ngIf="venue.accessible">Accessible</ion-chip> 
+            <ion-chip *ngIf="venue.beerGarden">Beer Garden</ion-chip> 
+            <ion-chip *ngIf="venue.cloakRoom">Cloak Room</ion-chip> 
+            <ion-chip *ngIf="venue.danceFloor">Dance Floor</ion-chip> 
+            <ion-chip *ngIf="venue.outdoorSeats">Outdoor Seats</ion-chip> 
+            <ion-chip *ngIf="venue.smokingArea">Smoking Area</ion-chip>
+
+            <!-- Entertainment -->
+            <ion-chip *ngIf="venue.comedy">Comedy</ion-chip> 
+            <ion-chip *ngIf="venue.dJ">DJ</ion-chip> 
+            <ion-chip *ngIf="venue.festival">Festival</ion-chip> 
+            <ion-chip *ngIf="venue.games">Games</ion-chip> 
+            <ion-chip *ngIf="venue.karaoke">Karaoke</ion-chip> 
+            <ion-chip *ngIf="venue.liveGigs">Live Gigs</ion-chip>
+            <ion-chip *ngIf="venue.openMic">Open Mic</ion-chip> 
+            <ion-chip *ngIf="venue.pubQuiz">Pub Quiz</ion-chip>
+            <ion-chip *ngIf="venue.raves">Raves</ion-chip> 
+            <ion-chip *ngIf="venue.specialisedEvents">Specialised Events</ion-chip>
+            <ion-chip *ngIf="venue.sports">Sports</ion-chip> 
+          </div>
+          <br>
+          <div>
+            <ion-icon name="location-outline" class="icon"></ion-icon>
+            <span>{{ venue.address }}</span>
+          </div>
+          <ion-text color="dark">
+            <h1>Entry Fees</h1>
+            More information here...
+          </ion-text>
+          <ion-text color="dark">
+            <h1>Special Offers</h1>
+            More information here...
+          </ion-text>
+          <ion-text color="dark">
+            <h1>Peak Business Hours</h1>
+            More information here...
+          </ion-text>
+        </ion-card-content>
+        <ion-footer>
+          <ion-toolbar>
+            <ion-col>
+              <ion-button>
+                <ion-icon slot="start" name="pin-outline" class="ion-align-items-start"></ion-icon>
+                Check-In
+              </ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button>
+                <ion-icon slot="start" name="heart-outline" class="ion-align-items-end"></ion-icon>
+                Add To Favourites
+              </ion-button> 
+            </ion-col>         
+          </ion-toolbar>
+        </ion-footer>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-content>
+
+
