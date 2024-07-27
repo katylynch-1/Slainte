@@ -53,7 +53,7 @@
     <p>New Member? <a [routerLink]="['/signup']">Sign up</a></p>
   </div>
   <ion-fab vertical="bottom" horizontal="end" style="margin-bottom: 30px">
-    <ion-fab-button [routerLink]="['/home-test']">
+    <ion-fab-button (click)="navigateToTab1()">
       <ion-icon name="chevron-forward"></ion-icon>
     </ion-fab-button>
   </ion-fab>

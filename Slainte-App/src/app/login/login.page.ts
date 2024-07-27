@@ -3,6 +3,7 @@ import { FormGroup, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { LoadingController } from '@ionic/angular';
 import { AuthenticationService } from '../services/authentication.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class LoginPage implements OnInit {
   loginForm: FormGroup
 
 
-  constructor(public formBuilder: FormBuilder, public loadingCtrl: LoadingController, public authService: AuthenticationService) { }
+
+  constructor(public formBuilder: FormBuilder, public loadingCtrl: LoadingController, public authService: AuthenticationService, private router: Router) { }
 
 
   ngOnInit() {
@@ -43,6 +45,10 @@ export class LoginPage implements OnInit {
     if(this.loginForm.valid){
       // const user = await this.authService.registerUser(email, password)
     }
+  }
+
+  navigateToTab1(){
+    this.router.navigate(['/tabs/tab1']);
   }
 
 }

@@ -1,13 +1,12 @@
-
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content>
-  <ion-header>
-    <ion-toolbar>
-      <ion-title size="large">My Profile</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <ion-card>
+  <!-- <ion-card>
     
     <ion-card-header>
       <ion-avatar>
@@ -22,9 +21,19 @@
      
     
     </ion-card-content>
-  </ion-card>
+  </ion-card> -->
+  <div *ngIf="userData">
+    <h1>Welcome, {{ userData.email}}</h1>
+    
 
-  
+  </div>
   
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button (click)="signOut()">Log Out</ion-button>
+  </ion-toolbar>
+</ion-footer>
+
 
