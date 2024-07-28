@@ -3,7 +3,6 @@
     <ion-title>Profile</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
 
   <!-- <ion-card>
@@ -22,17 +21,19 @@
     
     </ion-card-content>
   </ion-card> -->
-  <div *ngIf="userData">
-    <h1>Welcome, {{ userData.email}}</h1>
-    
+  <div *ngIf="user">
+    <h1>Welcome, {{ user.email}}</h1>
+  </div>
 
+  <div *ngIf="!user">
+    <p>Loading user data...</p>
   </div>
   
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <ion-button (click)="signOut()">Log Out</ion-button>
+    <ion-button horizontal="center" (click)="signOut()">Log Out</ion-button>
   </ion-toolbar>
 </ion-footer>
 

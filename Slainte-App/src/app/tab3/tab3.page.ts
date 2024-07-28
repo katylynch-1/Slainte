@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 
 import { AuthenticationService } from '../services/authentication.service';
 import { Router } from '@angular/router';
-import { User } from '../services/user.service';
+import { User } from '@firebase/auth-types';
 
 // import { UserService, User } from '../services/user.service';
 // import { Router, ActivatedRoute } from '@angular/router';
@@ -17,7 +17,9 @@ import { User } from '../services/user.service';
 export class Tab3Page implements OnInit{
 
   // users?: Observable<User[]>;
-  userData: User | null = null;
+  user: User | null = null;
+
+  // user: any = null;
  
 
   constructor(private authService: AuthenticationService, private router:Router) {}
@@ -27,15 +29,23 @@ export class Tab3Page implements OnInit{
     // this.router.navigate(['login']);
   }
 
+  // ngOnInit(){
+  //   this.authService.ngFireAuth.authState.subscribe(user => {
+  //     if(user) {
+  //       this.authService.getUserData(user.uid).subscribe(data => {
+  //         this.userData = data;
+  //       });
+  //     }
+  //   });
+    
+  // }
+
   ngOnInit(){
-    this.authService.ngFireAuth.authState.subscribe(user => {
+    this.authService.getUser().subscribe(user => {
       if(user) {
-        this.authService.getUserData(user.uid).subscribe(data => {
-          this.userData = data;
-        });
+        this.user = user;
       }
     });
-    
   }
 
 
