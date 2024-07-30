@@ -1,0 +1,11 @@
+{
+	"appId": "com.example.app",
+	"appName": "slainte-app",
+	"webDir": "www",
+	"packageClassList": [
+		"AppPlugin",
+		"HapticsPlugin",
+		"KeyboardPlugin",
+		"StatusBarPlugin"
+	]
+}
