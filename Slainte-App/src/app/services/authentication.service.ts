@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 // import { User } from './user.service';
 import { User } from '@firebase/auth-types';
@@ -12,13 +13,37 @@ import { Observable } from 'rxjs';
 export class AuthenticationService {
 
   user$: Observable<User | null>;
+  regForm: FormGroup;
 
   constructor(public ngFireAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router) {
     this.user$ = this.ngFireAuth.authState;
    }
 
-  async registerUser(email: string, password: string){
-    return await this.ngFireAuth.createUserWithEmailAndPassword(email, password)
+  // async registerUser(email: string, password: string){
+  //   this.ngFireAuth.createUserWithEmailAndPassword(email, password).then(userCredential => {
+  //     return this.afs.collection('users').add()
+  //   })
+  // }
+
+  async registerUser(email: string, password: string) {
+    try {
+      const userCredential = await this.ngFireAuth.createUserWithEmailAndPassword(email, password);
+      
+      // Extract user info
+      const user = userCredential.user;
+
+      
+  
+      // Add the user data to Firestore
+      return this.afs.collection('users').add({
+        uid: user?.uid,
+        email: user?.email,
+       
+      });
+    } catch (error) {
+      console.error("Error during user registration:", error);
+      throw error; // Rethrow the error after logging
+    }
   }
 
   // async loginUser(email: string, password: string){
