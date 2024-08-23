@@ -61,7 +61,7 @@ export class AuthenticationService {
     return userCredential.user;
   }
 
-  async resetPassword(email: string){
+  async resetPassword(email: string): Promise<void> {
     return await this.ngFireAuth.sendPasswordResetEmail(email)
   }
 
