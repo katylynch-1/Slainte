@@ -11,7 +11,7 @@ import { ToastController } from '@ionic/angular';
 export class EditUserPage implements OnInit {
 
   user: User = {
-    userID: '',
+    uid: '',
     firstName: '',
     lastName: '',
     userName: '',
@@ -76,28 +76,28 @@ export class EditUserPage implements OnInit {
   ngOnInit() {
   }
 
-  ionViewWillEnter() {
-    let userID = this.activatedRoute.snapshot.paramMap.get('userID');
-    if (userID) {
-      console.log(userID);
-      this.userService.getUser(userID).subscribe(user => {
-        this.user = user;
-      });
-    }
-  }
+  // ionViewWillEnter() {
+  //   let userID = this.activatedRoute.snapshot.paramMap.get('userID');
+  //   if (userID) {
+  //     console.log(userID);
+  //     this.userService.getUser(userID).subscribe(user => {
+  //       this.user = user;
+  //     });
+  //   }
+  // }
 
-  updateUser() {
-    this.userService.updateUser(this.user).then(() => {
-      this.showToast('User preferences updated');
-    }, err => {
-      this.showToast('There was a problem updating your preferences');
-    });
-  }
+  // updateUser() {
+  //   this.userService.updateUser(this.user).then(() => {
+  //     this.showToast('User preferences updated');
+  //   }, err => {
+  //     this.showToast('There was a problem updating your preferences');
+  //   });
+  // }
 
-  showToast(msg: string) {
-    this.toastCtrl.create({
-      message:msg,
-      duration: 2000
-    }).then(toast => toast.present());
-  }
+  // showToast(msg: string) {
+  //   this.toastCtrl.create({
+  //     message:msg,
+  //     duration: 2000
+  //   }).then(toast => toast.present());
+  // }
 }

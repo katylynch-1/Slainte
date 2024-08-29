@@ -45,8 +45,7 @@ export class SignupPage implements OnInit {
       try {
         const user = await this.authService.registerUser(
           this.regForm.value.email,
-          this.regForm.value.password
-        );
+          this.regForm.value.password,        );
         if (user) {
           this.router.navigate(['/']);
         }

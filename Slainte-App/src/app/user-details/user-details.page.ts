@@ -12,7 +12,7 @@ import { ToastController } from '@ionic/angular';
 export class UserDetailsPage implements OnInit {
 
   user: User = {
-    userID: '',
+    uid: '',
     firstName: '',
     lastName: '',
     userName: '',
@@ -76,13 +76,13 @@ export class UserDetailsPage implements OnInit {
   ngOnInit() {
   }
 
-  ionViewWillEnter(){
-    let userID = this.activatedRoute.snapshot.paramMap.get('userID');
-    if(userID) {
-      this.userService.getUser(userID).subscribe(user => {
-        this.user = user;
-      })
-    }
-  }
+  // ionViewWillEnter(){
+  //   let userID = this.activatedRoute.snapshot.paramMap.get('userID');
+  //   if(userID) {
+  //     this.userService.getUser(userID).subscribe(user => {
+  //       this.user = user;
+  //     })
+  //   }
+  // }
 
 }

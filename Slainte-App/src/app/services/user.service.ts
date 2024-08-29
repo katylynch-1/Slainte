@@ -4,10 +4,11 @@ import { map, take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 export interface User{
-  userID?: string,
+  uid?: string,
   userName: string,
   firstName: string,
   lastName: string,
+  // fullName: string,
   email: string,
   phoneNumber: string,
 
@@ -92,18 +93,18 @@ export class UserService {
     return this.users;
   }
 
-  getUser(userID: string): Observable<User> {
-    return this.userCollection.doc<User>(userID).valueChanges().pipe(
+  getUser(uid: string): Observable<User> {
+    return this.userCollection.doc<User>(uid).valueChanges().pipe(
       take(1),
       map(user => {
-        user.userID = userID;
+        user.uid = uid;
         return user
       })
     );
   }
 
   updateUser(user: User): Promise<void> {
-    return this.userCollection.doc(user.userID).update({ pints: user.pints, cocktails: user.cocktails, wine: user.cocktails, gin: user.gin, whiskey: user.whiskey, nonAlcoholic: user.nonAlcoholic, goodGuinness: user.goodGuinness,
+    return this.userCollection.doc(user.uid).update({ pints: user.pints, cocktails: user.cocktails, wine: user.cocktails, gin: user.gin, whiskey: user.whiskey, nonAlcoholic: user.nonAlcoholic, goodGuinness: user.goodGuinness,
       bar: user.bar, pub: user.pub, nightclub: user.nightclub, lateBar: user.lateBar, trad: user.trad, pop: user.pop, techno: user.techno, house: user.house, indie: user.indie, rock: user.rock, rAndB: user.rAndB, hipHop: user.hipHop, reggaeton: user.reggaeton, jazz: user.jazz,
       energetic: user.energetic, cosy: user.cosy, alternative: user.alternative, relaxed: user.relaxed, traditional: user.traditional, fancy: user.fancy, casual: user.casual, lgbtq: user.lgbtq, loud: user.loud,
       outdoorSeats: user.outdoorSeats, accessible: user.accessible, cloakRoom: user.cloakRoom, smokingArea: user.smokingArea, beerGarden: user.beerGarden, danceFloor: user.danceFloor,
