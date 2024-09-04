@@ -66,6 +66,7 @@ export interface Venue {
   raves: boolean;
   specialisedEvents: boolean;
   sports: boolean;
+  dragShows: boolean;
 
 
   [key: string]: any; // Add index signature
