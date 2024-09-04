@@ -52,6 +52,7 @@ export interface Venue {
   danceFloor: boolean;
   outdoorSeats: boolean;
   smokingArea: boolean;
+  budgetFriendly: boolean;
 
   // Entertainment Tags
   comedy: boolean;
