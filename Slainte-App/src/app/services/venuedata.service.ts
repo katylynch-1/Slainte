@@ -52,6 +52,7 @@ export interface Venue {
   danceFloor: boolean;
   outdoorSeats: boolean;
   smokingArea: boolean;
+  budgetFriendly: boolean;
 
   // Entertainment Tags
   comedy: boolean;
@@ -65,6 +66,7 @@ export interface Venue {
   raves: boolean;
   specialisedEvents: boolean;
   sports: boolean;
+  dragShows: boolean;
 
 
   [key: string]: any; // Add index signature
