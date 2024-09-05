@@ -5,24 +5,36 @@
 </ion-header>
 
 <ion-content>
+  <!-- First row with heading and filter -->
   <ion-row>
     <ion-col>
       <div class="headings">
         <h2>Venues for You</h2>
       </div>
     </ion-col>
-     <ion-col>
-      <div class="filter">
+    <ion-col>
+      <div class="filter" style="text-align: right;">
         <ion-icon name="filter" size="large" (click)="openFilterModal()"></ion-icon>
       </div>
-     </ion-col>
+    </ion-col>
   </ion-row>
-  
-  <ion-row>
+
+  <!-- Row for selected filters -->
+  <ion-row *ngIf="selectedFilters.length > 0">
     <ion-col>
-      <ion-chip *ngFor="let filter of selectedFilters" (click)="removeFilter(filter)"> <!-- Displays selections as ion-chips with option to remove --> 
+      <ion-chip *ngFor="let filter of selectedFilters" (click)="removeFilter(filter)">
         <ion-label>{{ filter.label }}</ion-label>
-        <ion-icon name="close-outline"></ion-icon></ion-chip>
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-chip>
+    </ion-col>
+  </ion-row>
+
+  <!-- Display the count of venues -->
+  <ion-row>
+    <ion-col size="12">
+      <p style="font-size: 1rem; font-weight: 500; text-align: left; color: #6c757d; margin-top: 0;">
+        <i>Showing {{ countFilteredVenues() }} out of {{ countAllVenues() }} venues</i>
+      </p>
     </ion-col>
   </ion-row>
   <!-- Venue list -->

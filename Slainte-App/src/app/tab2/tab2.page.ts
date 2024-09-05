@@ -86,8 +86,16 @@ export class Tab2Page {
     }
   }
 
+  countAllVenues(): number {
+    return this.venues.length;
+  }
+
+  countFilteredVenues(): number {
+    return this.filteredVenues.length;
+  }
+
   updateSelectedFilters() {
-    this.selectedFilters = []; // Initializes as an empty array originally
+    this.selectedFilters = []; 
 
     // Gathers the tags selected from each individual category 
     this.selectedAtmospheres.forEach(tag => this.selectedFilters.push({ label: tag, type: 'atmosphere' }));
