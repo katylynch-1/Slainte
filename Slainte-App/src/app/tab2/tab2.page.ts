@@ -28,13 +28,7 @@ export class Tab2Page {
     });
   }
 
-  // ngOnInit() {
-  //   this.venueService.getVenues().subscribe(venues => {
-  //     this.venues = venues;
-  //     this.applyFilters(); 
-  //   });
-  // }
-
+  // Filter Modal
   async openFilterModal() {
     const modal = await this.modalController.create({
       component: FilterModalComponent
@@ -79,7 +73,7 @@ export class Tab2Page {
       })
       // Filter out venues with no matches
       .filter(item => item.matchCount > 0)
-      // Sort venues by match count in descending order
+      // Sort venues by match count in descending order to prioritise venues with highest no. of matches
       .sort((a, b) => b.matchCount - a.matchCount)
       // Extract the venues from the sorted array
       .map(item => item.venue);
@@ -126,6 +120,7 @@ export class Tab2Page {
     this.applyFilters();
   }
 
+// Open venue details page
   openVenueDetails(venue: any){
     let navigationExtras: NavigationExtras = {
       state: {

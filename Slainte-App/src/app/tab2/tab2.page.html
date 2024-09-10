@@ -19,6 +19,15 @@
     </ion-col>
   </ion-row>
 
+  <!-- Display the count of venues -->
+  <ion-row>
+    <ion-col size="12">
+      <p>
+        <i>Showing {{ countFilteredVenues() }} out of {{ countAllVenues() }} venues</i>
+      </p>
+    </ion-col>
+  </ion-row>
+
   <!-- Row for selected filters -->
   <ion-row *ngIf="selectedFilters.length > 0">
     <ion-col>
@@ -29,14 +38,6 @@
     </ion-col>
   </ion-row>
 
-  <!-- Display the count of venues -->
-  <ion-row>
-    <ion-col size="12">
-      <p style="font-size: 1rem; font-weight: 500; text-align: left; color: #6c757d; margin-top: 0;">
-        <i>Showing {{ countFilteredVenues() }} out of {{ countAllVenues() }} venues</i>
-      </p>
-    </ion-col>
-  </ion-row>
   <!-- Venue list -->
   <ion-grid>
     <ion-row>
