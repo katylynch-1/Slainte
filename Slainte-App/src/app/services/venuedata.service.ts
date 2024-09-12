@@ -84,7 +84,7 @@ export class VenuedataService {
     this.venueCollection = this.afs.collection<Venue>('Venues');
    }
 
-   getVenues(): Observable<Venue[]> {
+   getVenues(): Observable<Venue[]> { // Extracts venue data
     return this.venueCollection.snapshotChanges().pipe(
       map(venues => {
         return venues.map(venue => {
@@ -93,7 +93,7 @@ export class VenuedataService {
           return { venueID, ...data };
         });
       }),
-      switchMap(venues => {
+      switchMap(venues => { // Gets venue images
         const observables = venues.map(venue => {
           if (venue.imagePath) {
             const storageRef = this.storage.ref(venue.imagePath);
