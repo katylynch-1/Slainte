@@ -14,9 +14,10 @@ import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { EdituserdetailsComponent } from './edituserdetails/edituserdetails.component';
 
 @NgModule({
-  declarations: [AppComponent, FilterModalComponent],
+  declarations: [AppComponent, FilterModalComponent, EdituserdetailsComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, AngularFireModule, AngularFireAuthModule, AngularFirestoreModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
               { provide: FIREBASE_OPTIONS, useValue: environment.firebase}],
