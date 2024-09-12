@@ -12,11 +12,11 @@ import { Observable } from 'rxjs';
 })
 export class AuthenticationService {
 
-  user$: Observable<User | null>;
+  user: Observable<User | null>;
   regForm: FormGroup;
 
   constructor(public ngFireAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router) {
-    this.user$ = this.ngFireAuth.authState;
+    this.user = this.ngFireAuth.authState;
    }
 
   // async registerUser(email: string, password: string){
@@ -83,7 +83,7 @@ export class AuthenticationService {
   // }
 
   getUser(): Observable<User | null> {
-    return this.user$;
+    return this.user;
   }
 
   // async getProfile(){

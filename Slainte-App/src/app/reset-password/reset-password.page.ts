@@ -15,6 +15,7 @@ export class ResetPasswordPage implements OnInit {
   constructor(private authService: AuthenticationService) { }
 
   resetPassword(){
+    // Send a reset password to the email provided
     this.authService.resetPassword(this.email)
     .then(() => {
       this.message = 'Password reset email sent. Please check your inbox.';

@@ -42,23 +42,6 @@ const routes: Routes = [
   {
     path: 'reset-password',
     loadChildren: () => import('./reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
-  },
-  {
-    path: 'landingpage',
-    loadChildren: () => import('./landingpage/landingpage.module').then( m => m.LandingpagePageModule)
-  },
-  {
-    path: 'home-test',
-    loadChildren: () => import('./home-test/home-test.module').then( m => m.HomeTestPageModule)
-
-  },
-  {
-    path: 'enter-user-details',
-    loadChildren: () => import('./enter-user-details/enter-user-details.module').then( m => m.EnterUserDetailsPageModule)
-  },
-  {
-    path: 'enter-user-details/:uid',
-    loadChildren: () => import('./enter-user-details/enter-user-details.module').then( m => m.EnterUserDetailsPageModule)
   }
 ];
 @NgModule({

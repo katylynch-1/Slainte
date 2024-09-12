@@ -35,10 +35,12 @@ export class LoginPage implements OnInit {
 
   async login(){
     if (!this.email || !this.password) {
+      // Error message to display if a user has not entered an email or password
       console.error('Email or Password is missing.');
       return;
     }
     try{
+      // Call on Authentication Service to log in User using provided email and password
       await this.authService.loginUser(this.email, this.password);
       this.router.navigate(['/tabs/tab1'])
     } catch (error){
