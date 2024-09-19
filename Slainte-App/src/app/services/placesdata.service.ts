@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -11,12 +11,7 @@ export class PlacesdataService {
 
   constructor(private http: HttpClient) { }
 
-  getPubs(location: string, radius: number): Observable<any> {
-    const params = new HttpParams()
-      .set('location', location)
-      .set('radius', radius.toString())
-      .set('type', 'bar'); // 'bar' or 'pub' based on Google Places API types
-
-    return this.http.get<any>(this.apiUrl, { params });
+  getBars(lat: number, lng: number, radius: number, type: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}?location=${lat},${lng}&radius=${radius}&type=${type}}`);
   }
 }

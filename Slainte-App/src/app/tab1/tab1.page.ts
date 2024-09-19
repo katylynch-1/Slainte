@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { GeolocationService } from '../services/geolocation.service';
 import { PlacesdataService } from '../services/placesdata.service';
 
-
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -10,24 +9,13 @@ import { PlacesdataService } from '../services/placesdata.service';
 })
 export class Tab1Page implements OnInit {
 
-  venues: any[] = [];
+  map: any;
 
-  constructor(private placesService: PlacesdataService) {}
+  constructor(private geolocationService: GeolocationService) {}
 
-  ngOnInit(): void {
-    this.placesService.getPubs('53.3331,-6.2489', 1500).subscribe(data => {
-      this.venues = data.results;
-    });
+  ngOnInit() {
+    // this.loadMap();
   }
-}
-
-  // map: any;
-
-  // constructor(private geolocationService: GeolocationService) {}
-
-  // ngOnInit() {
-  //   this.loadMap();
-  // }
 
   // async loadMap() {
   //   const { lat, lng } = await this.geolocationService.getCurrentPosition();
@@ -46,5 +34,13 @@ export class Tab1Page implements OnInit {
   //   });
   // }
 
-  
+  // venues: any[] = [];
 
+  // constructor(private placesService: PlacesdataService) {}
+
+  // ngOnInit(): void {
+  //   this.placesService.getPubs('53.3331,-6.2489', 1500).subscribe(data => {
+  //     this.venues = data.results;
+  //   });
+  // }
+}
