@@ -16,7 +16,7 @@ app.get('/api/places', async (req, res) => {
         const response = await axios.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json', {
             params: {
                 location: `${lat},${lng}`,
-                radius: radius || 1000,
+                radius: radius,
                 type: 'bar',
                 key: GOOGLE_API_KEY
             },
