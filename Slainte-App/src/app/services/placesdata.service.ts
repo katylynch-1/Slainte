@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,11 +7,12 @@ import { Observable } from 'rxjs';
 })
 export class PlacesdataService {
 
-  private apiUrl = 'http://localhost:3000/api/places'; // Update with your server URL
+  private serverUrl = 'http://localhost:3000/api/place'; // Ensure this is the correct endpoint
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getBars(lat: number, lng: number, radius: number, type: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}?location=${lat},${lng}&radius=${radius}&type=${type}}`);
+  getBars(lat: number, lng: number, radius: number): Observable<any> {
+    // No need to pass type or API key. The server handles it.
+    return this.http.get(`${this.serverUrl}?lat=${lat}&lng=${lng}&radius=${radius}`);
   }
 }
