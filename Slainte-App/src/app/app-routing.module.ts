@@ -4,8 +4,6 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    // loadChildren: () => import('./landingpage/landingpage.module').then( m => m.LandingpagePageModule)
-    // loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
 
   },
@@ -43,15 +41,6 @@ const routes: Routes = [
     path: 'reset-password',
     loadChildren: () => import('./reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
   },
-  {
-    path: 'landingpage',
-    loadChildren: () => import('./landingpage/landingpage.module').then( m => m.LandingpagePageModule)
-  },
-  {
-    path: 'home-test',
-    loadChildren: () => import('./home-test/home-test.module').then( m => m.HomeTestPageModule)
-
-  }
 ];
 @NgModule({
   imports: [

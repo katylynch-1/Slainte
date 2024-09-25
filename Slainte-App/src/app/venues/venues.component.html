@@ -1,11 +1,13 @@
 <div class="venues-container">
-  <h2>Venues in Dublin</h2>
-
+  <h2>Venues in Dublin (Places API)</h2>
   <ul *ngIf="bars.length > 0;">
     <!-- Loop through the venues array -->
     <li *ngFor="let bar of bars">
       <h3>{{ bar.name }}</h3>
       <p>{{ bar.vicinity }}</p>
       <p>Rating: {{ bar.rating }}</p>
+      <p>{{ bar.types }}</p>
     </li>
   </ul>
+
+  
