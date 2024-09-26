@@ -19,7 +19,7 @@ export class VenuedetailsPage implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation()?.extras.state){
         this.venue = this.router.getCurrentNavigation().extras.state['venue'];
-        console.log(this.venue);
+        console.log('Venue from navigation state:',this.venue);
       }
     });
   }
@@ -31,12 +31,15 @@ export class VenuedetailsPage implements OnInit {
       if (placeId) {
         // Call your API to get additional venue details using place_id
         this.fetchApiVenueDetails(placeId);
+      } else {
+        console.error('No place_id found in route params');
       }
     });
   }
 
   // Method to fetch Google Places API details
   fetchApiVenueDetails(placeId: string) {
+    console.log('Fetching details for placeId:', placeId);
     this.venueData.getVenueDetails(placeId).subscribe({
       next: (details) => {
         this.apiVenueDetails = details;

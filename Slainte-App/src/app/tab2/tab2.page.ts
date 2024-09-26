@@ -119,11 +119,12 @@ export class Tab2Page {
   }
 
   openVenueDetails(venue: any){
+    const placeId = venue.place_id; //Extract place_id from Venue object
     let navigationExtras: NavigationExtras = {
       state: {
         venue: venue
       }
     };
-    this.router.navigate(['venuedetails'], navigationExtras);
+    this.router.navigate(['venuedetails', placeId], navigationExtras);
   }
 }

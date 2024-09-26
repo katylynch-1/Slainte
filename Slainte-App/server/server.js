@@ -38,11 +38,11 @@ app.get('/api/place/details', async (req, res) => {
     }
 
     try {
-        const response = await axios.get('https://maps.googleapis.com/maps/api/place/details/json', {
+        const response = await axios.get('https://maps.googleapis.com/maps/api/place/details', {
             params: {
                 place_id: place_id,
                 key: GOOGLE_API_KEY,
-                fields: 'formatted_address', // Specify the fields you need
+                fields: 'adr_address', // Specify the fields you need
             },
         });
         res.json(response.data.result);

@@ -10,8 +10,10 @@ const routes: Routes = [
   {
     path: 'venuedetails',
     loadChildren: () => import('./venuedetails/venuedetails.module').then( m => m.VenuedetailsPageModule)
-
-    // loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'venuedetails/:place_id',
+    loadChildren: () => import('./venuedetails/venuedetails.module').then( m => m.VenuedetailsPageModule)
   },
   {
     path: 'tabs',
