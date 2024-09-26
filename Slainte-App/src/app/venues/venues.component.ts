@@ -10,8 +10,12 @@ export class VenuesComponent  implements OnInit {
 
   bars: any[] = [];
   lat: number = 53.3442;
-  lng: number = -6.2674; // Dublin 2
-  radius: number = 10000; // 10 km
+  lng: number = -6.2674; // Dublin 7
+  radius: number = 1000; // 3 km
+  type: string = 'bar' || 'night_club';
+  keyword: string = 'pub';
+
+
 
   constructor(private placesService: PlacesdataService) { }
 
@@ -20,7 +24,7 @@ export class VenuesComponent  implements OnInit {
   }
   
   showPlaces(){
-    this.placesService.getBars(this.lat, this.lng, this.radius).subscribe({
+    this.placesService.getBars(this.lat, this.lng, this.radius, this.type, this.keyword).subscribe({
       next: (data) => {
         this.bars = data;
         // this.pubs = data;

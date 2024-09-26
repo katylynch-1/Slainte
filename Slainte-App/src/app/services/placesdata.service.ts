@@ -11,7 +11,7 @@ export class PlacesdataService {
 
   constructor(private http: HttpClient) {}
 
-  getBars(lat: number, lng: number, radius: number): Observable<any> {
-    return this.http.get(`${this.serverUrl}?lat=${lat}&lng=${lng}&radius=${radius}`);
+  getBars(lat: number, lng: number, radius: number, type: string, keyword: string): Observable<any> {
+    return this.http.get(`${this.serverUrl}?lat=${lat}&lng=${lng}&radius=${radius}&type=${type}&keyword=${keyword}`);
   }
 }
