@@ -110,12 +110,10 @@ export class VenuedataService {
   }
 
 
-  private serverDetailsUrl = 'http://localhost:3000/api/place/details/json'; // 
-
+  private serverDetailsUrl = 'http://localhost:3000/api/place/details'; // 
 
   getVenueDetails(placeId: string): Observable<any> {
-    return this.http.get(`${this.serverDetailsUrl}?place_id=${placeId}`);
-
+    return this.http.get(`${this.serverDetailsUrl}?&place_id=${placeId}`);
   }
   
 }

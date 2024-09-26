@@ -72,12 +72,21 @@
             <ion-chip *ngIf="venue.sports">Sports</ion-chip> 
           </div>
           <br>
-          <br>
 
-            <!-- Address from Firebase or API -->
+            <!-- Info from API -->
             <div *ngIf="apiVenueDetails?.formatted_address">
               <ion-icon name="location-outline" class="icon"></ion-icon>
-              <span>{{ apiVenueDetails?.adr_address }}</span>
+              <span>{{ apiVenueDetails?.formatted_address }}</span>
+            </div>
+
+            <div>
+              <ion-icon name="call-outline" class="icon"></ion-icon>
+              <span>{{ apiVenueDetails?.formatted_phone_number }}</span> 
+            </div>
+
+            <div *ngIf="apiVenueDetails?.rating">
+              <ion-icon name="star-outline" class="icon"></ion-icon>
+              <span>{{ apiVenueDetails?.rating }}</span> 
             </div>
           </ion-card-content>
       </ion-card>

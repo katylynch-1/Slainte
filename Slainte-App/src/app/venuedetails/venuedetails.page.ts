@@ -52,6 +52,5 @@ export class VenuedetailsPage implements OnInit {
         console.log('Place details fetching complete');
       }
     });
-  }
-  
+  };  
 }

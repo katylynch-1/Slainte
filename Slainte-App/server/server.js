@@ -30,7 +30,7 @@ app.get('/api/places', async (req, res) => {
 });
 
 // New endpoint for place details using place_id
-app.get('/api/place/details', async (req, res) => {
+app.get('/api/place/details', async (req, res) => { 
     const { place_id } = req.query;
 
     if (!place_id) {
@@ -38,11 +38,11 @@ app.get('/api/place/details', async (req, res) => {
     }
 
     try {
-        const response = await axios.get('https://maps.googleapis.com/maps/api/place/details', {
+        const response = await axios.get('https://maps.googleapis.com/maps/api/place/details/json', {
             params: {
                 place_id: place_id,
                 key: GOOGLE_API_KEY,
-                fields: 'adr_address', // Specify the fields you need
+                fields: 'formatted_address,formatted_phone_number,rating' // Specify all required fields
             },
         });
         res.json(response.data.result);
