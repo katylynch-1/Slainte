@@ -3,9 +3,11 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { AngularFireStorage } from "@angular/fire/compat/storage";
 import { map, switchMap } from 'rxjs/operators';
 import { Observable, forkJoin, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 export interface Venue {
   venueID?: string,
+  place_id?: string,
   name: string,
   address: string,
   openingHours: string,
@@ -78,7 +80,7 @@ export class VenuedataService {
 
   private venueCollection: AngularFirestoreCollection<Venue>;
 
-  constructor(private storage: AngularFireStorage, private afs: AngularFirestore) {
+  constructor(private storage: AngularFireStorage, private afs: AngularFirestore, private http: HttpClient) {
     this.venueCollection = this.afs.collection<Venue>('Venues');
    }
 
@@ -106,4 +108,13 @@ export class VenuedataService {
       })
     );
   }
+
+
+  private serverDetailsUrl = 'http://localhost:3000//api/place/details'; // 
+
+
+  getVenueDetails(placeId: string): Observable<any> {
+    return this.http.get(`${this.serverDetailsUrl}?place_id=${placeId}`);
+  }
+  
 }

@@ -29,6 +29,29 @@ app.get('/api/places', async (req, res) => {
     }
 });
 
+// New endpoint for place details using place_id
+app.get('/api/place/details', async (req, res) => {
+    const { place_id } = req.query;
+
+    if (!place_id) {
+        return res.status(400).send('place_id is required');
+    }
+
+    try {
+        const response = await axios.get('https://maps.googleapis.com/maps/api/place/details/json', {
+            params: {
+                place_id: place_id,
+                key: GOOGLE_API_KEY,
+                fields: 'formatted_address', // Specify the fields you need
+            },
+        });
+        res.json(response.data.result);
+    } catch (error) {
+        console.error('Error fetching place details from Google Places API:', error.response?.data || error.message);
+        res.status(500).send('server error');
+    }
+});
+
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);
 });
