@@ -10,11 +10,13 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 
 import { FilterModalComponent } from './filter-modal/filter-modal.component';
+
 import { FormsModule } from '@angular/forms';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+
 
 @NgModule({
   declarations: [AppComponent, FilterModalComponent],

@@ -1,11 +1,24 @@
 <div class="venues-container">
-  <h2>Venues in Dublin</h2>
+      <h2 class="heading">Bars Near You</h2>
 
-  <ul *ngIf="bars.length > 0;">
-    <!-- Loop through the venues array -->
-    <li *ngFor="let bar of bars">
-      <h3>{{ bar.name }}</h3>
-      <p>{{ bar.vicinity }}</p>
-      <p>Rating: {{ bar.rating }}</p>
-    </li>
-  </ul>
+      <div *ngIf="bars.length > 0;">
+        <ion-grid [fixed]="true">
+          <!-- <ion-row> -->
+          <!-- Loop through the venues array -->
+          <ion-col size="1">
+              <ion-card class="venue-card" *ngFor="let bar of bars">
+              <ion-card-header>
+                <ion-card-title>{{ bar.name }}</ion-card-title>
+              </ion-card-header>
+
+              <ion-card-content>
+                <ion-chip>Bar</ion-chip>
+                <p>{{ bar.vicinity }}</p>
+                <p>Rating: {{ bar.rating }}</p>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        <!-- </ion-row> -->
+        </ion-grid>
+      </div>
+</div>

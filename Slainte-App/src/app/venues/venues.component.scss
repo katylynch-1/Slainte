@@ -1,0 +1,30 @@
+.venues-container {
+    --color: #fff;
+}
+
+h2 {
+    --color: #9efff0;
+}
+
+.venue-card {
+    --background: #3C3C3C;
+    --color: #9efff0;
+    --outline: 5px;
+    --outline--color: #fff;
+  }
+  
+  ion-card-title {
+    --color: #F75FA6;
+  }
+  
+  ion-card-subtitle {
+    --color: #F75FA6;
+  }
+
+  ion-card-content {
+    --color: #F75FA6;
+  }
+
+  ion-grid {
+    --ion-grid-columns: 2;
+  }

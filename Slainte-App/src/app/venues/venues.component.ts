@@ -11,7 +11,7 @@ export class VenuesComponent  implements OnInit {
   bars: any[] = [];
   lat: number = 53.3442;
   lng: number = -6.2674; // Dublin 2
-  radius: number = 5000; // 3 km
+  radius: number = 10000; // 10 km
 
   constructor(private placesService: PlacesdataService) { }
 
