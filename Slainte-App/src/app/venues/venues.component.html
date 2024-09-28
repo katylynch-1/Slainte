@@ -2,13 +2,18 @@
   <h2>Venues in Dublin (Places API)</h2>
   <ul *ngIf="bars.length > 0;">
     <!-- Loop through the venues array -->
-    <li *ngFor="let bar of bars">
-      <h3>{{ bar.name }}</h3>
-      <p>{{ bar.vicinity }}</p>
-      <p>Rating: {{ bar.rating }}</p>
-      <p>{{ bar.types }}</p>
-    </li>
+    <ion-card *ngFor="let bar of bars">
+      <ion-card-header><ion-card-title>{{ bar.name }}</ion-card-title></ion-card-header>
+      <ion-card-content>
+      <ion-icon name="location-outline" class="icon"></ion-icon><span>{{ bar.vicinity }}</span>
+      <br>
+      <ion-icon name="star-outline" class="icon"></ion-icon><span>{{ bar.rating }}</span>
+      <ion-chip>{{ bar.types }}</ion-chip>
+    </ion-card-content>
+    </ion-card>
   </ul>
+  </div>
+
 
   
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PlacesdataService } from '../services/placesdata.service';
+import { Geolocation } from '@capacitor/geolocation';
 
 @Component({
   selector: 'app-venues',
@@ -19,8 +20,21 @@ export class VenuesComponent  implements OnInit {
 
   constructor(private placesService: PlacesdataService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.getCurrentLocation(); 
     this.showPlaces();
+  }
+
+  async getCurrentLocation() {
+    try {
+      const position = await Geolocation.getCurrentPosition();
+      this.lat = position.coords.latitude;
+      this.lng = position.coords.longitude;
+      console.log(`Current position: ${this.lat}, ${this.lng}`);
+    } catch (error) {
+      console.error('Error getting location', error);
+      // Handle location errors (fallback to default coordinates or show a message)
+    }
   }
   
   showPlaces(){

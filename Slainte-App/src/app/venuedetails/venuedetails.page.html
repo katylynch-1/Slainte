@@ -79,7 +79,7 @@
               <span>{{ apiVenueDetails?.formatted_address }}</span>
             </div>
 
-            <div>
+            <div *ngIf="apiVenueDetails?.formatted_phone_number">
               <ion-icon name="call-outline" class="icon"></ion-icon>
               <span>{{ apiVenueDetails?.formatted_phone_number }}</span> 
             </div>

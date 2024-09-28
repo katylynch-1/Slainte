@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { GeolocationService } from '../services/geolocation.service';
-import { PlacesdataService } from '../services/placesdata.service';
 
 @Component({
   selector: 'app-tab1',
@@ -34,13 +33,4 @@ export class Tab1Page implements OnInit {
   //   });
   // }
 
-  // venues: any[] = [];
-
-  // constructor(private placesService: PlacesdataService) {}
-
-  // ngOnInit(): void {
-  //   this.placesService.getPubs('53.3331,-6.2489', 1500).subscribe(data => {
-  //     this.venues = data.results;
-  //   });
-  // }
 }
