@@ -17,12 +17,19 @@
       </div>
      </ion-col>
   </ion-row>
-  
   <ion-row>
     <ion-col>
       <ion-chip *ngFor="let filter of selectedFilters" (click)="removeFilter(filter)"> <!-- Displays selections as ion-chips with option to remove --> 
         <ion-label>{{ filter.label }}</ion-label>
         <ion-icon name="close-outline"></ion-icon></ion-chip>
+    </ion-col>
+  </ion-row>
+  <!-- Display the count of venues -->
+  <ion-row>
+    <ion-col size="12">
+      <p>
+        <i>Showing {{ countFilteredVenues() }} out of {{ countAllVenues() }} venues</i>
+      </p>
     </ion-col>
   </ion-row>
   <!-- Venue list -->

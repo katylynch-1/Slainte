@@ -84,11 +84,27 @@
               <span>{{ apiVenueDetails?.formatted_phone_number }}</span> 
             </div>
 
+            <div *ngIf="apiVenueDetails?.price_level">
+              <ion-icon name="star-outline" class="icon"></ion-icon>
+              <span> Rating: {{ apiVenueDetails?.price_level }} /5 </span> 
+            </div>
+
             <div *ngIf="apiVenueDetails?.rating">
               <ion-icon name="star-outline" class="icon"></ion-icon>
-              <span>{{ apiVenueDetails?.rating }}</span> 
+              <span> Rating: {{ apiVenueDetails?.rating }}</span> 
+            </div>
+
+            <div *ngIf="apiVenueDetails?.current_opening_hours">
+              <ion-icon name="star-outline" class="icon"></ion-icon>
+              <span> {{ apiVenueDetails?.current_opening_hours }}</span> 
             </div>
           </ion-card-content>
+          <ion-footer>
+            <div id="buttons">
+            <ion-button><ion-icon name="pin-outline"></ion-icon>Check-In</ion-button>
+            <ion-button><ion-icon name="heart-outline"></ion-icon>Add To Favourites</ion-button>
+          </div>
+          </ion-footer>
       </ion-card>
     </ion-col>
   </ion-row>

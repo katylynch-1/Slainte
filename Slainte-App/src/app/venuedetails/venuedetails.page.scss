@@ -5,5 +5,16 @@
     padding-bottom: 8px;
   }
 
+  #buttons {
+    display: flex;               /* Use flexbox layout */
+    justify-content: center;     /* Center items horizontally */
+    align-items: center;  
+    padding-bottom: 10px;       /* Center items vertically (optional) */
+  }
+  
+  ion-button {
+    margin: 0 10px;            /* Add some space between the buttons */
+  }
+
 
   

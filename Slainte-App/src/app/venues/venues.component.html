@@ -1,19 +1,20 @@
 <div class="venues-container">
-  <h2>Venues in Dublin (Places API)</h2>
-  <ul *ngIf="bars.length > 0;">
+  <div *ngIf="bars.length > 0;">
     <!-- Loop through the venues array -->
-    <ion-card *ngFor="let bar of bars">
-      <ion-card-header><ion-card-title>{{ bar.name }}</ion-card-title></ion-card-header>
+    <ion-card *ngFor="let bar of bars" class="center-card">
+      <ion-card-header>
+        <ion-card-title>{{ bar.name }}</ion-card-title>
+      </ion-card-header>
       <ion-card-content>
-      <ion-icon name="location-outline" class="icon"></ion-icon><span>{{ bar.vicinity }}</span>
-      <br>
-      <ion-icon name="star-outline" class="icon"></ion-icon><span>{{ bar.rating }}</span>
-      <ion-chip>{{ bar.types }}</ion-chip>
-    </ion-card-content>
+        <div>
+          <ion-icon name="location-outline" class="icon"></ion-icon>
+          <span>{{ bar.vicinity }}</span>
+        </div>
+        <div>
+          <ion-icon name="star-outline" class="icon"></ion-icon>
+          <span>{{ bar.rating }}</span>
+        </div>
+      </ion-card-content>
     </ion-card>
-  </ul>
   </div>
-
-
-  
-
+</div>
