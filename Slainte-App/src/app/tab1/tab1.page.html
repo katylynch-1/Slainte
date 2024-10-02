@@ -4,9 +4,16 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <img src="/assets/SlainteLogo.png">
-
-  <div id="map" style="height: 100%; width: 100%;"></div>
-
+<ion-content class="ion-padding">
+  <div id="map" style="height: 40%; width: 100%;"></div>
+  <br>
+  <ion-segment value="default">
+    <ion-segment-button value="default">
+      <ion-label>Venues For You</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="segment">
+      <ion-label>Venues Near You</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <app-venues></app-venues>
 </ion-content>

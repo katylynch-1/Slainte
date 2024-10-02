@@ -74,39 +74,37 @@
             <ion-chip *ngIf="venue.sports">Sports</ion-chip> 
           </div>
           <br>
-          <div>
-            <ion-icon name="location-outline" class="icon"></ion-icon>
-            <span>{{ venue.address }}</span>
+
+            <!-- Info from API -->
+            <div *ngIf="apiVenueDetails?.formatted_address">
+              <ion-icon name="location-outline" class="icon"></ion-icon>
+              <span>{{ apiVenueDetails?.formatted_address }}</span>
+            </div>
+
+            <div *ngIf="apiVenueDetails?.formatted_phone_number">
+              <ion-icon name="call-outline" class="icon"></ion-icon>
+              <span>{{ apiVenueDetails?.formatted_phone_number }}</span> 
+            </div>
+
+            <div *ngIf="apiVenueDetails?.price_level">
+              <span> Price Level: {{ apiVenueDetails?.price_level }} /5 </span> 
+            </div>
+
+            <div *ngIf="apiVenueDetails?.rating">
+              <ion-badge color="warning" class="rating-badge">
+                <ion-icon name="star" class="rating-icon"></ion-icon>
+                <span>{{ apiVenueDetails?.rating }}</span>
+              </ion-badge>
+            </div>            
+            
+
+          </ion-card-content>
+          <ion-footer>
+            <div id="buttons">
+            <ion-button><ion-icon name="pin-outline"></ion-icon>Check-In</ion-button>
+            <ion-button><ion-icon name="heart-outline"></ion-icon>Add To Favourites</ion-button>
           </div>
-          <ion-text color="dark">
-            <h1>Entry Fees</h1>
-            More information here...
-          </ion-text>
-          <ion-text color="dark">
-            <h1>Special Offers</h1>
-            More information here...
-          </ion-text>
-          <ion-text color="dark">
-            <h1>Peak Business Hours</h1>
-            More information here...
-          </ion-text>
-        </ion-card-content>
-        <ion-footer>
-          <ion-toolbar>
-            <ion-col>
-              <ion-button>
-                <ion-icon slot="start" name="pin-outline" class="ion-align-items-start"></ion-icon>
-                Check-In
-              </ion-button>
-            </ion-col>
-            <ion-col>
-              <ion-button>
-                <ion-icon slot="start" name="compass-outline" class="ion-align-items-end"></ion-icon>
-                Get Directions
-              </ion-button> 
-            </ion-col>         
-          </ion-toolbar>
-        </ion-footer>
+          </ion-footer>
       </ion-card>
     </ion-col>
   </ion-row>

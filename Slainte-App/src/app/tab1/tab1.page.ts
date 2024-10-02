@@ -11,30 +11,44 @@ declare var google: any;
 
 export class Tab1Page implements OnInit {
 
-  map: any;
+  map: google.maps.Map | undefined;
 
   constructor(private geolocationService: GeolocationService) {}
 
   ngOnInit() {
-    this.loadMap();
+    this.initializeMap(); // Initialize map on component load
   }
 
-  async loadMap() {
+  async initializeMap() {
+    // Get the user's current position from the GeolocationService
     const { lat, lng } = await this.geolocationService.getCurrentPosition();
+    console.log('Latitude:', lat, 'Longitude:', lng);
 
-    const mapOptions = {
-      center: { lat: lat, lng: lng },
-      zoom: 15
+    // Set map options centered on user's location
+    const mapOptions: google.maps.MapOptions = {
+      center: { lat, lng },
+      zoom: 15,
+      mapId: 'f7407f18b4a90b70' // Add your Map ID here
     };
 
-    const mapEle = document.getElementById('map');
-    this.map = new google.maps.Map(mapEle, mapOptions);
+    // Get the HTML element where the map will be rendered
+    const mapEle = document.getElementById('map') as HTMLElement;
+    if (mapEle) {
+      this.map = new google.maps.Map(mapEle, mapOptions);
+    } else {
+      console.error('Map element not found');
+    }
 
-    const marker = new google.maps.Marker({
-      position: { lat: lat, lng: lng },
-      map: this.map
+    // Import the AdvancedMarkerElement from the Google Maps library
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker") as google.maps.MarkerLibrary;
+
+    // Create and place a marker at the user's current location
+    new AdvancedMarkerElement({
+      position: { lat, lng },
+      map: this.map,
+      title: 'You are here!', // Tooltip on hover
     });
-  }
 
-  
+    console.log('Creating marker at:', { lat, lng });
+  }
 }

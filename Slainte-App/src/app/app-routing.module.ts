@@ -4,16 +4,16 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    // loadChildren: () => import('./landingpage/landingpage.module').then( m => m.LandingpagePageModule)
-    // loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
 
   },
   {
     path: 'venuedetails',
     loadChildren: () => import('./venuedetails/venuedetails.module').then( m => m.VenuedetailsPageModule)
-
-    // loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'venuedetails/:place_id',
+    loadChildren: () => import('./venuedetails/venuedetails.module').then( m => m.VenuedetailsPageModule)
   },
   {
     path: 'tabs',
@@ -42,7 +42,8 @@ const routes: Routes = [
   {
     path: 'reset-password',
     loadChildren: () => import('./reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
-  }
+  },
+
 ];
 @NgModule({
   imports: [

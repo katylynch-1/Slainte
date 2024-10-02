@@ -9,7 +9,7 @@
   <ion-row>
     <ion-col>
       <div class="headings">
-        <h2>Venues for You</h2>
+        <h2>Sláinte Venues</h2>
       </div>
     </ion-col>
     <ion-col>
@@ -18,8 +18,6 @@
       </div>
     </ion-col>
   </ion-row>
-
-  <!-- Display the count of venues -->
   <ion-row>
     <ion-col size="12">
       <p>
@@ -37,7 +35,14 @@
       </ion-chip>
     </ion-col>
   </ion-row>
-
+  <!-- Display the count of venues -->
+  <ion-row>
+    <ion-col size="12">
+      <p>
+        <i>Showing {{ countFilteredVenues() }} out of {{ countAllVenues() }} venues</i>
+      </p>
+    </ion-col>
+  </ion-row>
   <!-- Venue list -->
   <ion-grid>
     <ion-row>

@@ -49,6 +49,14 @@ export class Tab2Page {
     return await modal.present();
   }
 
+  countAllVenues(): number {
+    return this.venues.length;
+  }
+
+  countFilteredVenues(): number {
+    return this.filteredVenues.length;
+  }
+  
   applyFilters() {
     const tagGroups = [this.selectedAtmospheres, this.selectedDrinks, this.selectedMusic, this.selectedAmenities, this.selectedEntertainment];
     const tagsAreSelected = tagGroups.some(tags => tags.length > 0);
@@ -122,11 +130,12 @@ export class Tab2Page {
 
 // Open venue details page
   openVenueDetails(venue: any){
+    const placeId = venue.place_id; //Extract place_id from Venue object
     let navigationExtras: NavigationExtras = {
       state: {
         venue: venue
       }
     };
-    this.router.navigate(['venuedetails'], navigationExtras);
+    this.router.navigate(['venuedetails', placeId], navigationExtras);
   }
 }
