@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { AuthenticationService } from '../services/authentication.service';
 import { Router } from '@angular/router';
 import { User } from '@firebase/auth-types';
+import { EdituserdetailsComponent } from '../edituserdetails/edituserdetails.component';
+import { ModalController } from '@ionic/angular';
 
 // import { UserService, User } from '../services/user.service';
 // import { Router, ActivatedRoute } from '@angular/router';
@@ -17,12 +19,13 @@ import { User } from '@firebase/auth-types';
 export class Tab3Page implements OnInit{
 
   // users?: Observable<User[]>;
-  user: User | null = null;
+  // user: User | null = null;
+  user: User;
 
   // user: any = null;
  
 
-  constructor(private authService: AuthenticationService, private router:Router) {}
+  constructor(private authService: AuthenticationService, private router:Router, private modalController: ModalController) {}
 
   signOut(){
     this.authService.signOut()
@@ -46,6 +49,15 @@ export class Tab3Page implements OnInit{
         this.user = user;
       }
     });
+  }
+
+  async openEditModal(){
+    const modal = await this.modalController.create({
+      component: EdituserdetailsComponent
+    });
+
+    await modal.present();
+
   }
 
 

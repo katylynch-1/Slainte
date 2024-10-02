@@ -28,13 +28,7 @@ export class Tab2Page {
     });
   }
 
-  // ngOnInit() {
-  //   this.venueService.getVenues().subscribe(venues => {
-  //     this.venues = venues;
-  //     this.applyFilters(); 
-  //   });
-  // }
-
+  // Filter Modal
   async openFilterModal() {
     const modal = await this.modalController.create({
       component: FilterModalComponent
@@ -87,15 +81,23 @@ export class Tab2Page {
       })
       // Filter out venues with no matches
       .filter(item => item.matchCount > 0)
-      // Sort venues by match count in descending order
+      // Sort venues by match count in descending order to prioritise venues with highest no. of matches
       .sort((a, b) => b.matchCount - a.matchCount)
       // Extract the venues from the sorted array
       .map(item => item.venue);
     }
   }
 
+  countAllVenues(): number {
+    return this.venues.length;
+  }
+
+  countFilteredVenues(): number {
+    return this.filteredVenues.length;
+  }
+
   updateSelectedFilters() {
-    this.selectedFilters = []; // Initializes as an empty array originally
+    this.selectedFilters = []; 
 
     // Gathers the tags selected from each individual category 
     this.selectedAtmospheres.forEach(tag => this.selectedFilters.push({ label: tag, type: 'atmosphere' }));
@@ -126,6 +128,7 @@ export class Tab2Page {
     this.applyFilters();
   }
 
+// Open venue details page
   openVenueDetails(venue: any){
     const placeId = venue.place_id; //Extract place_id from Venue object
     let navigationExtras: NavigationExtras = {

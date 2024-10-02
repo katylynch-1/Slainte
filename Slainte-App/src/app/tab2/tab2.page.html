@@ -5,23 +5,34 @@
 </ion-header>
 
 <ion-content>
+  <!-- First row with heading and filter -->
   <ion-row>
     <ion-col>
       <div class="headings">
         <h2>Sláinte Venues</h2>
       </div>
     </ion-col>
-     <ion-col>
-      <div class="filter">
+    <ion-col>
+      <div class="filter" style="text-align: right;">
         <ion-icon name="filter" size="large" (click)="openFilterModal()"></ion-icon>
       </div>
-     </ion-col>
+    </ion-col>
   </ion-row>
   <ion-row>
+    <ion-col size="12">
+      <p>
+        <i>Showing {{ countFilteredVenues() }} out of {{ countAllVenues() }} venues</i>
+      </p>
+    </ion-col>
+  </ion-row>
+
+  <!-- Row for selected filters -->
+  <ion-row *ngIf="selectedFilters.length > 0">
     <ion-col>
-      <ion-chip *ngFor="let filter of selectedFilters" (click)="removeFilter(filter)"> <!-- Displays selections as ion-chips with option to remove --> 
+      <ion-chip *ngFor="let filter of selectedFilters" (click)="removeFilter(filter)">
         <ion-label>{{ filter.label }}</ion-label>
-        <ion-icon name="close-outline"></ion-icon></ion-chip>
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-chip>
     </ion-col>
   </ion-row>
   <!-- Display the count of venues -->
@@ -85,6 +96,8 @@
                 <ion-chip *ngIf="venue.danceFloor">Dance Floor</ion-chip> 
                 <ion-chip *ngIf="venue.outdoorSeats">Outdoor Seats</ion-chip> 
                 <ion-chip *ngIf="venue.smokingArea">Smoking Area</ion-chip>
+                <ion-chip *ngIf="venue.budgetFriendly">Budget-Friendly</ion-chip>
+
 
                 <!-- Entertainment -->
                 <ion-chip *ngIf="venue.comedy">Comedy</ion-chip> 
@@ -98,6 +111,7 @@
                 <ion-chip *ngIf="venue.raves">Raves</ion-chip> 
                 <ion-chip *ngIf="venue.specialisedEvents">Specialised Events</ion-chip>
                 <ion-chip *ngIf="venue.sports">Sports</ion-chip> 
+                <ion-chip *ngIf="venue.dragShows">Drag Shows</ion-chip> 
               </div>
             </ion-card-content>
           </ion-card>

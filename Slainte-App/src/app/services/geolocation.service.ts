@@ -8,6 +8,7 @@ export class GeolocationService {
 
   constructor() { }
 
+  // Fetches the current position of the user
   async getCurrentPosition() {
     try {
       const position = await Geolocation.getCurrentPosition();

@@ -47,7 +47,7 @@ export class SignupPage implements OnInit {
           this.regForm.value.email,
           this.regForm.value.password,        );
         if (user) {
-          this.router.navigate(['/']);
+          this.router.navigate(['/tabs/tab1']);
         }
       } catch (error) {
         console.log(error);
