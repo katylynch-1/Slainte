@@ -87,11 +87,12 @@
             </div>
 
             <div *ngIf="apiVenueDetails?.price_level">
-              <span> Price Level: {{ apiVenueDetails?.price_level }} /5 </span> 
+              <p>Price Level: {{ getPriceDescription(apiVenueDetails.price_level) }}</p>
+              <ion-progress-bar [value]="apiVenueDetails.price_level / 5" [color]="getPriceBarColor(apiVenueDetails.price_level)"></ion-progress-bar>
             </div>
-
+            <br>
             <div *ngIf="apiVenueDetails?.rating">
-              <ion-badge color="warning" class="rating-badge">
+              <ion-badge color="" class="rating-badge">
                 <ion-icon name="star" class="rating-icon"></ion-icon>
                 <span>{{ apiVenueDetails?.rating }}</span>
               </ion-badge>
