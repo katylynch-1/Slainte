@@ -6,8 +6,14 @@
 
 <ion-content class="ion-padding">
   <div id="map" style="height: 40%; width: 100%;"></div>
-  <h2>Venues Near You</h2>
+  <br>
+  <ion-segment value="default">
+    <ion-segment-button value="default">
+      <ion-label>Venues For You</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="segment">
+      <ion-label>Venues Near You</ion-label>
+    </ion-segment-button>
+  </ion-segment>
   <app-venues></app-venues>
-  <h2>Venues For You</h2>
-  <p>This will display a list of Sláinte verified venues based upon the user's preferences upon account creation.</p>
 </ion-content>

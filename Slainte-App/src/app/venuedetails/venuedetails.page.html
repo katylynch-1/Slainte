@@ -85,19 +85,17 @@
             </div>
 
             <div *ngIf="apiVenueDetails?.price_level">
-              <ion-icon name="star-outline" class="icon"></ion-icon>
-              <span> Rating: {{ apiVenueDetails?.price_level }} /5 </span> 
+              <span> Price Level: {{ apiVenueDetails?.price_level }} /5 </span> 
             </div>
 
             <div *ngIf="apiVenueDetails?.rating">
-              <ion-icon name="star-outline" class="icon"></ion-icon>
-              <span> Rating: {{ apiVenueDetails?.rating }}</span> 
-            </div>
+              <ion-badge color="warning" class="rating-badge">
+                <ion-icon name="star" class="rating-icon"></ion-icon>
+                <span>{{ apiVenueDetails?.rating }}</span>
+              </ion-badge>
+            </div>            
+            
 
-            <div *ngIf="apiVenueDetails?.current_opening_hours">
-              <ion-icon name="star-outline" class="icon"></ion-icon>
-              <span> {{ apiVenueDetails?.current_opening_hours }}</span> 
-            </div>
           </ion-card-content>
           <ion-footer>
             <div id="buttons">

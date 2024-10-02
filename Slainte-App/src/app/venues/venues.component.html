@@ -1,6 +1,5 @@
-<div class="venues-container">
+<!-- <div class="venues-container">
   <div *ngIf="bars.length > 0;">
-    <!-- Loop through the venues array -->
     <ion-card *ngFor="let bar of bars" class="center-card">
       <ion-card-header>
         <ion-card-title>{{ bar.name }}</ion-card-title>
@@ -17,4 +16,28 @@
       </ion-card-content>
     </ion-card>
   </div>
+</div> -->
+
+<div class="venues-container">
+  <div *ngIf="bars.length > 0;">
+    <!-- Loop through the venues array -->
+    <ion-list>
+      <ion-item *ngFor="let bar of bars" class="venue-item">
+        <ion-label>
+          <h2>{{ bar.name }}</h2>
+          <p>
+            <ion-icon name="location-outline" class="icon"></ion-icon>
+            <span>{{ bar.vicinity }}</span>
+          </p>
+          <p>
+            <ion-badge color="" class="rating-badge">
+              <ion-icon name="star" class="rating-icon"></ion-icon>
+              <span>{{ bar.rating }}</span>
+            </ion-badge>
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
 </div>
+
