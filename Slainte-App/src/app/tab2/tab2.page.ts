@@ -88,14 +88,6 @@ export class Tab2Page {
     }
   }
 
-  countAllVenues(): number {
-    return this.venues.length;
-  }
-
-  countFilteredVenues(): number {
-    return this.filteredVenues.length;
-  }
-
   updateSelectedFilters() {
     this.selectedFilters = []; 
 

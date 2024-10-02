@@ -7,13 +7,23 @@
 <ion-content class="ion-padding">
   <div id="map" style="height: 40%; width: 100%;"></div>
   <br>
-  <ion-segment value="default">
-    <ion-segment-button value="default">
+
+  <ion-segment [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="venuesForYou">
       <ion-label>Venues For You</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="segment">
+    <ion-segment-button value="venuesNearYou">
       <ion-label>Venues Near You</ion-label>
     </ion-segment-button>
   </ion-segment>
-  <app-venues></app-venues>
+
+  <ng-container *ngIf="selectedSegment === 'venuesForYou'">
+    <div>
+      <p>This will generate a list of venues based on the users interests.</p>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="selectedSegment === 'venuesNearYou'">
+    <app-venues></app-venues>
+  </ng-container>
 </ion-content>

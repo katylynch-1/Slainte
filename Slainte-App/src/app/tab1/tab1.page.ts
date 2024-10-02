@@ -46,9 +46,15 @@ export class Tab1Page implements OnInit {
     new AdvancedMarkerElement({
       position: { lat, lng },
       map: this.map,
-      title: 'You are here!', // Tooltip on hover
     });
 
     console.log('Creating marker at:', { lat, lng });
   }
+
+  selectedSegment: string = 'venuesForYou'; // Default to 'Venues For You'
+
+  segmentChanged(event: any) {
+    this.selectedSegment = event.detail.value; // Update segment based on selection
+  }
 }
+
