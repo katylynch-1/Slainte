@@ -13,7 +13,7 @@ export class VenuesComponent  implements OnInit {
   lat: number = 53.3442;
   lng: number = -6.2674; 
   radius: number = 1000; 
-  type: string = 'bar' || 'night_club';
+  type: string = 'bar,night_club';
   keyword: string = 'pub';
 
 

@@ -37,13 +37,13 @@ export class Tab1Page implements OnInit {
       console.error('Map element not found');
     }
 
-    // Import the AdvancedMarkerElement from the Google Maps library
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker") as google.maps.MarkerLibrary;
 
-    // Create and place a marker at the user's current location
     new AdvancedMarkerElement({
       position: { lat, lng },
       map: this.map,
+      
+      
     });
 
     console.log('Creating marker at:', { lat, lng });

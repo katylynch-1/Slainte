@@ -120,9 +120,8 @@ export class Tab2Page {
     this.applyFilters();
   }
 
-// Open venue details page
   openVenueDetails(venue: any){
-    const placeId = venue.place_id; //Extract place_id from Venue object
+    const placeId = venue.place_id; 
     let navigationExtras: NavigationExtras = {
       state: {
         venue: venue
