@@ -88,14 +88,6 @@ export class Tab2Page {
     }
   }
 
-  countAllVenues(): number {
-    return this.venues.length;
-  }
-
-  countFilteredVenues(): number {
-    return this.filteredVenues.length;
-  }
-
   updateSelectedFilters() {
     this.selectedFilters = []; 
 
@@ -128,9 +120,8 @@ export class Tab2Page {
     this.applyFilters();
   }
 
-// Open venue details page
   openVenueDetails(venue: any){
-    const placeId = venue.place_id; //Extract place_id from Venue object
+    const placeId = venue.place_id; 
     let navigationExtras: NavigationExtras = {
       state: {
         venue: venue

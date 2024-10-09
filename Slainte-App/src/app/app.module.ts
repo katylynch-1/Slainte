@@ -10,7 +10,7 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 
 import { FilterModalComponent } from './filter-modal/filter-modal.component';
-
+import { SafetyModalComponent } from './safety-modal/safety-modal.component';
 import { FormsModule } from '@angular/forms';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire/compat';
@@ -20,7 +20,7 @@ import { EdituserdetailsComponent } from './edituserdetails/edituserdetails.comp
 
 
 @NgModule({
-  declarations: [AppComponent, FilterModalComponent, EdituserdetailsComponent],
+  declarations: [AppComponent, FilterModalComponent, EdituserdetailsComponent, SafetyModalComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, AngularFireModule, AngularFireAuthModule, AngularFirestoreModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
               { provide: FIREBASE_OPTIONS, useValue: environment.firebase},

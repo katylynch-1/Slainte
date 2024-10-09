@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GeolocationService } from '../services/geolocation.service';
-
+import { ModalController } from '@ionic/angular';
+import { SafetyModalComponent } from '../safety-modal/safety-modal.component';
 declare var google: any;
 
 @Component({
@@ -13,25 +14,22 @@ export class Tab1Page implements OnInit {
 
   map: google.maps.Map | undefined;
 
-  constructor(private geolocationService: GeolocationService) {}
+  constructor(private geolocationService: GeolocationService, private modalController: ModalController) {}
 
   ngOnInit() {
-    this.initializeMap(); // Initialize map on component load
+    this.initializeMap(); 
   }
 
   async initializeMap() {
-    // Get the user's current position from the GeolocationService
     const { lat, lng } = await this.geolocationService.getCurrentPosition();
     console.log('Latitude:', lat, 'Longitude:', lng);
 
-    // Set map options centered on user's location
     const mapOptions: google.maps.MapOptions = {
       center: { lat, lng },
       zoom: 15,
-      mapId: 'f7407f18b4a90b70' // Add your Map ID here
+      mapId: 'f7407f18b4a90b70'
     };
 
-    // Get the HTML element where the map will be rendered
     const mapEle = document.getElementById('map') as HTMLElement;
     if (mapEle) {
       this.map = new google.maps.Map(mapEle, mapOptions);
@@ -39,16 +37,29 @@ export class Tab1Page implements OnInit {
       console.error('Map element not found');
     }
 
-    // Import the AdvancedMarkerElement from the Google Maps library
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker") as google.maps.MarkerLibrary;
 
-    // Create and place a marker at the user's current location
     new AdvancedMarkerElement({
       position: { lat, lng },
       map: this.map,
-      title: 'You are here!', // Tooltip on hover
+      
+      
     });
 
     console.log('Creating marker at:', { lat, lng });
   }
+
+  selectedSegment: string = 'venuesForYou'; // Default to 'Venues For You'
+
+  segmentChanged(event: any) {
+    this.selectedSegment = event.detail.value; // Update segment based on selection
+  }
+
+  async openSafetyModal() {
+    const modal = await this.modalController.create({
+      component: SafetyModalComponent
+    });
+    return await modal.present();
+  }
 }
+

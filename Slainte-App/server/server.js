@@ -10,7 +10,7 @@ const GOOGLE_API_KEY = 'AIzaSyB7PYP1oKkK-1qkgTus3x0C_uRbqPdfAa0';
 app.use(cors());
 
 app.get('/api/places', async (req, res) => {
-    const { lat, lng, radius, type = 'bar' || 'night_club' } = req.query;
+    const { lat, lng, radius, type = 'bar,night_club' } = req.query;
 
     try {
         const response = await axios.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json', { // https://maps.googleapis.com/maps/api/place/details/json?place_id&fields=
@@ -18,7 +18,7 @@ app.get('/api/places', async (req, res) => {
                 location: `${lat},${lng}`,
                 radius: radius,
                 type: type,
-                keyword: 'pub',                    // Add a relevant keyword
+                keyword: 'pub',                   
                 key: GOOGLE_API_KEY,
             },
         });
