@@ -4,3 +4,23 @@
     padding-top: 15px; /* Space above */
     padding-right: 20px; /* Inline space to the right */
 }
+
+ion-avatar {
+    width: 200 px;
+    height: 200 px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto; /* Ensures it's centered inside the card */
+  }
+  
+  ion-avatar img {
+    
+    object-fit: cover; /* Ensures the image covers the avatar area without distortion */
+    border-radius: 50%; /* Ensures the image stays circular */
+  }
+
+  .toolbar-center {
+    display: flex;
+    justify-content: center; /* Centers the button horizontally */
+  }

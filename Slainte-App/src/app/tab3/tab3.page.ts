@@ -1,15 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-
 import { AuthenticationService } from '../services/authentication.service';
 import { Router } from '@angular/router';
 import { User } from '@firebase/auth-types';
 import { EdituserdetailsComponent } from '../edituserdetails/edituserdetails.component';
 import { ModalController } from '@ionic/angular';
 
-// import { UserService, User } from '../services/user.service';
-// import { Router, ActivatedRoute } from '@angular/router';
-// import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab3',
@@ -18,37 +13,26 @@ import { ModalController } from '@ionic/angular';
 })
 export class Tab3Page implements OnInit{
 
-  // users?: Observable<User[]>;
-  // user: User | null = null;
   user: User;
-
-  // user: any = null;
- 
+  userDetails: any = null;
 
   constructor(private authService: AuthenticationService, private router:Router, private modalController: ModalController) {}
-
-  signOut(){
-    this.authService.signOut()
-    // this.router.navigate(['login']);
-  }
-
-  // ngOnInit(){
-  //   this.authService.ngFireAuth.authState.subscribe(user => {
-  //     if(user) {
-  //       this.authService.getUserData(user.uid).subscribe(data => {
-  //         this.userData = data;
-  //       });
-  //     }
-  //   });
-    
-  // }
 
   ngOnInit(){
     this.authService.getUser().subscribe(user => {
       if(user) {
         this.user = user;
-      }
+
+      // Fetch additional user details from Firestore
+      this.authService.getUserDetails(user.uid).subscribe(details => {
+        this.userDetails = details;
+      });
+    }
     });
+  }
+
+  signOut(){
+    this.authService.signOut()
   }
 
   async openEditModal(){

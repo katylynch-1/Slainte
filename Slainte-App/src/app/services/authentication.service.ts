@@ -19,36 +19,41 @@ export class AuthenticationService {
     this.user = this.ngFireAuth.authState;
    }
 
-  // async registerUser(email: string, password: string){
-  //   this.ngFireAuth.createUserWithEmailAndPassword(email, password).then(userCredential => {
-  //     return this.afs.collection('users').add()
-  //   })
-  // }
-
-  async registerUser(email: string, password: string) {
+  async registerUser(email: string, password: string, additionalData: any) {
     try {
       const userCredential = await this.ngFireAuth.createUserWithEmailAndPassword(email, password);
       
       // Extract user info
       const user = userCredential.user;
 
-      
-  
       // Add the user data to Firestore
-      return this.afs.collection('users').add({
+      return this.afs.collection('userDetails').doc(user?.uid).set({
         uid: user?.uid,
         email: user?.email,
-       
+        // ...additonalData
+        firstName: additionalData.firstName,
+        lastName: additionalData.lastName,
+        preferences: additionalData.preferences
       });
+
+      return user;
+
     } catch (error) {
       console.error("Error during user registration:", error);
       throw error; // Rethrow the error after logging
     }
   }
 
-  // async loginUser(email: string, password: string){
-  //   await this.ngFireAuth.signInWithEmailAndPassword(email, password)
-  // }
+   // Get the current authenticated user
+   getUser(): Observable<User | null> {
+    return this.ngFireAuth.authState;
+  }
+
+  // Retrieve user details from Firestore
+  getUserDetails(uid: string): Observable<any> {
+    return this.afs.collection('userDetails').doc(uid).valueChanges();
+  }
+
 
   async loginUser(email: string, password: string):Promise<User | null> {
     if (!email) {
@@ -61,19 +66,21 @@ export class AuthenticationService {
     return userCredential.user;
   }
 
+  //Reset Password
   async resetPassword(email: string): Promise<void> {
     return await this.ngFireAuth.sendPasswordResetEmail(email)
   }
 
-  // async signOut(){
-  //   return await this.ngFireAuth.signOut()
-  // }
-
+  // Sign Out
   async signOut(): Promise<void> {
     await this.ngFireAuth.signOut();
     this.router.navigate(['/login']);
   }
 
+
+    // async signOut(){
+  //   return await this.ngFireAuth.signOut()
+  // }
   // getUserData(uid: string) {
   //   return this.afs.collection('users').doc<User>(uid).valueChanges();
   // }
@@ -82,9 +89,9 @@ export class AuthenticationService {
   //   return this.ngFireAuth.authState;
   // }
 
-  getUser(): Observable<User | null> {
-    return this.user;
-  }
+  // getUser(): Observable<User | null> {
+  //   return this.user;
+  // }
 
   // async getProfile(){
   //   return await this.ngFireAuth.currentUser

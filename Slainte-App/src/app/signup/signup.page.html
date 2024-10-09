@@ -6,20 +6,28 @@
 
 <ion-content [fullscreen]="true">
 <div class="header">
-  <!-- <ion-title class="title">Welcome </ion-title> -->
   <p class="subTitle">Sign up to create an account</p>
 </div>
 
 <form [formGroup]="regForm">
   <div class="ion-padding">
     <ion-item>
-      <ion-input formControlName="fullName" placeholder="Name" class="input"></ion-input>
+      <ion-input formControlName="firstName" placeholder="First Name" class="input"></ion-input>
         <ion-icon name="person-outline"></ion-icon>
     </ion-item>
-    <div *ngIf="this.regForm.controls?.['fullName'].touched && this.regForm.controls?.['fullName'].invalid">
-      <!-- <ion-text *ngIf="errorControl.fullName.errors?.required"> -->
+    <div *ngIf="this.regForm.controls?.['firstName'].touched && this.regForm.controls?.['firstName'].invalid">
       <ion-text>
-        Full name is required
+        First name is required
+      </ion-text>
+    </div>
+
+    <ion-item>
+      <ion-input formControlName="lastName" placeholder="Last Name" class="input"></ion-input>
+        <ion-icon name="person-outline"></ion-icon>
+    </ion-item>
+    <div *ngIf="this.regForm.controls?.['lastName'].touched && this.regForm.controls?.['lastName'].invalid">
+      <ion-text>
+        Last name is required
       </ion-text>
     </div>
 
@@ -28,14 +36,15 @@
         <ion-icon name="person-outline"></ion-icon>
     </ion-item>
     <div *ngIf="this.regForm.controls?.['email'].touched && this.regForm.controls?.['email'].invalid">
-      <!-- <ion-text *ngIf="errorControl.email.errors?.required"> -->
+
         <ion-text>
         Email is required
       </ion-text>
-      <!-- <ion-text *ngIf="errorControl.email.errors?.pattern"> -->
+
         <ion-text>
         Email should be valid
       </ion-text>
+
     </div>
 
     <ion-item>
@@ -43,11 +52,11 @@
         <ion-icon name="lock-closed-outline"></ion-icon>
     </ion-item>
     <div *ngIf="this.regForm.controls?.['password'].touched && this.regForm.controls?.['password'].invalid">
-      <!-- <ion-text *ngIf="errorControl.password.errors?.required"> -->
+
       <ion-text>
         Password is required
       </ion-text>
-      <!-- <ion-text *ngIf="errorControl.password.errors?.pattern"> -->
+
       <ion-text>
         Password must have at least 8 characters with 
         One capital letter, 
@@ -55,7 +64,205 @@
         and at least one number
       </ion-text>
     </div>
+
+    <ion-item>
+      <ion-title>Preferences</ion-title>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="bars"></ion-checkbox>
+      <ion-label>Bars</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="nightclubs"></ion-checkbox>
+      <ion-label>Nightclubs</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="pubs"></ion-checkbox>
+      <ion-label>Pubs</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="lateBars"></ion-checkbox>
+      <ion-label>Late Bars</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-checkbox formControlName="pints"></ion-checkbox>
+      <ion-label>Pints</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="goodGuinness"></ion-checkbox>
+      <ion-label>Good Guinness</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="cocktails"></ion-checkbox>
+      <ion-label>Cocktails</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="wine"></ion-checkbox>
+      <ion-label>Wine</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="gin"></ion-checkbox>
+      <ion-label>Gin</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="whiskey"></ion-checkbox>
+      <ion-label>Whiskey</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="nonAlcoholic"></ion-checkbox>
+      <ion-label>Non-Alcoholic</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-checkbox formControlName="trad"></ion-checkbox>
+      <ion-label>Trad</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="pop"></ion-checkbox>
+      <ion-label>Pop</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="techno"></ion-checkbox>
+      <ion-label>Techno</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="house"></ion-checkbox>
+      <ion-label>House</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="indie"></ion-checkbox>
+      <ion-label>Indie</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="rock"></ion-checkbox>
+      <ion-label>Rock</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="rAndB"></ion-checkbox>
+      <ion-label>R&B</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="hipHop"></ion-checkbox>
+      <ion-label>Hip Hop</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="reggaeton"></ion-checkbox>
+      <ion-label>Reggaeton</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="jazz"></ion-checkbox>
+      <ion-label>Jazz</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-checkbox formControlName="energetic"></ion-checkbox>
+      <ion-label>Energetic</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="cosy"></ion-checkbox>
+      <ion-label>Cosy</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="alternative"></ion-checkbox>
+      <ion-label>Alternative</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="relaxed"></ion-checkbox>
+      <ion-label>Relaxed</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="traditional"></ion-checkbox>
+      <ion-label>Traditional</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="fancy"></ion-checkbox>
+      <ion-label>Fancy</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="casual"></ion-checkbox>
+      <ion-label>Casual</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="lgbtq"></ion-checkbox>
+      <ion-label>LGBTQ+</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="loud"></ion-checkbox>
+      <ion-label>Loud</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-checkbox formControlName="outdoorSeats"></ion-checkbox>
+      <ion-label>Outdoor Seats</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="accessible"></ion-checkbox>
+      <ion-label>Accessible</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="cloakRoom"></ion-checkbox>
+      <ion-label>Cloak Room</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="smokingArea"></ion-checkbox>
+      <ion-label>Smoking Area</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="beerGarden"></ion-checkbox>
+      <ion-label>Beer Garden</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="danceFloor"></ion-checkbox>
+      <ion-label>Dance Floor</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-checkbox formControlName="festival"></ion-checkbox>
+      <ion-label>Festival</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="openMic"></ion-checkbox>
+      <ion-label>Open Mic</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="pubQuiz"></ion-checkbox>
+      <ion-label>Pub Quiz</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="rave"></ion-checkbox>
+      <ion-label>Rave</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="liveGig"></ion-checkbox>
+      <ion-label>Live Gig</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="dj"></ion-checkbox>
+      <ion-label>DJ</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="karaoke"></ion-checkbox>
+      <ion-label>Karaoke</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="comedy"></ion-checkbox>
+      <ion-label>Comedy</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="sports"></ion-checkbox>
+      <ion-label>Sports</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="specialisedEvents"></ion-checkbox>
+      <ion-label>Specialised Events</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox formControlName="games"></ion-checkbox>
+      <ion-label>Games</ion-label>
+    </ion-item>
   </div>
+
   <div class="signinLink">
     <p>Already a member? <a [routerLink]="['/login']">Sign In Now</a></p>
   </div>

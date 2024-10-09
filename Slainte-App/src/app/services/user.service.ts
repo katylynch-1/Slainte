@@ -8,7 +8,6 @@ export interface User{
   userName: string,
   firstName: string,
   lastName: string,
-  // fullName: string,
   email: string,
   phoneNumber: string,
 
@@ -77,7 +76,7 @@ export class UserService {
 
   constructor(private afs: AngularFirestore){
 
-    this.userCollection = this.afs.collection<User>('users');
+    this.userCollection = this.afs.collection<User>('userDetails');
     this.users = this.userCollection.snapshotChanges().pipe(
       map(users => {
         return users.map(user => {

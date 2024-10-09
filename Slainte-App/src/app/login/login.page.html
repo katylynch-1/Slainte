@@ -46,7 +46,7 @@
     </div>
   </div> 
   </form> -->
-
+<ion-card class="ion-text-center">
   <form>
     <ion-item>
       <ion-label position="floating">Email</ion-label>
@@ -61,15 +61,20 @@
   <div class="forgotPassword">
     <a [routerLink]="['/reset-password']">Forgot password?</a>
   </div>
+  <br>
+
+  <ion-button [routerLink]="['/tabs/tab1']">Magic Skip Button</ion-button>
+
+</ion-card>
+
+<ion-fab vertical="bottom" horizontal="end" style="margin-bottom: 30px">
+  <ion-fab-button (click)="login()">
+    <ion-icon name="chevron-forward"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
   <div class="signupLink">
     <p>New Member? <a [routerLink]="['/signup']">Sign up</a></p>
   </div>
-  <ion-fab vertical="bottom" horizontal="end" style="margin-bottom: 30px">
-    <ion-fab-button (click)="login()">
-      <ion-icon name="chevron-forward"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
-  <ion-button [routerLink]="['/tabs/tab1']">Magic Skip Button</ion-button>
 
 </ion-content>
