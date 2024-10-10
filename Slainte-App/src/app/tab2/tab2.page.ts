@@ -88,10 +88,6 @@ export class Tab2Page {
     }
   }
 
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
   updateSelectedFilters() {
     this.selectedFilters = []; 
 
