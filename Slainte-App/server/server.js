@@ -52,6 +52,22 @@ app.get('/api/place/details', async (req, res) => {
     }
 });
 
+// Geocoding endpoint
+// This brings back JSON data on browser
+// https://maps.googleapis.com/maps/api/geocode/json?address=dame%street&key=AIzaSyB7PYP1oKkK-1qkgTus3x0C_uRbqPdfAa0
+
+app.get('/api/geocode', async (req, res) => {
+    const address = req.query.address; // Get address from query parameter
+  
+    try {
+        const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${GOOGLE_API_KEY}`);
+        res.json(response.data); // Send back the geocoding data
+    } catch (error) {
+      console.error('Error fetching geocode:', error);
+      res.status(500).send('Error fetching geocode');
+    }
+  });
+
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);
 });

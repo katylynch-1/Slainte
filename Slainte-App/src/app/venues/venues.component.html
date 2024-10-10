@@ -18,6 +18,12 @@
   </div>
 </div> -->
 
+<ion-content class="ion-padding">
+  <ion-searchbar
+    [(ngModel)]="userInput" search-icon="location" placeholder="Search a new location..." (ionInput)="onInputChange($event)">
+  </ion-searchbar>
+
+  <ion-button (click)="onUserInputSubmit()">Search</ion-button>
 <div class="venues-container">
   <div *ngIf="bars.length > 0;">
     <!-- Loop through the venues array -->
