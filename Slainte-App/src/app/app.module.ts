@@ -19,6 +19,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { EdituserdetailsComponent } from './edituserdetails/edituserdetails.component';
 
 
+
 @NgModule({
   declarations: [AppComponent, FilterModalComponent, EdituserdetailsComponent, SafetyModalComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, AngularFireModule, AngularFireAuthModule, AngularFirestoreModule],

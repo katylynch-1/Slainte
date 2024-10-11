@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GeolocationService } from '../services/geolocation.service';
 import { ModalController } from '@ionic/angular';
 import { SafetyModalComponent } from '../safety-modal/safety-modal.component';
+
 declare var google: any;
 
 @Component({
@@ -12,6 +13,7 @@ declare var google: any;
 
 export class Tab1Page implements OnInit {
 
+  // Display users location on map
   map: google.maps.Map | undefined;
 
   constructor(private geolocationService: GeolocationService, private modalController: ModalController) {}

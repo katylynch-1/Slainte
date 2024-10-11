@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 // import { User } from './user.service';
 import { User } from '@firebase/auth-types';
 import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class AuthenticationService {
 
   user: Observable<User | null>;
   regForm: FormGroup;
+
 
   constructor(public ngFireAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router) {
     this.user = this.ngFireAuth.authState;
@@ -76,6 +78,9 @@ export class AuthenticationService {
     await this.ngFireAuth.signOut();
     this.router.navigate(['/login']);
   }
+
+
+
 
 
     // async signOut(){
