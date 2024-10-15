@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GeolocationService } from '../services/geolocation.service';
 import { ModalController } from '@ionic/angular';
 import { SafetyModalComponent } from '../safety-modal/safety-modal.component';
+
 declare var google: any;
 
 @Component({
@@ -54,6 +55,8 @@ export class Tab1Page implements OnInit {
   segmentChanged(event: any) {
     this.selectedSegment = event.detail.value; // Update segment based on selection
   }
+
+
 
   async openSafetyModal() {
     const modal = await this.modalController.create({

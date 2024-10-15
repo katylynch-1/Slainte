@@ -42,7 +42,7 @@ app.get('/api/place/details', async (req, res) => {
             params: {
                 place_id: place_id,
                 key: GOOGLE_API_KEY,
-                fields: 'formatted_address,formatted_phone_number,rating,price_level,current_opening_hours' // Specify all required fields
+                fields: 'name,formatted_address,formatted_phone_number,rating,price_level,current_opening_hours' // Specify all required fields
             },
         });
         res.json(response.data.result);

@@ -29,6 +29,7 @@
     <!-- Loop through the venues array -->
     <ion-list>
       <ion-item *ngFor="let bar of bars" class="venue-item">
+        <div (click)="openApiVenueDetails(bar)">
         <ion-label>
           <h2>{{ bar.name }}</h2>
           <p>
@@ -42,6 +43,7 @@
             </ion-badge>
           </p>
         </ion-label>
+       </div>
       </ion-item>
     </ion-list>
   </div>

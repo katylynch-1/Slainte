@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { VenuedataService } from '../services/venuedata.service';
 
 @Component({
@@ -13,12 +12,11 @@ export class VenuedetailsPage implements OnInit {
   venue: any;
   apiVenueDetails: any;
 
-
   constructor(private route: ActivatedRoute, private router: Router, private venueData: VenuedataService) { 
     
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation()?.extras.state){
-        this.venue = this.router.getCurrentNavigation().extras.state['venue'];
+        this.venue = this.router.getCurrentNavigation().extras.state['venue']; 
         console.log('Venue from navigation state:',this.venue);
       }
     });

@@ -17,6 +17,7 @@ export class PlacesdataService {
   }
 
   geocode(address: string): Observable<any> {
-    return this.http.get(`${this.geocodingServerUrl}/?address=${encodeURIComponent(address)}`);
+    // encodeURIComponent is used to convert the address variable to make sure special characters (e.g. spaces) are properly formatted for use in a URL
+    return this.http.get(`${this.geocodingServerUrl}?address=${encodeURIComponent(address)}`); 
   }
 }

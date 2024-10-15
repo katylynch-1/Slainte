@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PlacesdataService } from '../services/placesdata.service';
 import { Geolocation } from '@capacitor/geolocation';
 import { firstValueFrom } from 'rxjs'; // Import firstValueFrom
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-venues',
@@ -17,9 +18,10 @@ export class VenuesComponent  implements OnInit {
   type: string = 'bar,night_club';
   keyword: string = 'pub';
   userInput: string = '';
+  apiVenue: any;
 
 
-  constructor(private placesService: PlacesdataService) { }
+  constructor(private placesService: PlacesdataService, private router: Router) { }
 
 
   async ngOnInit() {
@@ -27,6 +29,7 @@ export class VenuesComponent  implements OnInit {
     this.showPlaces();
   }
 
+  // Shows venues nearby the users location by default
   async getCurrentLocation() {
     try {
       const position = await Geolocation.getCurrentPosition();
@@ -38,6 +41,7 @@ export class VenuesComponent  implements OnInit {
     }
   }
 
+  // Takes the user input and stores it
   onInputChange(event: any) {
     this.userInput = event.detail.value; 
     console.log('Current input:', this.userInput);
@@ -46,7 +50,7 @@ export class VenuesComponent  implements OnInit {
   async onUserInputSubmit() {
     try {
       if (this.userInput) {
-        // Geocodes the custom location
+        // Geocodes the custom location based on user input
         const geocodedLocation = await firstValueFrom(this.placesService.geocode(this.userInput));
         
         this.lat = geocodedLocation.results[0].geometry.location.lat;
@@ -73,5 +77,16 @@ export class VenuesComponent  implements OnInit {
         console.log('Pub data fetch complete');
       }
     })
+  }
+
+  openApiVenueDetails(venue: any){
+    console.log('Venue being passed:', venue);  // Add this to check if venue is undefined here
+    let navigationExtras: NavigationExtras = {
+      state: {
+        apiVenue: venue
+      }
+    };
+    console.log('Passing venue:', venue);  // Debugging to confirm data passed
+    this.router.navigate(['/apivenuedetails'], navigationExtras)
   }
 }
