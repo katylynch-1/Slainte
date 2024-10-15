@@ -46,4 +46,27 @@ export class ApivenuedetailsPage implements OnInit {
       }
     });
   }
+
+  getPriceDescription(priceLevel: number): string {
+    switch (priceLevel) {
+      case 1: return 'Cheap';
+      case 2: return 'Affordable';
+      case 3: return 'Moderate';
+      case 4: return 'Expensive';
+      case 5: return 'Very Expensive';
+      default: return 'Unknown';
+    }
+  }
+  
+  getPriceBarColor(priceLevel: number): string {
+    switch (priceLevel) {
+      case 1: return 'success'; 
+      case 2: return 'success'; 
+      case 3: return 'warning'; 
+      case 4: return 'danger'; 
+      case 5: return 'dark'; 
+      default: return 'medium';
+    }
+  }
+
 }
