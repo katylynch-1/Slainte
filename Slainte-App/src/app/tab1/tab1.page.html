@@ -18,9 +18,7 @@
   </ion-segment>
 
   <ng-container *ngIf="selectedSegment === 'venuesForYou'">
-    <div>
-      <p>This will generate a list of venues based on the users interests.</p>
-    </div>
+    <app-venues-for-user></app-venues-for-user>
   </ng-container>
 
   <ng-container *ngIf="selectedSegment === 'venuesNearby'">

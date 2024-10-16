@@ -13,6 +13,7 @@ declare var google: any;
 
 export class Tab1Page implements OnInit {
 
+  // Display users location on map
   map: google.maps.Map | undefined;
 
   constructor(private geolocationService: GeolocationService, private modalController: ModalController) {}
