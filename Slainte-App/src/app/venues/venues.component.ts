@@ -29,7 +29,7 @@ export class VenuesComponent  implements OnInit {
     this.showPlaces();
   }
 
-  // Shows venues nearby the users location by default
+  // By default shows venues nearby the users location
   async getCurrentLocation() {
     try {
       const position = await Geolocation.getCurrentPosition();
@@ -50,7 +50,7 @@ export class VenuesComponent  implements OnInit {
   async onUserInputSubmit() {
     try {
       if (this.userInput) {
-        // Geocodes the custom location based on user input
+        // Geocodes the custom location from user input
         const geocodedLocation = await firstValueFrom(this.placesService.geocode(this.userInput));
         
         this.lat = geocodedLocation.results[0].geometry.location.lat;

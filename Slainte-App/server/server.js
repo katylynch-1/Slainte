@@ -42,15 +42,26 @@ app.get('/api/place/details', async (req, res) => {
             params: {
                 place_id: place_id,
                 key: GOOGLE_API_KEY,
-                fields: 'name,formatted_address,formatted_phone_number,rating,price_level,current_opening_hours' // Specify all required fields
+                fields: 'name,formatted_address,formatted_phone_number,rating,price_level,current_opening_hours,photos'
             },
         });
-        res.json(response.data.result);
+
+        const venueDetails = response.data.result;
+
+        // If photos are available, map them to their URLs from the photo_reference parameter on the JSON data
+        if (venueDetails.photos && venueDetails.photos.length > 0) {
+            venueDetails.photos = venueDetails.photos.map(photo => ({
+                photoUrl: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo.photo_reference}&key=${GOOGLE_API_KEY}`
+            }));
+        }
+
+        res.json(venueDetails);
     } catch (error) {
         console.error('Error fetching place details from Google Places API:', error.response?.data || error.message);
         res.status(500).send('server error');
     }
 });
+
 
 // Geocoding endpoint
 // This brings back JSON data on browser

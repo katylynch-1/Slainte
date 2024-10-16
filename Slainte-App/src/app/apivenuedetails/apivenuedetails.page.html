@@ -12,11 +12,15 @@
     <ion-row>
       <ion-col>
         <ion-card *ngIf="apiVenue" class="venue-card">
+          <!-- At the moment I only have the first image showing as i dont have the functionality working for a carousel -->
+          <div *ngIf="apiVenue.photos && apiVenue.photos.length > 0">
+            <img *ngFor="let photo of apiVenue.photos.slice(0, 1)" [src]="photo.photoUrl" alt="{{ apiVenue.name }}">
+          </div>
           <ion-card-header>
             <ion-card-title>{{ apiVenue.name }}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            <b><p *ngIf="apiVenue.current_opening_hours?.open_now" style="color: green;">Open Now</p></b>
+            <p class="open-now" *ngIf="apiVenue.current_opening_hours?.open_now">Open Now</p>
             <div *ngIf="apiVenue?.formatted_address">
               <ion-icon name="location-outline" class="icon"></ion-icon>
               <span>{{ apiVenue?.formatted_address }}</span>

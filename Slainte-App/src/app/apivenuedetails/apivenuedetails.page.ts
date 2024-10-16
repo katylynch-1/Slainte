@@ -25,7 +25,7 @@ export class ApivenuedetailsPage implements OnInit {
       console.log('Received venue:', this.apiVenue);
 
       if (this.apiVenue && this.apiVenue.place_id) {
-        this.getApiVenueDetails(this.apiVenue.place_id);
+        this.getApiVenueDetails(this.apiVenue.place_id); // Get venue details from place_id
       } else {
         console.error('No valid place_id found in venue data');
       }
@@ -34,9 +34,9 @@ export class ApivenuedetailsPage implements OnInit {
     }
   }
 
-  getApiVenueDetails(placeId: string) {
+  getApiVenueDetails(placeId: string) { 
     console.log('Getting details for placeId:', placeId);
-    this.apiVenueData.getVenueDetails(placeId).subscribe({
+    this.apiVenueData.getVenueDetails(placeId).subscribe({ // Gets venue details using place details api
       next: (details) => {
         this.apiVenue = details;
         console.log('Venue details:', this.apiVenue);
@@ -47,7 +47,9 @@ export class ApivenuedetailsPage implements OnInit {
     });
   }
 
-  getPriceDescription(priceLevel: number): string {
+  
+
+  getPriceDescription(priceLevel: number): string { 
     switch (priceLevel) {
       case 1: return 'Cheap';
       case 2: return 'Affordable';
@@ -68,5 +70,4 @@ export class ApivenuedetailsPage implements OnInit {
       default: return 'medium';
     }
   }
-
 }

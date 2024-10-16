@@ -25,9 +25,9 @@ export class VenuedetailsPage implements OnInit {
   ngOnInit() {
     // Get place_id from route params
     this.route.paramMap.subscribe(params => {
-      const placeId = params.get('place_id'); // Assuming you're passing place_id in URL params
+      const placeId = params.get('place_id'); 
       if (placeId) {
-        // Call your API to get additional venue details using place_id
+        // Get additional venue details using place_id for place details API
         this.fetchApiVenueDetails(placeId);
       } else {
         console.error('No place_id found in route params');
@@ -35,7 +35,7 @@ export class VenuedetailsPage implements OnInit {
     });
   }
 
-  // Method to fetch Google Places API details
+  // Get Google Places API details
   fetchApiVenueDetails(placeId: string) {
     console.log('Fetching details for placeId:', placeId);
     this.venueData.getVenueDetails(placeId).subscribe({
