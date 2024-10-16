@@ -19,6 +19,8 @@ export class VenuesComponent  implements OnInit {
   keyword: string = 'pub';
   userInput: string = '';
   apiVenue: any;
+  loading: boolean = false; 
+
 
 
   constructor(private placesService: PlacesdataService, private router: Router) { }
@@ -66,15 +68,18 @@ export class VenuesComponent  implements OnInit {
   }
   
   async showPlaces(){
+    this.loading = true; 
     this.placesService.getBars(this.lat, this.lng, this.radius, this.type, this.keyword).subscribe({
       next: (data) => {
         this.bars = data;
       },
       error: (error) => {
         console.error('Error fetching bars', error);
+        this.loading = false; 
       },
       complete: () => {
         console.log('Pub data fetch complete');
+        this.loading = false; 
       }
     })
   }
@@ -88,5 +93,10 @@ export class VenuesComponent  implements OnInit {
     };
     console.log('Passing venue:', venue);  // Debugging to confirm data passed
     this.router.navigate(['/apivenuedetails'], navigationExtras)
+  }
+
+  openGoogleMaps(name: string) {
+    const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(name)}`;
+    window.open(url, '_blank'); // Opens in a new tab or the Google Maps app on mobile
   }
 }

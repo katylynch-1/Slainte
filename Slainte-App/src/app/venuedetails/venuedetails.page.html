@@ -76,8 +76,8 @@
           <br>
 
             <!-- Info from API -->
-            <div class="open-now" *ngIf="apiVenueDetails?.current_opening_hours?.open_now">Open Now
-            </div>
+            <div class="open-now" *ngIf="apiVenueDetails?.current_opening_hours?.open_now">Open Now</div>
+            <p class="closed-now" *ngIf="!apiVenueDetails?.current_opening_hours?.open_now">Closed Now</p>
 
             <div *ngIf="apiVenueDetails?.formatted_address">
               <ion-icon name="location-outline" class="icon"></ion-icon>
@@ -106,7 +106,7 @@
           <ion-footer>
             <div id="buttons">
             <ion-button><ion-icon name="pin-outline"></ion-icon>Check-In</ion-button>
-            <ion-button><ion-icon name="heart-outline"></ion-icon>Add To Favourites</ion-button>
+            <ion-button (click)="openGoogleMaps(apiVenueDetails.name)"><ion-icon name="compass-outline"></ion-icon>Get Directions</ion-button>
           </div>
           </ion-footer>
       </ion-card>

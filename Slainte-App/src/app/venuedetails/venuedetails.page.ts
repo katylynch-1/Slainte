@@ -72,6 +72,10 @@ export class VenuedetailsPage implements OnInit {
       case 5: return 'dark'; 
       default: return 'medium';
     }
+  }  
+
+  openGoogleMaps(name: string) {
+    const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(name)}`;
+    window.open(url, '_blank'); // Opens in a new tab or the Google Maps app on mobile
   }
-  
 }

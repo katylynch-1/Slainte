@@ -9,7 +9,9 @@
     display: flex;               /* Use flexbox layout */
     justify-content: center;     /* Center items horizontally */
     align-items: center;  
-    padding-bottom: 10px;       /* Center items vertically (optional) */
+    padding-bottom: 10px;      /* Center items vertically (optional) */
+    padding-top: 10px;      /* Center items vertically (optional) */
+
   }
   
   ion-button {
@@ -31,6 +33,13 @@
 
   .open-now {
     color: green;
+    text-align: left;
+    padding-bottom: 10px;
+    font-weight: bold;  
+  }
+
+  .closed-now {
+    color: red;
     text-align: left;
     padding-bottom: 10px;
     font-weight: bold;  
