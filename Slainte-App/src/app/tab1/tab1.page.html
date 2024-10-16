@@ -5,7 +5,6 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-searchbar search-icon="location" placeholder="Search a location..."></ion-searchbar>
   <div id="map" style="height: 40%; width: 100%;"></div>
   <br>
 
@@ -13,8 +12,8 @@
     <ion-segment-button value="venuesForYou">
       <ion-label>Venues For You</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="venuesNearYou">
-      <ion-label>Venues Near You</ion-label>
+    <ion-segment-button value="venuesNearby">
+      <ion-label>Venues Nearby</ion-label>
     </ion-segment-button>
   </ion-segment>
 
@@ -24,7 +23,7 @@
     </div>
   </ng-container>
 
-  <ng-container *ngIf="selectedSegment === 'venuesNearYou'">
+  <ng-container *ngIf="selectedSegment === 'venuesNearby'">
     <app-venues></app-venues>
   </ng-container>
 

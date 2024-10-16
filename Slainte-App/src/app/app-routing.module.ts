@@ -43,6 +43,14 @@ const routes: Routes = [
     path: 'reset-password',
     loadChildren: () => import('./reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
   },
+  {
+    path: 'apivenuedetails',
+    loadChildren: () => import('./apivenuedetails/apivenuedetails.module').then( m => m.ApivenuedetailsPageModule)
+  },
+  {
+    path: 'apivenuedetails/:place_id',
+    loadChildren: () => import('./apivenuedetails/apivenuedetails.module').then( m => m.ApivenuedetailsPageModule)
+  },
 
 ];
 @NgModule({

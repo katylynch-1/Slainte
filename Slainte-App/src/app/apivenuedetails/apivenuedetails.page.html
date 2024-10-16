@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Venue Details</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card *ngIf="apiVenue" class="venue-card">
+          <!-- At the moment I only have the first image showing as i dont have the functionality working for a carousel -->
+          <div *ngIf="apiVenue.photos && apiVenue.photos.length > 0">
+            <img *ngFor="let photo of apiVenue.photos.slice(0, 1)" [src]="photo.photoUrl" alt="{{ apiVenue.name }}">
+          </div>
+          <ion-card-header>
+            <ion-card-title>{{ apiVenue.name }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p class="open-now" *ngIf="apiVenue.current_opening_hours?.open_now">Open Now</p>
+            <div *ngIf="apiVenue?.formatted_address">
+              <ion-icon name="location-outline" class="icon"></ion-icon>
+              <span>{{ apiVenue?.formatted_address }}</span>
+            </div>
+            
+            <div *ngIf="apiVenue?.formatted_phone_number">
+              <ion-icon name="call-outline" class="icon"></ion-icon>
+              <span>{{ apiVenue?.formatted_phone_number }}</span> 
+            </div>
+            <div *ngIf="apiVenue?.price_level">
+              <p>Price Level: {{ getPriceDescription(apiVenue.price_level) }}</p>
+              <ion-progress-bar [value]="apiVenue.price_level / 5" [color]="getPriceBarColor(apiVenue.price_level)"></ion-progress-bar>
+            </div>
+            <br>
+            <div *ngIf="apiVenue?.rating">
+              <ion-badge color="" class="rating-badge">
+                <ion-icon name="star" class="rating-icon"></ion-icon>
+                <span>{{ apiVenue?.rating }}</span>
+              </ion-badge>
+            </div>  
+          </ion-card-content>
+            <ion-footer>
+              <div id="buttons">
+              <ion-button><ion-icon name="pin-outline"></ion-icon>Check-In</ion-button>
+              <ion-button><ion-icon name="heart-outline"></ion-icon>Add To Favourites</ion-button>
+            </div>
+            </ion-footer>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<!-- 
+<b>Opening Hours:</b>
+<p>{{ apiVenue.current_opening_hours.weekday_text }}</p> -->

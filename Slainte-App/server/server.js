@@ -46,15 +46,42 @@ app.get('/api/place/details', async (req, res) => {
             params: {
                 place_id: place_id,
                 key: GOOGLE_API_KEY,
-                fields: 'formatted_address,formatted_phone_number,rating,price_level,current_opening_hours' // Specify all required fields
+                fields: 'name,formatted_address,formatted_phone_number,rating,price_level,current_opening_hours,photos'
             },
         });
-        res.json(response.data.result);
+
+        const venueDetails = response.data.result;
+
+        // If photos are available, map them to their URLs from the photo_reference parameter on the JSON data
+        if (venueDetails.photos && venueDetails.photos.length > 0) {
+            venueDetails.photos = venueDetails.photos.map(photo => ({
+                photoUrl: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo.photo_reference}&key=${GOOGLE_API_KEY}`
+            }));
+        }
+
+        res.json(venueDetails);
     } catch (error) {
         console.error('Error fetching place details from Google Places API:', error.response?.data || error.message);
         res.status(500).send('server error');
     }
 });
+
+
+// Geocoding endpoint
+// This brings back JSON data on browser
+// https://maps.googleapis.com/maps/api/geocode/json?address=dame%street&key=AIzaSyB7PYP1oKkK-1qkgTus3x0C_uRbqPdfAa0
+
+app.get('/api/geocode', async (req, res) => {
+    const address = req.query.address; // Get address from query parameter
+  
+    try {
+        const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${GOOGLE_API_KEY}`);
+        res.json(response.data); // Send back the geocoding data
+    } catch (error) {
+      console.error('Error fetching geocode:', error);
+      res.status(500).send('Error fetching geocode');
+    }
+  });
 
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);

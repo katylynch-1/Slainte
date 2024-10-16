@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Venue Details</ion-title>
+    <ion-title>Sláinte Venue Details</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
@@ -76,6 +76,9 @@
           <br>
 
             <!-- Info from API -->
+            <div class="open-now" *ngIf="apiVenueDetails?.current_opening_hours?.open_now">Open Now
+            </div>
+
             <div *ngIf="apiVenueDetails?.formatted_address">
               <ion-icon name="location-outline" class="icon"></ion-icon>
               <span>{{ apiVenueDetails?.formatted_address }}</span>
