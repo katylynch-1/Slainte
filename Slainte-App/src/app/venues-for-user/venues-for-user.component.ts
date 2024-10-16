@@ -58,7 +58,7 @@ export class VenuesForUserComponent  implements OnInit {
         return true;  // Return true as soon as a match is found
       }
     }
-    return false;  // No macthes found, return false
+    return false;  // No matches found, return false
   }
 
 }
