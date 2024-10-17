@@ -24,28 +24,41 @@
   </ion-searchbar>
 
   <ion-button (click)="onUserInputSubmit()">Search</ion-button>
-<div class="venues-container">
-  <div *ngIf="bars.length > 0;">
-    <!-- Loop through the venues array -->
-    <ion-list>
-      <ion-item *ngFor="let bar of bars" class="venue-item">
-        <div (click)="openApiVenueDetails(bar)">
-        <ion-label>
-          <h2>{{ bar.name }}</h2>
-          <p>
-            <ion-icon name="location-outline" class="icon"></ion-icon>
-            <span>{{ bar.vicinity }}</span>
-          </p>
-          <p>
-            <ion-badge color="" class="rating-badge">
-              <ion-icon name="star" class="rating-icon"></ion-icon>
-              <span>{{ bar.rating }}</span>
-            </ion-badge>
-          </p>
-        </ion-label>
-       </div>
-      </ion-item>
-    </ion-list>
-  </div>
-</div>
 
+  <div *ngIf="loading" class="spinner-container">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+  <div *ngIf="!loading" class="venues-container">
+    <!-- Show a message when no bars are found -->
+    <div *ngIf="bars.length > 0; else noBars">
+      <!-- Loop through the venues array -->
+      <ion-list>
+        <ion-item *ngFor="let bar of bars" class="venue-item" (click)="openApiVenueDetails(bar)">
+          <ion-thumbnail slot="start">
+            
+          </ion-thumbnail>
+          <ion-label>
+            <h2>{{ bar.name }}</h2>
+            <p>
+              <ion-icon name="location-outline" class="icon"></ion-icon>
+              <span>{{ bar.vicinity }}</span>
+            </p>
+            <p>
+              <ion-badge color="warning" class="rating-badge">
+                <ion-icon name="star" class="rating-icon"></ion-icon>
+                <span>{{ bar.rating }}</span>
+              </ion-badge>
+            </p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+    
+    <!-- Template when no bars are available -->
+    <ng-template #noBars>
+      <div class="no-bars-message">
+        <p>No venues found in this area. Try searching for another location.</p>
+      </div>
+    </ng-template>
+  </div>

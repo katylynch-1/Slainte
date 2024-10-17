@@ -34,3 +34,13 @@ h2 {
     margin: 5px 0;
   }
   
+  .spinner-container {
+    display: flex;
+    justify-content: center; /* Horizontally centers the spinner */
+    align-items: center;     /* Vertically centers the spinner */
+    height: 100%;            /* Full height of the content area (without extra vertical scroll) */
+    position: absolute;      /* Ensures it's positioned relative to the container */
+    top: 0;
+    left: 0;
+    width: 100%;             /* Full width of the content area */
+  }

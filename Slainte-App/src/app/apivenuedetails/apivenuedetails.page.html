@@ -17,17 +17,24 @@
             <img *ngFor="let photo of apiVenue.photos.slice(0, 1)" [src]="photo.photoUrl" alt="{{ apiVenue.name }}">
           </div>
           <ion-card-header>
-            <ion-card-title>{{ apiVenue.name }}</ion-card-title>
+            <div class="card-header-container">
+              <ion-card-title> {{apiVenue.name}} </ion-card-title>
+              <div class="icons-container">
+                <ion-icon name="heart-outline" class="icon"></ion-icon>
+                <ion-icon name="bookmark-outline" class="icon"></ion-icon>
+              </div>
+            </div>
           </ion-card-header>
           <ion-card-content>
             <p class="open-now" *ngIf="apiVenue.current_opening_hours?.open_now">Open Now</p>
+            <p class="closed-now" *ngIf="!apiVenue.current_opening_hours?.open_now">Closed Now</p>
             <div *ngIf="apiVenue?.formatted_address">
-              <ion-icon name="location-outline" class="icon"></ion-icon>
+              <ion-icon name="location-outline" class="icons"></ion-icon>
               <span>{{ apiVenue?.formatted_address }}</span>
             </div>
             
             <div *ngIf="apiVenue?.formatted_phone_number">
-              <ion-icon name="call-outline" class="icon"></ion-icon>
+              <ion-icon name="call-outline" class="icons"></ion-icon>
               <span>{{ apiVenue?.formatted_phone_number }}</span> 
             </div>
             <div *ngIf="apiVenue?.price_level">
@@ -45,7 +52,7 @@
             <ion-footer>
               <div id="buttons">
               <ion-button><ion-icon name="pin-outline"></ion-icon>Check-In</ion-button>
-              <ion-button><ion-icon name="heart-outline"></ion-icon>Add To Favourites</ion-button>
+              <ion-button (click)="openGoogleMaps(apiVenue.name)"><ion-icon name="compass-outline"></ion-icon>Get Directions</ion-button>
             </div>
             </ion-footer>
         </ion-card>

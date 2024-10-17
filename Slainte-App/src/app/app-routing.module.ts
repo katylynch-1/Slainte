@@ -54,6 +54,7 @@ const routes: Routes = [
     path: 'apivenuedetails/:place_id',
     loadChildren: () => import('./apivenuedetails/apivenuedetails.module').then( m => m.ApivenuedetailsPageModule)
   },
+
   { 
     path: '', redirectTo: 'user-list', pathMatch: 'full' 
   },
@@ -62,7 +63,12 @@ const routes: Routes = [
   },
   { 
     path: 'chat/:chatId', component: ChatComponent 
+  },
+  {
+    path: 'messages-tab',
+    loadChildren: () => import('./messages-tab/messages-tab.module').then( m => m.MessagesTabPageModule)
   }
+
 ];
 @NgModule({
   imports: [
