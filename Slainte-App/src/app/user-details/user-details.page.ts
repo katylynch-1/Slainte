@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService, User } from '../services/user.service';
+// import { UserService, User } from '../services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 
@@ -11,67 +11,69 @@ import { ToastController } from '@ionic/angular';
 })
 export class UserDetailsPage implements OnInit {
 
-  user: User = {
-    uid: '',
-    firstName: '',
-    lastName: '',
-    userName: '',
-    email: '',
-    phoneNumber: '',
-    pints: '',
-    cocktails: '',
-    wine: '',
-    gin: '',
-    whiskey: '',
-    nonAlcoholic: '',
-    goodGuinness: '',
-    bar: '',
-    pub: '',
-    nightclub: '',
-    lateBar: '',
+  // user: User = {
+  //   uid: '',
+  //   firstName: '',
+  //   lastName: '',
+  //   userName: '',
+  //   email: '',
+  //   phoneNumber: '',
+  //   pints: '',
+  //   cocktails: '',
+  //   wine: '',
+  //   gin: '',
+  //   whiskey: '',
+  //   nonAlcoholic: '',
+  //   goodGuinness: '',
+  //   bar: '',
+  //   pub: '',
+  //   nightclub: '',
+  //   lateBar: '',
   
-    trad: '',
-    pop: '',
-    techno: '',
-    house: '',
-    indie: '',
-    rock: '',
-    rAndB: '',
-    hipHop: '',
-    reggaeton: '',
-    jazz: '',
+  //   trad: '',
+  //   pop: '',
+  //   techno: '',
+  //   house: '',
+  //   indie: '',
+  //   rock: '',
+  //   rAndB: '',
+  //   hipHop: '',
+  //   reggaeton: '',
+  //   jazz: '',
   
-    energetic: '',
-    cosy: '',
-    alternative: '',
-    relaxed: '',
-    traditional: '',
-    fancy: '',
-    casual: '',
-    lgbtq: '',
-    loud: '',
+  //   energetic: '',
+  //   cosy: '',
+  //   alternative: '',
+  //   relaxed: '',
+  //   traditional: '',
+  //   fancy: '',
+  //   casual: '',
+  //   lgbtq: '',
+  //   loud: '',
   
-    outdoorSeats: '',
-    accessible: '',
-    cloakRoom: '',
-    smokingArea: '',
-    beerGarden: '',
-    danceFloor: '',
+  //   outdoorSeats: '',
+  //   accessible: '',
+  //   cloakRoom: '',
+  //   smokingArea: '',
+  //   beerGarden: '',
+  //   danceFloor: '',
   
-    festival: '',
-    openMic: '',
-    pubQuiz: '',
-    rave: '',
-    liveGig: '',
-    dj: '',
-    karaoke: '',
-    comedy: '',
-    sports: '',
-    specialisedEvents: '',
-    games: ''
-    };
+  //   festival: '',
+  //   openMic: '',
+  //   pubQuiz: '',
+  //   rave: '',
+  //   liveGig: '',
+  //   dj: '',
+  //   karaoke: '',
+  //   comedy: '',
+  //   sports: '',
+  //   specialisedEvents: '',
+  //   games: ''
+  //   };
 
-  constructor(private activatedRoute: ActivatedRoute, private userService: UserService) { }
+  // constructor(private activatedRoute: ActivatedRoute, private userService: UserService) { }
+
+  constructor() {}
 
   ngOnInit() {
   }
