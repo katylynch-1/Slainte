@@ -3,6 +3,7 @@ import { PlacesdataService } from '../services/placesdata.service';
 import { Geolocation } from '@capacitor/geolocation';
 import { firstValueFrom } from 'rxjs'; // Import firstValueFrom
 import { NavigationExtras, Router } from '@angular/router';
+import { VenuedataService } from '../services/venuedata.service';
 
 @Component({
   selector: 'app-venues',
@@ -23,7 +24,7 @@ export class VenuesComponent  implements OnInit {
 
 
 
-  constructor(private placesService: PlacesdataService, private router: Router) { }
+  constructor(private placesService: PlacesdataService, private router: Router, private venueDataImgs: VenuedataService) { }
 
 
   async ngOnInit() {
@@ -67,11 +68,32 @@ export class VenuesComponent  implements OnInit {
     }
   }
   
-  async showPlaces(){
+  // async showPlaces(){
+  //   this.loading = true; 
+  //   this.placesService.getBars(this.lat, this.lng, this.radius, this.type, this.keyword).subscribe({
+  //     next: (data) => {
+  //       this.bars = data;
+  //     },
+  //     error: (error) => {
+  //       console.error('Error fetching bars', error);
+  //       this.loading = false; 
+  //     },
+  //     complete: () => {
+  //       console.log('Pub data fetch complete');
+  //       this.loading = false; 
+  //     }
+  //   })
+  // }
+
+  async showPlaces() {
     this.loading = true; 
-    this.placesService.getBars(this.lat, this.lng, this.radius, this.type, this.keyword).subscribe({
-      next: (data) => {
-        this.bars = data;
+    this.placesService.getBars(this.lat, this.lng, this.radius, this.type, this.keyword).subscribe({ // Gets places data from places data service through places API
+      next: async (data) => {
+        this.bars = await Promise.all(data.map(async (bar: any) => {
+          const details = await firstValueFrom(this.venueDataImgs.getVenueDetails(bar.place_id)); // Gets additional venue details such as images from venue data service through place details API
+          bar.photos = details.photos || [];  // Add photos to the bar object
+          return bar;
+        }));
       },
       error: (error) => {
         console.error('Error fetching bars', error);
@@ -81,7 +103,7 @@ export class VenuesComponent  implements OnInit {
         console.log('Pub data fetch complete');
         this.loading = false; 
       }
-    })
+    });
   }
 
   openApiVenueDetails(venue: any){

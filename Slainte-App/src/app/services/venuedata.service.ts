@@ -5,6 +5,8 @@ import { map, switchMap } from 'rxjs/operators';
 import { Observable, forkJoin, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
+// This service is to retrieve venues from firebase and venue details using the place details API
+
 export interface Venue {
   venueID?: string,
   place_id?: string,

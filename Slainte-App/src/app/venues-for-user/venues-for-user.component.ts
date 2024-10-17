@@ -14,6 +14,7 @@ export class VenuesForUserComponent  implements OnInit {
   venues: Venue[] = [];
   user: User;
   userDetails: any = null;
+  loading: boolean = false;
 
   constructor(private venueService: VenuedataService, private router: Router, private authService: AuthenticationService) {
 
@@ -42,6 +43,7 @@ export class VenuesForUserComponent  implements OnInit {
           this.userDetails = details;
 
           //Retrieve venues and match to user's preferences 
+          this.loading = true; 
           this.venueService.getVenues().subscribe(venues => {
             this.venues = venues.filter(venue => this.matchPreferences(venue, this.userDetails.preferences));
           });
@@ -55,6 +57,7 @@ export class VenuesForUserComponent  implements OnInit {
     for (const key in userPreferences) {
       // Loop through the user's preferences and return true if at least one matches
       if (userPreferences[key] === true && venue[key] === true) {
+        this.loading = false; 
         return true;  // Return true as soon as a match is found
       }
     }
