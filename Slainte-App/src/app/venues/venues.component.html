@@ -15,7 +15,7 @@
       <!-- Loop through the venues array -->
       <ion-list>
         <ion-item *ngFor="let bar of bars" class="venue-item" (click)="openApiVenueDetails(bar)">
-          <ion-thumbnail slot="start">
+          <ion-thumbnail slot="start" class="thumbnail">
             <img *ngIf="bar.photos && bar.photos.length > 0" [src]="bar.photos[0].photoUrl" alt="{{ bar.name }}">
           </ion-thumbnail>
           <ion-label>
