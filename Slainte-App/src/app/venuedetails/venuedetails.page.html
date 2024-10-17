@@ -13,7 +13,13 @@
       <ion-card *ngIf="venue" class="venue-card">
         <img [src]="venue.imageURL" alt="{{ venue.name }}">
         <ion-card-header>
-          <ion-card-title> {{venue.name}} </ion-card-title>
+          <div class="card-header-container">
+            <ion-card-title> {{venue.name}} </ion-card-title>
+            <div class="icons-container">
+              <ion-icon name="heart-outline" class="icon"></ion-icon>
+              <ion-icon name="bookmark-outline" class="icon"></ion-icon>
+            </div>
+          </div>
           <ion-card-subtitle>{{ venue.type }}</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
@@ -80,12 +86,12 @@
             <p class="closed-now" *ngIf="!apiVenueDetails?.current_opening_hours?.open_now">Closed Now</p>
 
             <div *ngIf="apiVenueDetails?.formatted_address">
-              <ion-icon name="location-outline" class="icon"></ion-icon>
+              <ion-icon name="location-outline" class="icons"></ion-icon>
               <span>{{ apiVenueDetails?.formatted_address }}</span>
             </div>
 
             <div *ngIf="apiVenueDetails?.formatted_phone_number">
-              <ion-icon name="call-outline" class="icon"></ion-icon>
+              <ion-icon name="call-outline" class="icons"></ion-icon>
               <span>{{ apiVenueDetails?.formatted_phone_number }}</span> 
             </div>
 

@@ -1,4 +1,4 @@
-.icon {
+.icons {
     font-size: 24px; 
     vertical-align: middle; 
     padding-right: 5px;
@@ -43,4 +43,20 @@
     text-align: left;
     padding-bottom: 10px;
     font-weight: bold;  
+  }
+
+  .card-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .icons-container {
+    display: flex;
+    gap: 10px; /* Space between icons */
+  }
+  
+  .icon {
+    font-size: 24px; /* Adjust the size of the icons if necessary */
+    cursor: pointer; /* Add a pointer on hover */
   }
