@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { ChatComponent } from './chat/chat.component';
+import { UserListComponent } from './user-list/user-list.component'; 
+
 
 const routes: Routes = [
   {
@@ -51,7 +54,15 @@ const routes: Routes = [
     path: 'apivenuedetails/:place_id',
     loadChildren: () => import('./apivenuedetails/apivenuedetails.module').then( m => m.ApivenuedetailsPageModule)
   },
-
+  { 
+    path: '', redirectTo: 'user-list', pathMatch: 'full' 
+  },
+  { 
+    path: 'user-list', component: UserListComponent 
+  },
+  { 
+    path: 'chat/:chatId', component: ChatComponent 
+  }
 ];
 @NgModule({
   imports: [

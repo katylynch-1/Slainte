@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Chat</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Display the messages -->
+  <div *ngIf="messages$ | async as messages">
+    <div *ngFor="let message of messages">
+      <div [ngClass]="{'sent': message.senderId === currentUser.uid, 'received': message.senderId !== currentUser.uid}">
+        <p>{{ message.content }}</p>
+        <span>{{ message.timestamp?.toDate() | date: 'short' }}</span>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-input [(ngModel)]="newMessage" placeholder="Type a message..."></ion-input>
+  <ion-button (click)="sendMessage()">Send</ion-button>
+</ion-footer>
