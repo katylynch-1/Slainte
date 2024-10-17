@@ -10,7 +10,7 @@
       <ion-list>
         <ion-item *ngFor="let venue of venues" class="venue-item" (click)="openVenueDetails(venue)">
           <!-- Thumbnail for image -->
-          <ion-thumbnail slot="start">
+          <ion-thumbnail slot="start" class="thumbnail">
             <img [src]="venue.imageURL" alt="{{ venue.name }}">
           </ion-thumbnail>
           
