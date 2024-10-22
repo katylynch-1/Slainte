@@ -5,228 +5,194 @@
 </ion-header>
 <ion-content>
 
-    <div class="filter">
+    <!-- <div class="filter">
       <ion-fab vertical="top" horizontal="end" slot="fixed">
         <ion-fab-button (click)="openEditModal()">
-          <ion-icon name="color-palette"></ion-icon>
+          <ion-icon name="create-outline"></ion-icon>
         </ion-fab-button>
       </ion-fab>
-    </div>
+    </div> -->
 
-  <ion-card class="ion-text-center">
+    <ion-content>
+      <div class="profile-container">
+        <ion-avatar class="profilePic">
+          <img [src]="'https://ionicframework.com/docs/img/demos/avatar.svg'" alt="Profile Picture"/>
+        </ion-avatar>
     
-    <ion-card-header>
-      
-      
-    </ion-card-header>
-    <ion-avatar>
-      <img src="/assets/images/gen.jpeg" />
-    </ion-avatar>
-    <ion-card-content>
-      
-      <div *ngIf="userDetails">
-        <ion-card-title>{{userDetails.firstName }} {{userDetails.lastName }}</ion-card-title>
-        <ion-card-subtitle>{{ user.email }}</ion-card-subtitle>
+        <div class="user-details">
+          <div *ngIf="userDetails">
+            <h2>{{ userDetails.firstName }} {{ userDetails.lastName }}</h2>
+          </div>
+          <p> {{ userDetails?.userBio }}</p>
+          <div class="interests-container">
+            <ion-chip class="chip" *ngIf="userDetails?.preferences?.bars">
+              <ion-label>Bars</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.nightclubs">
+              <ion-label>Nightclubs</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.pubs">
+              <ion-label>Pubs</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.lateBars">
+              <ion-label>Late Bars</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.pints">
+              <ion-label>Pints</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.cocktails">
+              <ion-label>Cocktails</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.wine">
+              <ion-label>Wine</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.gin">
+              <ion-label>Gin</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.whiskey">
+              <ion-label>Whiskey</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.nonAlcoholic">
+              <ion-label>Non-Alcoholic</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.goodGuinness">
+              <ion-label>Good Guinness</ion-label>
+            </ion-chip>
+    
+            <ion-chip *ngIf="userDetails?.preferences?.trad">
+              <ion-label>Trad</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.pop">
+              <ion-label>Pop</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.techno">
+              <ion-label>Techno</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.house">
+              <ion-label>House</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.indie">
+              <ion-label>Indie</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.rock">
+              <ion-label>Rock</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.rAndB">
+              <ion-label>R&B</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.hipHop">
+              <ion-label>Hip Hop</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.reggaeton">
+              <ion-label>Reggaeton</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.jazz">
+              <ion-label>Jazz</ion-label>
+            </ion-chip>
+    
+            <ion-chip *ngIf="userDetails?.preferences?.energetic">
+              <ion-label>Energetic</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.cosy">
+              <ion-label>Cosy</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.alternative">
+              <ion-label>Alternative</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.relaxed">
+              <ion-label>Relaxed</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.traditional">
+              <ion-label>Traditional</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.fancy">
+              <ion-label>Fancy</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.casual">
+              <ion-label>Casual</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.lgbtq">
+              <ion-label>LGBTQ+</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.loud">
+              <ion-label>Loud</ion-label>
+            </ion-chip>
+    
+            <ion-chip *ngIf="userDetails?.preferences?.outdoorSeats">
+              <ion-label>Outdoor Seats</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.accessible">
+              <ion-label>Accessible</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.cloakRoom">
+              <ion-label>Cloak Room</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.smokingArea">
+              <ion-label>Smoking Area</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.beerGarden">
+              <ion-label>Beer Garden</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.danceFloor">
+              <ion-label>Dance Floor</ion-label>
+            </ion-chip>
+    
+            <ion-chip *ngIf="userDetails?.preferences?.festival">
+              <ion-label>Festival</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.openMic">
+              <ion-label>Open Mic</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.pubQuiz">
+              <ion-label>Pub Quiz</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.rave">
+              <ion-label>Rave</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.liveGig">
+              <ion-label>Live Gig</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.dj">
+              <ion-label>DJ</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.karaoke">
+              <ion-label>Karaoke</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.comedy">
+              <ion-label>Comedy</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.sports">
+              <ion-label>Sports</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.specialisedEvents">
+              <ion-label>Specialised Events</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="userDetails?.preferences?.games">
+              <ion-label>Games</ion-label>
+            </ion-chip>
+            <ion-icon name="create-outline" class="edit-icon" (click)="openEditModal()"></ion-icon>
+          </div>
+        </div>
       </div>
 
-      <p>Interests:</p>
-      <div>
-        <ion-chip *ngIf="userDetails?.preferences?.bars">
-          <ion-label>Bars</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.nightclubs">
-          <ion-label>Nightclubs</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.pubs">
-          <ion-label>Pubs</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.lateBars">
-          <ion-label>Late Bars</ion-label>
-        </ion-chip>
+      <ion-segment>
+        <ion-segment-button value="favourites">
+          <ion-icon name="heart-outline"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button value="anseo">
+          <ion-icon name="pin-outline"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button value="saved">
+          <ion-icon name="bookmark-outline"></ion-icon>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-content>
 
-        <ion-chip *ngIf="userDetails?.preferences?.pints">
-          <ion-label>Pints</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.cocktails">
-          <ion-label>Cocktails</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.wine">
-          <ion-label>Wine</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.gin">
-          <ion-label>Gin</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.whiskey">
-          <ion-label>Whiskey</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.nonAlcoholic">
-          <ion-label>Non-Alcoholic</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.goodGuinness">
-          <ion-label>Good Guinness</ion-label>
-        </ion-chip>
-
-        <ion-chip *ngIf="userDetails?.preferences?.trad">
-          <ion-label>Trad</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.pop">
-          <ion-label>Pop</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.techno">
-          <ion-label>Techno</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.house">
-          <ion-label>House</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.indie">
-          <ion-label>Indie</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.rock">
-          <ion-label>Rock</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.rAndB">
-          <ion-label>R&B</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.hipHop">
-          <ion-label>Hip Hop</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.reggaeton">
-          <ion-label>Reggaeton</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.jazz">
-          <ion-label>Jazz</ion-label>
-        </ion-chip>
-
-        <ion-chip *ngIf="userDetails?.preferences?.energetic">
-          <ion-label>Energetic</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.cosy">
-          <ion-label>Cosy</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.alternative">
-          <ion-label>Alternative</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.relaxed">
-          <ion-label>Relaxed</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.traditional">
-          <ion-label>Traditional</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.fancy">
-          <ion-label>Fancy</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.casual">
-          <ion-label>Casual</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.lgbtq">
-          <ion-label>LGBTQ+</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.loud">
-          <ion-label>Loud</ion-label>
-        </ion-chip>
-
-        <ion-chip *ngIf="userDetails?.preferences?.outdoorSeats">
-          <ion-label>Outdoor Seats</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.accessible">
-          <ion-label>Accessible</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.cloakRoom">
-          <ion-label>Cloak Room</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.smokingArea">
-          <ion-label>Smoking Area</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.beerGarden">
-          <ion-label>Beer Garden</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.danceFloor">
-          <ion-label>Dance Floor</ion-label>
-        </ion-chip>
-
-        <ion-chip *ngIf="userDetails?.preferences?.festival">
-          <ion-label>Festival</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.openMic">
-          <ion-label>Open Mic</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.pubQuiz">
-          <ion-label>Pub Quiz</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.rave">
-          <ion-label>Rave</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.liveGig">
-          <ion-label>Live Gig</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.dj">
-          <ion-label>DJ</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.karaoke">
-          <ion-label>Karaoke</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.comedy">
-          <ion-label>Comedy</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.sports">
-          <ion-label>Sports</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.specialisedEvents">
-          <ion-label>Specialised Events</ion-label>
-        </ion-chip>
-        <ion-chip *ngIf="userDetails?.preferences?.games">
-          <ion-label>Games</ion-label>
-        </ion-chip>
-      </div>
-    </ion-card-content>
-  </ion-card>
-
-  <div class="user-list">
-    <h1 class="ion-padding">Friends</h1>
-    <ion-list *ngIf="users$ | async as users; else loading">
-      <ion-item *ngFor="let user of users" (click)="startChatWith(user.uid)">
-        <ion-icon name="person"></ion-icon><ion-label>{{ user.firstName }} {{ user.lastName }}</ion-label>
-      </ion-item>
-    </ion-list>
-    
     <ng-template #loading>
       <ion-item>
         <ion-label>Loading users...</ion-label>
       </ion-item>
     </ng-template>
-  </div>
-
-  <div class="ion-padding">
-  <h2>Favourites:</h2>
-  <ion-list lines="inset">
-    <ion-item>
-      <ion-label>           </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>           </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>           </ion-label>
-    </ion-item>
-  </ion-list>
-  </div>
-
-  <div class="ion-padding">
-    <h2>Check-Ins:</h2>
-    <ion-list lines="inset">
-      <ion-item>
-        <ion-label>           </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>           </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>           </ion-label>
-      </ion-item>
-    </ion-list>
-  </div>
-
-  
 </ion-content>
 
 <ion-footer>
@@ -235,4 +201,11 @@
   </ion-toolbar>
 </ion-footer>
 
-
+<!-- <div class="user-list">
+    <h1 class="ion-padding">Friends</h1>
+    <ion-list *ngIf="users$ | async as users; else loading">
+      <ion-item *ngFor="let user of users" (click)="startChatWith(user.uid)">
+        <ion-icon name="person"></ion-icon><ion-label>{{ user.firstName }} {{ user.lastName }}</ion-label>
+      </ion-item>
+  </ion-list> -->
+    

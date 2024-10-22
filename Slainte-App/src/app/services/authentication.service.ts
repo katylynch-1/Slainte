@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-// import { User } from './user.service';
 import { User } from '@firebase/auth-types';
 import { Observable } from 'rxjs';
+
 
 
 @Injectable({
@@ -35,6 +35,7 @@ export class AuthenticationService {
         // ...additonalData
         firstName: additionalData.firstName,
         lastName: additionalData.lastName,
+        userBio: additionalData.userBio,
         preferences: additionalData.preferences
       });
 

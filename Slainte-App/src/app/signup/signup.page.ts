@@ -31,6 +31,7 @@ export class SignupPage implements OnInit {
         //One upper case, one lower case, one number, one special character, min length of 8 characters
         Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
       ]],
+      userBio: ['', [Validators.required]],
       bars: [false], nightclubs: [false],  pubs: [false],  lateBars: [false],
       pints: [false], cocktails: [false], wine: [false], gin: [false], whiskey: [false], nonAlcoholic: [false], goodGuinness: [false],
       trad: [false], pop: [false], techno: [false], house: [false], rock: [false], indie: [false], hipHop: [false], reggaeton: [false], jazz: [false], rAndB: [false],
@@ -45,7 +46,6 @@ export class SignupPage implements OnInit {
     return this.regForm.controls;
   }
 
-
   async signUp() {
     const loading = await this.loadingCtrl.create();
     await loading.present();
@@ -59,7 +59,7 @@ export class SignupPage implements OnInit {
         // const email = this.regForm.value.email;
         // const password = this.regForm.value.password;
 
-        const { firstName, lastName, email, password, bars, nightclubs, pubs, lateBars, pints, cocktails, wine, gin, whiskey, nonAlcoholic, goodGuinness, trad, pop, techno, house, rock, indie, hipHop, reggaeton, jazz, rAndB, energetic, cosy, alternative, relaxed, traditional, fancy, casual, lgbtq, loud, outdoorSeats, accessible, cloakRoom, smokingArea, beerGarden, danceFloor, festival, openMic, pubQuiz, rave, liveGig, dj, karaoke, comedy, sports, specialisedEvents, games } = this.regForm.value;
+        const { firstName, lastName, email, password, userBio, bars, nightclubs, pubs, lateBars, pints, cocktails, wine, gin, whiskey, nonAlcoholic, goodGuinness, trad, pop, techno, house, rock, indie, hipHop, reggaeton, jazz, rAndB, energetic, cosy, alternative, relaxed, traditional, fancy, casual, lgbtq, loud, outdoorSeats, accessible, cloakRoom, smokingArea, beerGarden, danceFloor, festival, openMic, pubQuiz, rave, liveGig, dj, karaoke, comedy, sports, specialisedEvents, games } = this.regForm.value;
 
         const preferences = {
           bars, nightclubs, pubs, lateBars,
@@ -71,7 +71,7 @@ export class SignupPage implements OnInit {
         };
 
 
-        const user = await this.authService.registerUser(email, password, { firstName, lastName, preferences });
+        const user = await this.authService.registerUser(email, password, { firstName, lastName, userBio, preferences });
         this.router.navigate(['/tabs/tab1']);
         if (user) {
           this.router.navigate(['/tabs/tab1']);
