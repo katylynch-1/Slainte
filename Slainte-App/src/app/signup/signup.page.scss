@@ -44,4 +44,20 @@
         bottom: 30px;
         right: 16px
     }
+
+.image-upload {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    
+    ion-avatar {
+        width: 100px; // Set the desired width
+        height: 100px; // Set the desired height
+        margin: 10px 0; // Optional: add margin as needed
+      }
+ }
+
+
+ 
     

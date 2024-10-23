@@ -15,8 +15,8 @@
 
     <ion-content>
       <div class="profile-container">
-        <ion-avatar class="profilePic">
-          <img [src]="'https://ionicframework.com/docs/img/demos/avatar.svg'" alt="Profile Picture"/>
+        <ion-avatar class="profilePic" (click)="presentActionSheet()" tappable>
+          <img [src]="userDetails?.imageURL ? userDetails.imageURL : 'https://ionicframework.com/docs/img/demos/avatar.svg'" alt="User Profile Picture">
         </ion-avatar>
     
         <div class="user-details">

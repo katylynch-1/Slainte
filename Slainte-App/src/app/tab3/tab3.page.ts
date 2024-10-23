@@ -7,6 +7,9 @@ import { User } from '@firebase/auth-types';
 import { EdituserdetailsComponent } from '../edituserdetails/edituserdetails.component';
 import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
+import { ActionSheetController } from '@ionic/angular';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+
 
 
 @Component({
@@ -26,14 +29,15 @@ export class Tab3Page implements OnInit{
     private router: Router, 
     private modalController: ModalController, 
     private userService: UserService, 
-    private messagingService: MessagingService) {}
+    private messagingService: MessagingService,
+    private actionSheetController: ActionSheetController) {}
 
   ngOnInit(){
     this.authService.getUser().subscribe(user => {
       if(user) {
         this.user = user;
         this.currentUserId = user.uid;
-        this.loadUsers(); 
+        // this.loadUsers(); 
 
       // Fetch additional user details from Firestore
       this.authService.getUserDetails(user.uid).subscribe(details => {
@@ -41,6 +45,60 @@ export class Tab3Page implements OnInit{
       });
     }
     });
+  }
+
+  // Present the action sheet for profile picture options
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Profile Picture',
+      buttons: [
+        {
+          text: 'Update',
+          handler: () => {
+            this.updateImage();
+          },
+        },
+        {
+          text: 'Delete',
+          role: 'destructive',
+          handler: () => {
+            this.deleteImage();
+          },
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+      ],
+    });
+    await actionSheet.present();
+  }
+
+  async updateImage() {
+    const image = await Camera.getPhoto({
+      quality: 100,
+      allowEditing: true,
+      source: CameraSource.Camera,
+      resultType: CameraResultType.Uri,
+    });
+
+    if (image) {
+      // Convert image URI to File
+      const response = await fetch(image.webPath!);
+      const blob = await response.blob();
+      const file = new File([blob], `profile_pictures${this.user.uid}.jpg`, {
+        type: 'image/jpeg',
+      });
+
+      // Update profile picture
+      await this.authService.updateProfilePicture(this.user.uid, file);
+      this.userDetails.imageURL = image.webPath; // Update local image reference for display
+    }
+  }
+
+  async deleteImage() {
+    await this.authService.deleteProfilePicture(this.user.uid);
+    this.userDetails.imageURL = 'https://ionicframework.com/docs/img/demos/avatar.svg'; // Replace with default avatar
   }
 
   signOut(){
@@ -53,13 +111,12 @@ export class Tab3Page implements OnInit{
     });
 
     await modal.present();
-
   }
 
-  loadUsers() {
-    // Load all users currently on Firestore (Friends List)
-    this.users$ = this.userService.getUsers();
-  }
+  // loadUsers() {
+  //   // Load all users currently on Firestore (Friends List)
+  //   this.users$ = this.userService.getUsers();
+  // }
 
   startChatWith(userId: string) {
     this.messagingService.findOrCreateChat(this.currentUserId, userId)
