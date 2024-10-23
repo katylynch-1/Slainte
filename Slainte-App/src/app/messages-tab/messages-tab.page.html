@@ -3,3 +3,19 @@
     <ion-title>Messages</ion-title>
   </ion-toolbar>
 </ion-header>
+
+<ion-content>
+  <div class="user-list">
+    <ion-list *ngIf="users$ | async as users; else loading">
+      <ion-item *ngFor="let user of users" (click)="startChatWith(user.uid)">
+        <ion-icon name="person"></ion-icon><ion-label>{{ user.firstName }} {{ user.lastName }}</ion-label>
+      </ion-item>
+    </ion-list>
+    
+    <ng-template #loading>
+      <ion-item>
+        <ion-label>Loading users...</ion-label>
+      </ion-item>
+    </ng-template>
+  </div>
+</ion-content>

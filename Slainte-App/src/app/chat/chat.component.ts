@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MessagingService } from '../services/messaging.service';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from '../services/authentication.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-chat',
@@ -12,19 +13,28 @@ export class ChatComponent  implements OnInit {
 
   messages$: Observable<any[]>;
   chatId: string;
+  receiverId: string;
   currentUser: any;
   newMessage: string = '';
 
-  constructor(private messagingService: MessagingService, private authService: AuthenticationService) { }
+  constructor(private messagingService: MessagingService, private authService: AuthenticationService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     // Subscribe to the current logged-in user
     this.authService.getUser().subscribe((user) => {
       this.currentUser = user;
       if (user) {
-        // Start a chat with a specific receiver, e.g., 'receiverId'
-        const receiverId = 'exampleReceiverId';  // You will dynamically get this
-        this.startChat(user.uid, receiverId);
+        
+        // Get the receiverId from query parameters
+        this.route.queryParamMap.subscribe((params) => {
+          this.receiverId = params.get('receiverId');
+          if(this.receiverId) {
+            // Start the chat with the current user's ID and the selected receiver's ID
+            this.startChat(user.uid, this.receiverId);
+          } else {
+            console.error('No receiverId provided')
+          }
+        });
       }
     });
   }
@@ -45,7 +55,7 @@ export class ChatComponent  implements OnInit {
   sendMessage() {
     if (this.newMessage.trim()) {
       this.messagingService
-      .sendMessage(this.chatId, this.currentUser.uid, 'exampleReceiverId', this.newMessage)
+      .sendMessage(this.chatId, this.currentUser.uid, this.receiverId, this.newMessage)
       .then(() => {
         this.newMessage = ''; //Clear input after sending
       });
