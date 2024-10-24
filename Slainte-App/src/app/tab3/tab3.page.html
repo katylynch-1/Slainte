@@ -175,7 +175,7 @@
         </div>
       </div>
 
-      <ion-segment>
+      <ion-segment [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)">
         <ion-segment-button value="favourites">
           <ion-icon name="heart-outline"></ion-icon>
         </ion-segment-button>
@@ -186,6 +186,14 @@
           <ion-icon name="bookmark-outline"></ion-icon>
         </ion-segment-button>
       </ion-segment>
+
+      <div *ngIf="selectedSegment === 'saved'">
+        <ion-list>
+          <ion-item *ngFor="let venue of savedVenues">
+            <ion-label>{{ venue }}</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
     </ion-content>
 
     <ng-template #loading>

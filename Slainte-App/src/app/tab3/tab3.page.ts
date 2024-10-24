@@ -9,7 +9,7 @@ import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { ActionSheetController } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-
+import { SavevenuesService } from '../services/savevenues.service';
 
 
 @Component({
@@ -21,30 +21,66 @@ export class Tab3Page implements OnInit{
 
   user: User;
   userDetails: any = null;
+  savedVenues: string[] = [];
   users$: Observable<any[]>; // Observable to hold user list
   currentUserId: string; // Store current user's uid
+  selectedSegment: string = 'saved'; // Default selected segment
 
+
+  
 
   constructor(private authService: AuthenticationService, 
     private router: Router, 
     private modalController: ModalController, 
     private userService: UserService, 
     private messagingService: MessagingService,
-    private actionSheetController: ActionSheetController) {}
+    private actionSheetController: ActionSheetController,
+    private saveVenues: SavevenuesService) {}
 
-  ngOnInit(){
-    this.authService.getUser().subscribe(user => {
-      if(user) {
-        this.user = user;
-        this.currentUserId = user.uid;
-        // this.loadUsers(); 
-
-      // Fetch additional user details from Firestore
-      this.authService.getUserDetails(user.uid).subscribe(details => {
-        this.userDetails = details;
+    ngOnInit() {
+      this.loadUserDetails();
+    }
+  
+    loadUserDetails() {
+      // Get the currently authenticated user
+      this.authService.getUser().subscribe(user => {
+        if (user) {
+          const uid = user.uid;  // Get the user's UID
+          
+          // Fetch user details including saved venues
+          this.authService.getUserDetails(uid).subscribe(async userDetails => {
+            this.userDetails = userDetails;
+    
+            // Fetch saved venues using SavevenuesService
+            this.savedVenues = await this.saveVenues.getSavedVenues(); // Use the service to get saved venues
+            console.log('Saved Venues:', this.savedVenues);
+          });
+        } else {
+          console.error('No user is currently authenticated.');
+        }
       });
     }
-    });
+    
+  
+    // Check if the venue is saved
+    isVenueSaved(venueId: string): boolean {
+      return this.savedVenues.includes(venueId);
+    }
+  
+    // Toggle between saving and unsaving the venue
+    async toggleSave(venueId: string) {
+      if (this.isVenueSaved(venueId)) {
+        await this.saveVenues.unsaveVenue(venueId);  // Unsave the venue
+        this.savedVenues = this.savedVenues.filter(id => id !== venueId); // Remove from local array
+      } else {
+        await this.saveVenues.saveVenue(venueId);    // Save the venue
+        this.savedVenues.push(venueId); // Add to local array
+      }
+      console.log('Updated saved venues:', this.savedVenues);
+    }
+
+  segmentChanged(event: any) {
+    this.selectedSegment = event.detail.value; // Update segment based on selection
   }
 
   // Present the action sheet for profile picture options

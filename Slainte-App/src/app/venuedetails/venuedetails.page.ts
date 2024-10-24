@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VenuedataService } from '../services/venuedata.service';
+import { AuthenticationService } from '../services/authentication.service';
+import { SavevenuesService } from '../services/savevenues.service';
 
 @Component({
   selector: 'app-venuedetails',
@@ -11,13 +13,18 @@ export class VenuedetailsPage implements OnInit {
 
   venue: any;
   apiVenueDetails: any;
+  venueId: string;  // Declare venueId
+  isSaved: boolean;  // Declare isSaved
 
-  constructor(private route: ActivatedRoute, private router: Router, private venueData: VenuedataService) { 
+  constructor(private route: ActivatedRoute, private router: Router, private venueData: VenuedataService, private authService: AuthenticationService, private saveVenues: SavevenuesService) { 
     
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation()?.extras.state){
         this.venue = this.router.getCurrentNavigation().extras.state['venue']; 
         console.log('Venue from navigation state:',this.venue);
+        // Use the venue ID from the navigation state or Google API (e.g., place_id)
+        this.venueId = this.venue.place_id || ''; 
+        this.checkIfSaved();  // Check if this venue is already saved when loaded
       }
     });
   }
@@ -27,12 +34,33 @@ export class VenuedetailsPage implements OnInit {
     this.route.paramMap.subscribe(params => {
       const placeId = params.get('place_id'); 
       if (placeId) {
+        this.venueId = placeId;
         // Get additional venue details using place_id for place details API
         this.fetchApiVenueDetails(placeId);
+        this.checkIfSaved();  // Check if the venue is saved based on placeId
       } else {
         console.error('No place_id found in route params');
       }
     });
+  }
+
+  // Check if the venue is saved to the user's saved venues
+  async checkIfSaved() {
+    if (this.venueId) {
+      this.isSaved = await this.saveVenues.isVenueSaved(this.venueId);  // Check if venue is saved
+      console.log('Venue saved status:', this.isSaved);
+    }
+  }
+
+  // Toggle between saving and unsaving the venue
+  async toggleSave() {
+    if (this.isSaved) {
+      await this.saveVenues.unsaveVenue(this.venueId);  // Unsave the venue
+    } else {
+      await this.saveVenues.saveVenue(this.venueId);    // Save the venue
+    }
+    this.isSaved = !this.isSaved;  // Update the saved state in the UI
+    console.log('Venue saved state after toggle:', this.isSaved);
   }
 
   // Get Google Places API details

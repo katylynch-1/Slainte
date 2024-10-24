@@ -12,6 +12,7 @@ import { Observable, lastValueFrom } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthenticationService {
 
   user: Observable<User | null>;
@@ -52,7 +53,7 @@ export class AuthenticationService {
         userBio: additionalData.userBio,
         imageURL: imageURL,               // Store the download URL of the profile picture
         imageFilename: imageFilename,     // Store the filename in case you need it later (e.g., to delete/replace)
-        preferences: additionalData.preferences
+        preferences: additionalData.preferences,
       });
   
       return user;
@@ -123,27 +124,4 @@ export class AuthenticationService {
     await this.ngFireAuth.signOut();
     this.router.navigate(['/login']);
   }
-
-
-
-
-
-    // async signOut(){
-  //   return await this.ngFireAuth.signOut()
-  // }
-  // getUserData(uid: string) {
-  //   return this.afs.collection('users').doc<User>(uid).valueChanges();
-  // }
-
-  // getUser() {
-  //   return this.ngFireAuth.authState;
-  // }
-
-  // getUser(): Observable<User | null> {
-  //   return this.user;
-  // }
-
-  // async getProfile(){
-  //   return await this.ngFireAuth.currentUser
-  // }
 }
