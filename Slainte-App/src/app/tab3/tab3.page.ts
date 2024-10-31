@@ -6,11 +6,11 @@ import { Router } from '@angular/router';
 import { User } from '@firebase/auth-types';
 import { EdituserdetailsComponent } from '../edituserdetails/edituserdetails.component';
 import { ModalController } from '@ionic/angular';
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { ActionSheetController } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { SavevenuesService } from '../services/savevenues.service';
-
+import { SavedVenue } from '../services/savevenues.service';
 
 @Component({
   selector: 'app-tab3',
@@ -21,13 +21,11 @@ export class Tab3Page implements OnInit{
 
   user: User;
   userDetails: any = null;
-  savedVenues: string[] = [];
+  savedVenues: SavedVenue[] = [];
   users$: Observable<any[]>; // Observable to hold user list
   currentUserId: string; // Store current user's uid
   selectedSegment: string = 'saved'; // Default selected segment
 
-
-  
 
   constructor(private authService: AuthenticationService, 
     private router: Router, 
@@ -41,43 +39,55 @@ export class Tab3Page implements OnInit{
       this.loadUserDetails();
     }
   
-    loadUserDetails() {
-      // Get the currently authenticated user
-      this.authService.getUser().subscribe(user => {
+    async loadUserDetails() {
+      try {
+        // Get the currently authenticated user
+        const user = await firstValueFrom(this.authService.getUser());
         if (user) {
           const uid = user.uid;  // Get the user's UID
           
           // Fetch user details including saved venues
-          this.authService.getUserDetails(uid).subscribe(async userDetails => {
-            this.userDetails = userDetails;
-    
-            // Fetch saved venues using SavevenuesService
-            this.savedVenues = await this.saveVenues.getSavedVenues(); // Use the service to get saved venues
-            console.log('Saved Venues:', this.savedVenues);
-          });
+          this.userDetails = await firstValueFrom(this.authService.getUserDetails(uid));
+  
+          // Fetch saved venues using SavevenuesService
+          this.savedVenues = await this.saveVenues.getSavedVenues(uid); // Pass user ID to get saved venues
+          console.log('Saved Venues:', this.savedVenues);
         } else {
           console.error('No user is currently authenticated.');
         }
-      });
+      } catch (error) {
+        console.error('Error loading user details:', error);
+      }
     }
-    
   
     // Check if the venue is saved
     isVenueSaved(venueId: string): boolean {
-      return this.savedVenues.includes(venueId);
+      return this.savedVenues.some(venue => venue.id === venueId);
     }
   
     // Toggle between saving and unsaving the venue
-    async toggleSave(venueId: string) {
-      if (this.isVenueSaved(venueId)) {
-        await this.saveVenues.unsaveVenue(venueId);  // Unsave the venue
-        this.savedVenues = this.savedVenues.filter(id => id !== venueId); // Remove from local array
-      } else {
-        await this.saveVenues.saveVenue(venueId);    // Save the venue
-        this.savedVenues.push(venueId); // Add to local array
+    async toggleSave(venue: SavedVenue) {
+      try {
+        const user = await firstValueFrom(this.authService.getUser());
+        if (!user) throw new Error('User not authenticated');
+    
+        if (this.isVenueSaved(venue.id)) {
+          // Unsave the venue in the service
+          await this.saveVenues.unsaveVenue(venue.id);
+        } else {
+          // Save the venue in the service
+          await this.saveVenues.saveVenue(venue.id);
+        }
+    
+        // Refresh the saved venues list after each toggle action
+        this.savedVenues = await this.saveVenues.getSavedVenues(user.uid);
+        console.log('Updated saved venues:', this.savedVenues);
+    
+      } catch (error) {
+        console.error('Error toggling save state:', error);
       }
-      console.log('Updated saved venues:', this.savedVenues);
     }
+       
 
   segmentChanged(event: any) {
     this.selectedSegment = event.detail.value; // Update segment based on selection
