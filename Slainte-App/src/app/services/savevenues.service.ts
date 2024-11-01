@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthenticationService } from './authentication.service';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, forkJoin, map, of } from 'rxjs';
 import { Venue } from '../services/venuedata.service'
 import firebase from 'firebase/compat/app'; // Import firebase from compat
 import { AngularFireStorage } from '@angular/fire/compat/storage';
@@ -10,6 +10,7 @@ export interface SavedVenue {
   id: string; // This will be the place_id
   name: string; // Venue name
   imagePath: string; // Venue image URL
+  imageURL?: string; // Make this optional if it might not always be present
 }
 
 // Define the structure of the userDetails document
@@ -117,9 +118,21 @@ async isVenueSaved(venueId: string): Promise<boolean> {
   return false; // If user document does not exist or savedVenues is empty
  }
 
- async getImageUrl(imagePath: string): Promise<string> {
-  const storageRef = this.storage.ref(imagePath); // Create a reference to the file
-  return firstValueFrom(storageRef.getDownloadURL()); // Get the public URL using firstValueFrom
+ // New function to retrieve venues with their image URLs
+ async getVenuesWithImages(venues: SavedVenue[]): Promise<SavedVenue[]> {
+  const observables = venues.map(venue => {
+    if (venue.imagePath) {
+      const storageRef = this.storage.ref(venue.imagePath);
+      return storageRef.getDownloadURL().pipe(
+        map(url => ({ ...venue, imageURL: url }))
+      );
+    } else {
+      return of({ ...venue, imageURL: '' });
+    }
+  });
+
+  // Use forkJoin to wait for all observables to complete and emit the array of venues with image URLs
+  return firstValueFrom(forkJoin(observables));
  }
 }
 

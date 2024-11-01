@@ -177,27 +177,40 @@
 
       <ion-segment [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)">
         <ion-segment-button value="favourites">
-          <ion-icon name="heart-outline"></ion-icon>
+          <ion-icon [name]="selectedSegment === 'favourites' ? 'heart' : 'heart-outline'"></ion-icon>
         </ion-segment-button>
         <ion-segment-button value="anseo">
-          <ion-icon name="pin-outline"></ion-icon>
+          <ion-icon [name]="selectedSegment === 'anseo' ? 'pin' : 'pin-outline'"></ion-icon>
         </ion-segment-button>
         <ion-segment-button value="saved">
-          <ion-icon name="bookmark-outline"></ion-icon>
+          <ion-icon [name]="selectedSegment === 'saved' ? 'bookmark' : 'bookmark-outline'"></ion-icon>
         </ion-segment-button>
       </ion-segment>
 
-      <div *ngIf="selectedSegment === 'saved'">
+      <ng-container *ngIf="savedVenues.length > 0; else noSavedVenues">
         <ion-list>
-          <ion-item *ngFor="let venue of savedVenues">
-            <ion-thumbnail>
-              <img [src]="venue.imagePath" alt="{{ venue.name }}">
+          <ion-item *ngFor="let venue of savedVenues" (click)="openVenueDetailsPage(venue)">
+            <ion-thumbnail slot="start">
+              <img [src]="venue.imageURL" alt="{{ venue.name }}" class="venue-image">
             </ion-thumbnail>
-            <ion-label>{{ venue.name }}</ion-label>
+            <ion-label>
+              <h2>{{ venue.name }}</h2>
+            </ion-label>
           </ion-item>
         </ion-list>
-      </div>
+      </ng-container>
     </ion-content>
+
+    <ng-template #noSavedVenues>
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            <h2>No Saved Venues</h2>
+            <p>Find and save your favorite venues for easy access later!</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ng-template>
 
     <ng-template #loading>
       <ion-item>
