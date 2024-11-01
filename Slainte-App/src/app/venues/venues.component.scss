@@ -44,3 +44,10 @@ h2 {
     left: 0;
     width: 100%;             /* Full width of the content area */
   }
+
+  .thumbnail {
+    border-radius: 5px; /* Round the corners of the thumbnail */
+    overflow: hidden;
+    width: 80px; /* Set a width that suits your design */
+    height: 80px;
+  }

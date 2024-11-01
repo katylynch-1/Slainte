@@ -10,8 +10,6 @@
     }
     
 .header{
-        margin-top: 100px;
-        margin-bottom: 80px;
         text-align: center;
         .subTitle{
             color: gray;
@@ -27,7 +25,6 @@
         margin: auto;
         flex-direction: row;
         align-content: center;
-        position: absolute;
         justify-content: center;
         left: 0;
         bottom: 0;
@@ -41,4 +38,26 @@
             text-decoration: none;
         }
     }
+
+    .next-button {
+        position: fixed;
+        bottom: 30px;
+        right: 16px
+    }
+
+.image-upload {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    
+    ion-avatar {
+        width: 100px; // Set the desired width
+        height: 100px; // Set the desired height
+        margin: 10px 0; // Optional: add margin as needed
+      }
+ }
+
+
+ 
     

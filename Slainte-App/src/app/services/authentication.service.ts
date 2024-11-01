@@ -1,50 +1,96 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-// import { User } from './user.service';
 import { User } from '@firebase/auth-types';
-import { Observable } from 'rxjs';
+import { Observable, lastValueFrom } from 'rxjs';
+
 
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthenticationService {
 
   user: Observable<User | null>;
   regForm: FormGroup;
 
 
-  constructor(public ngFireAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router) {
+  constructor(public ngFireAuth: AngularFireAuth, private afs: AngularFirestore, private afStorage: AngularFireStorage, private router: Router) {
     this.user = this.ngFireAuth.authState;
    }
 
-  async registerUser(email: string, password: string, additionalData: any) {
+   async registerUser(email: string, password: string, additionalData: any, capturedImage: string | null) {
     try {
       const userCredential = await this.ngFireAuth.createUserWithEmailAndPassword(email, password);
-      
-      // Extract user info
       const user = userCredential.user;
-
-      // Add the user data to Firestore
-      return this.afs.collection('userDetails').doc(user?.uid).set({
+      
+      let imageURL = null;
+      let imageFilename = null;
+  
+      // Upload the captured image to Firebase Storage (if any)
+      if (capturedImage) {
+        const storageRef = this.afStorage.ref(`profile_pictures/${user?.uid}`);
+        const uploadTask = storageRef.putString(capturedImage, 'data_url'); // Upload the base64 image
+  
+        // Wait for the upload to complete
+        await lastValueFrom(uploadTask.snapshotChanges());
+  
+        // Get the download URL and the image filename (optional)
+        imageURL = await storageRef.getDownloadURL().toPromise();
+        imageFilename = `profile_pictures/${user?.uid}`;
+      }
+  
+      // Add the user data to Firestore, including image URL and filename
+      await this.afs.collection('userDetails').doc(user?.uid).set({
         uid: user?.uid,
         email: user?.email,
-        // ...additonalData
         firstName: additionalData.firstName,
         lastName: additionalData.lastName,
-        preferences: additionalData.preferences
+        userBio: additionalData.userBio,
+        imageURL: imageURL,               // Store the download URL of the profile picture
+        imageFilename: imageFilename,     // Store the filename in case you need it later (e.g., to delete/replace)
+        preferences: additionalData.preferences,
       });
-
+  
       return user;
-
+  
     } catch (error) {
       console.error("Error during user registration:", error);
-      throw error; // Rethrow the error after logging
+      throw error;
     }
   }
+
+  async updateProfilePicture(userId: string, file: File): Promise<void> {
+    const filePath = `profile_pictures/${userId}`;
+    const fileRef = this.afStorage.ref(filePath);
+
+    // Upload the file
+    await fileRef.put(file);
+    const downloadURL = await lastValueFrom(fileRef.getDownloadURL());
+
+    // Update the user's Firestore document with the new profile picture URL
+    await this.afs.collection('userDetails').doc(userId).update({
+      imageURL: downloadURL,
+    });
+  }
+
+  async deleteProfilePicture(userId: string): Promise<void> {
+    const filePath = `profile_pictures/${userId}`;
+    const fileRef = this.afStorage.ref(filePath);
+
+    // Delete the file from storage
+    await lastValueFrom(fileRef.delete());
+
+    // Remove the image URL from the user's Firestore document
+    await this.afs.collection('userDetails').doc(userId).update({
+      imageURL: null,
+    });
+  }
+  
 
    // Get the current authenticated user
    getUser(): Observable<User | null> {
@@ -78,27 +124,4 @@ export class AuthenticationService {
     await this.ngFireAuth.signOut();
     this.router.navigate(['/login']);
   }
-
-
-
-
-
-    // async signOut(){
-  //   return await this.ngFireAuth.signOut()
-  // }
-  // getUserData(uid: string) {
-  //   return this.afs.collection('users').doc<User>(uid).valueChanges();
-  // }
-
-  // getUser() {
-  //   return this.ngFireAuth.authState;
-  // }
-
-  // getUser(): Observable<User | null> {
-  //   return this.user;
-  // }
-
-  // async getProfile(){
-  //   return await this.ngFireAuth.currentUser
-  // }
 }
