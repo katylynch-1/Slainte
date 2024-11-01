@@ -3,6 +3,7 @@ export const environment = {
   firebase:{
     apiKey: "AIzaSyBJFAWlyZCG1OsRrWnbKeSqbu0tzVR8MlM",
     authDomain: "slainte-1.firebaseapp.com",
+    databaseURL: "https://slainte-1.europe-west1.firebasedatabase.app",
     projectId: "slainte-1",
     storageBucket: "slainte-1.appspot.com",
     messagingSenderId: "958291041038",

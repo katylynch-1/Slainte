@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ChatComponent } from './chat/chat.component';
 import { UserListComponent } from './user-list/user-list.component'; 
+import { NewChatComponent } from './new-chat/new-chat.component';
 
 
 const routes: Routes = [
@@ -62,7 +63,10 @@ const routes: Routes = [
     path: 'user-list', component: UserListComponent 
   },
   { 
-    path: 'chat/:chatId', component: ChatComponent 
+    path: 'chat/:recipientId', component: ChatComponent 
+  },
+  { 
+    path: 'new-chat', component: NewChatComponent
   },
   {
     path: 'messages-tab',

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
-import { MessagingService } from '../services/messaging.service';
 import { UserService } from '../services/user.service';
 import { Router, NavigationExtras } from '@angular/router';
 import { User } from '@firebase/auth-types';
@@ -181,22 +180,5 @@ export class Tab3Page implements OnInit{
 
     await modal.present();
   }
-
-  // loadUsers() {
-  //   // Load all users currently on Firestore (Friends List)
-  //   this.users$ = this.userService.getUsers();
-  // }
-
-  startChatWith(userId: string) {
-    this.messagingService.findOrCreateChat(this.currentUserId, userId)
-      .then((chatId: string) => { 
-        console.log(`Chat started with ${userId}, Chat ID: ${chatId}`);
-        this.router.navigate(['/chat', chatId]); 
-      })
-      .catch(error => {
-        console.error('Error starting chat:', error);
-      });
-  }
-
 
 }
