@@ -1,26 +1,31 @@
-.filter {
-    display: flex;
-    justify-content: flex-end;
-    padding-top: 15px; /* Space above */
-    padding-right: 20px; /* Inline space to the right */
+.profile-container {
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Center vertically */
+  padding: 16px; /* Add padding */
+  border-bottom: 1px solid #ccc; /* Optional: Add a border at the bottom */
 }
 
-ion-avatar {
-    width: 200 px;
-    height: 200 px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto; /* Ensures it's centered inside the card */
-  }
-  
-  ion-avatar img {
-    
-    object-fit: cover; /* Ensures the image covers the avatar area without distortion */
-    border-radius: 50%; /* Ensures the image stays circular */
-  }
+.profilePic {
+  width: 100px; /* Adjust the size of the avatar */
+  height: 100px; /* Ensure the avatar is circular */
+  margin-right: 16px; /* Space between the avatar and user details */
+}
 
-  .toolbar-center {
-    display: flex;
-    justify-content: center; /* Centers the button horizontally */
-  }
+.user-details {
+  flex: 1; /* Allow user details to take available space */
+  text-align: center;
+}
+
+.interests-container {
+  display: flex; /* Use flexbox for chips */
+  flex-wrap: wrap; /* Allow chips to wrap to the next line */
+  margin-top: 8px; /* Space above interests */
+  align-items: center;
+}
+
+
+.edit-icon {
+  font-size: 24px; /* Adjust this value for size */
+  margin-left: 8px; /* Space between the last chip and the icon */
+  vertical-align: middle; /* Align the icon vertically in line with the chips */
+}

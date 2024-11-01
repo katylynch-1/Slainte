@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Welcome</ion-title>
+    <ion-title>Welcome To Sláinte</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -9,6 +9,9 @@
   <p class="subTitle">Sign up to create an account</p>
 </div>
 
+<div class="signinLink">
+  <p>Already a member? <a [routerLink]="['/login']">Sign In Now</a></p>
+</div>
 <form [formGroup]="regForm">
   <div class="ion-padding">
     <ion-item>
@@ -33,7 +36,7 @@
 
     <ion-item>
       <ion-input formControlName="email" placeholder="Email" class="input"></ion-input>
-        <ion-icon name="person-outline"></ion-icon>
+        <ion-icon name="mail-outline"></ion-icon>
     </ion-item>
     <div *ngIf="this.regForm.controls?.['email'].touched && this.regForm.controls?.['email'].invalid">
 
@@ -44,7 +47,6 @@
         <ion-text>
         Email should be valid
       </ion-text>
-
     </div>
 
     <ion-item>
@@ -66,7 +68,26 @@
     </div>
 
     <ion-item>
-      <ion-title>Preferences</ion-title>
+      <ion-input formControlName="userBio" placeholder="Add a bio..." class="input"></ion-input>
+        <ion-icon name="create-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <!-- Code to add image capture -->
+      <ion-label position="stacked">Upload a Profile Picture</ion-label>
+      <div class="image-upload" (click)="addImage()" tappable>
+        <p class="upload-text" *ngIf="!capturedImage && !updateImage">
+          <ion-icon name="camera" class="camera-icon"></ion-icon>
+        </p>
+        <ion-avatar *ngIf="capturedImage && !updateImage">
+          <img [src]="capturedImage">
+        </ion-avatar>
+      </div>
+    </ion-item>
+
+    <!-- Interest Selection -->
+    <ion-item>
+      <ion-title>Select Your Interests</ion-title>
     </ion-item>
     <ion-item>
       <ion-checkbox formControlName="bars"></ion-checkbox>
@@ -263,13 +284,12 @@
     </ion-item>
   </div>
 
-  <div class="signinLink">
-    <p>Already a member? <a [routerLink]="['/login']">Sign In Now</a></p>
-  </div>
-  <ion-fab vertical="bottom" horizontal="end" style="margin-bottom: 30px">
-    <ion-fab-button (click)="signUp()">
+  <!-- Next Button -->
+  <ion-fab vertical="bottom" horizontal="end">
+    <ion-fab-button class="next-button" (click)="signUp()">
       <ion-icon name="chevron-forward"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </form>
 </ion-content>
+

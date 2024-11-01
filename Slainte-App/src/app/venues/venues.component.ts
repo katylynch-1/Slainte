@@ -114,7 +114,7 @@ export class VenuesComponent  implements OnInit {
       }
     };
     console.log('Passing venue:', venue);  // Debugging to confirm data passed
-    this.router.navigate(['/apivenuedetails'], navigationExtras)
+    this.router.navigate(['/apivenuedetails'], navigationExtras);
   }
 
   openGoogleMaps(name: string) {
