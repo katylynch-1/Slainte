@@ -5,6 +5,7 @@ import { firstValueFrom, forkJoin, map, of } from 'rxjs';
 import { Venue } from '../services/venuedata.service'
 import firebase from 'firebase/compat/app'; // Import firebase from compat
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { ToastController } from '@ionic/angular';
 
 export interface SavedVenue {
   id: string; // This will be the place_id
@@ -24,64 +25,70 @@ interface UserDetails {
 })
 export class SavevenuesService {
 
-  constructor(private firestore: AngularFirestore, private authService: AuthenticationService, private storage: AngularFireStorage) {}
+  constructor(private firestore: AngularFirestore, private authService: AuthenticationService, private storage: AngularFireStorage, private toastController: ToastController) {}
 
- async saveVenue(venueId: string): Promise<void> {
-  const user = await firstValueFrom(this.authService.getUser());
-  if (!user) throw new Error('User not authenticated');
+  async saveVenue(venueId: string): Promise<void> {
+    const user = await firstValueFrom(this.authService.getUser());
+    if (!user) throw new Error('User not authenticated');
 
-  const userDocRef = this.firestore.collection('userDetails').doc(user.uid);
-  
-  // Fetch the venue details from the venues collection using a query
-  const venueQuery = this.firestore.collection('Venues', ref => ref.where('place_id', '==', venueId));
-  const venueSnapshot = await firstValueFrom(venueQuery.get());
+    const userDocRef = this.firestore.collection('userDetails').doc(user.uid);
+    
+    const venueQuery = this.firestore.collection('Venues', ref => ref.where('place_id', '==', venueId));
+    const venueSnapshot = await firstValueFrom(venueQuery.get());
 
-  // Check if any documents were found
-  if (venueSnapshot.empty) {
-    console.error('Venue not found with place_id:', venueId);
-    throw new Error(`Venue with place_id ${venueId} does not exist.`);
+    if (venueSnapshot.empty) {
+      console.error('Venue not found with place_id:', venueId);
+      throw new Error(`Venue with place_id ${venueId} does not exist.`);
+    }
+
+    const venueData = venueSnapshot.docs[0].data() as Venue;
+
+    if (venueData && venueData.name && venueData.imagePath) {
+      const savedVenue: Venue = {
+        ...venueData,
+        id: venueData.place_id
+      };
+
+      await userDocRef.update({
+        savedVenues: firebase.firestore.FieldValue.arrayUnion(savedVenue)
+      });
+
+      // Show success toast
+      await this.presentToast('Venue has been saved!');
+    } else {
+      throw new Error('Venue details are incomplete. Cannot save.');
+    }
   }
 
-  // Get the first document that matches
-  const venueData = venueSnapshot.docs[0].data() as Venue;
+  async unsaveVenue(venueId: string): Promise<void> {
+    const user = await firstValueFrom(this.authService.getUser());
+    if (!user) throw new Error('User not authenticated');
 
-  // Check if the required values are defined
-  if (venueData && venueData.name && venueData.imagePath) {
-    // Save only the place_id, name, and imagePath to the savedVenues array
-    const savedVenue: SavedVenue = {
-      id: venueData.place_id, // Use place_id for id
-      name: venueData.name,
-      imagePath: venueData.imagePath // Use the correct property for the image
-    };
+    const userDocRef = this.firestore.collection('userDetails').doc(user.uid);
 
-    await userDocRef.update({
-      savedVenues: firebase.firestore.FieldValue.arrayUnion(savedVenue)
-    });
-  } else {
-    throw new Error('Venue details are incomplete. Cannot save.');
+    const userDoc = await firstValueFrom(userDocRef.get());
+
+    if (userDoc.exists) {
+      const userData = userDoc.data() as UserDetails;
+
+      const updatedSavedVenues = userData.savedVenues.filter(venue => venue.id !== venueId);
+
+      await userDocRef.update({ savedVenues: updatedSavedVenues });
+
+      // Show success toast
+      await this.presentToast('Venue has been unsaved!');
+    }
   }
- }
 
-// Unsave a venue for the current user
-async unsaveVenue(venueId: string): Promise<void> {
-  const user = await firstValueFrom(this.authService.getUser());
-  if (!user) throw new Error('User not authenticated');
-
-  const userDocRef = this.firestore.collection('userDetails').doc(user.uid);
-
-  // Retrieve current savedVenues array
-  const userDoc = await firstValueFrom(userDocRef.get());
-
-  if (userDoc.exists) {
-    const userData = userDoc.data() as UserDetails;
-
-    // Filter out the venue to be removed
-    const updatedSavedVenues = userData.savedVenues.filter(venue => venue.id !== venueId);
-
-    // Update the savedVenues array in Firestore
-    await userDocRef.update({ savedVenues: updatedSavedVenues });
-  }
+private async presentToast(message: string) {
+  const toast = await this.toastController.create({
+    message,
+    duration: 3000, // Duration in milliseconds
+    position: 'bottom' // Position of the toast
+  });
+  await toast.present();
 }
+
 
 
 async getSavedVenues(uid: string): Promise<SavedVenue[]> {

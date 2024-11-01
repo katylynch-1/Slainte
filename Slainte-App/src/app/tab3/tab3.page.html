@@ -187,17 +187,19 @@
         </ion-segment-button>
       </ion-segment>
 
-      <ng-container *ngIf="savedVenues.length > 0; else noSavedVenues">
-        <ion-list>
-          <ion-item *ngFor="let venue of savedVenues" (click)="openVenueDetailsPage(venue)">
-            <ion-thumbnail slot="start">
-              <img [src]="venue.imageURL" alt="{{ venue.name }}" class="venue-image">
-            </ion-thumbnail>
-            <ion-label>
-              <h2>{{ venue.name }}</h2>
-            </ion-label>
-          </ion-item>
-        </ion-list>
+      <ng-container *ngIf="selectedSegment === 'saved'">
+        <ng-container *ngIf="savedVenues.length > 0; else noSavedVenues">
+          <ion-list>
+            <ion-item *ngFor="let venue of savedVenues" (click)="openVenueDetailsPage(venue)">
+              <ion-thumbnail slot="start">
+                <img [src]="venue.imageURL" alt="{{ venue.name }}" class="venue-image">
+              </ion-thumbnail>
+              <ion-label>
+                <h2>{{ venue.name }}</h2>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ng-container>
       </ng-container>
     </ion-content>
 
