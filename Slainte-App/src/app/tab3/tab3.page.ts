@@ -101,7 +101,7 @@ export class Tab3Page implements OnInit{
 
   openVenueDetailsPage(venue: any) {
     console.log('Clicked venue:', venue); // Log the venue that was clicked
-    const placeId = venue.place_id; 
+    const placeId = venue.id; 
     console.log('Place ID:', placeId); // Log the place ID
     if (!placeId) {
       console.error('No place ID found for the venue:', venue);
