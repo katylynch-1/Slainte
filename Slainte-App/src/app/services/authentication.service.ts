@@ -8,7 +8,6 @@ import { User } from '@firebase/auth-types';
 import { Observable, lastValueFrom } from 'rxjs';
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -64,32 +63,79 @@ export class AuthenticationService {
     }
   }
 
+  // async updateProfilePicture(userId: string, file: File): Promise<void> {
+  //   const filePath = `profile_pictures/${userId}`;
+  //   const fileRef = this.afStorage.ref(filePath);
+
+  //   // Upload the file
+  //   await fileRef.put(file);
+  //   const downloadURL = await lastValueFrom(fileRef.getDownloadURL());
+
+  //   // Update the user's Firestore document with the new profile picture URL
+  //   await this.afs.collection('userDetails').doc(userId).update({
+  //     imageURL: downloadURL,
+  //   });
+  // }
+
+  // async deleteProfilePicture(userId: string): Promise<void> {
+  //   const filePath = `profile_pictures/${userId}`;
+  //   const fileRef = this.afStorage.ref(filePath);
+
+  //   // Delete the file from storage
+  //   await lastValueFrom(fileRef.delete());
+
+  //   // Remove the image URL from the user's Firestore document
+  //   await this.afs.collection('userDetails').doc(userId).update({
+  //     imageURL: null,
+  //   });
+  // }
+
   async updateProfilePicture(userId: string, file: File): Promise<void> {
-    const filePath = `profile_pictures/${userId}`;
-    const fileRef = this.afStorage.ref(filePath);
-
-    // Upload the file
-    await fileRef.put(file);
-    const downloadURL = await lastValueFrom(fileRef.getDownloadURL());
-
-    // Update the user's Firestore document with the new profile picture URL
-    await this.afs.collection('userDetails').doc(userId).update({
-      imageURL: downloadURL,
-    });
+    try {
+      const filePath = `profile_pictures/${userId}`;
+      const fileRef = this.afStorage.ref(filePath);
+      
+      // Upload the file and wait for it to finish
+      const uploadTask = this.afStorage.upload(filePath, file);
+      await lastValueFrom(uploadTask.snapshotChanges()); // Ensure the upload completes
+  
+      // Get the download URL after the upload completes
+      const downloadURL = await lastValueFrom(fileRef.getDownloadURL());
+  
+      // Update the user's Firestore document with the new profile picture URL
+      await this.afs.collection('userDetails').doc(userId).update({
+        imageURL: downloadURL,
+      });
+      return downloadURL;
+    } catch (error) {
+      console.error('Error updating profile picture:', error);
+      throw error;
+    }
   }
 
   async deleteProfilePicture(userId: string): Promise<void> {
-    const filePath = `profile_pictures/${userId}`;
-    const fileRef = this.afStorage.ref(filePath);
-
-    // Delete the file from storage
-    await lastValueFrom(fileRef.delete());
-
-    // Remove the image URL from the user's Firestore document
-    await this.afs.collection('userDetails').doc(userId).update({
-      imageURL: null,
-    });
-  }
+    try {
+      const filePath = `profile_pictures/${userId}`;
+      const fileRef = this.afStorage.ref(filePath);
+  
+      // Try to delete the file and check if it exists before deletion
+      await lastValueFrom(fileRef.delete());
+  
+      // Remove the image URL from the user's Firestore document
+      await this.afs.collection('userDetails').doc(userId).update({
+        imageURL: null,
+      });
+    } catch (error: any) {
+      if (error.code === 'storage/object-not-found') {
+        console.warn('Profile picture not found for deletion:', error);
+      } else {
+        console.error('Error deleting profile picture:', error);
+      }
+      throw error;
+    }
+  } 
+    
+  
   
 
    // Get the current authenticated user
