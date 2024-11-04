@@ -117,15 +117,7 @@ export class SignupPage implements OnInit {
   
     if (this.regForm.valid) {
       try {
-        const { firstName, lastName, email, password, userBio, bars, nightclubs, pubs, lateBars, pints, cocktails, wine, gin, whiskey, nonAlcoholic, goodGuinness, trad, pop, techno, house, rock, indie, hipHop, reggaeton, jazz, rAndB, energetic, cosy, alternative, relaxed, traditional, fancy, casual, lgbtq, loud, outdoorSeats, accessible, cloakRoom, smokingArea, beerGarden, danceFloor, festival, openMic, pubQuiz, rave, liveGig, dj, karaoke, comedy, sports, specialisedEvents, games } = this.regForm.value;
-  
-        // const preferences = {
-        //   bars, nightclubs, pubs, lateBars, pints, cocktails, wine, gin, whiskey, nonAlcoholic, goodGuinness,
-        //   trad, pop, techno, house, rock, indie, hipHop, reggaeton, jazz, rAndB,
-        //   energetic, cosy, alternative, relaxed, traditional, fancy, casual, lgbtq, loud, 
-        //   outdoorSeats, accessible, cloakRoom, smokingArea, beerGarden, danceFloor, 
-        //   festival, openMic, pubQuiz, rave, liveGig, dj, karaoke, comedy, sports, specialisedEvents, games
-        // };
+        const { firstName, lastName, email, password, userBio } = this.regForm.value;
 
         const preferences: { [key: string]: boolean } = {};
         const allOptions = [
