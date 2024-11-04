@@ -3,17 +3,7 @@
     <ion-title>Profile</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-
-    <!-- <div class="filter">
-      <ion-fab vertical="top" horizontal="end" slot="fixed">
-        <ion-fab-button (click)="openEditModal()">
-          <ion-icon name="create-outline"></ion-icon>
-        </ion-fab-button>
-      </ion-fab>
-    </div> -->
-
-    <ion-content>
+<ion-content class="body">
       <div class="profile-container">
         <ion-avatar class="profilePic" (click)="presentActionSheet()" tappable>
           <img [src]="userDetails?.imageURL ? userDetails.imageURL : 'https://ionicframework.com/docs/img/demos/avatar.svg'" alt="User Profile Picture">
@@ -25,149 +15,137 @@
           </div>
           <p> {{ userDetails?.userBio }}</p>
           <div class="interests-container">
-            <ion-chip class="chip" *ngIf="userDetails?.preferences?.bars">
-              <ion-label>Bars</ion-label>
-            </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.nightclubs">
-              <ion-label>Nightclubs</ion-label>
-            </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.pubs">
-              <ion-label>Pubs</ion-label>
-            </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.lateBars">
-              <ion-label>Late Bars</ion-label>
-            </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.pints">
+            <ion-chip class="drinks-chips" [outline]="true" *ngIf="userDetails?.preferences?.pints">
               <ion-label>Pints</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.cocktails">
+            <ion-chip class="drinks-chips" [outline]="true" *ngIf="userDetails?.preferences?.cocktails">
               <ion-label>Cocktails</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.wine">
+            <ion-chip class="drinks-chips" [outline]="true" *ngIf="userDetails?.preferences?.wine">
               <ion-label>Wine</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.gin">
+            <ion-chip class="drinks-chips" [outline]="true" *ngIf="userDetails?.preferences?.gin">
               <ion-label>Gin</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.whiskey">
+            <ion-chip class="drinks-chips" [outline]="true" *ngIf="userDetails?.preferences?.whiskey">
               <ion-label>Whiskey</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.nonAlcoholic">
+            <ion-chip class="drinks-chips" [outline]="true" *ngIf="userDetails?.preferences?.nonAlcoholic">
               <ion-label>Non-Alcoholic</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.goodGuinness">
+            <ion-chip class="drinks-chips" [outline]="true" *ngIf="userDetails?.preferences?.goodGuinness">
               <ion-label>Good Guinness</ion-label>
             </ion-chip>
     
-            <ion-chip *ngIf="userDetails?.preferences?.trad">
+            <ion-chip class="music-chips" [outline]="true" *ngIf="userDetails?.preferences?.trad">
               <ion-label>Trad</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.pop">
+            <ion-chip class="music-chips" [outline]="true" *ngIf="userDetails?.preferences?.pop">
               <ion-label>Pop</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.techno">
+            <ion-chip class="music-chips" [outline]="true" *ngIf="userDetails?.preferences?.techno">
               <ion-label>Techno</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.house">
+            <ion-chip class="music-chips" [outline]="true" *ngIf="userDetails?.preferences?.house">
               <ion-label>House</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.indie">
+            <ion-chip class="music-chips" [outline]="true" *ngIf="userDetails?.preferences?.indie">
               <ion-label>Indie</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.rock">
+            <ion-chip class="music-chips" [outline]="true" *ngIf="userDetails?.preferences?.rock">
               <ion-label>Rock</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.rAndB">
+            <ion-chip class="music-chips" [outline]="true" *ngIf="userDetails?.preferences?.rAndB">
               <ion-label>R&B</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.hipHop">
+            <ion-chip class="music-chips" [outline]="true" *ngIf="userDetails?.preferences?.hipHop">
               <ion-label>Hip Hop</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.reggaeton">
+            <ion-chip class="music-chips" [outline]="true" *ngIf="userDetails?.preferences?.reggaeton">
               <ion-label>Reggaeton</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.jazz">
+            <ion-chip class="music-chips" [outline]="true" *ngIf="userDetails?.preferences?.jazz">
               <ion-label>Jazz</ion-label>
             </ion-chip>
     
-            <ion-chip *ngIf="userDetails?.preferences?.energetic">
+            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="userDetails?.preferences?.energetic">
               <ion-label>Energetic</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.cosy">
+            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="userDetails?.preferences?.cosy">
               <ion-label>Cosy</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.alternative">
+            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="userDetails?.preferences?.alternative">
               <ion-label>Alternative</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.relaxed">
+            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="userDetails?.preferences?.relaxed">
               <ion-label>Relaxed</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.traditional">
+            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="userDetails?.preferences?.traditional">
               <ion-label>Traditional</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.fancy">
+            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="userDetails?.preferences?.fancy">
               <ion-label>Fancy</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.casual">
+            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="userDetails?.preferences?.casual">
               <ion-label>Casual</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.lgbtq">
+            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="userDetails?.preferences?.lgbtq">
               <ion-label>LGBTQ+</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.loud">
+            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="userDetails?.preferences?.loud">
               <ion-label>Loud</ion-label>
             </ion-chip>
     
-            <ion-chip *ngIf="userDetails?.preferences?.outdoorSeats">
+            <ion-chip class="amenities-chips" [outline]="true" *ngIf="userDetails?.preferences?.outdoorSeats">
               <ion-label>Outdoor Seats</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.accessible">
+            <ion-chip class="amenities-chips" [outline]="true" *ngIf="userDetails?.preferences?.accessible">
               <ion-label>Accessible</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.cloakRoom">
+            <ion-chip class="amenities-chips" [outline]="true" *ngIf="userDetails?.preferences?.cloakRoom">
               <ion-label>Cloak Room</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.smokingArea">
+            <ion-chip class="amenities-chips" [outline]="true" *ngIf="userDetails?.preferences?.smokingArea">
               <ion-label>Smoking Area</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.beerGarden">
+            <ion-chip class="amenities-chips" [outline]="true" *ngIf="userDetails?.preferences?.beerGarden">
               <ion-label>Beer Garden</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.danceFloor">
+            <ion-chip class="amenities-chips" [outline]="true" *ngIf="userDetails?.preferences?.danceFloor">
               <ion-label>Dance Floor</ion-label>
             </ion-chip>
     
-            <ion-chip *ngIf="userDetails?.preferences?.festival">
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="userDetails?.preferences?.festival">
               <ion-label>Festival</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.openMic">
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="userDetails?.preferences?.openMic">
               <ion-label>Open Mic</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.pubQuiz">
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="userDetails?.preferences?.pubQuiz">
               <ion-label>Pub Quiz</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.rave">
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="userDetails?.preferences?.rave">
               <ion-label>Rave</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.liveGig">
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="userDetails?.preferences?.liveGig">
               <ion-label>Live Gig</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.dj">
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="userDetails?.preferences?.dj">
               <ion-label>DJ</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.karaoke">
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="userDetails?.preferences?.karaoke">
               <ion-label>Karaoke</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.comedy">
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="userDetails?.preferences?.comedy">
               <ion-label>Comedy</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.sports">
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="userDetails?.preferences?.sports">
               <ion-label>Sports</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.specialisedEvents">
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="userDetails?.preferences?.specialisedEvents">
               <ion-label>Specialised Events</ion-label>
             </ion-chip>
-            <ion-chip *ngIf="userDetails?.preferences?.games">
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="userDetails?.preferences?.games">
               <ion-label>Games</ion-label>
             </ion-chip>
             <ion-icon name="create-outline" class="edit-icon" (click)="openEditModal()"></ion-icon>
@@ -175,38 +153,34 @@
         </div>
       </div>
 
-      <ion-segment [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)">
-        <ion-segment-button value="favourites">
-          <ion-icon [name]="selectedSegment === 'favourites' ? 'heart' : 'heart-outline'"></ion-icon>
+      <ion-segment class="segment" [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)">
+        <ion-segment-button class="segment-button" value="favourites">
+            <ion-icon [name]="selectedSegment === 'favourites' ? 'heart' : 'heart-outline'"></ion-icon>
         </ion-segment-button>
-        <ion-segment-button value="anseo">
-          <ion-icon [name]="selectedSegment === 'anseo' ? 'pin' : 'pin-outline'"></ion-icon>
+        <ion-segment-button class="segment-button" value="saved">
+            <ion-icon [name]="selectedSegment === 'saved' ? 'bookmark' : 'bookmark-outline'"></ion-icon>
         </ion-segment-button>
-        <ion-segment-button value="saved">
-          <ion-icon [name]="selectedSegment === 'saved' ? 'bookmark' : 'bookmark-outline'"></ion-icon>
+        <ion-segment-button class="segment-button" value="friends">
+            <ion-icon [name]="selectedSegment === 'friends' ? 'people' : 'people-outline'"></ion-icon>
         </ion-segment-button>
-      </ion-segment>
+    </ion-segment>
+    
 
       <ng-container *ngIf="selectedSegment === 'saved'">
         <ng-container *ngIf="savedVenues.length > 0; else noSavedVenues">
           <ion-refresher slot="fixed" (ionRefresh)="refreshSavedVenues($event)">
-            <ion-refresher-content pullingIcon="arrow-down" refreshingSpinner="bubbles">
-            </ion-refresher-content>
+            <ion-refresher-content pullingIcon="arrow-down" refreshingSpinner="bubbles"></ion-refresher-content>
           </ion-refresher>
       
-          <ion-list>
-            <ion-item *ngFor="let venue of savedVenues" (click)="openVenueDetailsPage(venue)">
-              <ion-thumbnail slot="start">
-                <img [src]="venue.imageURL" alt="{{ venue.name }}" class="venue-image">
-              </ion-thumbnail>
-              <ion-label>
-                <h2>{{ venue.name }}</h2>
-              </ion-label>
-            </ion-item>
-          </ion-list>
+          <!-- Create a grid for the venues -->
+          <div class="venue-grid">
+            <div class="venue-item" *ngFor="let venue of savedVenues" (click)="openVenueDetailsPage(venue)">
+              <img [src]="venue.imageURL" alt="{{ venue.name }}" class="venue-image" />
+              <h3 class="venue-name">{{ venue.name }}</h3>
+            </div>
+          </div>
         </ng-container>
       </ng-container>
-    </ion-content>
 
     <ng-template #noSavedVenues>
       <ion-list>

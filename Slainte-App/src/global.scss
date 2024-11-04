@@ -36,7 +36,11 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
 
-
+/* Add this to global.scss */
+.inner-scroll {
+    background-color: black; /* Set the background color to black */
+    color: white; /* Optional: Set text color to white for better visibility */
+  }
   
   
   

@@ -3,6 +3,7 @@
   align-items: center; /* Center vertically */
   padding: 16px; /* Add padding */
   border-bottom: 1px solid #ccc; /* Optional: Add a border at the bottom */
+  background-color: black;
 }
 
 .profilePic {
@@ -14,6 +15,9 @@
 .user-details {
   flex: 1; /* Allow user details to take available space */
   text-align: center;
+  background-color: black;
+  color: white;
+
 }
 
 .interests-container {
@@ -21,11 +25,124 @@
   flex-wrap: wrap; /* Allow chips to wrap to the next line */
   margin-top: 8px; /* Space above interests */
   align-items: center;
+  color: white;
 }
 
+.drinks-chips {
+  color: white;        
+  border-color: #D96ACE; 
+}
+
+.entertainment-chips {
+  color: white;        
+  border-color: #7F48AC; 
+}
+
+.amenities-chips {
+  color: white;        
+  border-color: #84BC7B; 
+}
+
+.music-chips {
+  color: white;        
+  border-color: #5CA5ED; 
+}
+
+.atmosphere-chips {
+  color: white;        
+  border-color: #F0F371; 
+}
 
 .edit-icon {
   font-size: 24px; /* Adjust this value for size */
   margin-left: 8px; /* Space between the last chip and the icon */
   vertical-align: middle; /* Align the icon vertically in line with the chips */
 }
+
+.venue-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjust the size to your liking */
+  gap: 5px; /* Space between grid items */
+  padding: 5px;
+  background-color: black;
+}
+
+.venue-item {
+  text-align: center; /* Center the text and image */
+  background-color: black;
+}
+
+.venue-image {
+  width: 100%;
+  height: 150px;
+  border-radius: 8px; /* Optional: Add rounded corners to the images */
+  object-fit: cover; /* Ensure the images cover the space without stretching */
+}
+
+.venue-name {
+  margin-top: 8px;
+  font-size: 14px;
+  color: white;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%; /* Ensures text does not overflow */
+}
+
+/* Style for the header and footer toolbar */
+ion-toolbar {
+  --background: black;
+  --color: white;   /* For text color */
+}
+
+// /* Style for the segment buttons */
+// /* Apply these styles in your global.scss or component-specific styles */
+// // .segment {
+// //   background-color: black; /* Set the background color to black */
+// // }
+
+// // /* Target the segment buttons */
+// // .segment-button {
+// //   --border-color: transparent; /* Remove any border color */
+// // }
+
+// // /* Change icon color for active segment button */
+// // .segment-button[aria-pressed="true"] ion-icon {
+// //   --color: black; /* Change active icon color to black */
+// // }
+
+// // /* Change icon color for inactive segment buttons */
+// // .segment-button ion-icon {
+// //   --color: white; /* Set inactive icon color to white */
+// // }
+
+.segment {
+  background-color: black; /* Set the background color to black */
+}
+
+/* Target the segment buttons */
+.segment-button {
+  background-color: black; /* Ensure button background is black */
+  --background: black; /* Ensure background is black */
+  --border-color: transparent; /* Remove any border color */
+}
+
+/* Ensure active buttons also have the correct styles */
+.segment-button[aria-pressed="true"] {
+  background-color: black; /* Keep the active segment button black */
+  color: white; /* Active button text color */
+}
+
+/* Change icon color for active segment button */
+.segment-button[aria-pressed="true"] ion-icon {
+  color: black; /* Change active icon color to black */
+}
+
+/* Change icon color for inactive segment button */
+.segment-button ion-icon {
+  color: white; /* Change inactive icon color to white */
+}
+
+
+
