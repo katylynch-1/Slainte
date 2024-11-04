@@ -189,6 +189,11 @@
 
       <ng-container *ngIf="selectedSegment === 'saved'">
         <ng-container *ngIf="savedVenues.length > 0; else noSavedVenues">
+          <ion-refresher slot="fixed" (ionRefresh)="refreshSavedVenues($event)">
+            <ion-refresher-content pullingIcon="arrow-down" refreshingSpinner="bubbles">
+            </ion-refresher-content>
+          </ion-refresher>
+      
           <ion-list>
             <ion-item *ngFor="let venue of savedVenues" (click)="openVenueDetailsPage(venue)">
               <ion-thumbnail slot="start">
