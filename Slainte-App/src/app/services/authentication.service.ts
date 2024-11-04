@@ -63,33 +63,6 @@ export class AuthenticationService {
     }
   }
 
-  // async updateProfilePicture(userId: string, file: File): Promise<void> {
-  //   const filePath = `profile_pictures/${userId}`;
-  //   const fileRef = this.afStorage.ref(filePath);
-
-  //   // Upload the file
-  //   await fileRef.put(file);
-  //   const downloadURL = await lastValueFrom(fileRef.getDownloadURL());
-
-  //   // Update the user's Firestore document with the new profile picture URL
-  //   await this.afs.collection('userDetails').doc(userId).update({
-  //     imageURL: downloadURL,
-  //   });
-  // }
-
-  // async deleteProfilePicture(userId: string): Promise<void> {
-  //   const filePath = `profile_pictures/${userId}`;
-  //   const fileRef = this.afStorage.ref(filePath);
-
-  //   // Delete the file from storage
-  //   await lastValueFrom(fileRef.delete());
-
-  //   // Remove the image URL from the user's Firestore document
-  //   await this.afs.collection('userDetails').doc(userId).update({
-  //     imageURL: null,
-  //   });
-  // }
-
   async updateProfilePicture(userId: string, file: File): Promise<void> {
     try {
       const filePath = `profile_pictures/${userId}`;

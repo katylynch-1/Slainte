@@ -86,202 +86,62 @@
     </ion-item>
 
     <!-- Interest Selection -->
-    <ion-item>
-      <ion-title>Select Your Interests</ion-title>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="bars"></ion-checkbox>
-      <ion-label>Bars</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="nightclubs"></ion-checkbox>
-      <ion-label>Nightclubs</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="pubs"></ion-checkbox>
-      <ion-label>Pubs</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="lateBars"></ion-checkbox>
-      <ion-label>Late Bars</ion-label>
-    </ion-item>
+    <h3>Select Your Interests</h3>
 
-    <ion-item>
-      <ion-checkbox formControlName="pints"></ion-checkbox>
-      <ion-label>Pints</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="goodGuinness"></ion-checkbox>
-      <ion-label>Good Guinness</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="cocktails"></ion-checkbox>
-      <ion-label>Cocktails</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="wine"></ion-checkbox>
-      <ion-label>Wine</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="gin"></ion-checkbox>
-      <ion-label>Gin</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="whiskey"></ion-checkbox>
-      <ion-label>Whiskey</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="nonAlcoholic"></ion-checkbox>
-      <ion-label>Non-Alcoholic</ion-label>
-    </ion-item>
+    <div class="category">
+      <h5>Atmosphere</h5>
+      <ion-chip
+        *ngFor="let option of atmosphereOptions"
+        [color]="regForm.controls[option.controlName].value ? 'primary' : ''"
+        (click)="toggleChip(option.controlName)">
+        {{ option.label }}
+        <ion-icon *ngIf="regForm.controls[option.controlName].value" name="checkmark"></ion-icon>
+      </ion-chip>
+    </div>
 
-    <ion-item>
-      <ion-checkbox formControlName="trad"></ion-checkbox>
-      <ion-label>Trad</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="pop"></ion-checkbox>
-      <ion-label>Pop</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="techno"></ion-checkbox>
-      <ion-label>Techno</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="house"></ion-checkbox>
-      <ion-label>House</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="indie"></ion-checkbox>
-      <ion-label>Indie</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="rock"></ion-checkbox>
-      <ion-label>Rock</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="rAndB"></ion-checkbox>
-      <ion-label>R&B</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="hipHop"></ion-checkbox>
-      <ion-label>Hip Hop</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="reggaeton"></ion-checkbox>
-      <ion-label>Reggaeton</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="jazz"></ion-checkbox>
-      <ion-label>Jazz</ion-label>
-    </ion-item>
+    <div class="category">
+      <h5>Drinks</h5>
+      <ion-chip
+        *ngFor="let option of drinksOptions"
+        [color]="regForm.controls[option.controlName].value ? 'primary' : ''"
+        (click)="toggleChip(option.controlName)">
+        {{ option.label }}
+        <ion-icon *ngIf="regForm.controls[option.controlName].value" name="checkmark"></ion-icon>
+      </ion-chip>
+    </div>
 
-    <ion-item>
-      <ion-checkbox formControlName="energetic"></ion-checkbox>
-      <ion-label>Energetic</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="cosy"></ion-checkbox>
-      <ion-label>Cosy</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="alternative"></ion-checkbox>
-      <ion-label>Alternative</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="relaxed"></ion-checkbox>
-      <ion-label>Relaxed</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="traditional"></ion-checkbox>
-      <ion-label>Traditional</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="fancy"></ion-checkbox>
-      <ion-label>Fancy</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="casual"></ion-checkbox>
-      <ion-label>Casual</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="lgbtq"></ion-checkbox>
-      <ion-label>LGBTQ+</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="loud"></ion-checkbox>
-      <ion-label>Loud</ion-label>
-    </ion-item>
+    <div class="category">
+      <h5>Music</h5>
+      <ion-chip
+        *ngFor="let option of musicOptions"
+        [color]="regForm.controls[option.controlName].value ? 'primary' : ''"
+        (click)="toggleChip(option.controlName)">
+        {{ option.label }}
+        <ion-icon *ngIf="regForm.controls[option.controlName].value" name="checkmark"></ion-icon>
+      </ion-chip>
+    </div>
 
-    <ion-item>
-      <ion-checkbox formControlName="outdoorSeats"></ion-checkbox>
-      <ion-label>Outdoor Seats</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="accessible"></ion-checkbox>
-      <ion-label>Accessible</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="cloakRoom"></ion-checkbox>
-      <ion-label>Cloak Room</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="smokingArea"></ion-checkbox>
-      <ion-label>Smoking Area</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="beerGarden"></ion-checkbox>
-      <ion-label>Beer Garden</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="danceFloor"></ion-checkbox>
-      <ion-label>Dance Floor</ion-label>
-    </ion-item>
+    <div class="category">
+      <h5>Amenities</h5>
+      <ion-chip
+        *ngFor="let option of amenitiesOptions"
+        [color]="regForm.controls[option.controlName].value ? 'primary' : ''"
+        (click)="toggleChip(option.controlName)">
+        {{ option.label }}
+        <ion-icon *ngIf="regForm.controls[option.controlName].value" name="checkmark"></ion-icon>
+      </ion-chip>
+    </div>
 
-    <ion-item>
-      <ion-checkbox formControlName="festival"></ion-checkbox>
-      <ion-label>Festival</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="openMic"></ion-checkbox>
-      <ion-label>Open Mic</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="pubQuiz"></ion-checkbox>
-      <ion-label>Pub Quiz</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="rave"></ion-checkbox>
-      <ion-label>Rave</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="liveGig"></ion-checkbox>
-      <ion-label>Live Gig</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="dj"></ion-checkbox>
-      <ion-label>DJ</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="karaoke"></ion-checkbox>
-      <ion-label>Karaoke</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="comedy"></ion-checkbox>
-      <ion-label>Comedy</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="sports"></ion-checkbox>
-      <ion-label>Sports</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="specialisedEvents"></ion-checkbox>
-      <ion-label>Specialised Events</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox formControlName="games"></ion-checkbox>
-      <ion-label>Games</ion-label>
-    </ion-item>
+    <div class="category">
+      <h5>Entertainment</h5>
+      <ion-chip
+        *ngFor="let option of entertainmentOptions"
+        [color]="regForm.controls[option.controlName].value ? 'primary' : ''"
+        (click)="toggleChip(option.controlName)">
+        {{ option.label }}
+        <ion-icon *ngIf="regForm.controls[option.controlName].value" name="checkmark"></ion-icon>
+      </ion-chip>
+    </div>
   </div>
 
   <!-- Next Button -->
