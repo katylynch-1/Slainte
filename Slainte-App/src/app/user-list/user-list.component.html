@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>User List</ion-title>
   </ion-toolbar>
@@ -8,7 +8,7 @@
   <ion-list *ngIf="users$ | async as users; else loading">
     <ion-item *ngFor="let user of users" (click)="startChatWith(user.uid)">
       <ion-label>{{ user.firstName }} ({{ user.lastName }})</ion-label> <!-- Adjust according to your user fields -->
-    </ion-item>
+    <!-- </ion-item>
   </ion-list>
   
   <ng-template #loading>
@@ -16,4 +16,4 @@
       <ion-label>Loading users...</ion-label>
     </ion-item>
   </ng-template>
-</ion-content>
+</ion-content> --> 

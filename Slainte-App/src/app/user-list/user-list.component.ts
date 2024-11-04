@@ -19,27 +19,27 @@ export class UserListComponent  implements OnInit {
 
   ngOnInit() {
     //get the current user's uid
-    this.authService.getUser().subscribe(user => {
-      if (user) {
-        this.currentUserId = user.uid;
-        this.loadUsers(); 
-      }
-    });
+    // this.authService.getUser().subscribe(user => {
+    //   if (user) {
+    //     this.currentUserId = user.uid;
+    //     this.loadUsers(); 
+    //   }
+    // });
   }
 
-  loadUsers() {
-    this.users$ = this.userService.getUsers();
-  }
+  // loadUsers() {
+  //   this.users$ = this.userService.getUsers();
+  // }
 
-  startChatWith(userId: string) {
-    this.messagingService.findOrCreateChat(this.currentUserId, userId)
-      .then((chatId: string) => { 
-        console.log(`Chat started with ${userId}, Chat ID: ${chatId}`);
-        this.router.navigate(['/chat', chatId]); 
-      })
-      .catch(error => {
-        console.error('Error starting chat:', error);
-      });
-  }
+  // startChatWith(userId: string) {
+  //   this.messagingService.findOrCreateChat(this.currentUserId, userId)
+  //     .then((chatId: string) => { 
+  //       console.log(`Chat started with ${userId}, Chat ID: ${chatId}`);
+  //       this.router.navigate(['/chat', chatId]); 
+  //     })
+  //     .catch(error => {
+  //       console.error('Error starting chat:', error);
+  //     });
+  // }
 
 }
