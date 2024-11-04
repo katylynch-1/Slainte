@@ -33,7 +33,7 @@ export class Tab3Page implements OnInit {
     private userService: UserService, 
     private actionSheetController: ActionSheetController,
     private saveVenues: SavevenuesService,
-    private toastController: ToastController
+    private toastController: ToastController,
   ) {}
 
   ngOnInit() {
@@ -65,6 +65,12 @@ export class Tab3Page implements OnInit {
     }
   }
 
+  // Add the refresh method
+  async refreshSavedVenues(event: any) {
+    await this.loadUserDetails(); // Reload user details and saved venues
+    event.target.complete(); // Dismiss the refresher
+  }
+
   // Check if the venue is saved
   isVenueSaved(venueId: string): boolean {
     return this.savedVenues.some(venue => venue.id === venueId);
@@ -76,15 +82,14 @@ export class Tab3Page implements OnInit {
       if (!this.user) throw new Error('User not authenticated');
       
       if (this.isVenueSaved(venue.id)) {
-        // Unsave the venue in the service
         await this.saveVenues.unsaveVenue(venue.id);
       } else {
-        // Save the venue in the service
         await this.saveVenues.saveVenue(venue.id);
       }
-
-      // Refresh the saved venues list after each toggle action
+  
+      // Fetch the updated saved venues list
       this.savedVenues = await this.saveVenues.getSavedVenues(this.user.uid);
+  
       console.log('Updated saved venues:', this.savedVenues);
     } catch (error) {
       console.error('Error toggling save state:', error);
