@@ -1,14 +1,3 @@
-.input {
-    font-size: 300;
-    color: black;
-    }
-    
-    ion-item{
-        --background:#f1f1f1;
-        border-radius: 10 px;
-        margin-bottom: 16px;
-    }
-    
 .header{
         text-align: center;
         .subTitle{
@@ -39,12 +28,6 @@
         }
     }
 
-    .next-button {
-        position: fixed;
-        bottom: 30px;
-        right: 16px
-    }
-
 .image-upload {
     display: flex;
     align-items: center;
@@ -64,41 +47,21 @@
   }
   
 
-//  .atmosphere-category {
-//     color: #F0F371;
-//  }
-
  .atmosphere-check {
     color: #F0F371;
  }
-
-//  .drinks-category {
-//     color: #D96ACE;
-//  }
 
  .drinks-check {
     color: #D96ACE;
  }
 
-//  .entertainment-category {
-//     color: #7F48AC;
-//  }
-
   .entertainment-check {
     color: #7F48AC;
  }
 
-//  .amenities-category {
-//     color: #84BC7B;
-//  }
-
   .amenities-check {
     color: #84BC7B;
  }
-
-//  .music-category {
-//     color: #5CA5ED;
-//  }
 
  .music-check {
     color: #5CA5ED;
