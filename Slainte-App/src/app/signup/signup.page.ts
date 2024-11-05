@@ -31,7 +31,6 @@ export class SignupPage implements OnInit {
   drinksOptions = [
     { label: 'Cocktails', controlName: 'cocktails' },
     { label: 'Gin', controlName: 'gin' },
-    { label: 'Cosy', controlName: 'cosy' },
     { label: 'Good Guinness', controlName: 'goodGuinness' },
     { label: 'Non-Alcoholic', controlName: 'nonAlcoholic' },
     { label: 'Pints', controlName: 'pints' },

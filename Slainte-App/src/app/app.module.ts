@@ -13,7 +13,7 @@ import { FilterModalComponent } from './filter-modal/filter-modal.component';
 import { SafetyModalComponent } from './safety-modal/safety-modal.component';
 import { ChatComponent } from './chat/chat.component';
 import { EdituserdetailsComponent } from './edituserdetails/edituserdetails.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire/compat';
@@ -25,7 +25,7 @@ import { NewChatComponent } from './new-chat/new-chat.component';
 
 @NgModule({
   declarations: [AppComponent, FilterModalComponent, EdituserdetailsComponent, SafetyModalComponent, ChatComponent, NewChatComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, AngularFireModule.initializeApp(environment.firebase), AngularFireAuthModule, AngularFirestoreModule, AngularFireDatabaseModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, AngularFireModule.initializeApp(environment.firebase), AngularFireAuthModule, AngularFirestoreModule, AngularFireDatabaseModule, ReactiveFormsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
               { provide: FIREBASE_OPTIONS, useValue: environment.firebase},
               provideHttpClient(withInterceptorsFromDi())],

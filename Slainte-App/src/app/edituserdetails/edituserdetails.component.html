@@ -1,104 +1,92 @@
-<!-- Modal to edit user preferences -->
 <ion-header>
   <ion-toolbar>
-    <ion-title>Edit Details</ion-title>
+    <ion-title>Update Profile</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="dismissModal()">Cancel</ion-button>
+      <ion-button (click)="dismissModal()">Close</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
+  <form [formGroup]="editForm" (ngSubmit)="submitForm()">
+    <ion-item>
+      <ion-label position="floating">First Name</ion-label>
+      <ion-input formControlName="firstName"></ion-input>
+    </ion-item>
 
-<p>Hello, {{ userDetails.firstName }} {{ userDetails.lastName }}</p>
+    <ion-item>
+      <ion-label position="floating">Last Name</ion-label>
+      <ion-input formControlName="lastName"></ion-input>
+    </ion-item>
 
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Edit Interests</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input formControlName="email" type="email"></ion-input>
+    </ion-item>
 
-  <ion-list>
     <ion-item>
-      <ion-select aria-label="Drinks" placeholder="Select all drinks that apply" [multiple]="true">
-        <ion-select-option>Pints</ion-select-option>
-        <ion-select-option>Cocktails</ion-select-option>
-        <ion-select-option>Wine</ion-select-option>
-        <ion-select-option>Gin</ion-select-option>
-        <ion-select-option>Whiskey</ion-select-option>
-        <ion-select-option>Non-Alcoholic</ion-select-option>
-        <ion-select-option>Good Guinness</ion-select-option>
-      </ion-select>
+      <ion-label position="floating">Bio</ion-label>
+      <ion-textarea formControlName="userBio"></ion-textarea>
     </ion-item>
-    <ion-item>
-      <ion-select aria-label="Venues" placeholder="Select all venues that apply" [multiple]="true">
-        <ion-select-option>Pub</ion-select-option>
-        <ion-select-option>Nightclub</ion-select-option>
-        <ion-select-option>Bar</ion-select-option>
-        <ion-select-option>Late Bar</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-select aria-label="Music" placeholder="Select all music genres that apply" [multiple]="true">
-        <ion-select-option>Trad</ion-select-option>
-        <ion-select-option>Pop</ion-select-option>
-        <ion-select-option>Techno</ion-select-option>
-        <ion-select-option>House</ion-select-option>
-        <ion-select-option>Indie</ion-select-option>
-        <ion-select-option>Rock</ion-select-option>
-        <ion-select-option>R&B</ion-select-option>
-        <ion-select-option>Hip Hop</ion-select-option>
-        <ion-select-option>Reggaeton</ion-select-option>
-        <ion-select-option>Jazz</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-select aria-label="Atmosphere" placeholder="Select all atmosphere types that apply" [multiple]="true">
-        <ion-select-option>Energetic</ion-select-option>
-        <ion-select-option>Cosy</ion-select-option>
-        <ion-select-option>Alternative</ion-select-option>
-        <ion-select-option>Relaxed</ion-select-option>
-        <ion-select-option>Loud</ion-select-option>
-        <ion-select-option>Traditional</ion-select-option>
-        <ion-select-option>Fancy</ion-select-option>
-        <ion-select-option>Casual</ion-select-option>
-        <ion-select-option>LGBTQ+</ion-select-option>
-        
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-select aria-label="Amenities" placeholder="Select all amenities that apply" [multiple]="true">
-        <ion-select-option>Outdoor Seats</ion-select-option>
-        <ion-select-option>Accessible</ion-select-option>
-        <ion-select-option>Cloak Room</ion-select-option>
-        <ion-select-option>Smoking Area</ion-select-option>
-        <ion-select-option>Beer Garden</ion-select-option>
-        <ion-select-option>Dance Floor</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-select aria-label="Entertainment" placeholder="Select all activities that apply" [multiple]="true">
-        <ion-select-option>Festival</ion-select-option>
-        <ion-select-option>Open Mic</ion-select-option>
-        <ion-select-option>Pub Quiz</ion-select-option>
-        <ion-select-option>Rave</ion-select-option>
-        <ion-select-option>Live Gig</ion-select-option>
-        <ion-select-option>DJ</ion-select-option>
-        <ion-select-option>Karaoke</ion-select-option>
-        <ion-select-option>Comedy</ion-select-option>
-        <ion-select-option>Sports</ion-select-option>
-        <ion-select-option>Specialised Events</ion-select-option>
-        <ion-select-option>Games</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
-  <ion-footer>
-    <ion-toolbar color="success">
-      <!-- <ion-button expand="full" fill="clear" color="light" (click)="updateUser()"> -->
-      <ion-button expand="full" fill="clear" color="light">
-      <ion-icon name="checkmark" slot="start"></ion-icon>
-      Update User Preference
-      </ion-button>
-    </ion-toolbar>
-  </ion-footer>
+
+    <h3>Edit Your Interests</h3>
+    <div class="category">
+      <h5>Atmosphere</h5>
+      <ion-chip
+        *ngFor="let option of atmosphereOptions"
+        [color]="editForm.controls[option.controlName].value ? 'primary' : ''"
+        (click)="toggleChip(option.controlName)">
+        {{ option.label }}
+        <ion-icon *ngIf="editForm.controls[option.controlName].value" name="checkmark"></ion-icon>
+      </ion-chip>
+    </div>
+    
+    <div class="category">
+      <h5>Drinks</h5>
+      <ion-chip
+        *ngFor="let option of drinksOptions"
+        [color]="editForm.controls[option.controlName].value ? 'primary' : ''"
+        (click)="toggleChip(option.controlName)">
+        {{ option.label }}
+        <ion-icon *ngIf="editForm.controls[option.controlName].value" name="checkmark"></ion-icon>
+      </ion-chip>
+    </div>
+
+    <div class="category">
+      <h5>Music</h5>
+      <ion-chip
+        *ngFor="let option of musicOptions"
+        [color]="editForm.controls[option.controlName].value ? 'primary' : ''"
+        (click)="toggleChip(option.controlName)">
+        {{ option.label }}
+        <ion-icon *ngIf="editForm.controls[option.controlName].value" name="checkmark"></ion-icon>
+      </ion-chip>
+    </div>
+
+    <div class="category">
+      <h5>Amenities</h5>
+      <ion-chip
+        *ngFor="let option of amenitiesOptions"
+        [color]="editForm.controls[option.controlName].value ? 'primary' : ''"
+        (click)="toggleChip(option.controlName)">
+        {{ option.label }}
+        <ion-icon *ngIf="editForm.controls[option.controlName].value" name="checkmark"></ion-icon>
+      </ion-chip>
+    </div>
+
+    <div class="category">
+      <h5>Entertainment</h5>
+      <ion-chip
+        *ngFor="let option of entertainmentOptions"
+        [color]="editForm.controls[option.controlName].value ? 'primary' : ''"
+        (click)="toggleChip(option.controlName)">
+        {{ option.label }}
+        <ion-icon *ngIf="editForm.controls[option.controlName].value" name="checkmark"></ion-icon>
+      </ion-chip>
+    </div>
+    
+    <!-- Repeat for other categories (Music, Amenities, Entertainment, etc.) -->
+    
+    <ion-button expand="block" type="submit" [disabled]="!editForm.valid">Save Changes</ion-button>
+  </form>
 </ion-content>
