@@ -29,7 +29,8 @@ export class Tab1Page implements OnInit {
     const mapOptions: google.maps.MapOptions = {
       center: { lat, lng },
       zoom: 15,
-      mapId: 'f7407f18b4a90b70'
+      mapId: 'f7407f18b4a90b70',
+      
     };
 
     const mapEle = document.getElementById('map') as HTMLElement;

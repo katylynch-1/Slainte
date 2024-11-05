@@ -25,59 +25,59 @@
         <ion-card-content>
           <div class="chip-container">
             <!-- Atmosphere -->
-            <ion-chip *ngIf="venue.traditional">Traditional</ion-chip> 
-            <ion-chip *ngIf="venue.casual">Casual</ion-chip> 
-            <ion-chip *ngIf="venue.cosy">Cosy</ion-chip> 
-            <ion-chip *ngIf="venue.energetic">Energetic</ion-chip> 
-            <ion-chip *ngIf="venue.alternative">Alternative</ion-chip> 
-            <ion-chip *ngIf="venue.relaxed">Relaxed</ion-chip> 
-            <ion-chip *ngIf="venue.fancy">Fancy</ion-chip> 
-            <ion-chip *ngIf="venue.lgbtq">LGBTQ+</ion-chip> 
-            <ion-chip *ngIf="venue.loud">Loud</ion-chip> 
+            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="venue.traditional">Traditional</ion-chip> 
+            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="venue.casual">Casual</ion-chip> 
+            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="venue.cosy">Cosy</ion-chip> 
+            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="venue.energetic">Energetic</ion-chip> 
+            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="venue.alternative">Alternative</ion-chip> 
+            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="venue.relaxed">Relaxed</ion-chip> 
+            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="venue.fancy">Fancy</ion-chip> 
+            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="venue.lgbtq">LGBTQ+</ion-chip> 
+            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="venue.loud">Loud</ion-chip> 
 
             <!-- Drinks -->
-            <ion-chip *ngIf="venue.cocktails">Cocktails</ion-chip> 
-            <ion-chip *ngIf="venue.gin">Gin</ion-chip> 
-            <ion-chip *ngIf="venue.goodGuinness">Good Guinness</ion-chip> 
-            <ion-chip *ngIf="venue.pints">Pints</ion-chip> 
-            <ion-chip *ngIf="venue.nonAlcoholic">Non-Alcoholic</ion-chip> 
-            <ion-chip *ngIf="venue.whiskey">Whiskey</ion-chip>
-            <ion-chip *ngIf="venue.wine">Wine</ion-chip> 
+            <ion-chip class="drinks-chips" [outline]="true" *ngIf="venue.cocktails">Cocktails</ion-chip> 
+            <ion-chip class="drinks-chips" [outline]="true" *ngIf="venue.gin">Gin</ion-chip> 
+            <ion-chip class="drinks-chips" [outline]="true" *ngIf="venue.goodGuinness">Good Guinness</ion-chip> 
+            <ion-chip class="drinks-chips" [outline]="true" *ngIf="venue.pints">Pints</ion-chip> 
+            <ion-chip class="drinks-chips" [outline]="true" *ngIf="venue.nonAlcoholic">Non-Alcoholic</ion-chip> 
+            <ion-chip class="drinks-chips" [outline]="true" *ngIf="venue.whiskey">Whiskey</ion-chip>
+            <ion-chip class="drinks-chips" [outline]="true" *ngIf="venue.wine">Wine</ion-chip> 
 
             <!-- Music -->
-            <ion-chip *ngIf="venue.hipHop">Hip-Hop</ion-chip> 
-            <ion-chip *ngIf="venue.house">House</ion-chip> 
-            <ion-chip *ngIf="venue.indie">Indie</ion-chip> 
-            <ion-chip *ngIf="venue.jazz">Jazz</ion-chip> 
-            <ion-chip *ngIf="venue.pop">Pop</ion-chip> 
-            <ion-chip *ngIf="venue.rNb">R&B</ion-chip>
-            <ion-chip *ngIf="venue.reggaeton">Reggaeton</ion-chip> 
-            <ion-chip *ngIf="venue.rock">Rock</ion-chip>
-            <ion-chip *ngIf="venue.techno">Techno</ion-chip> 
-            <ion-chip *ngIf="venue.trad">Trad</ion-chip> 
+            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.hipHop">Hip-Hop</ion-chip> 
+            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.house">House</ion-chip> 
+            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.indie">Indie</ion-chip> 
+            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.jazz">Jazz</ion-chip> 
+            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.pop">Pop</ion-chip> 
+            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.rNb">R&B</ion-chip>
+            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.reggaeton">Reggaeton</ion-chip> 
+            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.rock">Rock</ion-chip>
+            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.techno">Techno</ion-chip> 
+            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.trad">Trad</ion-chip> 
 
             <!-- Amenities -->
-            <ion-chip *ngIf="venue.accessible">Accessible</ion-chip> 
-            <ion-chip *ngIf="venue.beerGarden">Beer Garden</ion-chip> 
-            <ion-chip *ngIf="venue.cloakRoom">Cloak Room</ion-chip> 
-            <ion-chip *ngIf="venue.danceFloor">Dance Floor</ion-chip> 
-            <ion-chip *ngIf="venue.outdoorSeats">Outdoor Seats</ion-chip> 
-            <ion-chip *ngIf="venue.smokingArea">Smoking Area</ion-chip>
-            <ion-chip *ngIf="venue.budgetFriendly">Budget-Friendly</ion-chip>
+            <ion-chip class="amenities-chips" [outline]="true" *ngIf="venue.accessible">Accessible</ion-chip> 
+            <ion-chip class="amenities-chips" [outline]="true" *ngIf="venue.beerGarden">Beer Garden</ion-chip> 
+            <ion-chip class="amenities-chips" [outline]="true" *ngIf="venue.cloakRoom">Cloak Room</ion-chip> 
+            <ion-chip class="amenities-chips" [outline]="true" *ngIf="venue.danceFloor">Dance Floor</ion-chip> 
+            <ion-chip class="amenities-chips" [outline]="true" *ngIf="venue.outdoorSeats">Outdoor Seats</ion-chip> 
+            <ion-chip class="amenities-chips" [outline]="true" *ngIf="venue.smokingArea">Smoking Area</ion-chip>
+            <ion-chip class="amenities-chips" [outline]="true" *ngIf="venue.budgetFriendly">Budget-Friendly</ion-chip>
 
 
             <!-- Entertainment -->
-            <ion-chip *ngIf="venue.comedy">Comedy</ion-chip> 
-            <ion-chip *ngIf="venue.dJ">DJ</ion-chip> 
-            <ion-chip *ngIf="venue.festival">Festival</ion-chip> 
-            <ion-chip *ngIf="venue.games">Games</ion-chip> 
-            <ion-chip *ngIf="venue.karaoke">Karaoke</ion-chip> 
-            <ion-chip *ngIf="venue.liveGigs">Live Gigs</ion-chip>
-            <ion-chip *ngIf="venue.openMic">Open Mic</ion-chip> 
-            <ion-chip *ngIf="venue.pubQuiz">Pub Quiz</ion-chip>
-            <ion-chip *ngIf="venue.raves">Raves</ion-chip> 
-            <ion-chip *ngIf="venue.specialisedEvents">Specialised Events</ion-chip>
-            <ion-chip *ngIf="venue.sports">Sports</ion-chip> 
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.comedy">Comedy</ion-chip> 
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.dJ">DJ</ion-chip> 
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.festival">Festival</ion-chip> 
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.games">Games</ion-chip> 
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.karaoke">Karaoke</ion-chip> 
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.liveGigs">Live Gigs</ion-chip>
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.openMic">Open Mic</ion-chip> 
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.pubQuiz">Pub Quiz</ion-chip>
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.raves">Raves</ion-chip> 
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.specialisedEvents">Specialised Events</ion-chip>
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.sports">Sports</ion-chip> 
           </div>
           <br>
 

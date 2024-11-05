@@ -3,7 +3,6 @@
   align-items: center; /* Center vertically */
   padding: 16px; /* Add padding */
   border-bottom: 1px solid #ccc; /* Optional: Add a border at the bottom */
-  background-color: black;
 }
 
 .profilePic {
@@ -15,9 +14,6 @@
 .user-details {
   flex: 1; /* Allow user details to take available space */
   text-align: center;
-  background-color: black;
-  color: white;
-
 }
 
 .interests-container {
@@ -25,32 +21,6 @@
   flex-wrap: wrap; /* Allow chips to wrap to the next line */
   margin-top: 8px; /* Space above interests */
   align-items: center;
-  color: white;
-}
-
-.drinks-chips {
-  color: white;        
-  border-color: #D96ACE; 
-}
-
-.entertainment-chips {
-  color: white;        
-  border-color: #7F48AC; 
-}
-
-.amenities-chips {
-  color: white;        
-  border-color: #84BC7B; 
-}
-
-.music-chips {
-  color: white;        
-  border-color: #5CA5ED; 
-}
-
-.atmosphere-chips {
-  color: white;        
-  border-color: #F0F371; 
 }
 
 .edit-icon {
@@ -64,12 +34,10 @@
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjust the size to your liking */
   gap: 5px; /* Space between grid items */
   padding: 5px;
-  background-color: black;
 }
 
 .venue-item {
   text-align: center; /* Center the text and image */
-  background-color: black;
 }
 
 .venue-image {
@@ -82,7 +50,6 @@
 .venue-name {
   margin-top: 8px;
   font-size: 14px;
-  color: white;
   font-weight: 700;
   white-space: nowrap;
   overflow: hidden;
@@ -92,32 +59,17 @@
 
 /* Style for the header and footer toolbar */
 ion-toolbar {
-  --background: black;
-  --color: white;   /* For text color */
   position: relative; /* Make the toolbar's position relative to position the icon */
-
-}
-
-.segment {
-  background-color: black; /* Set the background color to black */
 }
 
 /* Target the segment buttons */
 .segment-button {
-  background-color: black; /* Ensure button background is black */
-  --background: black; /* Ensure background is black */
   --border-color: transparent; /* Remove any border color */
 }
 
 /* Ensure active buttons also have the correct styles */
 .segment-button[aria-pressed="true"] {
-  background-color: black; /* Keep the active segment button black */
   color: white; /* Active button text color */
-}
-
-/* Change icon color for active segment button */
-.segment-button[aria-pressed="true"] ion-icon {
-  color: black; /* Change active icon color to black */
 }
 
 /* Change icon color for inactive segment button */
@@ -125,23 +77,9 @@ ion-toolbar {
   color: white; /* Change inactive icon color to white */
 }
 
-ion-content {
-  --background: black;
-}
-
 /* Set the background color for the main content container */
 .content-container {
-  background-color: black;
   color: white; /* Ensure text color is white for readability */
-}
-
-/* Set a default background color for all containers inside the content */
-.profile-container,
-.venue-grid,
-.venue-item,
-.no-saved,
-.segment-button {
-  background-color: black;
 }
 
 .logout-icon {
@@ -152,4 +90,3 @@ ion-content {
   font-size: 24px; /* Adjust the size of the icon if needed */
   color: #fff; /* Set the color of the icon */
 }
-
