@@ -94,28 +94,9 @@
 ion-toolbar {
   --background: black;
   --color: white;   /* For text color */
+  position: relative; /* Make the toolbar's position relative to position the icon */
+
 }
-
-// /* Style for the segment buttons */
-// /* Apply these styles in your global.scss or component-specific styles */
-// // .segment {
-// //   background-color: black; /* Set the background color to black */
-// // }
-
-// // /* Target the segment buttons */
-// // .segment-button {
-// //   --border-color: transparent; /* Remove any border color */
-// // }
-
-// // /* Change icon color for active segment button */
-// // .segment-button[aria-pressed="true"] ion-icon {
-// //   --color: black; /* Change active icon color to black */
-// // }
-
-// // /* Change icon color for inactive segment buttons */
-// // .segment-button ion-icon {
-// //   --color: white; /* Set inactive icon color to white */
-// // }
 
 .segment {
   background-color: black; /* Set the background color to black */
@@ -144,5 +125,31 @@ ion-toolbar {
   color: white; /* Change inactive icon color to white */
 }
 
+ion-content {
+  --background: black;
+}
 
+/* Set the background color for the main content container */
+.content-container {
+  background-color: black;
+  color: white; /* Ensure text color is white for readability */
+}
+
+/* Set a default background color for all containers inside the content */
+.profile-container,
+.venue-grid,
+.venue-item,
+.no-saved,
+.segment-button {
+  background-color: black;
+}
+
+.logout-icon {
+  position: absolute;
+  right: 16px; /* Adjust the distance from the right edge */
+  top: 50%;
+  transform: translateY(-50%); /* Vertically center the icon in the toolbar */
+  font-size: 24px; /* Adjust the size of the icon if needed */
+  color: #fff; /* Set the color of the icon */
+}
 
