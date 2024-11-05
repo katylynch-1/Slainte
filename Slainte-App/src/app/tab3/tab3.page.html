@@ -6,6 +6,9 @@
   
 </ion-header>
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refreshAllContent($event)">
+    <ion-refresher-content pullingIcon="arrow-down" refreshingSpinner="bubbles"></ion-refresher-content>
+  </ion-refresher>
   <div class="content-container">
     <div class="profile-container">
       <ion-avatar class="profilePic" (click)="presentActionSheet()" tappable>
@@ -171,10 +174,6 @@
 
     <ng-container *ngIf="selectedSegment === 'saved'">
       <ng-container *ngIf="savedVenues.length > 0; else noSavedVenues">
-        <ion-refresher slot="fixed" (ionRefresh)="refreshSavedVenues($event)">
-          <ion-refresher-content pullingIcon="arrow-down" refreshingSpinner="bubbles"></ion-refresher-content>
-        </ion-refresher>
-    
         <!-- Create a grid for the venues -->
         <div class="venue-grid">
           <div class="venue-item" *ngFor="let venue of savedVenues" (click)="openVenueDetailsPage(venue)">

@@ -57,8 +57,6 @@ export class Tab1Page implements OnInit {
     this.selectedSegment = event.detail.value; // Update segment based on selection
   }
 
-
-
   async openSafetyModal() {
     const modal = await this.modalController.create({
       component: SafetyModalComponent
