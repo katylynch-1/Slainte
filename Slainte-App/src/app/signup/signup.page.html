@@ -1,159 +1,152 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Welcome To Sláinte</ion-title>
+    <ion-title>Sign up to Sláinte</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-<div class="header">
-  <p class="subTitle">Sign up to create an account</p>
-</div>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <!-- <div class="header">
+    <p class="subTitle">Sign up to create an account</p>
+  </div> -->
 
-<div class="signinLink">
-  <p>Already a member? <a [routerLink]="['/login']">Sign In Now</a></p>
-</div>
-<form [formGroup]="regForm">
-  <div class="ion-padding">
-    <ion-item>
-      <ion-input formControlName="firstName" placeholder="First Name" class="input"></ion-input>
-        <ion-icon name="person-outline"></ion-icon>
-    </ion-item>
-    <div *ngIf="this.regForm.controls?.['firstName'].touched && this.regForm.controls?.['firstName'].invalid">
-      <ion-text>
-        First name is required
-      </ion-text>
-    </div>
+  <ion-segment [(ngModel)]="selectedStep" color="primary">
+    <ion-segment-button value="step1">
+      Step 1: <br>
+      Account Details
+    </ion-segment-button>
+    <ion-segment-button value="step2">
+      Step 2: <br>
+      Select Your Interests
+    </ion-segment-button>
+  </ion-segment>
 
-    <ion-item>
-      <ion-input formControlName="lastName" placeholder="Last Name" class="input"></ion-input>
-        <ion-icon name="person-outline"></ion-icon>
-    </ion-item>
-    <div *ngIf="this.regForm.controls?.['lastName'].touched && this.regForm.controls?.['lastName'].invalid">
-      <ion-text>
-        Last name is required
-      </ion-text>
-    </div>
+  <form [formGroup]="regForm">
+    <div>
+      <!-- Step 1: Personal Details -->
+      <div *ngIf="selectedStep === 'step1'">
+        <ion-item>
+          <ion-input formControlName="firstName" placeholder="First Name" class="input"></ion-input>
+          <ion-icon name="person-outline"></ion-icon>
+        </ion-item>
+        <div *ngIf="this.regForm.controls?.['firstName'].touched && this.regForm.controls?.['firstName'].invalid">
+          <ion-text color="danger">First name is required</ion-text>
+        </div>
 
-    <ion-item>
-      <ion-input formControlName="email" placeholder="Email" class="input"></ion-input>
-        <ion-icon name="mail-outline"></ion-icon>
-    </ion-item>
-    <div *ngIf="this.regForm.controls?.['email'].touched && this.regForm.controls?.['email'].invalid">
+        <ion-item>
+          <ion-input formControlName="lastName" placeholder="Last Name" class="input"></ion-input>
+          <ion-icon name="person-outline"></ion-icon>
+        </ion-item>
+        <div *ngIf="this.regForm.controls?.['lastName'].touched && this.regForm.controls?.['lastName'].invalid">
+          <ion-text color="danger">Last name is required</ion-text>
+        </div>
+        <ion-item>
+          <ion-input formControlName="email" placeholder="Email" class="input"></ion-input>
+          <ion-icon name="mail-outline"></ion-icon>
+        </ion-item>
+        <div *ngIf="this.regForm.controls?.['email'].touched && this.regForm.controls?.['email'].invalid">
+          <ion-text color="danger">Email is required</ion-text>
+        </div>
 
-        <ion-text>
-        Email is required
-      </ion-text>
+        <ion-item>
+          <ion-input formControlName="password" placeholder="Password" class="input" type="password"></ion-input>
+          <ion-icon name="lock-closed-outline"></ion-icon>
+        </ion-item>
+        <div *ngIf="this.regForm.controls?.['password'].touched && this.regForm.controls?.['password'].invalid">
+          <ion-text color="danger">Password is required</ion-text>
+          <ion-text color="danger">Password must have at least 8 characters, one capital letter, one special symbol, and at least one number</ion-text>
+        </div>
 
-        <ion-text>
-        Email should be valid
-      </ion-text>
-    </div>
+        <ion-item>
+          <ion-input formControlName="userBio" placeholder="Add a bio..." class="input"></ion-input>
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-item>
 
-    <ion-item>
-      <ion-input formControlName="password" placeholder="Password" class="input"></ion-input>
-        <ion-icon name="lock-closed-outline"></ion-icon>
-    </ion-item>
-    <div *ngIf="this.regForm.controls?.['password'].touched && this.regForm.controls?.['password'].invalid">
-
-      <ion-text>
-        Password is required
-      </ion-text>
-
-      <ion-text>
-        Password must have at least 8 characters with 
-        One capital letter, 
-        One special symbol 
-        and at least one number
-      </ion-text>
-    </div>
-
-    <ion-item>
-      <ion-input formControlName="userBio" placeholder="Add a bio..." class="input"></ion-input>
-        <ion-icon name="create-outline"></ion-icon>
-    </ion-item>
-
-    <ion-item>
-      <!-- Code to add image capture -->
-      <div>
-        <p *ngIf="!capturedImage && !updateImage">
-          <ion-icon name="camera"></ion-icon>
-        </p>
-        <ion-avatar *ngIf="capturedImage && !updateImage">
-          <img [src]="capturedImage">
-        </ion-avatar>
+        <ion-item>
+          <ion-label position="stacked">Upload a Profile Picture</ion-label>
+          <div (click)="addImage()" tappable>
+            <p *ngIf="!capturedImage && !updateImage">
+              <ion-icon name="camera"></ion-icon>
+            </p>
+            <ion-avatar *ngIf="capturedImage && !updateImage">
+              <img [src]="capturedImage">
+            </ion-avatar>
+          </div>
+        </ion-item>
       </div>
-    </ion-item>
-
-    <!-- Interest Selection -->
-    <h3>Select Your Interests</h3>
-
-    <div class="atmosphere-category">
-      <h5>Atmosphere</h5>
-      <ion-chip
-        *ngFor="let option of atmosphereOptions"
-        [color]="regForm.controls[option.controlName].value ? 'atmosphere-check' : ''"
-        (click)="toggleChip(option.controlName)"
-        class="atmosphere-chips" [outline]="true">
-        {{ option.label }}
-        <ion-icon *ngIf="regForm.controls[option.controlName].value" name="checkmark" class="atmosphere-check"></ion-icon>
-      </ion-chip>
     </div>
 
-    <div class="drinks-category">
-      <h5>Drinks</h5>
-      <ion-chip
-        *ngFor="let option of drinksOptions"
-        [color]="regForm.controls[option.controlName].value ? 'drinks-check' : ''"
-        (click)="toggleChip(option.controlName)"
-        class="drinks-chips" [outline]="true">
-        {{ option.label }}
-        <ion-icon *ngIf="regForm.controls[option.controlName].value" name="checkmark" class="drinks-check"></ion-icon>
-      </ion-chip>
-    </div>
+      <!-- Step 2: Account Details -->
+      <div *ngIf="selectedStep === 'step2'">
+        <div class="atmosphere-category">
+          <h5>Atmosphere</h5>
+          <ion-chip
+            *ngFor="let option of atmosphereOptions"
+            [color]="regForm.controls[option.controlName].value ? 'atmosphere-check' : ''"
+            (click)="toggleChip(option.controlName)"
+            class="atmosphere-chips" [outline]="true">
+            {{ option.label }}
+            <ion-icon *ngIf="regForm.controls[option.controlName].value" name="checkmark" class="atmosphere-check"></ion-icon>
+          </ion-chip>
+        </div>
 
-    <div class="music-category">
-      <h5>Music</h5>
-      <ion-chip
-        *ngFor="let option of musicOptions"
-        [color]="regForm.controls[option.controlName].value ? 'music-check' : ''"
-        (click)="toggleChip(option.controlName)"
-        class="music-chips" [outline]="true">
-        {{ option.label }}
-        <ion-icon *ngIf="regForm.controls[option.controlName].value" name="checkmark" class="music-check"></ion-icon>
-      </ion-chip>
-    </div>
+        <div class="drinks-category">
+          <h5>Drinks</h5>
+          <ion-chip
+            *ngFor="let option of drinksOptions"
+            [color]="regForm.controls[option.controlName].value ? 'drinks-check' : ''"
+            (click)="toggleChip(option.controlName)"
+            class="drinks-chips" [outline]="true">
+            {{ option.label }}
+            <ion-icon *ngIf="regForm.controls[option.controlName].value" name="checkmark" class="drinks-check"></ion-icon>
+          </ion-chip>
+        </div>
 
-    <div class="amenities-category">
-      <h5>Amenities</h5>
-      <ion-chip
-        *ngFor="let option of amenitiesOptions"
-        [color]="regForm.controls[option.controlName].value ? 'amenities-check' : ''"
-        (click)="toggleChip(option.controlName)"
-        class="amenities-chips" [outline]="true">
-        {{ option.label }}
-        <ion-icon *ngIf="regForm.controls[option.controlName].value" name="checkmark" class="amenities-check"></ion-icon>
-      </ion-chip>
-    </div>
+        <div class="music-category">
+          <h5>Music</h5>
+          <ion-chip
+            *ngFor="let option of musicOptions"
+            [color]="regForm.controls[option.controlName].value ? 'music-check' : ''"
+            (click)="toggleChip(option.controlName)"
+            class="music-chips" [outline]="true">
+            {{ option.label }}
+            <ion-icon *ngIf="regForm.controls[option.controlName].value" name="checkmark" class="music-check"></ion-icon>
+          </ion-chip>
+        </div>
+    
+        <div class="amenities-category">
+          <h5>Amenities</h5>
+          <ion-chip
+            *ngFor="let option of amenitiesOptions"
+            [color]="regForm.controls[option.controlName].value ? 'amenities-check' : ''"
+            (click)="toggleChip(option.controlName)"
+            class="amenities-chips" [outline]="true">
+            {{ option.label }}
+            <ion-icon *ngIf="regForm.controls[option.controlName].value" name="checkmark" class="amenities-check"></ion-icon>
+          </ion-chip>
+        </div>
+    
+        <div class="entertainment-category">
+          <h5>Entertainment</h5>
+          <ion-chip
+            *ngFor="let option of entertainmentOptions"
+            [color]="regForm.controls[option.controlName].value ? 'entertainment-check' : ''"
+            (click)="toggleChip(option.controlName)"
+            class="entertainment-chips" [outline]="true">
+            {{ option.label }}
+            <ion-icon *ngIf="regForm.controls[option.controlName].value" name="checkmark" class="entertainment-check"></ion-icon>
+          </ion-chip>
+        </div>
+        <br>
+        <ion-button (click)="signUp()">Sign Up</ion-button>
+      </div>
+      <!-- Navigation Buttons -->
+      <div>
+        <ion-button *ngIf="selectedStep !== 'step1'" fill="outline" (click)="goToStep('step1')">Back</ion-button>
+        <ion-button *ngIf="selectedStep !== 'step2'" (click)="goToStep('step2')">Next</ion-button>
+      </div>
+  </form>
 
-    <div class="entertainment-category">
-      <h5>Entertainment</h5>
-      <ion-chip
-        *ngFor="let option of entertainmentOptions"
-        [color]="regForm.controls[option.controlName].value ? 'entertainment-check' : ''"
-        (click)="toggleChip(option.controlName)"
-        class="entertainment-chips" [outline]="true">
-        {{ option.label }}
-        <ion-icon *ngIf="regForm.controls[option.controlName].value" name="checkmark" class="entertainment-check"></ion-icon>
-      </ion-chip>
-    </div>
+  <div class="signinLink">
+    <p>Already a member? <a [routerLink]="['/login']">Sign In Now</a></p>
   </div>
-
-  <!-- Next Button -->
-  <ion-fab vertical="bottom" horizontal="end">
-    <ion-fab-button class="next-button" (click)="signUp()">
-      <ion-icon name="chevron-forward"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-</form>
 </ion-content>
-

@@ -15,6 +15,8 @@ export class SignupPage implements OnInit {
   regForm: FormGroup;
   capturedImage = "";
   updateImage = false;
+  selectedStep: string = 'step1';
+
 
   atmosphereOptions = [
     { label: 'Alternative', controlName: 'alternative' },
@@ -99,6 +101,10 @@ export class SignupPage implements OnInit {
       outdoorSeats: [false], accessible: [false], cloakRoom: [false], smokingArea: [false], beerGarden: [false], danceFloor: [false], 
       festival: [false], openMic: [false], pubQuiz: [false], rave: [false], liveGig: [false], dj: [false], karaoke: [false], comedy: [false], sports: [false], specialisedEvents: [false], games: [false] 
     })
+  }
+
+  goToStep(step: string) {
+    this.selectedStep = step;
   }
 
   toggleChip(controlName: string) {
