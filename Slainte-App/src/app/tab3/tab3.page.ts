@@ -116,7 +116,7 @@ export class Tab3Page implements OnInit {
   }
 
   // Present the action sheet for profile picture options
-  async presentActionSheet() {
+  async presentPictureActionSheet() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Profile Picture',
       buttons: [
@@ -131,6 +131,26 @@ export class Tab3Page implements OnInit {
           role: 'destructive',
           handler: () => {
             this.deleteImage();
+          },
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+      ],
+    });
+    await actionSheet.present();
+  }
+
+  async presentLogoutActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Are you sure?',
+      buttons: [
+        {
+          text: 'Logout',
+          role: 'destructive',
+          handler: () => {
+            this.signOut();
           },
         },
         {

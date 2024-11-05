@@ -25,7 +25,7 @@ import { NewChatComponent } from './new-chat/new-chat.component';
 
 @NgModule({
   declarations: [AppComponent, FilterModalComponent, EdituserdetailsComponent, SafetyModalComponent, ChatComponent, NewChatComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, AngularFireModule.initializeApp(environment.firebase), AngularFireAuthModule, AngularFirestoreModule, AngularFireDatabaseModule, ReactiveFormsModule],
+  imports: [BrowserModule, IonicModule.forRoot({mode: 'ios'}), AppRoutingModule, FormsModule, AngularFireModule.initializeApp(environment.firebase), AngularFireAuthModule, AngularFirestoreModule, AngularFireDatabaseModule, ReactiveFormsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
               { provide: FIREBASE_OPTIONS, useValue: environment.firebase},
               provideHttpClient(withInterceptorsFromDi())],

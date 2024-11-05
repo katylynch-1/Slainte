@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Profile</ion-title>
-    <ion-icon name="log-out-outline" class="logout-icon" (click)="signOut()"></ion-icon>
+    <ion-icon name="log-out-outline" class="logout-icon" (click)="presentLogoutActionSheet()"></ion-icon>
   </ion-toolbar>
   
 </ion-header>
@@ -11,7 +11,7 @@
   </ion-refresher>
   <div class="content-container">
     <div class="profile-container">
-      <ion-avatar class="profilePic" (click)="presentActionSheet()" tappable>
+      <ion-avatar class="profilePic" (click)="presentPictureActionSheet()" tappable>
         <img [src]="userDetails?.imageURL ? userDetails.imageURL : 'https://ionicframework.com/docs/img/demos/avatar.svg'" alt="User Profile Picture">
       </ion-avatar>
   
@@ -159,14 +159,14 @@
       </div>
     </div>
 
-    <ion-segment mode="md" class="segment" [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)">
-      <ion-segment-button class="segment-button" value="favourites">
+    <ion-segment class="segment" [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="favourites">
           <ion-icon [name]="selectedSegment === 'favourites' ? 'heart' : 'heart-outline'"></ion-icon>
       </ion-segment-button>
-      <ion-segment-button class="segment-button" value="saved">
+      <ion-segment-button value="saved">
           <ion-icon [name]="selectedSegment === 'saved' ? 'bookmark' : 'bookmark-outline'"></ion-icon>
       </ion-segment-button>
-      <ion-segment-button class="segment-button" value="friends">
+      <ion-segment-button value="friends">
           <ion-icon [name]="selectedSegment === 'friends' ? 'people' : 'people-outline'"></ion-icon>
       </ion-segment-button>
   </ion-segment>

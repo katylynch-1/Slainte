@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { AuthenticationService } from '../services/authentication.service';
-import { User } from '@firebase/auth-types';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { firstValueFrom } from 'rxjs';
@@ -21,9 +20,6 @@ interface UserPreferences {
   styleUrls: ['./edituserdetails.component.scss'],
 })
 export class EdituserdetailsComponent  implements OnInit {
-
-  // user: User;
-  // userDetails: any = null;
 
   editForm: FormGroup;
   userId: string;

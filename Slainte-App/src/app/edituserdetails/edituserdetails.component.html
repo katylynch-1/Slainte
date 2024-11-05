@@ -28,14 +28,14 @@
       <ion-label position="floating">Bio</ion-label>
       <ion-textarea formControlName="userBio"></ion-textarea>
     </ion-item>
-
-    <h3>Edit Your Interests</h3>
     <div class="category">
+      <h4>Interest Selection</h4>
       <h5>Atmosphere</h5>
       <ion-chip
         *ngFor="let option of atmosphereOptions"
-        [color]="editForm.controls[option.controlName].value ? 'primary' : ''"
-        (click)="toggleChip(option.controlName)">
+        [color]="editForm.controls[option.controlName].value ? 'atmosphere-check' : ''"
+        (click)="toggleChip(option.controlName)"
+        class="atmosphere-chips" [outline]="true">
         {{ option.label }}
         <ion-icon *ngIf="editForm.controls[option.controlName].value" name="checkmark"></ion-icon>
       </ion-chip>
@@ -45,10 +45,11 @@
       <h5>Drinks</h5>
       <ion-chip
         *ngFor="let option of drinksOptions"
-        [color]="editForm.controls[option.controlName].value ? 'primary' : ''"
-        (click)="toggleChip(option.controlName)">
+        [color]="editForm.controls[option.controlName].value ? 'drinks-check' : ''"
+        (click)="toggleChip(option.controlName)"
+        class="drinks-chips" [outline]="true">
         {{ option.label }}
-        <ion-icon *ngIf="editForm.controls[option.controlName].value" name="checkmark"></ion-icon>
+        <ion-icon *ngIf="editForm.controls[option.controlName].value" name="checkmark" class="drinks-check"></ion-icon>
       </ion-chip>
     </div>
 
@@ -56,10 +57,11 @@
       <h5>Music</h5>
       <ion-chip
         *ngFor="let option of musicOptions"
-        [color]="editForm.controls[option.controlName].value ? 'primary' : ''"
-        (click)="toggleChip(option.controlName)">
+        [color]="editForm.controls[option.controlName].value ? 'music-check' : ''"
+        (click)="toggleChip(option.controlName)"
+        class="music-chips" [outline]="true">
         {{ option.label }}
-        <ion-icon *ngIf="editForm.controls[option.controlName].value" name="checkmark"></ion-icon>
+        <ion-icon *ngIf="editForm.controls[option.controlName].value" name="checkmark" class="music-check"></ion-icon>
       </ion-chip>
     </div>
 
@@ -67,10 +69,11 @@
       <h5>Amenities</h5>
       <ion-chip
         *ngFor="let option of amenitiesOptions"
-        [color]="editForm.controls[option.controlName].value ? 'primary' : ''"
-        (click)="toggleChip(option.controlName)">
+        [color]="editForm.controls[option.controlName].value ? 'amenities-check' : ''"
+        (click)="toggleChip(option.controlName)"
+        class="amenities-chips" [outline]="true">
         {{ option.label }}
-        <ion-icon *ngIf="editForm.controls[option.controlName].value" name="checkmark"></ion-icon>
+        <ion-icon *ngIf="editForm.controls[option.controlName].value" name="checkmark" class="amenities-check"></ion-icon>
       </ion-chip>
     </div>
 
@@ -78,10 +81,11 @@
       <h5>Entertainment</h5>
       <ion-chip
         *ngFor="let option of entertainmentOptions"
-        [color]="editForm.controls[option.controlName].value ? 'primary' : ''"
-        (click)="toggleChip(option.controlName)">
+        [color]="editForm.controls[option.controlName].value ? 'entertainment-check' : ''"
+        (click)="toggleChip(option.controlName)"
+        class="entertainment-chips" [outline]="true">
         {{ option.label }}
-        <ion-icon *ngIf="editForm.controls[option.controlName].value" name="checkmark"></ion-icon>
+        <ion-icon *ngIf="editForm.controls[option.controlName].value" name="checkmark" class="entertainment-check"></ion-icon>
       </ion-chip>
     </div>
     

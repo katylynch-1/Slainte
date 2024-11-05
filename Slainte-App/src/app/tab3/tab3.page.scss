@@ -62,26 +62,6 @@ ion-toolbar {
   position: relative; /* Make the toolbar's position relative to position the icon */
 }
 
-/* Target the segment buttons */
-.segment-button {
-  --border-color: transparent; /* Remove any border color */
-}
-
-/* Ensure active buttons also have the correct styles */
-.segment-button[aria-pressed="true"] {
-  color: white; /* Active button text color */
-}
-
-/* Change icon color for inactive segment button */
-.segment-button ion-icon {
-  color: white; /* Change inactive icon color to white */
-}
-
-/* Set the background color for the main content container */
-.content-container {
-  color: white; /* Ensure text color is white for readability */
-}
-
 .logout-icon {
   position: absolute;
   right: 16px; /* Adjust the distance from the right edge */
