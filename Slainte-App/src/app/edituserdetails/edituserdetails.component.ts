@@ -4,6 +4,7 @@ import { AuthenticationService } from '../services/authentication.service';
 import { User } from '@firebase/auth-types';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { firstValueFrom } from 'rxjs';
 
 // Define an interface for user preferences
 interface UserPreferences {
@@ -139,6 +140,7 @@ toggleChip(controlName: string) {
 // Submit the form and update Firebase
 async submitForm() {
   if (this.editForm.valid) {
+    // Get the current form values
     const updatedData = { ...this.editForm.value };
 
     // Construct new preferences based on current form values
@@ -151,18 +153,32 @@ async submitForm() {
       ...this.entertainmentOptions,
     ];
 
+    // Collect preferences from the form
     allOptions.forEach((option) => {
       newPreferences[option.controlName] = this.editForm.controls[option.controlName].value;
     });
 
-    // Overwrite the preferences in updatedData
-    updatedData.preferences = newPreferences;
-
     try {
-      // Update user data in the 'userDetails' collection
-      await this.afs.collection('userDetails').doc(this.userId).update(updatedData);
-      this.dismissModal(); // Close the modal after successful update
-      this.showToast('User details updated successfully!'); // Show success message
+      // Fetch the existing user data
+      const userDoc = await firstValueFrom(this.afs.collection('userDetails').doc(this.userId).get());
+      if (userDoc.exists) {
+        const existingData = userDoc.data() as UserPreferences;
+
+        // Update the user document with the existing data and new preferences
+        const updatedPreferences = { ...existingData.preferences, ...newPreferences }; // Merge existing and new preferences
+
+        // Update Firestore only with the relevant fields
+        await this.afs.collection('userDetails').doc(this.userId).update({
+          firstName: updatedData.firstName,
+          lastName: updatedData.lastName,
+          email: updatedData.email,
+          userBio: updatedData.userBio,
+          preferences: updatedPreferences // Update preferences directly
+        });
+
+        this.dismissModal(); // Close the modal after successful update
+        this.showToast('User details updated successfully!'); // Show success message
+      }
     } catch (error) {
       console.error('Error updating user details: ', error);
       this.showToast('Failed to update user details. Please try again.'); // Show error message
