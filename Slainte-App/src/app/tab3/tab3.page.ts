@@ -10,6 +10,7 @@ import { ActionSheetController } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { SavevenuesService, SavedVenue } from '../services/savevenues.service';
 import { ToastController } from '@ionic/angular';
+import { FriendrequestsService } from '../services/friendrequests.service'; // Import FriendrequestsService
 
 @Component({
   selector: 'app-tab3',
@@ -21,8 +22,7 @@ export class Tab3Page implements OnInit {
   user: User | null = null; // Initialize as null to handle cases where the user is not authenticated
   userDetails: any = null;
   savedVenues: SavedVenue[] = [];
-  users$: Observable<any[]>; // Observable to hold user list
-  currentUserId: string; // Store current user's uid
+  friendsList: any[] = []; // New array to store friends list
   selectedSegment: string = 'saved'; // Default selected segment
 
   constructor(
@@ -33,6 +33,7 @@ export class Tab3Page implements OnInit {
     private actionSheetController: ActionSheetController,
     private saveVenues: SavevenuesService,
     private toastController: ToastController,
+    private friendRequestsService: FriendrequestsService // Inject FriendrequestsService
   ) {}
 
   ngOnInit() {
@@ -54,6 +55,12 @@ export class Tab3Page implements OnInit {
         const savedVenues = await this.saveVenues.getSavedVenues(uid); // Get saved venues
         this.savedVenues = await this.saveVenues.getVenuesWithImages(savedVenues); // Pass fetched venues to get images
 
+        // Fetch the accepted friend requests (friends list)
+        this.friendRequestsService.getFriends(uid).subscribe(friends => {
+          this.friendsList = friends;  // Store the fetched friends in friendsList
+          console.log('Friends List:', this.friendsList); // Log the friends list for debugging
+        });
+
         // Log the saved venues for debugging
         console.log('Saved Venues:', this.savedVenues);
       } else {
@@ -66,7 +73,7 @@ export class Tab3Page implements OnInit {
 
   // Add the refresh method
   async refreshAllContent(event: any) {
-    await this.loadUserDetails(); // Reload user details and saved venues
+    await this.loadUserDetails(); // Reload user details, saved venues, and friends list
     event.target.complete(); // Dismiss the refresher
   }
 

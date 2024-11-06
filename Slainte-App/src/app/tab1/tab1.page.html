@@ -2,10 +2,11 @@
   <ion-toolbar>
     <ion-title>Home</ion-title>
   </ion-toolbar>
+  <ion-icon class="notification-icon" name="notifications-outline" (click)="openNotifications()"></ion-icon>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div id="map" style="height: 40%; width: 100%;"></div>
+  <!-- <div id="map" style="height: 40%; width: 100%;"></div> -->
   <br>
   <!-- <ion-refresher slot="fixed" (ionRefresh)="refreshAllContent($event)">
     <ion-refresher-content pullingIcon="arrow-down" refreshingSpinner="bubbles"></ion-refresher-content>
@@ -26,6 +27,9 @@
   <ng-container *ngIf="selectedSegment === 'venuesNearby'">
     <app-venues></app-venues>
   </ng-container>
+
+  <h3>Connect with other Sláinte users</h3>
+  <app-connect></app-connect>
 
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
     <ion-fab-button color="warning" (click)="openSafetyModal()">

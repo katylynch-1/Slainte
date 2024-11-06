@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GeolocationService } from '../services/geolocation.service';
 import { ModalController } from '@ionic/angular';
 import { SafetyModalComponent } from '../safety-modal/safety-modal.component';
+import { NotificationsComponent } from '../notifications/notifications.component';
 
 declare var google: any;
 
@@ -62,6 +63,14 @@ export class Tab1Page implements OnInit {
     const modal = await this.modalController.create({
       component: SafetyModalComponent
     });
+    return await modal.present();
+  }
+
+  async openNotifications() {
+    const modal = await this.modalController.create({
+      component: NotificationsComponent,
+    });
+
     return await modal.present();
   }
 }

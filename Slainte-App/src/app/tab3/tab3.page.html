@@ -194,7 +194,18 @@
       </ion-item>
     </ion-list>
   </ng-template>
-  </div>
+
+  <ion-content>
+    <ng-container *ngIf="selectedSegment === 'friends'">
+      <ion-list>
+        <ion-item *ngFor="let friend of friendsList">
+          <ion-avatar slot="start">
+            <img [src]="friend.imageURL || 'https://ionicframework.com/docs/img/demos/avatar.svg'" />
+          </ion-avatar>
+          <ion-label>{{ friend.firstName }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ng-container>
 </ion-content>
 
 <!-- <ion-footer>

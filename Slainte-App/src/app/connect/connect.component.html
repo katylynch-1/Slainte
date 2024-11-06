@@ -1,0 +1,6 @@
+<div *ngFor="let user of users">
+  <p>
+    {{ user.firstName }} {{ user.lastName }}
+  </p>
+  <ion-button (click)="sendRequest(user.id)">Send Friend Request</ion-button>
+</div>

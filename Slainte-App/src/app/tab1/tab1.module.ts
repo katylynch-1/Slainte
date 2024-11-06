@@ -7,6 +7,8 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { VenuesComponent } from '../venues/venues.component';
 import { VenuesForUserComponent } from '../venues-for-user/venues-for-user.component'; // Import the component
 import { Tab1PageRoutingModule } from './tab1-routing.module';
+import { ConnectComponent } from '../connect/connect.component';
+import { NotificationsComponent } from '../notifications/notifications.component';
 
 @NgModule({
   imports: [
@@ -17,6 +19,6 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
     Tab1PageRoutingModule,
     
   ],
-  declarations: [Tab1Page, VenuesComponent, VenuesForUserComponent]
+  declarations: [Tab1Page, VenuesComponent, VenuesForUserComponent, ConnectComponent, NotificationsComponent]
 })
 export class Tab1PageModule {}
