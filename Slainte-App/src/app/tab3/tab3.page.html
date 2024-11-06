@@ -195,30 +195,27 @@
     </ion-list>
   </ng-template>
 
-  <ion-content>
-    <ng-container *ngIf="selectedSegment === 'friends'">
+  
+  <ng-container *ngIf="selectedSegment === 'friends'">
+    <ion-list *ngIf="friendsList && friendsList.length > 0; else noFriends">
+      <ion-item *ngFor="let friend of friendsList">
+        <ion-avatar slot="start">
+          <img [src]="friend.imageURL || 'https://ionicframework.com/docs/img/demos/avatar.svg'" />
+        </ion-avatar>
+        <ion-label>{{ friend.firstName }} {{ friend.lastName }}</ion-label>
+      </ion-item>
+    </ion-list>
+  
+    <ng-template #noFriends>
       <ion-list>
-        <ion-item *ngFor="let friend of friendsList">
-          <ion-avatar slot="start">
-            <img [src]="friend.imageURL || 'https://ionicframework.com/docs/img/demos/avatar.svg'" />
-          </ion-avatar>
-          <ion-label>{{ friend.firstName }}</ion-label>
+        <ion-item>
+          <ion-label>
+            <h2>No Friends</h2>
+            <p>You have no friends yet. Accept some requests to connect!</p>
+          </ion-label>
         </ion-item>
       </ion-list>
-    </ng-container>
-</ion-content>
-
-<!-- <ion-footer>
-  <ion-toolbar>
-    <ion-button expand="block" (click)="signOut()">Log Out</ion-button>
-  </ion-toolbar>
-</ion-footer> -->
-
-<!-- <div class="user-list">
-    <h1 class="ion-padding">Friends</h1>
-    <ion-list *ngIf="users$ | async as users; else loading">
-      <ion-item *ngFor="let user of users" (click)="startChatWith(user.uid)">
-        <ion-icon name="person"></ion-icon><ion-label>{{ user.firstName }} {{ user.lastName }}</ion-label>
-      </ion-item>
-  </ion-list> -->
+    </ng-template>
+  </ng-container>
+  
     

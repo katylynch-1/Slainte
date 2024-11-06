@@ -44,23 +44,23 @@ export class Tab3Page implements OnInit {
     try {
       // Get the currently authenticated user
       this.user = await firstValueFrom(this.authService.getUser());
-
+  
       if (this.user) {
         const uid = this.user.uid;  // Get the user's UID
-        
+  
         // Fetch user details including saved venues
         this.userDetails = await firstValueFrom(this.authService.getUserDetails(uid));
-
+  
         // Fetch saved venues using SavevenuesService
         const savedVenues = await this.saveVenues.getSavedVenues(uid); // Get saved venues
         this.savedVenues = await this.saveVenues.getVenuesWithImages(savedVenues); // Pass fetched venues to get images
-
+  
         // Fetch the accepted friend requests (friends list)
         this.friendRequestsService.getFriends(uid).subscribe(friends => {
+          console.log('Fetched Friends:', friends); // Log the friends data to verify it's correct
           this.friendsList = friends;  // Store the fetched friends in friendsList
-          console.log('Friends List:', this.friendsList); // Log the friends list for debugging
         });
-
+  
         // Log the saved venues for debugging
         console.log('Saved Venues:', this.savedVenues);
       } else {
@@ -70,6 +70,7 @@ export class Tab3Page implements OnInit {
       console.error('Error loading user details:', error);
     }
   }
+  
 
   // Add the refresh method
   async refreshAllContent(event: any) {
