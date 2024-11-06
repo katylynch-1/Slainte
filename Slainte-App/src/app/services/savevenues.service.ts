@@ -83,7 +83,7 @@ export class SavevenuesService {
 private async presentToast(message: string) {
   const toast = await this.toastController.create({
     message,
-    duration: 3000, // Duration in milliseconds
+    duration: 2000, // Duration in milliseconds
     position: 'bottom' // Position of the toast
   });
   await toast.present();

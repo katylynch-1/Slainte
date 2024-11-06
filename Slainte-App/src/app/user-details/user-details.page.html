@@ -1,84 +1,159 @@
-<!-- <ion-header [translucent]="true">
+<!-- Code used on Sign Up Html 
+  
+  <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Profile</ion-title>
+    <ion-title>Welcome To Sláinte</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-fab vertical="top" horizontal="end" slot="fixed">
-    <ion-fab-button [routerLink]="['/edit-user',user.uid]">
-      <ion-icon name="color-palette"></ion-icon>
+<div class="header">
+  <p class="subTitle">Sign up to create an account</p>
+</div>
+
+<div class="signinLink">
+  <p>Already a member? <a [routerLink]="['/login']">Sign In Now</a></p>
+</div>
+<form [formGroup]="regForm">
+  <div class="ion-padding">
+    <ion-item>
+      <ion-input formControlName="firstName" placeholder="First Name" class="input"></ion-input>
+        <ion-icon name="person-outline"></ion-icon>
+    </ion-item>
+    <div *ngIf="this.regForm.controls?.['firstName'].touched && this.regForm.controls?.['firstName'].invalid">
+      <ion-text>
+        First name is required
+      </ion-text>
+    </div>
+
+    <ion-item>
+      <ion-input formControlName="lastName" placeholder="Last Name" class="input"></ion-input>
+        <ion-icon name="person-outline"></ion-icon>
+    </ion-item>
+    <div *ngIf="this.regForm.controls?.['lastName'].touched && this.regForm.controls?.['lastName'].invalid">
+      <ion-text>
+        Last name is required
+      </ion-text>
+    </div>
+
+    <ion-item>
+      <ion-input formControlName="email" placeholder="Email" class="input"></ion-input>
+        <ion-icon name="mail-outline"></ion-icon>
+    </ion-item>
+    <div *ngIf="this.regForm.controls?.['email'].touched && this.regForm.controls?.['email'].invalid">
+
+        <ion-text>
+        Email is required
+      </ion-text>
+
+        <ion-text>
+        Email should be valid
+      </ion-text>
+    </div>
+
+    <ion-item>
+      <ion-input formControlName="password" placeholder="Password" class="input"></ion-input>
+        <ion-icon name="lock-closed-outline"></ion-icon>
+    </ion-item>
+    <div *ngIf="this.regForm.controls?.['password'].touched && this.regForm.controls?.['password'].invalid">
+
+      <ion-text>
+        Password is required
+      </ion-text>
+
+      <ion-text>
+        Password must have at least 8 characters with 
+        One capital letter, 
+        One special symbol 
+        and at least one number
+      </ion-text>
+    </div>
+
+    <ion-item>
+      <ion-input formControlName="userBio" placeholder="Add a bio..." class="input"></ion-input>
+        <ion-icon name="create-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Upload a Profile Picture</ion-label>
+      <div (click)="addImage()" tappable>
+        <p *ngIf="!capturedImage && !updateImage">
+          <ion-icon name="camera"></ion-icon>
+        </p>
+        <ion-avatar *ngIf="capturedImage && !updateImage">
+          <img [src]="capturedImage">
+        </ion-avatar>
+      </div>
+    </ion-item>
+
+    <h3>Select Your Interests</h3>
+
+    <div class="atmosphere-category">
+      <h5>Atmosphere</h5>
+      <ion-chip
+        *ngFor="let option of atmosphereOptions"
+        [color]="regForm.controls[option.controlName].value ? 'atmosphere-check' : ''"
+        (click)="toggleChip(option.controlName)"
+        class="atmosphere-chips" [outline]="true">
+        {{ option.label }}
+        <ion-icon *ngIf="regForm.controls[option.controlName].value" name="checkmark" class="atmosphere-check"></ion-icon>
+      </ion-chip>
+    </div>
+
+    <div class="drinks-category">
+      <h5>Drinks</h5>
+      <ion-chip
+        *ngFor="let option of drinksOptions"
+        [color]="regForm.controls[option.controlName].value ? 'drinks-check' : ''"
+        (click)="toggleChip(option.controlName)"
+        class="drinks-chips" [outline]="true">
+        {{ option.label }}
+        <ion-icon *ngIf="regForm.controls[option.controlName].value" name="checkmark" class="drinks-check"></ion-icon>
+      </ion-chip>
+    </div>
+
+    <div class="music-category">
+      <h5>Music</h5>
+      <ion-chip
+        *ngFor="let option of musicOptions"
+        [color]="regForm.controls[option.controlName].value ? 'music-check' : ''"
+        (click)="toggleChip(option.controlName)"
+        class="music-chips" [outline]="true">
+        {{ option.label }}
+        <ion-icon *ngIf="regForm.controls[option.controlName].value" name="checkmark" class="music-check"></ion-icon>
+      </ion-chip>
+    </div>
+
+    <div class="amenities-category">
+      <h5>Amenities</h5>
+      <ion-chip
+        *ngFor="let option of amenitiesOptions"
+        [color]="regForm.controls[option.controlName].value ? 'amenities-check' : ''"
+        (click)="toggleChip(option.controlName)"
+        class="amenities-chips" [outline]="true">
+        {{ option.label }}
+        <ion-icon *ngIf="regForm.controls[option.controlName].value" name="checkmark" class="amenities-check"></ion-icon>
+      </ion-chip>
+    </div>
+
+    <div class="entertainment-category">
+      <h5>Entertainment</h5>
+      <ion-chip
+        *ngFor="let option of entertainmentOptions"
+        [color]="regForm.controls[option.controlName].value ? 'entertainment-check' : ''"
+        (click)="toggleChip(option.controlName)"
+        class="entertainment-chips" [outline]="true">
+        {{ option.label }}
+        <ion-icon *ngIf="regForm.controls[option.controlName].value" name="checkmark" class="entertainment-check"></ion-icon>
+      </ion-chip>
+    </div>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end">
+    <ion-fab-button class="next-button" (click)="signUp()">
+      <ion-icon name="chevron-forward"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Profile</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-avatar>
-        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-      </ion-avatar>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-card-title> {{ user.firstName }} {{ user.lastName }}</ion-card-title>
-    </ion-card-content>
-    <h3>INTERESTS</h3>
-    <ion-row class="ion-justify-content-center">
-      <ion-chip *ngIf="user.pints">Pints</ion-chip>
-      <ion-chip *ngIf="user.cocktails">Cocktails</ion-chip>
-      <ion-chip *ngIf="user.wine">Wine</ion-chip>
-      <ion-chip *ngIf="user.gin">Gin</ion-chip>
-      <ion-chip *ngIf="user.whiskey">Whiskey</ion-chip>
-      <ion-chip *ngIf="user.nonAlcoholic">Non-Alcoholic</ion-chip>
-      <ion-chip *ngIf="user.goodGuinness">Good Guinness</ion-chip>
-  
-      <ion-chip *ngIf="user.pub">Pub</ion-chip>
-      <ion-chip *ngIf="user.bar">Bar</ion-chip>
-      <ion-chip *ngIf="user.nightclub">Nightclub</ion-chip>
-      <ion-chip *ngIf="user.lateBar">Late Bar</ion-chip>
-  
-      <ion-chip *ngIf="user.trad">Trad</ion-chip>
-      <ion-chip *ngIf="user.pop">Pop</ion-chip>
-      <ion-chip *ngIf="user.techno">Techno</ion-chip>
-      <ion-chip *ngIf="user.house">House</ion-chip>
-      <ion-chip *ngIf="user.indie">Indie</ion-chip>
-      <ion-chip *ngIf="user.rock">Rock</ion-chip>
-      <ion-chip *ngIf="user.rAndB">R&B</ion-chip>
-      <ion-chip *ngIf="user.hipHop">Hip Hop</ion-chip>
-      <ion-chip *ngIf="user.reggaeton">Reggaeton</ion-chip>
-      <ion-chip *ngIf="user.jazz">Jazz</ion-chip>
-  
-      <ion-chip *ngIf="user.energetic">Energetic</ion-chip>
-      <ion-chip *ngIf="user.cosy">Cosy</ion-chip>
-      <ion-chip *ngIf="user.alternative">Alternative</ion-chip>
-      <ion-chip *ngIf="user.relaxed">Relaxed</ion-chip>
-      <ion-chip *ngIf="user.traditional">Traditional</ion-chip>
-      <ion-chip *ngIf="user.fancy">Fancy</ion-chip>
-      <ion-chip *ngIf="user.casual">Casual</ion-chip>
-      <ion-chip *ngIf="user.lgbtq">LGBTQ+</ion-chip>
-      <ion-chip *ngIf="user.loud">Loud</ion-chip>
-  
-      <ion-chip *ngIf="user.outdoorSeats">Outdoor Seats</ion-chip>
-      <ion-chip *ngIf="user.accessible">Accessible</ion-chip>
-      <ion-chip *ngIf="user.cloakRoom">Cloak Room</ion-chip>
-      <ion-chip *ngIf="user.smokingArea">Smoking Area</ion-chip>
-      <ion-chip *ngIf="user.beerGarden">Beer Garden</ion-chip>
-      <ion-chip *ngIf="user.danceFloor">Dance Floor</ion-chip>
-  
-      <ion-chip *ngIf="user.festival">Festival</ion-chip>
-      <ion-chip *ngIf="user.openMic">Open Mic</ion-chip>
-      <ion-chip *ngIf="user.pubQuiz">Pub Quiz</ion-chip>
-      <ion-chip *ngIf="user.rave">Rave</ion-chip>
-      <ion-chip *ngIf="user.liveGig">Live Gig</ion-chip>
-      <ion-chip *ngIf="user.dj">DJ</ion-chip>
-      <ion-chip *ngIf="user.karaoke">Karaoke</ion-chip>
-      <ion-chip *ngIf="user.comedy">Comedy</ion-chip>
-      <ion-chip *ngIf="user.sports">Sports</ion-chip>
-      <ion-chip *ngIf="user.specialisedEvents">Specialised Events</ion-chip>
-      <ion-chip *ngIf="user.games">Games</ion-chip>
-    </ion-row>
-  </ion-card>
-</ion-content> -->
+</form>
+</ion-content>
+ -->
