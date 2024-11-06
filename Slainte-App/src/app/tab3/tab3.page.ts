@@ -29,8 +29,7 @@ export class Tab3Page implements OnInit{
   constructor(private authService: AuthenticationService, 
     private router: Router, 
     private modalController: ModalController, 
-    private userService: UserService, 
-    private messagingService: MessagingService,
+    private userService: UserService,
     private actionSheetController: ActionSheetController,
     private saveVenues: SavevenuesService) {}
 
