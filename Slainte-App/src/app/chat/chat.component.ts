@@ -15,18 +15,13 @@ import { firstValueFrom } from 'rxjs';
 
 export class ChatComponent  implements OnInit {
 
-  // messages$: Observable<any[]>;
-  // chatId: string;
-  // receiverId: string;
-  // currentUser: any;
-  // newMessage: string = '';
-
-
   messages: Message[] = []; //Interface to hold message structure
   newMessage: string = ''; // New message string 
   chatId: string = '';
   user1Id: string = '';
   user2Id: string = '';
+  currentUserId: string;
+  recipientName: string = '';
 
   constructor(private authService: AuthenticationService, private messagingService: MessagingService, private route: ActivatedRoute) { }
 
@@ -39,28 +34,21 @@ export class ChatComponent  implements OnInit {
         this.route.paramMap.subscribe(params => {
           this.user2Id = params.get('recipientId') || ''; // Get recipient Id as user2Id 
 
-          this.generateChatId(); 
+          this.generateChatId();
+          this.loadRecipientName(); 
         });
       }
     });
+  }
 
-    // Subscribe to the current logged-in user
-    // this.authService.getUser().subscribe((user) => {
-    //   this.currentUser = user;
-    //   if (user) {
-        
-    //     // Get the receiverId from query parameters
-    //     this.route.queryParamMap.subscribe((params) => {
-    //       this.receiverId = params.get('receiverId');
-    //       if(this.receiverId) {
-    //         // Start the chat with the current user's ID and the selected receiver's ID
-    //         this.startChat(user.uid, this.receiverId);
-    //       } else {
-    //         console.error('No receiverId provided')
-    //       }
-    //     });
-    //   }
-    // });
+  async loadRecipientName() {
+    if (this.user2Id) {
+      const recipient = await firstValueFrom(this.messagingService.getUserById(this.user2Id)).catch(err => {
+        console.error('Error fetching recipient data:', err);
+        return null;
+      });
+      this.recipientName = recipient ? `${recipient.firstName} ${recipient.lastName}` : 'Unknown User';
+    }
   }
 
   generateChatId() { // Create chat ID based on user 1 and user 2 ids
@@ -72,44 +60,6 @@ export class ChatComponent  implements OnInit {
       this.loadMessages(); // Retrieve all messages 
     }
   }
-
-  // loadMessages() {
-  //   this.messagingService.getMessages(this.chatId).subscribe(data => {
-  //     this.messages = data;
-  //   });
-  // }
-
-  // loadMessages() {
-  //   this.messagingService.getMessages(this.chatId).subscribe(messagesData => {
-  //     // Map through each message to retrieve sender name
-  //     const messageObservables = messagesData.map(async message => {
-  //       const senderId = message.senderId;
-  //       const sender = await this.messagingService.getUserById(senderId).toPromise(); // Fetch sender's data
-  //       return {
-  //         ...message,
-  //         senderName: sender ? `${sender.firstName} ${sender.lastName}` : 'Unknown Sender'
-  //       };
-  //     });
-  //     Promise.all(messageObservables).then(messagesWithSenderNames => {
-  //       this.messages = messagesWithSenderNames;
-  //     });
-  //   });
-  // }
-
-  // loadMessages() {
-  //   this.messagingService.getMessages(this.chatId).subscribe(async (messagesData: Message[]) => {
-  //     // Use Promise.all to await all name fetches
-  //     const messagesWithNames = await Promise.all(messagesData.map(async message => {
-  //       // Fetch the sender's name using senderId
-  //       const sender = await this.messagingService.getUserById(message.senderId).toPromise();
-  //       return {
-  //         ...message,
-  //         senderName: sender ? `${sender.firstName} ${sender.lastName}` : 'Unknown Sender'
-  //       };
-  //     }));
-  //     this.messages = messagesWithNames;
-  //   });
-  // }
   
   loadMessages() {
     this.messagingService.getMessages(this.chatId).subscribe(messagesData => { // Retrieve messages data from firebase
@@ -149,28 +99,4 @@ export class ChatComponent  implements OnInit {
       this.newMessage = '';
     }
   }
-
-    // sendMessage(){
-    // if (this.newMessage.trim()) {
-    //   this.messagingService
-    //   .sendMessage(this.chatId, this.currentUser.uid, this.receiverId, this.newMessage)
-    //   .then(() => {
-    //     this.newMessage = ''; //Clear input after sending
-    //   });
-    // }
-    //}
-
-  // startChat(senderId: string, receiverId: string) {
-  //   //Check for an existing chat or create a new one
-  //   this.messagingService.findOrCreateChat(senderId, receiverId).then((chatId) => {
-  //     this.chatId = chatId;
-  //     //Load Chat messages
-  //     this.loadMessages();
-  //   });
-  // }
-
-  // loadMessages() {
-  //   this.messages$ = this.messagingService.getChatMessages(this.chatId);
-  // }
-
 }

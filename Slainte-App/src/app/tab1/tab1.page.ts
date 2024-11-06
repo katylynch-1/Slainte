@@ -29,7 +29,8 @@ export class Tab1Page implements OnInit {
     const mapOptions: google.maps.MapOptions = {
       center: { lat, lng },
       zoom: 15,
-      mapId: 'f7407f18b4a90b70'
+      mapId: 'f7407f18b4a90b70',
+      
     };
 
     const mapEle = document.getElementById('map') as HTMLElement;
@@ -56,8 +57,6 @@ export class Tab1Page implements OnInit {
   segmentChanged(event: any) {
     this.selectedSegment = event.detail.value; // Update segment based on selection
   }
-
-
 
   async openSafetyModal() {
     const modal = await this.modalController.create({
