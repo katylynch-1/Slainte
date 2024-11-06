@@ -39,6 +39,37 @@
 
   
   
+.atmosphere-check {
+  color: #F0F371;
+}
+
+.drinks-check {
+  color: #D96ACE;
+}
+
+.entertainment-check {
+  color: #7F48AC;
+}
+
+.amenities-check {
+  color: #84BC7B;
+}
+
+.music-check {
+  color: #5CA5ED;
+}
+
+@font-face {
+  font-family: 'PPMori';
+  src: url(/Slainte-App/src/assets/fonts/PPMori-Regular.otf) format(otf);
+
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'PPMori', sans-serif;
+}
   
 
 

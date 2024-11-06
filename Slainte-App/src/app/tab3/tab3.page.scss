@@ -29,3 +29,46 @@
   margin-left: 8px; /* Space between the last chip and the icon */
   vertical-align: middle; /* Align the icon vertically in line with the chips */
 }
+
+.venue-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjust the size to your liking */
+  gap: 5px; /* Space between grid items */
+  padding: 5px;
+}
+
+.venue-item {
+  text-align: center; /* Center the text and image */
+}
+
+.venue-image {
+  width: 100%;
+  height: 150px;
+  border-radius: 8px; /* Optional: Add rounded corners to the images */
+  object-fit: cover; /* Ensure the images cover the space without stretching */
+}
+
+.venue-name {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%; /* Ensures text does not overflow */
+}
+
+/* Style for the header and footer toolbar */
+ion-toolbar {
+  position: relative; /* Make the toolbar's position relative to position the icon */
+}
+
+.logout-icon {
+  position: absolute;
+  right: 16px; /* Adjust the distance from the right edge */
+  top: 50%;
+  transform: translateY(-50%); /* Vertically center the icon in the toolbar */
+  font-size: 24px; /* Adjust the size of the icon if needed */
+  color: #fff; /* Set the color of the icon */
+}
+
