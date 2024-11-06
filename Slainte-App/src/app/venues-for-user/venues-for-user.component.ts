@@ -9,21 +9,15 @@ import { User } from '@firebase/auth-types';
   templateUrl: './venues-for-user.component.html',
   styleUrls: ['./venues-for-user.component.scss'],
 })
-export class VenuesForUserComponent  implements OnInit {
-
+export class VenuesForUserComponent implements OnInit {
   venues: Venue[] = [];
   user: User;
   userDetails: any = null;
   loading: boolean = false;
 
-  constructor(private venueService: VenuedataService, private router: Router, private authService: AuthenticationService) {
+  constructor(private venueService: VenuedataService, private router: Router, private authService: AuthenticationService) {}
 
-    // this.venueService.getVenues().subscribe(venues => {
-    //   this.venues = venues;
-    // });
-   }
-
-   openVenueDetails(venue: any){
+  openVenueDetails(venue: any) {
     const placeId = venue.place_id; 
     let navigationExtras: NavigationExtras = {
       state: {
@@ -34,34 +28,44 @@ export class VenuesForUserComponent  implements OnInit {
   }
 
   ngOnInit() {
-    //Retrieve the current user
+    // Retrieve the current user
     this.authService.getUser().subscribe(user => {
-      if(user) {
+      if (user) {
         this.user = user;
 
         this.authService.getUserDetails(user.uid).subscribe(details => {
           this.userDetails = details;
 
-          //Retrieve venues and match to user's preferences 
+          // Retrieve venues and match to user's preferences 
           this.loading = true; 
           this.venueService.getVenues().subscribe(venues => {
-            this.venues = venues.filter(venue => this.matchPreferences(venue, this.userDetails.preferences));
+            // Process venues to include count of matches
+            this.venues = this.processVenues(venues, this.userDetails.preferences);
+            this.loading = false; // Stop loading once processing is done
           });
         });
       }
     });
   }
 
-  matchPreferences(venue: any, userPreferences: any): boolean {
-    // Loop through the user's preferences and compare them with the venue's boolean values
+  matchCount(venue: any, userPreferences: any): number {
+    let count = 0;
+    // Loop through the user's preferences and count matches
     for (const key in userPreferences) {
-      // Loop through the user's preferences and return true if at least one matches
       if (userPreferences[key] === true && venue[key] === true) {
-        this.loading = false; 
-        return true;  // Return true as soon as a match is found
+        count++;
       }
     }
-    return false;  // No matches found, return false
+    return count; // Return the total count of matches
   }
 
+  processVenues(venues: Venue[], userPreferences: any): Venue[] {
+    return venues
+      .map(venue => ({
+        ...venue,
+        matchCount: this.matchCount(venue, userPreferences) // Add a matchCount property to each venue
+      }))
+      .filter(venue => venue.matchCount > 0) // Filter out venues with no matches
+      .sort((a, b) => b.matchCount - a.matchCount); // Sort venues by matchCount in descending order
+  }
 }

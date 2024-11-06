@@ -8,8 +8,7 @@ import { ModalController } from '@ionic/angular';
 import { Observable, firstValueFrom } from 'rxjs';
 import { ActionSheetController } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { SavevenuesService } from '../services/savevenues.service';
-import { SavedVenue } from '../services/savevenues.service';
+import { SavevenuesService, SavedVenue } from '../services/savevenues.service';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -66,7 +65,7 @@ export class Tab3Page implements OnInit {
   }
 
   // Add the refresh method
-  async refreshSavedVenues(event: any) {
+  async refreshAllContent(event: any) {
     await this.loadUserDetails(); // Reload user details and saved venues
     event.target.complete(); // Dismiss the refresher
   }
@@ -117,7 +116,7 @@ export class Tab3Page implements OnInit {
   }
 
   // Present the action sheet for profile picture options
-  async presentActionSheet() {
+  async presentPictureActionSheet() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Profile Picture',
       buttons: [
@@ -132,6 +131,26 @@ export class Tab3Page implements OnInit {
           role: 'destructive',
           handler: () => {
             this.deleteImage();
+          },
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+      ],
+    });
+    await actionSheet.present();
+  }
+
+  async presentLogoutActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Are you sure?',
+      buttons: [
+        {
+          text: 'Logout',
+          role: 'destructive',
+          handler: () => {
+            this.signOut();
           },
         },
         {
