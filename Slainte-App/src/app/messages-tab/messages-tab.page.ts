@@ -4,10 +4,6 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
 import { User } from '@firebase/auth-types';
 
-// import { UserService } from '../services/user.service';
-// import { AuthenticationService } from '../services/authentication.service';
-// import { Observable } from 'rxjs';
-
 @Component({
   selector: 'app-messages-tab',
   templateUrl: './messages-tab.page.html',
@@ -15,10 +11,6 @@ import { User } from '@firebase/auth-types';
 })
 export class MessagesTabPage implements OnInit {
 
-  // user: User; // User defined by Firebase Authentication
-  // userDetails: any = null; // User personal information and interests
-  // users$: Observable<any[]>; // Observable to hold user list
-  // currentUserId: string; // Store current user's uid
   chats: any[] = [];
   currentUserId: string;
   users: any[] = [];
@@ -38,14 +30,6 @@ export class MessagesTabPage implements OnInit {
         this.loadUsers();
       }
     });
-
-    // this.authService.getUser().subscribe(user => {
-    //   if(user) {
-    //     this.user = user;
-    //     this.currentUserId = user.uid;
-    //     this.loadUsers(); 
-    //   }
-    // });
   }
 
   loadUsers() {
@@ -76,33 +60,11 @@ export class MessagesTabPage implements OnInit {
   getRecipientId(chat: any) {
     return chat.user1Id === this.currentUserId ? chat.user2Id : chat.user1Id;
   }
-  
-  // getRecipientName(chat: any) {
-  //   return chat.user1Id === this.currentUserId ? chat.user2Name : chat.user1Name;
-  // }
 
   getRecipientName(chat: any) {
     const recipientId = this.getRecipientId(chat);
     const recipient = this.users.find(user => user.uid === recipientId);
     return recipient ? `${recipient.firstName} ${recipient.lastName}` : 'Unknown User';
   }
-
-  // loadUsers() {
-  //   // Load all users currently on Firestore (Friends List)
-  //   this.users$ = this.userService.getUsers();
-  // }
-
-  // startChatWith(userId: string) {
-  //   this.messagingService.findOrCreateChat(this.currentUserId, userId)
-  //     .then((chatId: string) => { 
-  //       console.log(`Chat started with ${userId}, Chat ID: ${chatId}`);
-  //       this.router.navigate(['/chat', chatId], {
-  //         queryParams: { receiverId: userId }, //Pass the selected receiverId
-  //       }); 
-  //     })
-  //     .catch(error => {
-  //       console.error('Error starting chat:', error);
-  //     });
-  // }
 
 }

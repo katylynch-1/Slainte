@@ -84,7 +84,7 @@ app.get('/api/geocode', async (req, res) => {
   });
 
 app.listen(port, () => {
-    console.log(`Server listening at http://localhost:${port}`);
+    console.log(`Server listening at http://192.168.1.5:${port}`);
 });
 
 // http://localhost:3000/api/place?lat=53.3442&lng=-6.2674&radius=1000 - works on Postman

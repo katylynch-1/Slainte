@@ -15,6 +15,66 @@ export class SignupPage implements OnInit {
   regForm: FormGroup;
   capturedImage = "";
   updateImage = false;
+  selectedStep: string = 'step1';
+
+
+  atmosphereOptions = [
+    { label: 'Alternative', controlName: 'alternative' },
+    { label: 'Casual', controlName: 'casual' },
+    { label: 'Cosy', controlName: 'cosy' },
+    { label: 'Energetic', controlName: 'energetic' },
+    { label: 'Fancy', controlName: 'fancy' },
+    { label: 'LGBTQ+', controlName: 'lgbtq' },
+    { label: 'Loud', controlName: 'loud' },
+    { label: 'Relaxed', controlName: 'relaxed' },
+    { label: 'Traditional', controlName: 'traditional' },
+  ];
+
+  drinksOptions = [
+    { label: 'Cocktails', controlName: 'cocktails' },
+    { label: 'Gin', controlName: 'gin' },
+    { label: 'Good Guinness', controlName: 'goodGuinness' },
+    { label: 'Non-Alcoholic', controlName: 'nonAlcoholic' },
+    { label: 'Pints', controlName: 'pints' },
+    { label: 'Whiskey', controlName: 'whiskey' },
+    { label: 'Wine', controlName: 'wine' },
+  ];
+
+  musicOptions = [
+    { label: 'Hip Hop', controlName: 'hipHop' },
+    { label: 'House', controlName: 'house' },
+    { label: 'Indie', controlName: 'indie' },
+    { label: 'Jazz', controlName: 'jazz' },
+    { label: 'Pop', controlName: 'pop' },
+    { label: 'R&B', controlName: 'rAndB' },
+    { label: 'Reggaeton', controlName: 'reggaeton' },
+    { label: 'Rock', controlName: 'rock' },
+    { label: 'Techno', controlName: 'techno' },
+    { label: 'Trad', controlName: 'trad' },
+  ];
+
+  amenitiesOptions = [
+    { label: 'Accessible', controlName: 'accessible' },
+    { label: 'Beer Garden', controlName: 'beerGarden' },
+    { label: 'Cloak Room', controlName: 'cloakRoom' },
+    { label: 'Dance Floor', controlName: 'danceFloor' },
+    { label: 'Outdoor Seats', controlName: 'outdoorSeats' },
+    { label: 'Smoking Area', controlName: 'smokingArea' },
+  ];
+
+  entertainmentOptions = [
+    { label: 'Comedy', controlName: 'comedy' },
+    { label: 'DJ', controlName: 'dj' },
+    { label: 'Festival', controlName: 'festival' },
+    { label: 'Games', controlName: 'games' },
+    { label: 'Karaoke', controlName: 'karaoke' },
+    { label: 'Live Gigs', controlName: 'liveGig' },
+    { label: 'Open Mic', controlName: 'openMic' },
+    { label: 'Pub Quiz', controlName: 'pubQuiz' },
+    { label: 'Raves', controlName: 'rave' },
+    { label: 'Specialised Events', controlName: 'specialisedEvents' },
+    { label: 'Sports', controlName: 'sports' },
+  ];
 
   constructor(public formBuilder: FormBuilder, public loadingCtrl: LoadingController, public authService: AuthenticationService, public router: Router) { }
 
@@ -43,6 +103,15 @@ export class SignupPage implements OnInit {
     })
   }
 
+  goToStep(step: string) {
+    this.selectedStep = step;
+  }
+
+  toggleChip(controlName: string) {
+    const currentValue = this.regForm.controls[controlName].value;
+    this.regForm.controls[controlName].setValue(!currentValue);
+  }
+
   get errorControl(){
     return this.regForm.controls;
   }
@@ -53,15 +122,20 @@ export class SignupPage implements OnInit {
   
     if (this.regForm.valid) {
       try {
-        const { firstName, lastName, email, password, userBio, bars, nightclubs, pubs, lateBars, pints, cocktails, wine, gin, whiskey, nonAlcoholic, goodGuinness, trad, pop, techno, house, rock, indie, hipHop, reggaeton, jazz, rAndB, energetic, cosy, alternative, relaxed, traditional, fancy, casual, lgbtq, loud, outdoorSeats, accessible, cloakRoom, smokingArea, beerGarden, danceFloor, festival, openMic, pubQuiz, rave, liveGig, dj, karaoke, comedy, sports, specialisedEvents, games } = this.regForm.value;
-  
-        const preferences = {
-          bars, nightclubs, pubs, lateBars, pints, cocktails, wine, gin, whiskey, nonAlcoholic, goodGuinness,
-          trad, pop, techno, house, rock, indie, hipHop, reggaeton, jazz, rAndB,
-          energetic, cosy, alternative, relaxed, traditional, fancy, casual, lgbtq, loud, 
-          outdoorSeats, accessible, cloakRoom, smokingArea, beerGarden, danceFloor, 
-          festival, openMic, pubQuiz, rave, liveGig, dj, karaoke, comedy, sports, specialisedEvents, games
-        };
+        const { firstName, lastName, email, password, userBio } = this.regForm.value;
+
+        const preferences: { [key: string]: boolean } = {};
+        const allOptions = [
+        ...this.atmosphereOptions,
+        ...this.drinksOptions,
+        ...this.musicOptions,
+        ...this.amenitiesOptions,
+        ...this.entertainmentOptions,
+      ];
+
+      allOptions.forEach(option => {
+        preferences[option.controlName] = this.regForm.controls[option.controlName].value;
+      });
   
         // Pass the capturedImage (base64) as part of additional data
         const user = await this.authService.registerUser(email, password, { firstName, lastName, userBio, preferences }, this.capturedImage  // Add profilePicture
