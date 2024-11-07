@@ -53,12 +53,6 @@ export class Tab1Page implements OnInit {
     console.log('Creating marker at:', { lat, lng });
   }
 
-  selectedSegment: string = 'venuesForYou'; // Default to 'Venues For You'
-
-  segmentChanged(event: any) {
-    this.selectedSegment = event.detail.value; // Update segment based on selection
-  }
-
   async openSafetyModal() {
     const modal = await this.modalController.create({
       component: SafetyModalComponent

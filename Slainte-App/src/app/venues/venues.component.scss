@@ -1,53 +1,25 @@
-.venues-container {
-    --color: #fff;
-}
-
-h2 {
-    --color: #9efff0;
+.horizontal-scroll-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 12px; /* Adjust this value for a slight gap */
+  padding: 0; /* Ensure there’s no extra padding */
+  overflow-y: hidden;
 }
 
 .venue-card {
-    --background: #3C3C3C;
-    --color: #9efff0;
-    --outline: 5px;
-    --outline--color: #fff;
-  }
-  
+  min-width: 250px;
+  max-height: 350px;
+  margin: 0; /* Removes default margin */
+  padding: 0; /* Removes any padding */
+}
 
-  .venue-item {
-    --padding-start: 10px;
-    --inner-padding-end: 10px;
-  }
-  
-  .venue-item ion-icon {
-    margin-right: 8px;  /* Space between icon and text */
-    vertical-align: middle; /* Align icon with text */
-  }
-  
-  .venue-item h2 {
-    font-weight: bold;
-  }
-  
-  .venue-item p {
-    display: flex;
-    align-items: center;
-    margin: 5px 0;
-  }
-  
-  .spinner-container {
-    display: flex;
-    justify-content: center; /* Horizontally centers the spinner */
-    align-items: center;     /* Vertically centers the spinner */
-    height: 100%;            /* Full height of the content area (without extra vertical scroll) */
-    position: absolute;      /* Ensures it's positioned relative to the container */
-    top: 0;
-    left: 0;
-    width: 100%;             /* Full width of the content area */
-  }
+.venue-image {
+  height: 100px;
+  width: 100%;
+  object-fit: cover;
+}
 
-  .thumbnail {
-    border-radius: 5px; /* Round the corners of the thumbnail */
-    overflow: hidden;
-    width: 80px; /* Set a width that suits your design */
-    height: 80px;
-  }
+ion-content {
+  height: 350px; /* 80% of the viewport height */
+  overflow-y: hidden;
+}
