@@ -6,34 +6,14 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div id="map" style="height: 40%; width: 100%;"></div>
-  <br>
+  <div id="map" style="height: 25%; width: 100%;"></div>
   <!-- <ion-refresher slot="fixed" (ionRefresh)="refreshAllContent($event)">
     <ion-refresher-content pullingIcon="arrow-down" refreshingSpinner="bubbles"></ion-refresher-content>
   </ion-refresher> -->
-  <ion-segment [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)">
-    <ion-segment-button value="venuesForYou">
-      <ion-label>Venues For You</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="venuesNearby">
-      <ion-label>Venues Nearby</ion-label>
-    </ion-segment-button>
-  </ion-segment>
 
-  <ng-container *ngIf="selectedSegment === 'venuesForYou'">
-    <app-venues-for-user></app-venues-for-user>
-  </ng-container>
+  <h3>Venues for You</h3>
+   <app-venues-for-user></app-venues-for-user>
 
-  <ng-container *ngIf="selectedSegment === 'venuesNearby'">
+  <h3>Venues Nearby</h3>
     <app-venues></app-venues>
-  </ng-container>
-
-  <h3>Connect with other Sláinte users</h3>
-  <app-connect></app-connect>
-
-  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-    <ion-fab-button color="warning" (click)="openSafetyModal()">
-      <ion-icon name="warning-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 </ion-content>
