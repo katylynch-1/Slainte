@@ -10,11 +10,11 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let message of messages">
-      <ion-label>
-        <h3>{{ message.senderName }}</h3>
-        <h2>{{ message.content }}</h2>
+  <ion-list class="message-list">
+    <ion-item *ngFor="let message of messages" [ngClass]="{ 'sent': message.senderId === currentUserId, 'received': message.senderId !== currentUserId }">
+      <ion-label class="message-bubble">
+        <p class="message-content"> {{ message.content }} </p>
+        <p class="message-time"> {{message.timestamp | date:'shortTime' }}</p>
       </ion-label>
     </ion-item>
   </ion-list>

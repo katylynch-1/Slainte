@@ -1,17 +1,63 @@
-.sent {
-    text-align: right;
-    background-color: #dcf8c6;
-  }
-  
-  .received {
-    text-align: left;
-    background-color: #ffffff;
-  }
-  
-  ion-input {
-    width: 80%;
-  }
-  
-  ion-button {
-    width: 20%;
-  }
+
+.message-list {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+ion-item.sent {
+  justify-content: end;
+  float: right;
+
+}
+
+ion-item.received {
+  justify-content: start;
+  float: left;
+
+}
+
+.message-bubble {
+  max-width: 100%;
+  padding: 10px;
+  border-radius: 15px;
+  color: black;
+  font-size: 14px;
+  position: relative;
+  margin: 5px 0;
+}
+
+.sent .message-bubble {
+  background-color: #3880ff;  // Color for sent messages
+  color: white;
+  float: right;
+  text-align: right;
+}
+
+.received .message-bubble {
+  background-color: #e0e0e0;  // Color for received messages
+  color: black;
+  float: left;
+  text-align: left;
+}
+
+.sent .message-content {
+  margin: 0;
+  color: white;
+}
+
+.received .message-content {
+  margin: 0;
+  color: black;
+}
+
+
+.message-time {
+  font-size: 11px;
+  opacity: 0.6;
+  margin-top: 5px;
+}
+
+button {
+  color: white;
+}

@@ -35,15 +35,6 @@ export class NewChatComponent  implements OnInit {
     this.users$ = this.userService.getUsers();
   }
 
-  // startChat(user2Id: string) {
-  //   console.log('Starting chat with:', user2Id);
-  //   const chatId = this.messagingService.generateChatId(this.currentUserId, user2Id);
-  //   this.messagingService.createChat(chatId, this.currentUserId, user2Id).then(()=> {
-  //     // this.router.navigate([`/chat`, { recipientId: user2Id }]);
-  //     this.router.navigateByUrl(`/chat/${user2Id}`);
-  //   });
-  // }
-
   startChat(user2Id: string) {
     console.log('Starting chat with:', user2Id);
     const chatId = this.messagingService.generateChatId(this.currentUserId, user2Id);
@@ -52,7 +43,5 @@ export class NewChatComponent  implements OnInit {
       this.router.navigateByUrl(`/chat/${user2Id}`);
     }).catch(error => console.error('Error creating chat:', error));
   }
-  
-  
 
 }
