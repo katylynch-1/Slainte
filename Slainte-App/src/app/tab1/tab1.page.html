@@ -1,12 +1,12 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Home</ion-title>
+    <ion-icon class="notification-icon" name="notifications-outline" (click)="openNotifications()"></ion-icon>
   </ion-toolbar>
-  <ion-icon class="notification-icon" name="notifications-outline" (click)="openNotifications()"></ion-icon>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <!-- <div id="map" style="height: 40%; width: 100%;"></div> -->
+  <div id="map" style="height: 40%; width: 100%;"></div>
   <br>
   <!-- <ion-refresher slot="fixed" (ionRefresh)="refreshAllContent($event)">
     <ion-refresher-content pullingIcon="arrow-down" refreshingSpinner="bubbles"></ion-refresher-content>

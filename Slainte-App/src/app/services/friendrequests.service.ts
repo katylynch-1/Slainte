@@ -18,6 +18,14 @@ export class FriendrequestsService {
 
   constructor(private firestore: AngularFirestore) { }
   
+// Function to fetch multiple users' details by IDs
+getUserDetails(userIds: string[]): Observable<UserDetails[]> {
+  if (userIds.length === 0) return of([]); // Return an empty array if no IDs provided
+
+  return this.firestore.collection<UserDetails>('userDetails', ref =>
+    ref.where(firebase.firestore.FieldPath.documentId(), 'in', userIds)
+  ).valueChanges({ idField: 'id' });
+}
 
   // Send Friend Request
   async sendFriendRequest(fromUserId: string, toUserId: string): Promise<void> {
