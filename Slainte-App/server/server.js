@@ -4,7 +4,7 @@ const cors = require('cors'); // CORS middleware
 const app = express();
 const port = 3000;
 
-const GOOGLE_API_KEY = 'AIzaSyB6oHQCn8OiCT9jhQC87aUFElnyjjhFfX0';
+const GOOGLE_API_KEY = 'AIzaSyB7PYP1oKkK-1qkgTus3x0C_uRbqPdfAa0';
 
 // Enable CORS for all routes
 app.use(cors());
@@ -84,7 +84,7 @@ app.get('/api/geocode', async (req, res) => {
   });
 
 app.listen(port, () => {
-    console.log(`Server listening at http://192.168.1.5:${port}`);
+    console.log(`Server listening at http://localhost:${port}`);
 });
 
 // http://localhost:3000/api/place?lat=53.3442&lng=-6.2674&radius=1000 - works on Postman

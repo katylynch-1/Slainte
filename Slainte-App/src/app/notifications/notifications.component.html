@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Notifications</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<h3>Pending Friend Requests</h3>
+
+<!-- Check if there are any incoming friend requests -->
+<div *ngIf="incomingRequests.length > 0; else noIncomingRequests">
+  <div *ngFor="let request of incomingRequests">
+    <p>Request from {{ request.fromUserId }}</p>
+    <ion-button (click)="acceptRequest(request.fromUserId)">Accept</ion-button>
+    <ion-button (click)="rejectRequest(request.fromUserId)">Reject</ion-button>
+  </div>
+</div>
+
+<!-- Template for when there are no incoming requests -->
+<ng-template #noIncomingRequests>
+  <p>No new updates for incoming requests.</p>
+</ng-template>
+
+<h3>Accepted Friend Requests</h3>
+
+<!-- Check if there are any accepted friend requests -->
+<div *ngIf="acceptedRequests.length > 0; else noAcceptedRequests">
+  <div *ngFor="let request of acceptedRequests">
+    <p>{{ request.fromUserId }} accepted your friend request</p>
+  </div>
+</div>
+
+<!-- Template for when there are no accepted requests -->
+<ng-template #noAcceptedRequests>
+  <p>No new updates for accepted requests.</p>
+</ng-template>

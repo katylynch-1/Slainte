@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Home</ion-title>
+    <ion-icon class="notification-icon" name="notifications-outline" (click)="openNotifications()"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
@@ -26,6 +27,9 @@
   <ng-container *ngIf="selectedSegment === 'venuesNearby'">
     <app-venues></app-venues>
   </ng-container>
+
+  <h3>Connect with other Sláinte users</h3>
+  <app-connect></app-connect>
 
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
     <ion-fab-button color="warning" (click)="openSafetyModal()">
