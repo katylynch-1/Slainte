@@ -43,9 +43,9 @@ export class MessagingService {
       this.db.object(`/userChats/${recipientId}/${chatId}`).update({
         lastMessage: message,
         lastMessageTimestamp: timestamp,
-        unreadCount: this.db.database.ref(`/userChats/${recipientId}/${chatId}/unreadCount`).once('value').then(snapshot => {
-          return (snapshot.val() || 0) + 1;
-        })
+        // unreadCount: this.db.database.ref(`/userChats/${recipientId}/${chatId}/unreadCount`).once('value').then(snapshot => {
+        //   return (snapshot.val() || 0) + 1;
+        // })
       });
     });
   }
@@ -58,10 +58,6 @@ export class MessagingService {
     const [user1Id, user2Id] = chatId.split('_');
     return user1Id === currentUserId ? user2Id : user1Id;
   }
-
-  // getMessages(chatId: string) {
-  //   return this.db.list(`/chats/${chatId}/messages`).valueChanges();
-  // }
 
   getMessages(chatId: string): Observable<Message[]> {
     return this.db.list<Message>(`/chats/${chatId}/messages`).valueChanges();
@@ -102,6 +98,10 @@ export class MessagingService {
   generateChatId(user1Id: string, user2Id: string): string {
     // A simple way to generate a unique ID is to concatenate and sort the two user IDs
     return user1Id < user2Id ? `${user1Id}_${user2Id}` : `${user2Id}_${user1Id}`;
+  }
+
+  deleteChat(chatId: string, userId: string): Promise<void> {
+    return this.db.object(`/userChats/${userId}/${chatId}`).remove();
   }
 
 }

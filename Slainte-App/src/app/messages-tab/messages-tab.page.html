@@ -14,7 +14,8 @@
     <ion-refresher-content pullingIcon="arrow-down" refreshingSpinner="bubbles"></ion-refresher-content>
   </ion-refresher>
   <ion-list>
-    <ion-item *ngFor="let chat of chats" (click)="openChat(getRecipientId(chat))">
+    <ion-item-sliding *ngFor="let chat of chats">
+    <ion-item  (click)="openChat(getRecipientId(chat))">
       <ion-avatar slot="start">
         <img [src]="chat.recipientImageURL" alt="Profile Picture">
       </ion-avatar>
@@ -23,7 +24,13 @@
         <p>{{ chat.lastMessage }}</p>
         <small>{{ chat.lastMessageTimestamp | date:'short' }}</small> <!-- Format timestamp -->
       </ion-label>
-      <!-- <ion-badge *ngIf="chat.unreadCount > 0" color="danger">{{ chat.unreadCount }}</ion-badge> -->
     </ion-item>
+    <ion-item-options side="end">
+      <ion-item-option color="danger" (click)="deleteChat(chat)">
+        <ion-icon name="trash"></ion-icon>
+        Delete
+      </ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
   </ion-list>
 </ion-content>

@@ -22,7 +22,11 @@
 
 <ion-footer>
   <ion-toolbar>
-    <ion-input label="New Message" label-placement="floating" fill="outline" [(ngModel)]="newMessage" placeholder="Type a message..."></ion-input>
-    <ion-button (click)="sendMessage()">Send</ion-button>
+    <div class="message-input-container">
+      <ion-input class="message-input" [(ngModel)]="newMessage" placeholder="Type a message..."></ion-input>
+      <ion-button (click)="sendMessage()" fill="clear">
+        <ion-icon name="send"></ion-icon>
+      </ion-button>
+    </div>
   </ion-toolbar>
 </ion-footer>

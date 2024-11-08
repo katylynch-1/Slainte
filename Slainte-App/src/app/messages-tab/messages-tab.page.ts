@@ -57,30 +57,6 @@ export class MessagesTabPage implements OnInit {
     });
   }
 
-  // loadChats() {
-  //   this.messagingService.getUserChats().subscribe(async data => {
-  //     // Add recipient name, image URL, and unread count to each chat entry
-  //     this.chats = await Promise.all(data.map(async chat => {
-  //       const recipientId = this.getRecipientId(chat);
-  //       const recipientData = await this.loadRecipientData(recipientId);
-  
-  //       // Retrieve unread count if it's available
-  //       const unreadCount = chat.unreadCount || 0;
-  
-  //       return {
-  //         ...chat,
-  //         recipientName: recipientData ? `${recipientData.firstName} ${recipientData.lastName}` : 'Unknown User',
-  //         recipientImageURL: recipientData?.imageURL || 'assets/default-profile.png', // Default image if no imageURL
-  //         unreadCount: unreadCount  // Add unread count to each chat entry
-  //       };
-  //     }));
-  
-  //     // Sort by the latest message timestamp
-  //     this.chats = this.chats.sort((a, b) => b.lastMessageTimestamp - a.lastMessageTimestamp);
-  //   });
-  // }
-  
-
   async loadRecipientData(userId: string) {
     return await firstValueFrom(this.messagingService.getUserById(userId)).catch(error => {
       console.error('Error loading recipient data:', error);
@@ -116,6 +92,12 @@ export class MessagesTabPage implements OnInit {
     await this.loadChats(); // Reload chats
     // await this.loadUsers(); // Reload users
     event.target.complete(); // Dismiss the refresher
+  }
+
+  async deleteChat(chat: any) {
+    const chatId = this.messagingService.generateChatId(this.currentUserId, this.getRecipientId(chat));
+    await this.messagingService.deleteChat(chatId, this.currentUserId);
+    this.chats = this.chats.filter(c => c !== chat);
   }
 
 }
