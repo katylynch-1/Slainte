@@ -1,25 +1,28 @@
 <ion-content>
-  <ion-searchbar
+  <!-- <ion-searchbar
     [(ngModel)]="userInput" search-icon="location" placeholder="Search a new location..." (ionInput)="onInputChange($event)">
   </ion-searchbar>
 
-  <ion-button (click)="onUserInputSubmit()">Search</ion-button>
-
   <div *ngIf="loading" class="spinner-container">
     <ion-spinner name="crescent"></ion-spinner>
-  </div>
+  </div> -->
 
-  <div *ngIf="!loading" class="venues-container">
-    <!-- Show a message when no bars are found -->
+  <div *ngIf="!loading">
     <div *ngIf="bars.length > 0; else noBars">
-      <!-- Loop through the venues array -->
-      <ion-list>
-        <ion-item *ngFor="let bar of bars" class="venue-item" (click)="openApiVenueDetails(bar)">
-          <ion-thumbnail slot="start" class="thumbnail">
-            <img *ngIf="bar.photos && bar.photos.length > 0" [src]="bar.photos[0].photoUrl" alt="{{ bar.name }}">
-          </ion-thumbnail>
-          <ion-label>
-            <h2>{{ bar.name }}</h2>
+      <!-- Horizontal scroll container for cards -->
+      <div class="horizontal-scroll-container">
+        <!-- Loop through the venues array to display each venue as an ion-card -->
+        <ion-card *ngFor="let bar of bars" class="venue-card" (click)="openApiVenueDetails(bar)">
+          <!-- Venue image -->
+          <img class="venue-image" *ngIf="bar.photos && bar.photos.length > 0" [src]="bar.photos[0].photoUrl" alt="{{ bar.name }}">
+          <!-- Venue information -->
+          <ion-card-header>
+            <ion-card-title>{{ bar.name }}</ion-card-title>
+            <!-- <ion-card-subtitle>{{ venue.type }}</ion-card-subtitle> -->
+          </ion-card-header>
+
+          <!-- Venue tags in ion-card-content -->
+          <ion-card-content>
             <p>
               <ion-icon name="location-outline" class="icon"></ion-icon>
               <span>{{ bar.vicinity }}</span>
@@ -30,15 +33,12 @@
                 <span>{{ bar.rating }}</span>
               </ion-badge>
             </p>
-          </ion-label>
-        </ion-item>
-      </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </div>
     </div>
-    
-    <!-- Template when no bars are available -->
     <ng-template #noBars>
       <div class="no-bars-message">
         <p>No venues found in this area. Try searching for another location.</p>
       </div>
     </ng-template>
-  </div>
