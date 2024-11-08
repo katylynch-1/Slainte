@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MessagingService } from '../services/messaging.service';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
-import { User } from '@firebase/auth-types';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-messages-tab',
@@ -39,10 +39,31 @@ export class MessagesTabPage implements OnInit {
   }
 
   loadChats() {
-    this.messagingService.getUserChats().subscribe(data => {
-      this.chats = data; // Fetch the chats for the current user
+    this.messagingService.getUserChats().subscribe(async data => {
+      // Add recipient name and image URL to each chat entry
+      this.chats = await Promise.all(data.map(async chat => {
+        const recipientId = this.getRecipientId(chat);
+        const recipientData = await this.loadRecipientData(recipientId);
+        
+        return {
+          ...chat,
+          recipientName: recipientData ? `${recipientData.firstName} ${recipientData.lastName}` : 'Unknown User',
+          recipientImageURL: recipientData?.imageURL || 'assets/default-profile.png' // Use a default image if no imageURL is found
+        };
+      }));
+
+      // Sort by the latest message timestamp
+      this.chats = this.chats.sort((a, b) => b.lastMessageTimestamp - a.lastMessageTimestamp);
     });
   }
+
+  async loadRecipientData(userId: string) {
+    return await firstValueFrom(this.messagingService.getUserById(userId)).catch(error => {
+      console.error('Error loading recipient data:', error);
+      return null;
+    });
+  }
+  
 
   openChat(user2Id: string) {
     if (user2Id) {
@@ -65,6 +86,18 @@ export class MessagesTabPage implements OnInit {
     const recipientId = this.getRecipientId(chat);
     const recipient = this.users.find(user => user.uid === recipientId);
     return recipient ? `${recipient.firstName} ${recipient.lastName}` : 'Unknown User';
+  }
+
+  async refreshAllContent(event: any) {
+    await this.loadChats(); // Reload chats
+    // await this.loadUsers(); // Reload users
+    event.target.complete(); // Dismiss the refresher
+  }
+
+  async deleteChat(chat: any) {
+    const chatId = this.messagingService.generateChatId(this.currentUserId, this.getRecipientId(chat));
+    await this.messagingService.deleteChat(chatId, this.currentUserId);
+    this.chats = this.chats.filter(c => c !== chat);
   }
 
 }
