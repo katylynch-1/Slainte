@@ -29,7 +29,7 @@ export class Tab3Page implements OnInit {
     private authService: AuthenticationService, 
     private router: Router, 
     private modalController: ModalController, 
-    private userService: UserService, 
+    private userService: UserService,
     private actionSheetController: ActionSheetController,
     private saveVenues: SavevenuesService,
     private toastController: ToastController,
