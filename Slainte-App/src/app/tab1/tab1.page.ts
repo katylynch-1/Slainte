@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GeolocationService } from '../services/geolocation.service';
 import { ModalController } from '@ionic/angular';
-import { NotificationsComponent } from '../notifications/notifications.component';
 import { firstValueFrom } from 'rxjs';
 import { AuthenticationService } from '../services/authentication.service';
 
@@ -34,14 +33,6 @@ export class Tab1Page implements OnInit {
     } catch (error) {
       console.error('Error loading user data:', error);
     }
-  }
-
-  async openNotifications() {
-    const modal = await this.modalController.create({
-      component: NotificationsComponent,
-    });
-
-    return await modal.present();
   }
 }
 

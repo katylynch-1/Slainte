@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map, switchMap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { Observable, combineLatest, of } from 'rxjs';
 import firebase from 'firebase/compat/app';
 
 
@@ -81,16 +81,47 @@ getUserDetails(userIds: string[]): Observable<UserDetails[]> {
     await requestRef.delete();
   }
 
-  // Get real-time friend requests for a user, filtered by status
-  getFriendRequests(userId: string, status: 'pending' | 'accepted' | 'rejected'): Observable<any[]> {
-    return this.firestore.collection('userDetails').doc(userId).collection('friendRequests', ref => ref.where('status', '==', status)).snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.doc.data();
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      }))
+// Get real-time friend requests for a user, filtered by status, and include name and profile picture
+// Get real-time friend requests for a user, filtered by status, and include name and profile picture
+getFriendRequests(userId: string, status: 'pending' | 'accepted' | 'rejected'): Observable<any[]> {
+  return this.firestore.collection('userDetails').doc(userId).collection('friendRequests', ref => ref.where('status', '==', status))
+    .snapshotChanges()
+    .pipe(
+      switchMap(actions => {
+        const requests = actions.map(a => {
+          const requestData = a.payload.doc.data();
+          const requestId = a.payload.doc.id;
+          const fromUserId = requestData['fromUserId']; // Changed to fromUserId
+
+          // Fetch the sender's user details (the one who sent the friend request)
+          return this.firestore.collection<UserDetails>('userDetails').doc(fromUserId).valueChanges().pipe(
+            map((userData: UserDetails | undefined) => {
+              const result: any = {
+                id: requestId,
+                ...requestData
+              };
+
+              // Only add user details if available
+              if (userData) {
+                result.firstName = userData.firstName;
+                result.lastName = userData.lastName;
+                result.imageURL = userData.imageURL;
+              }
+
+              return result;
+            })
+          );
+        });
+
+        // Combine all the observables into a single observable array
+        return combineLatest(requests);
+      })
     );
-  }
+}
+
+
+
+
 
   // Get friends with user details
   getFriends(userId: string): Observable<UserDetails[]> {
