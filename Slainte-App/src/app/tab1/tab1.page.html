@@ -4,12 +4,11 @@
     <ion-icon class="notification-icon" name="notifications-outline" (click)="openNotifications()"></ion-icon>
   </ion-toolbar>
 </ion-header>
-
 <ion-content class="ion-padding">
-  <!-- <ion-refresher slot="fixed" (ionRefresh)="refreshAllContent($event)">
-    <ion-refresher-content pullingIcon="arrow-down" refreshingSpinner="bubbles"></ion-refresher-content>
-  </ion-refresher> -->
-
+  <div *ngIf="userDetails">
+    <h3>Hi, {{ userDetails.firstName }}!</h3>
+    <img [src]="userDetails.imageURL" class="profile-picture">
+  </div>
   <h3>Venues for You</h3>
    <app-venues-for-user></app-venues-for-user>
 

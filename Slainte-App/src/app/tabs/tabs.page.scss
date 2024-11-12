@@ -1,1 +1,11 @@
-
+@font-face {
+    font-family: 'PPMori';
+    src: url(/Slainte-App/src/assets/fonts/PPMori-Regular.otf) format(otf);
+  
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  body {
+    font-family: 'PPMori';
+  }
