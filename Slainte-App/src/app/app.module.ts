@@ -10,7 +10,6 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 
 import { FilterModalComponent } from './filter-modal/filter-modal.component';
-import { SafetyModalComponent } from './safety-modal/safety-modal.component';
 import { ChatComponent } from './chat/chat.component';
 import { EdituserdetailsComponent } from './edituserdetails/edituserdetails.component';
 import { NewChatComponent } from './new-chat/new-chat.component';
@@ -26,7 +25,7 @@ import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
 
 
 @NgModule({
-  declarations: [AppComponent, FilterModalComponent, EdituserdetailsComponent, SafetyModalComponent, ChatComponent, NewChatComponent],
+  declarations: [AppComponent, FilterModalComponent, EdituserdetailsComponent, ChatComponent, NewChatComponent],
   imports: [BrowserModule, IonicModule.forRoot({mode: 'ios'}), AppRoutingModule, FormsModule, AngularFireModule.initializeApp(environment.firebase), AngularFireAuthModule, AngularFirestoreModule, AngularFireDatabaseModule, ReactiveFormsModule, AngularFireMessagingModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
               { provide: FIREBASE_OPTIONS, useValue: environment.firebase},

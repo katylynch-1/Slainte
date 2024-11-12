@@ -8,3 +8,11 @@
     float: right;
     padding: 10px;
 }
+
+.profile-picture {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;  /* Makes the picture circular */
+    object-fit: cover;
+  }
+  
