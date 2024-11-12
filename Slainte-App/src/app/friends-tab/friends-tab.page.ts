@@ -3,6 +3,7 @@ import { FriendrequestsService } from '../services/friendrequests.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { User } from '@firebase/auth-types';
 import { firstValueFrom } from 'rxjs';
+import { ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'app-friends-tab',
@@ -19,7 +20,8 @@ export class FriendsTabPage implements OnInit {
 
   constructor(
     private friendRequestService: FriendrequestsService, 
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private actionSheetController: ActionSheetController
   ) {}
 
   async refreshAllContent(event: any) {
@@ -59,30 +61,58 @@ export class FriendsTabPage implements OnInit {
   }
 
   // Handle accepting a friend request
-  acceptRequest(requestId: string) {
-    if (this.currentUserId) {
-      this.friendRequestService.acceptFriendRequest(this.currentUserId, requestId).then(() => {
-        // After accepting the request, update the lists
-        this.incomingRequests = this.incomingRequests.filter(req => req.id !== requestId); // Remove from incoming requests
-        this.friendRequestService.getFriends(this.currentUserId).subscribe(friends => {
-          this.friendsList = friends; // Update the friends list
-        });
-      }).catch(error => {
+  acceptRequest(fromUserId: string) {
+    this.friendRequestService.acceptFriendRequest(fromUserId, this.currentUserId).subscribe({
+      next: () => {
+        console.log('Friend request accepted');
+        this.incomingRequests = this.incomingRequests.filter(request => request.id !== fromUserId); // Remove the accepted request
+      },
+      error: error => {
         console.error('Error accepting friend request:', error);
-      });
-    }
+      }
+    });
   }
 
-  // Handle rejecting a friend request
-  rejectRequest(requestId: string) {
-    if (this.currentUserId) {
-      this.friendRequestService.rejectFriendRequest(this.currentUserId, requestId).then(() => {
-        // After rejecting the request, update the lists
-        this.incomingRequests = this.incomingRequests.filter(req => req.id !== requestId); // Remove from incoming requests
-      }).catch(error => {
-        console.error('Error rejecting friend request:', error);
+  // Method to reject a friend request
+  rejectRequest(fromUserId: string) {
+    this.friendRequestService.rejectFriendRequest(fromUserId, this.currentUserId).then(() => {
+      console.log('Friend request rejected');
+      this.incomingRequests = this.incomingRequests.filter(request => request.id !== fromUserId); // Remove the rejected request
+    }).catch(error => {
+      console.error('Error rejecting friend request:', error);
+    });
+  }
+
+  removeFriend(fromUserId: string, toUserId: string): void {
+    this.friendRequestService.removeFriend(fromUserId, toUserId)
+      .then(() => {
+        console.log('Friend removed successfully');
+        // Optionally, show a success message or update UI
+      })
+      .catch((error) => {
+        console.error('Error removing friend:', error);
+        // Optionally, show an error message or handle the error in the UI
       });
-    }
+  }
+
+  async removeFriendActionSheet(friendId: string) {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Are you sure?',
+      buttons: [
+        {
+          text: 'Unfriend',
+          role: 'destructive',
+          handler: () => {
+            this.removeFriend(this.currentUserId, friendId);
+          },
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+      ],
+    });
+    await actionSheet.present();
   }
 
   // Update selected segment for tab navigation

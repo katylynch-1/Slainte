@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map, switchMap } from 'rxjs/operators';
-import { Observable, combineLatest, of } from 'rxjs';
+import { Observable, combineLatest, of, from } from 'rxjs';
 import firebase from 'firebase/compat/app';
 
 
@@ -28,7 +28,7 @@ getUserDetails(userIds: string[]): Observable<UserDetails[]> {
 }
 
   // Send Friend Request
-  async sendFriendRequest(fromUserId: string, toUserId: string): Promise<void> {
+async sendFriendRequest(fromUserId: string, toUserId: string): Promise<void> {
     const requestRef = this.firestore.collection('userDetails').doc(toUserId)
                        .collection('friendRequests').doc(fromUserId);
 
@@ -47,31 +47,33 @@ getUserDetails(userIds: string[]): Observable<UserDetails[]> {
     await requestRef.delete();
   }
 
-  // Accept Friend Request
-  async acceptFriendRequest(fromUserId: string, toUserId: string): Promise<void> {
-    const requestRef = this.firestore.collection('userDetails').doc(toUserId)
+// Update acceptFriendRequest to return an Observable instead of a Promise
+acceptFriendRequest(fromUserId: string, toUserId: string): Observable<void> {
+  const requestRef = this.firestore.collection('userDetails').doc(toUserId)
                      .collection('friendRequests').doc(fromUserId);
 
-    // Update status to 'accepted'
-    await requestRef.update({ status: 'accepted' });
+  // Update status to 'accepted' and then add friends
+  return from(
+    requestRef.update({ status: 'accepted' }).then(async () => {
+      // References to both user's friends collections
+      const toUserFriendsRef = this.firestore.collection('userDetails').doc(toUserId)
+                          .collection('friends').doc(fromUserId);
 
-    // Add each user to the other’s friends list (create the 'friends' collection if doesn't exist)
-    const toUserFriendsRef = this.firestore.collection('userDetails').doc(toUserId)
-                        .collection('friends').doc(fromUserId);
+      const fromUserFriendsRef = this.firestore.collection('userDetails').doc(fromUserId)
+                            .collection('friends').doc(toUserId);
 
-    const fromUserFriendsRef = this.firestore.collection('userDetails').doc(fromUserId)
-                          .collection('friends').doc(toUserId);
-
-    // Add the friend relationship to both user's 'friends' collection
-    await toUserFriendsRef.set({
-      userId: fromUserId, 
-      timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    });
-    await fromUserFriendsRef.set({
-      userId: toUserId, 
-      timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    });
-  }
+      // Add each user to the other's friends list
+      await toUserFriendsRef.set({
+        userId: fromUserId, 
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      await fromUserFriendsRef.set({
+        userId: toUserId, 
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+    })
+  );
+}
 
   // Reject Friend Request
   async rejectFriendRequest(fromUserId: string, toUserId: string): Promise<void> {
@@ -81,7 +83,6 @@ getUserDetails(userIds: string[]): Observable<UserDetails[]> {
     await requestRef.delete();
   }
 
-// Get real-time friend requests for a user, filtered by status, and include name and profile picture
 // Get real-time friend requests for a user, filtered by status, and include name and profile picture
 getFriendRequests(userId: string, status: 'pending' | 'accepted' | 'rejected'): Observable<any[]> {
   return this.firestore.collection('userDetails').doc(userId).collection('friendRequests', ref => ref.where('status', '==', status))
@@ -119,10 +120,6 @@ getFriendRequests(userId: string, status: 'pending' | 'accepted' | 'rejected'): 
     );
 }
 
-
-
-
-
   // Get friends with user details
   getFriends(userId: string): Observable<UserDetails[]> {
     return this.firestore.collection('userDetails').doc(userId)
@@ -152,4 +149,30 @@ getFriendRequests(userId: string, status: 'pending' | 'accepted' | 'rejected'): 
       }))
     );
   }
+
+  async removeFriend(fromUserId: string, toUserId: string): Promise<void> {
+    // References to both user's friends collections
+    const toUserFriendsRef = this.firestore.collection('userDetails').doc(toUserId)
+                          .collection('friends').doc(fromUserId);
+  
+    const fromUserFriendsRef = this.firestore.collection('userDetails').doc(fromUserId)
+                            .collection('friends').doc(toUserId);
+  
+    // Delete each user from the other's friends list
+    await toUserFriendsRef.delete();
+    await fromUserFriendsRef.delete();
+  
+    // Optionally, delete the friend request if it exists (either 'accepted', 'pending', or 'rejected')
+    const requestRef = this.firestore.collection('userDetails').doc(toUserId)
+                          .collection('friendRequests').doc(fromUserId);
+  
+    await requestRef.delete(); // Delete the friend request from the 'toUserId' side
+  
+    // You might want to clean up the reverse (if friend request was initiated from `fromUserId`)
+    const reverseRequestRef = this.firestore.collection('userDetails').doc(fromUserId)
+                           .collection('friendRequests').doc(toUserId);
+  
+    await reverseRequestRef.delete(); // Delete the reverse friend request from the 'fromUserId' side
+  }
+  
 }

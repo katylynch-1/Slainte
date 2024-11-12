@@ -33,7 +33,7 @@ export class Tab3Page implements OnInit {
     private actionSheetController: ActionSheetController,
     private saveVenues: SavevenuesService,
     private toastController: ToastController,
-    private friendRequestsService: FriendrequestsService // Inject FriendrequestsService
+    private friendRequestsService: FriendrequestsService,
   ) {}
 
   ngOnInit() {
