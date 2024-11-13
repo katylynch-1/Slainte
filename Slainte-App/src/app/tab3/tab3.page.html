@@ -160,9 +160,6 @@
     </div>
 
     <ion-segment class="segment" [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)">
-      <ion-segment-button value="favourites">
-          <ion-icon [name]="selectedSegment === 'favourites' ? 'heart' : 'heart-outline'"></ion-icon>
-      </ion-segment-button>
       <ion-segment-button value="saved">
           <ion-icon [name]="selectedSegment === 'saved' ? 'bookmark' : 'bookmark-outline'"></ion-icon>
       </ion-segment-button>
