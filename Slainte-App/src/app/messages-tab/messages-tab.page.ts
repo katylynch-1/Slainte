@@ -3,6 +3,8 @@ import { MessagingService } from '../services/messaging.service';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
 import { firstValueFrom } from 'rxjs';
+import { ActionSheetController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-messages-tab',
@@ -15,7 +17,10 @@ export class MessagesTabPage implements OnInit {
   currentUserId: string;
   users: any[] = [];
 
-  constructor(private authService: AuthenticationService, private messagingService: MessagingService, private router: Router) { }
+  constructor(private authService: AuthenticationService, 
+    private messagingService: MessagingService, 
+    private router: Router,
+    private actionSheetController: ActionSheetController) { }
 
   ngOnInit() {
     this.messagingService.getUserChats().subscribe(data => {
@@ -92,6 +97,26 @@ export class MessagesTabPage implements OnInit {
     await this.loadChats(); // Reload chats
     // await this.loadUsers(); // Reload users
     event.target.complete(); // Dismiss the refresher
+  }
+
+  async presentDeleteChatActionSheet(chat: any) {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Delete Chat',
+      buttons: [
+        {
+          text: 'Delete',
+          role: 'destructive',
+          handler: () => {
+            this.deleteChat(chat);
+          },
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+      ],
+    });
+    await actionSheet.present();
   }
 
   async deleteChat(chat: any) {

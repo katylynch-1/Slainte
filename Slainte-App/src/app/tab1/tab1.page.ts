@@ -3,6 +3,9 @@ import { GeolocationService } from '../services/geolocation.service';
 import { ModalController } from '@ionic/angular';
 import { SafetyModalComponent } from '../safety-modal/safety-modal.component';
 import { NotificationsComponent } from '../notifications/notifications.component';
+import { AuthenticationService } from '../services/authentication.service';
+import { User} from '@firebase/auth-types';
+import { firstValueFrom } from 'rxjs';
 
 declare var google: any;
 
@@ -16,11 +19,28 @@ export class Tab1Page implements OnInit {
 
   // Display users location on map
   map: google.maps.Map | undefined;
+  userDetails: any = null;
+  user : User;
 
-  constructor(private geolocationService: GeolocationService, private modalController: ModalController) {}
+  constructor(private geolocationService: GeolocationService, private modalController: ModalController, private authService: AuthenticationService) {}
 
   ngOnInit() {
-    this.initializeMap(); 
+    // this.initializeMap(); 
+    this.loadUserDetails();
+  }
+
+  async loadUserDetails(){
+    try {
+      this.user = await firstValueFrom(this.authService.getUser());
+      if(this.user){
+        const uid = this.user.uid;
+        this.userDetails = await firstValueFrom(this.authService.getUserDetails(uid));
+      }else {
+        console.error('No user is currently authenticated');
+      }
+    } catch(error){
+      console.error('Error loading user details', error);
+    }
   }
 
   async initializeMap() {

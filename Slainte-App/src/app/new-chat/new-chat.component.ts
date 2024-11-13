@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { UserService } from '../services/user.service';
 import { MessagingService } from '../services/messaging.service';
 import { AuthenticationService } from '../services/authentication.service';
@@ -32,7 +33,9 @@ export class NewChatComponent  implements OnInit {
   }
 
   loadUsers() {
-    this.users$ = this.userService.getUsers();
+    this.users$ = this.userService.getUsers().pipe(
+      map(users => users.filter(user => user.uid !== this.currentUserId)) // Filter out currently logged in user
+    );
   }
 
   startChat(user2Id: string) {

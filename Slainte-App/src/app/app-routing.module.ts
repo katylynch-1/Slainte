@@ -71,6 +71,10 @@ const routes: Routes = [
   {
     path: 'messages-tab',
     loadChildren: () => import('./messages-tab/messages-tab.module').then( m => m.MessagesTabPageModule)
+  },
+  {
+    path: 'tag-search',
+    loadChildren: () => import('./tag-search/tag-search.module').then( m => m.TagSearchPageModule)
   }
 
 ];

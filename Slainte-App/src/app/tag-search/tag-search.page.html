@@ -1,44 +1,17 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Explore</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ tag }}</ion-title> <!-- Display the selected tag as the title -->
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <!-- First row with heading and filter -->
-  <ion-row>
-    <ion-col>
-      <div class="headings">
-        <h2>Sláinte Venues</h2>
-      </div>
-    </ion-col>
-    <ion-col>
-      <div class="filter" style="text-align: right;">
-        <ion-icon name="filter" size="large" (click)="openFilterModal()"></ion-icon>
-      </div>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col size="12">
-      <p>
-        <i>Showing {{ countFilteredVenues() }} out of {{ countAllVenues() }} venues</i>
-      </p>
-    </ion-col>
-  </ion-row>
 
-  <!-- Row for selected filters -->
-  <ion-row *ngIf="selectedFilters.length > 0">
-    <ion-col>
-      <ion-chip *ngFor="let filter of selectedFilters" (click)="removeFilter(filter)">
-        <ion-label>{{ filter.label }}</ion-label>
-        <ion-icon name="close-outline"></ion-icon>
-      </ion-chip>
-    </ion-col>
-  </ion-row>
-  <!-- Venue list -->
   <ion-grid>
     <ion-row>
-      <ng-container *ngFor="let venue of filteredVenues"> 
+      <ng-container *ngFor="let venue of venues"> 
         <div (click)="openVenueDetails(venue)">
         <ion-col size="12" size-sm="6" size-md="4" size-lg="3" size-xl="3">
           <ion-card class="venue-card">

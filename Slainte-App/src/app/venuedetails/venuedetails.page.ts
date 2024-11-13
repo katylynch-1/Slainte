@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { VenuedataService } from '../services/venuedata.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { SavevenuesService } from '../services/savevenues.service';
@@ -123,5 +123,12 @@ async toggleSave() {
   openGoogleMaps(name: string) {
     const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(name)}`;
     window.open(url, '_blank'); // Opens in a new tab or the Google Maps app on mobile
+  }
+
+  goToTagSearch(tag: string){
+    const navigationExtras: NavigationExtras = {
+      queryParams: { tag: tag }
+    };
+    this.router.navigate(['tag-search'], navigationExtras);
   }
 }
