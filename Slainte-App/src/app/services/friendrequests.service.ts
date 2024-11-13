@@ -8,7 +8,8 @@ import firebase from 'firebase/compat/app';
 interface UserDetails {
   firstName: string;
   lastName: string;
-  imageURL?: string; // Optional since some users might not have a profile picture
+  imageURL?: string; 
+  id: string;
 }
 
 @Injectable({
@@ -19,15 +20,15 @@ export class FriendrequestsService {
   constructor(private firestore: AngularFirestore) { }
   
 // Function to fetch multiple users' details by IDs
-getUserDetails(userIds: string[]): Observable<UserDetails[]> {
-  if (userIds.length === 0) return of([]); // Return an empty array if no IDs provided
+// getUserDetails(userIds: string[]): Observable<UserDetails[]> {
+//   if (userIds.length === 0) return of([]); 
 
-  return this.firestore.collection<UserDetails>('userDetails', ref =>
-    ref.where(firebase.firestore.FieldPath.documentId(), 'in', userIds)
-  ).valueChanges({ idField: 'id' });
-}
+//   return this.firestore.collection<UserDetails>('userDetails', ref =>
+//     ref.where(firebase.firestore.FieldPath.documentId(), 'in', userIds)
+//   ).valueChanges({ idField: 'id' });
+// }
 
-  // Send Friend Request
+  // Send Friend Request - used on 'connect' component
 async sendFriendRequest(fromUserId: string, toUserId: string): Promise<void> {
     const requestRef = this.firestore.collection('userDetails').doc(toUserId)
                        .collection('friendRequests').doc(fromUserId);
@@ -47,7 +48,7 @@ async sendFriendRequest(fromUserId: string, toUserId: string): Promise<void> {
     await requestRef.delete();
   }
 
-// Update acceptFriendRequest to return an Observable instead of a Promise
+// Accept friend requests - used on friends tab component
 acceptFriendRequest(fromUserId: string, toUserId: string): Observable<void> {
   const requestRef = this.firestore.collection('userDetails').doc(toUserId)
                      .collection('friendRequests').doc(fromUserId);
@@ -75,7 +76,7 @@ acceptFriendRequest(fromUserId: string, toUserId: string): Observable<void> {
   );
 }
 
-  // Reject Friend Request
+  // Reject friend request - used on friends tab component
   async rejectFriendRequest(fromUserId: string, toUserId: string): Promise<void> {
     const requestRef = this.firestore.collection('userDetails').doc(toUserId)
                        .collection('friendRequests').doc(fromUserId);
@@ -83,7 +84,7 @@ acceptFriendRequest(fromUserId: string, toUserId: string): Observable<void> {
     await requestRef.delete();
   }
 
-// Get real-time friend requests for a user, filtered by status, and include name and profile picture
+// Load incoming friend requests (pending) - used in friends component
 getFriendRequests(userId: string, status: 'pending' | 'accepted' | 'rejected'): Observable<any[]> {
   return this.firestore.collection('userDetails').doc(userId).collection('friendRequests', ref => ref.where('status', '==', status))
     .snapshotChanges()
@@ -120,7 +121,7 @@ getFriendRequests(userId: string, status: 'pending' | 'accepted' | 'rejected'): 
     );
 }
 
-  // Get friends with user details
+  // Get friends list - used on tab3 component & friends tab to load friends
   getFriends(userId: string): Observable<UserDetails[]> {
     return this.firestore.collection('userDetails').doc(userId)
       .collection('friends')
@@ -139,17 +140,32 @@ getFriendRequests(userId: string, status: 'pending' | 'accepted' | 'rejected'): 
       );
   }
 
-  // Add a method to fetch all users with their details
-  getAllUsers(): Observable<any[]> {
-    return this.firestore.collection('userDetails').snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as any;
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      }))
+  // Loads other users with registered accounts except the current user and their friends - used in connect ccomponent
+  findOtherUsers(currentUserId: string): Observable<any[]> {
+    // First, fetch the friends list
+    return this.getFriends(currentUserId).pipe(
+      switchMap(friends => {
+        const friendsList = friends.map(friend => friend.id); // Extract friend IDs
+  
+        // Fetch all users from Firestore and filter out the current user and friends
+        return this.firestore.collection('userDetails').snapshotChanges().pipe(
+          map(actions =>
+            actions
+              .map(a => {
+                const data = a.payload.doc.data() as any; // Extract document data
+                const id = a.payload.doc.id;               // Get document ID
+                return { id, ...data };                    // Merge ID with data object
+              })
+              .filter(user => user.id !== currentUserId && !friendsList.includes(user.id)) // Exclude current user and friends
+          )
+        );
+      })
     );
   }
+  
+  
 
+  // Remove friend - used on friends tab component
   async removeFriend(fromUserId: string, toUserId: string): Promise<void> {
     // References to both user's friends collections
     const toUserFriendsRef = this.firestore.collection('userDetails').doc(toUserId)
