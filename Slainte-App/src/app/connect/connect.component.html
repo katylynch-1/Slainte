@@ -1,6 +1,6 @@
 <ion-content>
   <div class="horizontal-scroll-container">
-    <ion-card *ngFor="let user of users" class="user-card">
+    <ion-card *ngFor="let user of users" class="user-card" [routerLink]="['/userprofile', user.id]">
       <ion-icon 
       class="friendrequest-icon" 
       [name]="isFriendRequested(user.id) ? 'person-add' : 'person-add-outline'" 
@@ -149,6 +149,7 @@
           </ion-chip>
         </div>
       </ion-card-content>
-    </ion-card> <!-- This is the missing closing tag -->
+    </ion-card> 
+  <!-- This is the missing closing tag -->
   </div>
 </ion-content>

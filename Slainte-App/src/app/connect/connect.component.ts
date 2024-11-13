@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FriendrequestsService } from '../services/friendrequests.service';
 import { AuthenticationService } from '../services/authentication.service';
+import { ProfilenavigationService } from '../services/profilenavigation.service';
 
 @Component({
   selector: 'app-connect',
@@ -9,7 +10,7 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class ConnectComponent implements OnInit {
 
-  constructor(private authService: AuthenticationService, private friendRequestService: FriendrequestsService) { }
+  constructor(private authService: AuthenticationService, private friendRequestService: FriendrequestsService, private profileNavService: ProfilenavigationService) { }
 
   users: any[] = [];
   currentUserId: string | undefined;
@@ -66,5 +67,10 @@ export class ConnectComponent implements OnInit {
   // Check if a user has already received a friend request (if true icon turns filled)
   isFriendRequested(userId: string): boolean {
     return this.sentRequests.has(userId);  
+  }
+
+  // Call this method when a user clicks on a profile from anywhere in the app
+  viewUserProfile(userId: string) {
+    this.profileNavService.navigateToProfile(userId);
   }
 }
