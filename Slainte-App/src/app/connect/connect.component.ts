@@ -25,22 +25,16 @@ export class ConnectComponent implements OnInit {
     });
   }
 
-  // Component code
+  // Displays a list of users except the current user and friends
   loadUsers() {
-    // Make sure currentUserId is defined before proceeding
     if (!this.currentUserId) return;
-  
-    // Call the findOtherUsers service method and subscribe to it
     this.friendRequestService.findOtherUsers(this.currentUserId).subscribe(users => {
-      // Handle the list of users returned from the service
       this.users = users;
       console.log('All users except current user and friends:', this.users);
     });
   }
   
   
-    
-
   // Send a friend request and update the sentRequests set
   sendRequest(toUserId: string) {
     if (this.currentUserId) {
