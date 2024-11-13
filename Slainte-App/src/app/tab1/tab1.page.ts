@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { GeolocationService } from '../services/geolocation.service';
 import { ModalController } from '@ionic/angular';
-import { firstValueFrom } from 'rxjs';
 import { AuthenticationService } from '../services/authentication.service';
-
-declare var google: any;
+import { User} from '@firebase/auth-types';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-tab1',

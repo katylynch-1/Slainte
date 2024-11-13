@@ -1,14 +1,26 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Home</ion-title>
-  </ion-toolbar>
-</ion-header>
-<ion-content class="ion-padding">
-  <div *ngIf="userDetails">
-    <h3>Hi, {{ userDetails.firstName }}!</h3>
-    <img [src]="userDetails.imageURL" class="profile-picture">
+  
+  <div class="center-container">
+    <img src="/assets/images/Slainte-Logo.png" class="logo">
   </div>
-  <h3>Venues for You</h3>
+
+</ion-header>
+
+
+<ion-content class="ion-padding">
+
+  <div *ngIf="userDetails">
+    <ion-avatar class="profilePic">
+      <img [src]="userDetails?.imageURL ? userDetails.imageURL : 'https://ionicframework.com/docs/img/demos/avatar.svg'" alt="User Profile Picture">
+    </ion-avatar>
+    <h2>Hi {{ userDetails.firstName }}!</h2>
+  </div>
+  <br>
+  <!-- <ion-refresher slot="fixed" (ionRefresh)="refreshAllContent($event)">
+    <ion-refresher-content pullingIcon="arrow-down" refreshingSpinner="bubbles"></ion-refresher-content>
+  </ion-refresher> -->
+
+  <h3>Venues For You</h3>
    <app-venues-for-user></app-venues-for-user>
 
   <h3>Venues Nearby</h3>

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { from, Observable, of } from 'rxjs';
+import { from, Observable, of, firstValueFrom } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Message } from '../message.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -92,17 +93,40 @@ export class MessagingService {
       ]).then(() => {}); // Add an empty .then() to resolve as void
     });
   }
-  
-  
 
+  checkIfChatExists(chatId: string): Promise<boolean> {
+    return firstValueFrom(
+      this.db.object(`/chats/${chatId}`).valueChanges().pipe(
+        map(chat => !!chat)
+      )
+    );
+  }
+  
   generateChatId(user1Id: string, user2Id: string): string {
     // A simple way to generate a unique ID is to concatenate and sort the two user IDs
     return user1Id < user2Id ? `${user1Id}_${user2Id}` : `${user2Id}_${user1Id}`;
   }
 
+  // deleteChat(chatId: string, userId: string): Promise<void> {
+  //   const otherUserId = this.getRecipientId(chatId, userId);
+  //   const deletePromises = [
+  //     this.db.object(`/chats/${chatId}`).remove(),                  // Remove the chat from /chats
+  //     this.db.object(`/userChats/${userId}/${chatId}`).remove(),    // Remove the chat for the current user
+  //     this.db.object(`/userChats/${otherUserId}/${chatId}`).remove() // Remove the chat for the other user
+  //   ];
+  //   return Promise.all(deletePromises).then(() => {});
+  // }
+
   deleteChat(chatId: string, userId: string): Promise<void> {
-    return this.db.object(`/userChats/${userId}/${chatId}`).remove();
+    const otherUserId = this.getRecipientId(chatId, userId);
+    const deletePromises = [
+      this.db.object(`/chats/${chatId}`).remove(),                  // Remove the chat from /chats
+      this.db.object(`/userChats/${userId}/${chatId}`).remove(),    // Remove the chat for the current user
+      this.db.object(`/userChats/${otherUserId}/${chatId}`).remove() // Remove the chat for the other user
+    ];
+    return Promise.all(deletePromises).then(() => {});
   }
+  
 
 }
 

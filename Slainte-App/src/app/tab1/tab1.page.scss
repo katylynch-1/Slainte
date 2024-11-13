@@ -9,10 +9,26 @@
     padding: 10px;
 }
 
-.profile-picture {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;  /* Makes the picture circular */
-    object-fit: cover;
+.center-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
   }
   
+  .centered-content {
+    text-align: center;      /* Optional: Center-align text inside the content */
+    
+  }
+
+  .profilePic {
+    width: 40px; /* Adjust the size of the avatar */
+    height: 40px; /* Ensure the avatar is circular */
+    margin-right: 16px; /* Space between the avatar and user details */
+    float: left;
+  }
+
+  .logo {
+    width: 60px;
+    height: 60px;
+  }
+
