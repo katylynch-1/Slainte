@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
-import { UserService } from '../services/user.service';
 import { Router, NavigationExtras } from '@angular/router';
 import { User } from '@firebase/auth-types';
 import { EdituserdetailsComponent } from '../edituserdetails/edituserdetails.component';
@@ -29,7 +28,6 @@ export class Tab3Page implements OnInit {
     private authService: AuthenticationService, 
     private router: Router, 
     private modalController: ModalController, 
-    private userService: UserService,
     private actionSheetController: ActionSheetController,
     private saveVenues: SavevenuesService,
     private toastController: ToastController,

@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ChatComponent } from './chat/chat.component';
 import { UserListComponent } from './user-list/user-list.component'; 
 import { NewChatComponent } from './new-chat/new-chat.component';
+import { UserprofileComponent } from './userprofile/userprofile.component';
 
 
 const routes: Routes = [
@@ -75,7 +76,11 @@ const routes: Routes = [
   {
     path: 'friends-tab',
     loadChildren: () => import('./friends-tab/friends-tab.module').then( m => m.FriendsTabPageModule)
-  }
+  },
+  {
+    path: 'userprofile/:userId',
+    component: UserprofileComponent
+  }  
 
 ];
 @NgModule({
