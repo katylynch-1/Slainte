@@ -71,6 +71,10 @@ const routes: Routes = [
   {
     path: 'messages-tab',
     loadChildren: () => import('./messages-tab/messages-tab.module').then( m => m.MessagesTabPageModule)
+  },
+  {
+    path: 'friends-tab',
+    loadChildren: () => import('./friends-tab/friends-tab.module').then( m => m.FriendsTabPageModule)
   }
 
 ];

@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Friends</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="refreshAllContent($event)">
+    <ion-refresher-content pullingIcon="bubbles" refreshingSpinner="bubbles"></ion-refresher-content>
+  </ion-refresher>
+  <!-- Segment for Friends, Requests, and Activity -->
+  <ion-segment class="segment" [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)" color="primary">
+    <ion-segment-button value="friends">
+      My Friends
+    </ion-segment-button>
+    <ion-segment-button value="requests">
+      Friend Requests
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Friends Tab -->
+  <ng-container *ngIf="selectedSegment === 'friends'">
+    <ion-list *ngIf="friendsList && friendsList.length > 0; else noFriends">
+      <ion-item *ngFor="let friend of friendsList">
+        <ion-avatar slot="start">
+          <img [src]="friend.imageURL|| 'https://ionicframework.com/docs/img/demos/avatar.svg'" />
+        </ion-avatar>
+        <ion-label>{{ friend.firstName }} {{ friend.lastName }}</ion-label>
+        <ion-icon slot="end" name="close-outline" (click)="removeFriendActionSheet(friend.id)"></ion-icon>
+      </ion-item>
+    </ion-list>
+    
+    <!-- No Friends Message -->
+    <ng-template #noFriends>
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            <h2>No Friends</h2>
+            <p>You have no friends yet. Accept some requests to connect!</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ng-template>
+  </ng-container>
+
+  <!-- Requests Tab -->
+  <ng-container *ngIf="selectedSegment === 'requests'">
+    <ion-list *ngIf="incomingRequests && incomingRequests.length > 0; else noIncomingRequests">
+      <ion-item *ngFor="let request of incomingRequests">
+        <ion-avatar slot="start">
+          <img [src]="request.imageURL || 'https://ionicframework.com/docs/img/demos/avatar.svg'" alt="Friend's Profile Picture">
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ request.firstName }} {{ request.lastName }}</h2>
+          <p>sent you a friend request.</p>
+        </ion-label>
+        
+        <!-- Buttons to accept or reject -->
+        <ion-button (click)="acceptRequest(request.id)" expand="block">Accept</ion-button>
+        <ion-button (click)="rejectRequest(request.id)" expand="block">Reject</ion-button>
+      </ion-item>
+    </ion-list>
+
+    <!-- No Incoming Requests Message -->
+    <ng-template #noIncomingRequests>
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            <p>You have no new friend requests.</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ng-template>
+  </ng-container>
+</ion-content>

@@ -8,7 +8,6 @@ import { VenuesComponent } from '../venues/venues.component';
 import { VenuesForUserComponent } from '../venues-for-user/venues-for-user.component'; // Import the component
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { ConnectComponent } from '../connect/connect.component';
-import { NotificationsComponent } from '../notifications/notifications.component';
 
 @NgModule({
   imports: [
@@ -19,6 +18,6 @@ import { NotificationsComponent } from '../notifications/notifications.component
     Tab1PageRoutingModule,
     
   ],
-  declarations: [Tab1Page, VenuesComponent, VenuesForUserComponent, ConnectComponent, NotificationsComponent]
+  declarations: [Tab1Page, VenuesComponent, VenuesForUserComponent, ConnectComponent]
 })
 export class Tab1PageModule {}

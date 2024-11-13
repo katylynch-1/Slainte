@@ -25,12 +25,21 @@ export class ConnectComponent implements OnInit {
     });
   }
 
-  // Load all users except the current user
+  // Component code
   loadUsers() {
-    this.friendRequestService.getAllUsers().subscribe(users => {
-      this.users = users.filter(user => user.id !== this.currentUserId);
+    // Make sure currentUserId is defined before proceeding
+    if (!this.currentUserId) return;
+  
+    // Call the findOtherUsers service method and subscribe to it
+    this.friendRequestService.findOtherUsers(this.currentUserId).subscribe(users => {
+      // Handle the list of users returned from the service
+      this.users = users;
+      console.log('All users except current user and friends:', this.users);
     });
   }
+  
+  
+    
 
   // Send a friend request and update the sentRequests set
   sendRequest(toUserId: string) {
@@ -46,8 +55,22 @@ export class ConnectComponent implements OnInit {
     }
   }
 
-  // Check if a user has already received a friend request
+    // Send a friend request and update the sentRequests set
+    unsendRequest(toUserId: string) {
+      if (this.currentUserId) {
+        this.friendRequestService.unsendFriendRequest(this.currentUserId, toUserId)
+          .then(() => {
+            console.log('Friend request sent');
+            this.sentRequests.add(toUserId); // Add to the sentRequests set
+          })
+          .catch(error => {
+            console.error('Error sending friend request:', error);
+          });
+      }
+    }
+
+  // Check if a user has already received a friend request (if true icon turns filled)
   isFriendRequested(userId: string): boolean {
-    return this.sentRequests.has(userId);  // Returns true if the user ID is in the Set
+    return this.sentRequests.has(userId);  
   }
 }

@@ -33,7 +33,7 @@ export class Tab3Page implements OnInit {
     private actionSheetController: ActionSheetController,
     private saveVenues: SavevenuesService,
     private toastController: ToastController,
-    private friendRequestsService: FriendrequestsService // Inject FriendrequestsService
+    private friendRequestsService: FriendrequestsService,
   ) {}
 
   ngOnInit() {
@@ -42,34 +42,54 @@ export class Tab3Page implements OnInit {
 
   async loadUserDetails() {
     try {
-      // Get the currently authenticated user
+      // 1. Get the currently authenticated user
       this.user = await firstValueFrom(this.authService.getUser());
   
-      if (this.user) {
-        const uid = this.user.uid;  // Get the user's UID
-  
-        // Fetch user details including saved venues
-        this.userDetails = await firstValueFrom(this.authService.getUserDetails(uid));
-  
-        // Fetch saved venues using SavevenuesService
-        const savedVenues = await this.saveVenues.getSavedVenues(uid); // Get saved venues
-        this.savedVenues = await this.saveVenues.getVenuesWithImages(savedVenues); // Pass fetched venues to get images
-  
-        // Fetch the accepted friend requests (friends list)
-        this.friendRequestsService.getFriends(uid).subscribe(friends => {
-          console.log('Fetched Friends:', friends); // Log the friends data to verify it's correct
-          this.friendsList = friends;  // Store the fetched friends in friendsList
-        });
-  
-        // Log the saved venues for debugging
-        console.log('Saved Venues:', this.savedVenues);
-      } else {
+      if (!this.user) {
         console.error('No user is currently authenticated.');
+        return;
+      }
+  
+      const uid = this.user.uid;  // Get the user's UID
+      
+      // 2. Fetch user details
+      try {
+        this.userDetails = await firstValueFrom(this.authService.getUserDetails(uid));
+        console.log('Fetched user details:', this.userDetails);
+      } catch (error) {
+        console.error('Error fetching user details:', error);
+        throw error;
+      }
+  
+      // 3. Fetch saved venues, only proceed if there are venues
+      try {
+        const savedVenues = await this.saveVenues.getSavedVenues(uid);
+        if (savedVenues && savedVenues.length > 0) {
+          this.savedVenues = await this.saveVenues.getVenuesWithImages(savedVenues);
+          console.log('Fetched saved venues with images:', this.savedVenues);
+        } else {
+          console.log('No saved venues found for this user.');
+          this.savedVenues = [];  // Set an empty array if no venues found
+        }
+      } catch (error) {
+        console.error('Error fetching saved venues:', error);
+        this.savedVenues = [];  // Fallback to empty array if fetching venues fails
+      }
+  
+      // 4. Fetch accepted friend requests and update friendsList
+      try {
+        this.friendsList = await firstValueFrom(this.friendRequestsService.getFriends(uid));
+        console.log('Fetched Friends:', this.friendsList);
+      } catch (error) {
+        console.error('Error fetching friends:', error);
+        throw error;
       }
     } catch (error) {
       console.error('Error loading user details:', error);
     }
   }
+  
+  
   
 
   // Add the refresh method
