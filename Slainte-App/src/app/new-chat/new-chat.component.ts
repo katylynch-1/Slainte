@@ -38,13 +38,32 @@ export class NewChatComponent  implements OnInit {
     );
   }
 
-  startChat(user2Id: string) {
-    console.log('Starting chat with:', user2Id);
+  // startChat(user2Id: string) {
+  //   const chatId = this.messagingService.generateChatId(this.currentUserId, user2Id);
+  //   this.messagingService.createChat(chatId, this.currentUserId, user2Id).then(() => {
+  //     console.log('Chat created successfully');
+  //     this.router.navigateByUrl(`/chat/${user2Id}`);
+  //   }).catch(error => console.error('Error creating chat:', error));
+  // }
+
+  async startChat(user2Id: string) {
     const chatId = this.messagingService.generateChatId(this.currentUserId, user2Id);
-    this.messagingService.createChat(chatId, this.currentUserId, user2Id).then(() => {
-      console.log('Chat created successfully');
+    
+    // Check if the chat already exists
+    const chatExists = await this.messagingService.checkIfChatExists(chatId);
+    
+    if (chatExists) {
+      // Navigate to existing chat if it already exists
+      console.log('Chat already exists, navigating to it.');
       this.router.navigateByUrl(`/chat/${user2Id}`);
-    }).catch(error => console.error('Error creating chat:', error));
+    } else {
+      // Otherwise, create a new chat
+      console.log('Creating a new chat.');
+      this.messagingService.createChat(chatId, this.currentUserId, user2Id).then(() => {
+        console.log('Chat created successfully');
+        this.router.navigateByUrl(`/chat/${user2Id}`);
+      }).catch(error => console.error('Error creating chat:', error));
+    }
   }
 
 }
