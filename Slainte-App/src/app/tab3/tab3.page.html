@@ -7,7 +7,7 @@
 </ion-header>
 <ion-content>
   <ion-refresher slot="fixed" (ionRefresh)="refreshAllContent($event)">
-    <ion-refresher-content pullingIcon="arrow-down" refreshingSpinner="bubbles"></ion-refresher-content>
+    <ion-refresher-content pullingIcon="bubbles" refreshingSpinner="bubbles"></ion-refresher-content>
   </ion-refresher>
   <div class="content-container">
     <div class="profile-container">
@@ -160,9 +160,6 @@
     </div>
 
     <ion-segment class="segment" [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)">
-      <ion-segment-button value="favourites">
-          <ion-icon [name]="selectedSegment === 'favourites' ? 'heart' : 'heart-outline'"></ion-icon>
-      </ion-segment-button>
       <ion-segment-button value="saved">
           <ion-icon [name]="selectedSegment === 'saved' ? 'bookmark' : 'bookmark-outline'"></ion-icon>
       </ion-segment-button>
