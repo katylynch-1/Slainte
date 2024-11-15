@@ -16,7 +16,6 @@
           <div class="card-header-container">
             <ion-card-title> {{venue.name}} </ion-card-title>
             <div class="icons-container">
-              <ion-icon name="heart-outline" class="icon"></ion-icon>
               <ion-icon class="icon" [name]="isSaved ? 'bookmark' : 'bookmark-outline'" (click)="toggleSave()"></ion-icon>
           </div>
           </div>
