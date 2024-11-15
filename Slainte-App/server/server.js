@@ -2,7 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const cors = require('cors'); // CORS middleware
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 
 const GOOGLE_API_KEY = 'AIzaSyB7PYP1oKkK-1qkgTus3x0C_uRbqPdfAa0';
 
@@ -88,7 +88,7 @@ app.listen(port, () => {
     console.log(`Server listening at http://slainte-1.web.app:${port}`);
 });
 
-// http://localhost:3000/api/place?lat=53.3442&lng=-6.2674&radius=1000 - works on Postman
+// https://slainte-app-958291041038.europe-west1.run.app/api/places?lat=53.3442&lng=-6.2674&radius=1000 - works on Postman
 // https://maps.googleapis.com/maps/api/place/nearbysearch/json?&location=53.3567,-6.2682&radius=1000&type=bar,night_club&keyword=pub&key=AIzaSyB7PYP1oKkK-1qkgTus3x0C_uRbqPdfAa0
 // This ^ works in browser and returns JSON data displaying a list of pubs/bars only no hotels
 

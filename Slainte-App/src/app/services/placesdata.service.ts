@@ -9,8 +9,9 @@ export class PlacesdataService {
 
   // This service is strictly to retrieve a list of nearby venues through places API and is used to geocode locations 
 
-  private placesServerUrl = 'http://localhost:3000/api/places'; // I think this has to match line 12 on backend server
-  private geocodingServerUrl = 'http://localhost:3000/api/geocode';
+  private placesServerUrl = 'https://slainte-app-958291041038.europe-west1.run.app/api/places'; // I think this has to match line 12 on backend server
+  private geocodingServerUrl = 'https://slainte-app-958291041038.europe-west1.run.app/api/geocode';
+
 
   constructor(private http: HttpClient) {}
 
