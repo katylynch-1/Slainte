@@ -1,8 +1,8 @@
 {
-  "functions": [
-    {
+  "functions": 
+    { 
       "source": "functions",
-      "codebase": "default",
+      "codebase": "functions",
       "ignore": [
         "node_modules",
         ".git",
@@ -10,6 +10,20 @@
         "firebase-debug.*.log",
         "*.local"
       ]
-    }
-  ]
+    },
+  "hosting": {
+    "site": "slainte-1.firebaseapp.com",
+    "public": "www",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/api/**",
+        "function": "api"
+      }
+    ]
+  }
 }
