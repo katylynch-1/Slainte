@@ -6,6 +6,7 @@ import { MessagingService } from '../services/messaging.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { FriendrequestsService } from '../services/friendrequests.service';
 
 @Component({
   selector: 'app-new-chat',
@@ -19,7 +20,12 @@ export class NewChatComponent  implements OnInit {
 
   recipientId: string;
 
-  constructor(private userService: UserService, private messagingService: MessagingService, private authService: AuthenticationService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private userService: UserService, 
+    private messagingService: MessagingService, 
+    private authService: AuthenticationService, 
+    private router: Router, 
+    private route: ActivatedRoute,
+    private friendRequestsService: FriendrequestsService) { }
 
   ngOnInit() {
     this.recipientId = this.route.snapshot.paramMap.get('recipientId');
@@ -32,10 +38,14 @@ export class NewChatComponent  implements OnInit {
     });
   }
 
+  // loadUsers() {
+  //   this.users$ = this.userService.getUsers().pipe(
+  //     map(users => users.filter(user => user.uid !== this.currentUserId)) // Filter out currently logged in user
+  //   );
+  // }
+
   loadUsers() {
-    this.users$ = this.userService.getUsers().pipe(
-      map(users => users.filter(user => user.uid !== this.currentUserId)) // Filter out currently logged in user
-    );
+    this.users$ = this.friendRequestsService.getFriends(this.currentUserId);
   }
 
   // startChat(user2Id: string) {

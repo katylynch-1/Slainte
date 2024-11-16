@@ -3,7 +3,7 @@ PODS:
     - CapacitorCordova
   - CapacitorApp (6.0.0):
     - Capacitor
-  - CapacitorCamera (6.0.2):
+  - CapacitorCamera (6.1.0):
     - Capacitor
   - CapacitorCordova (6.1.1)
   - CapacitorGeolocation (6.0.1):
@@ -11,6 +11,8 @@ PODS:
   - CapacitorHaptics (6.0.0):
     - Capacitor
   - CapacitorKeyboard (6.0.1):
+    - Capacitor
+  - CapacitorPushNotifications (6.0.2):
     - Capacitor
   - CapacitorStatusBar (6.0.0):
     - Capacitor
@@ -23,6 +25,7 @@ DEPENDENCIES:
   - "CapacitorGeolocation (from `../../node_modules/@capacitor/geolocation`)"
   - "CapacitorHaptics (from `../../node_modules/@capacitor/haptics`)"
   - "CapacitorKeyboard (from `../../node_modules/@capacitor/keyboard`)"
+  - "CapacitorPushNotifications (from `../../node_modules/@capacitor/push-notifications`)"
   - "CapacitorStatusBar (from `../../node_modules/@capacitor/status-bar`)"
 
 EXTERNAL SOURCES:
@@ -40,19 +43,22 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/haptics"
   CapacitorKeyboard:
     :path: "../../node_modules/@capacitor/keyboard"
+  CapacitorPushNotifications:
+    :path: "../../node_modules/@capacitor/push-notifications"
   CapacitorStatusBar:
     :path: "../../node_modules/@capacitor/status-bar"
 
 SPEC CHECKSUMS:
   Capacitor: 8941aba4364ba9d1b22188569001f2ce45cc2b00
   CapacitorApp: 9d53aec7101f7b030a950c5bdc4df8612576b279
-  CapacitorCamera: ed022171dbf3853e68eec877b4d78995378af6b7
+  CapacitorCamera: 81ce64062cd82b82cc75a79616fda4bd09d7f643
   CapacitorCordova: 8f2cc8d8d3619c566e9418fe8772064a94266106
   CapacitorGeolocation: 39dca51d755f08ed1d43e51be55291a402cdc64f
   CapacitorHaptics: 9ebc9363f0e9b8eb4295088a0b474530acf1859b
   CapacitorKeyboard: 5f32a712adf41e07a61caafb82cf29fb6d8ba123
+  CapacitorPushNotifications: ccd797926c030acad3d5498ef452c735c90a2c89
   CapacitorStatusBar: 2e4369f99166125435641b1908d05f561eaba6f6
 
-PODFILE CHECKSUM: 1577608f09c27b8b333855a502c521fa53186552
+PODFILE CHECKSUM: 9109f5ef6dc78eb29d36623b9571ad7878017827
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2
