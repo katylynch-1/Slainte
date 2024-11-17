@@ -21,14 +21,14 @@
   <!-- Friends Tab -->
   <ng-container *ngIf="selectedSegment === 'friends'">
     <ion-list *ngIf="friendsList && friendsList.length > 0; else noFriends">
-      <ion-item *ngFor="let friend of friendsList">
+      <ion-item *ngFor="let friend of friendsList" [routerLink]="['/userprofile', friend.id]">
         <ion-avatar slot="start">
-          <img [src]="friend.imageURL|| 'https://ionicframework.com/docs/img/demos/avatar.svg'" />
+          <img [src]="friend.imageURL || 'https://ionicframework.com/docs/img/demos/avatar.svg'" />
         </ion-avatar>
         <ion-label>{{ friend.firstName }} {{ friend.lastName }}</ion-label>
-        <ion-icon slot="end" name="close-outline" (click)="removeFriendActionSheet(friend.id)"></ion-icon>
+        <!-- <ion-icon slot="end" name="close-outline" (click)="removeFriendActionSheet(friend.id)"></ion-icon> -->
       </ion-item>
-    </ion-list>
+    </ion-list>  
     
     <!-- No Friends Message -->
     <ng-template #noFriends>

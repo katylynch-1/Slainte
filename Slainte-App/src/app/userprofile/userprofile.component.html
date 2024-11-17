@@ -154,11 +154,33 @@
             <ion-label>Games</ion-label>
           </ion-chip>
         </div>
-      </div>
+      </div>     
     </div>
   </div>
+  
+      <!-- Add Friend button below the profile details -->
+      <div *ngIf="isFriend; else notFriends">
+        <ion-button color="success" class="button" (click)="removeFriendActionSheet(userId)">
+          <ion-icon name="checkmark"></ion-icon>
+          Friends
+        </ion-button>
+      </div>
+    
+      <ng-template #notFriends>
+        <ion-button 
+          [color]="isRequestPending ? 'warning' : 'primary'" 
+          (click)="sendRequest(userId)" class="button">
+          <ng-container *ngIf="isRequestPending; else addFriendText">
+            <ion-icon name="checkmark"></ion-icon>
+            Request Sent
+          </ng-container>
+          <ng-template #addFriendText>
+            <ion-icon name="person-add-outline"></ion-icon>
+            Add Friend
+          </ng-template>
+        </ion-button>
+      </ng-template>
 
-<!-- Segment to toggle between Saved Venues and Friends -->
 <ion-segment class="segment" [(ngModel)]="selectedSegment" value="savedVenues">
   <ion-segment-button value="savedVenues">
     <ion-icon [name]="selectedSegment === 'savedVenues' ? 'bookmark' : 'bookmark-outline'"></ion-icon>
@@ -185,9 +207,9 @@
 
 <!-- Friends Section -->
 <div *ngIf="selectedSegment === 'friends'">
-  <div *ngIf="userProfile?.friends?.length; else noFriends">
+  <div *ngIf="userProfile?.friendsList?.length; else noFriends">
     <ion-list>
-      <ion-item *ngFor="let friend of userProfile.friends">
+      <ion-item *ngFor="let friend of userProfile.friendsList">
         <ion-avatar slot="start">
           <img [src]="friend.imageURL">
         </ion-avatar>
@@ -199,5 +221,4 @@
     <p>No friends found.</p>
   </ng-template>
 </div>
-
 </ion-content>

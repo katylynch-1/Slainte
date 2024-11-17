@@ -10,6 +10,7 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { SavevenuesService, SavedVenue } from '../services/savevenues.service';
 import { ToastController } from '@ionic/angular';
 import { FriendrequestsService } from '../services/friendrequests.service'; // Import FriendrequestsService
+import { ProfilenavigationService } from '../services/profilenavigation.service';
 
 @Component({
   selector: 'app-tab3',
@@ -32,6 +33,7 @@ export class Tab3Page implements OnInit {
     private saveVenues: SavevenuesService,
     private toastController: ToastController,
     private friendRequestsService: FriendrequestsService,
+    private profileNavigation: ProfilenavigationService
   ) {}
 
   ngOnInit() {
@@ -87,9 +89,10 @@ export class Tab3Page implements OnInit {
     }
   }
   
+  viewUserProfile(userId: string) {
+    this.profileNavigation.navigateToProfile(userId);
+  }
   
-  
-
   // Add the refresh method
   async refreshAllContent(event: any) {
     await this.loadUserDetails(); // Reload user details, saved venues, and friends list

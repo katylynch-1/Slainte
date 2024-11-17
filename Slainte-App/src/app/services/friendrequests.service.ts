@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { Observable, combineLatest, of, from } from 'rxjs';
 import firebase from 'firebase/compat/app';
 
@@ -121,6 +121,7 @@ getFriendRequests(userId: string, status: 'pending' | 'accepted' | 'rejected'): 
     );
 }
 
+
   // Get friends list - used on tab3 component & friends tab to load friends
   getFriends(userId: string): Observable<UserDetails[]> {
     return this.firestore.collection('userDetails').doc(userId)
@@ -162,7 +163,30 @@ getFriendRequests(userId: string, status: 'pending' | 'accepted' | 'rejected'): 
       })
     );
   }
-  
+
+  // Checks whether the users are friends already - used in userprofile component
+  checkFriendshipStatus(userId: string, friendId: string): Observable<boolean> {
+    return this.firestore
+      .collection('userDetails')  // Navigate to the userDetails collection
+      .doc(userId)               // Access the document for the current user
+      .collection('friends')     // Navigate to the 'friends' sub-collection
+      .doc(friendId)             // Access the document for the specific friend
+      .get()                     // Fetch the document snapshot
+      .pipe(
+        map((doc) => doc.exists) // Map the document to a boolean: true if exists, false otherwise
+      );
+  }
+
+  checkPendingRequest(currentUserId: string, targetUserId: string): Observable<boolean> {
+    return this.firestore.collection(`userDetails/${targetUserId}/friendRequests`, ref =>
+      ref.where('fromUserId', '==', currentUserId).where('status', '==', 'pending')).get().pipe(
+      map(querySnapshot => !querySnapshot.empty), // Returns true if a pending request exists, otherwise false
+      catchError((error) => {
+        console.error('Error checking for pending friend request:', error);
+        return of(false); // Return false in case of an error
+      })
+    );
+  }
   
 
   // Remove friend - used on friends tab component

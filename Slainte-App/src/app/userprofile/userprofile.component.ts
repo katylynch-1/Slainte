@@ -3,7 +3,11 @@ import { ActivatedRoute, NavigationExtras } from '@angular/router';
 import { FriendrequestsService } from '../services/friendrequests.service';
 import { Router } from '@angular/router';
 import { SavevenuesService } from '../services/savevenues.service';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, of, switchMap } from 'rxjs';
+import { ActionSheetController } from '@ionic/angular';
+import { AuthenticationService } from '../services/authentication.service';
+import { User } from '@firebase/auth-types';
+
 
 @Component({
   selector: 'app-userprofile',
@@ -12,29 +16,50 @@ import { firstValueFrom } from 'rxjs';
 })
 export class UserprofileComponent  implements OnInit {
 
-  userId: string;
+  userId: string; // The ID of the other user
   userProfile: any;
   selectedSegment: string = 'savedVenues'; // Default selected segment
+  currentUserId: string; // Current user ID
+  isFriend: boolean; // Tracks friendship status
+  sentRequests = new Set<string>();  // Needed for add friend functionality
+  isRequestPending: boolean;
 
-  constructor(private route: ActivatedRoute, private router: Router, private friendRequestService: FriendrequestsService, private saveVenues: SavevenuesService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private friendRequestService: FriendrequestsService, private saveVenues: SavevenuesService, private actionSheetController: ActionSheetController, private authService: AuthenticationService) { }
 
   ngOnInit() {
-    // Get the friendId from the URL parameter
-    this.route.paramMap.subscribe(params => {
-      this.userId = params.get('userId');  // Retrieve the userId parameter
-      this.loadUserProfile();  // Call function to load profile data
+    this.authService.getUser().pipe(
+      switchMap((user) => {
+        if (user) {
+          this.currentUserId = user.uid; // Set current user ID
+          console.log('Authenticated user ID:', this.currentUserId);
+          return this.route.paramMap; 
+        } else {
+          console.error('No authenticated user found.');
+          throw new Error('No authenticated user');
+        }
+      })
+    ).subscribe({
+      next: (params) => {
+        this.userId = params.get('userId'); // Retrieve the other user's ID
+        this.loadUserProfile(); // Load profile data
+        this.checkFriendshipStatus(); 
+      },
+      error: (error) => {
+        console.error('Error initializing component:', error);
+      }
     });
   }
+  
   
   // Load the friend's profile using the friendId
   async loadUserProfile() {
     if (this.userId) {
       try {
-        // Fetch the user profile data
+        // Get the user profile data
         const profiles = await firstValueFrom(this.friendRequestService.getUserDetails([this.userId]));
         this.userProfile = profiles[0];  // Assume only one profile is returned
   
-        // Fetch saved venues with images for the user
+        // Get saved venues with images for the user
         const savedVenues = await this.saveVenues.getSavedVenues(this.userId);
         if (savedVenues && savedVenues.length > 0) {
           this.userProfile.savedVenues = await this.saveVenues.getVenuesWithImages(savedVenues);
@@ -44,7 +69,7 @@ export class UserprofileComponent  implements OnInit {
           this.userProfile.savedVenues = [];
         }
   
-        // Fetch the friend list for the user's profile
+        // Get the friend list for the user's profile
         this.userProfile.friendsList = await firstValueFrom(this.friendRequestService.getFriends(this.userId));
         console.log('Fetched Friends:', this.userProfile.friendsList);
   
@@ -52,6 +77,80 @@ export class UserprofileComponent  implements OnInit {
         console.error('Error loading user details or friends list:', error);
       }
     }
+  }
+
+  // Call the service to check friendship status
+  checkFriendshipStatus() {
+    if (!this.currentUserId || !this.userId) return;
+  
+    // Check friendship status
+    this.friendRequestService.checkFriendshipStatus(this.currentUserId, this.userId).pipe(
+      switchMap((status) => {
+        this.isFriend = status;
+        console.log(`Friendship status between ${this.currentUserId} and ${this.userId}:`, status);
+  
+        if (!status) {
+          // If not friends, check if a pending request exists in the other user's collection
+          return this.friendRequestService.checkPendingRequest(this.currentUserId, this.userId);
+        } else {
+          this.isRequestPending = false; // No pending request if already friends
+          return of(false); // Return false to stop further checks
+        }
+      })
+    ).subscribe({
+      next: (isPending) => {
+        this.isRequestPending = isPending;
+        console.log(`Pending request status between ${this.currentUserId} and ${this.userId}:`, this.isRequestPending);
+      },
+      error: (error) => {
+        console.error('Error checking friendship or pending request:', error);
+      }
+    });
+  }
+  
+
+  sendRequest(toUserId: string) {
+    if (this.currentUserId) {
+      this.friendRequestService.sendFriendRequest(this.currentUserId, toUserId)
+        .then(() => {
+          console.log('Friend request sent');
+          this.sentRequests.add(toUserId); // Add to the sentRequests set
+          this.checkFriendshipStatus(); // Recheck friendship status after sending the friend request for instant UI updates
+        })
+        .catch(error => {
+          console.error('Error sending friend request:', error);
+        });
+    }
+  }
+
+  removeFriend(fromUserId: string, toUserId: string): void {
+    this.friendRequestService.removeFriend(fromUserId, toUserId)
+      .then(() => {
+        console.log('Friend removed successfully');
+      })
+      .catch((error) => {
+        console.error('Error removing friend:', error);
+      });
+  }
+
+  async removeFriendActionSheet(friendId: string) {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Are you sure?',
+      buttons: [
+        {
+          text: 'Unfriend',
+          role: 'destructive',
+          handler: () => {
+            this.removeFriend(this.currentUserId, friendId);
+          },
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+      ],
+    });
+    await actionSheet.present();
   }
 
   openVenueDetailsPage(venue: any) {
