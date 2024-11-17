@@ -4,7 +4,7 @@ import { ChatComponent } from './chat/chat.component';
 import { UserListComponent } from './user-list/user-list.component'; 
 import { NewChatComponent } from './new-chat/new-chat.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
-
+import { ShareWithFriendsComponent } from './share-with-friends/share-with-friends.component';
 
 const routes: Routes = [
   {
@@ -68,6 +68,9 @@ const routes: Routes = [
   },
   { 
     path: 'new-chat', component: NewChatComponent
+  },
+  { 
+    path: 'share-with-friends', component: ShareWithFriendsComponent
   },
   {
     path: 'messages-tab',

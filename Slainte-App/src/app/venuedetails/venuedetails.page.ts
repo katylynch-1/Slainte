@@ -3,6 +3,10 @@ import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { VenuedataService } from '../services/venuedata.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { SavevenuesService } from '../services/savevenues.service';
+import { MessagingService } from '../services/messaging.service';
+import { FriendrequestsService } from '../services/friendrequests.service';
+import { ModalController } from '@ionic/angular';
+import { ShareWithFriendsComponent } from '../share-with-friends/share-with-friends.component';
 
 @Component({
   selector: 'app-venuedetails',
@@ -17,35 +21,59 @@ export class VenuedetailsPage implements OnInit {
   venueName: string;   // Make sure this is set to the venue’s name
   venueImageUrl: string;  // Make sure this is set to the venue’s image URL
   isSaved: boolean;  // Declare isSaved
+  currentUserId: string;
 
-  constructor(private route: ActivatedRoute, private router: Router, private venueData: VenuedataService, private authService: AuthenticationService, private saveVenues: SavevenuesService) { 
+  constructor(private route: ActivatedRoute, private router: Router, private venueData: VenuedataService, private authService: AuthenticationService, private saveVenues: SavevenuesService, private messagingService: MessagingService, private friendRequestService: FriendrequestsService, private modalController: ModalController) { 
     
-    this.route.queryParams.subscribe(params => {
-      if (this.router.getCurrentNavigation()?.extras.state){
-        this.venue = this.router.getCurrentNavigation().extras.state['venue']; 
-        console.log('Venue from navigation state:',this.venue);
-        // Use the venue ID from the navigation state or Google API (e.g., place_id)
-        this.venueId = this.venue.place_id || ''; 
-        this.checkIfSaved();  // Check if this venue is already saved when loaded
-      }
-    });
+    // this.route.queryParams.subscribe(params => {
+    //   if (this.router.getCurrentNavigation()?.extras.state){
+    //     this.venue = this.router.getCurrentNavigation().extras.state['venue']; 
+    //     console.log('Venue from navigation state:',this.venue);
+    //     // Use the venue ID from the navigation state or Google API (e.g., place_id)
+    //     this.venueId = this.venue.place_id || ''; 
+    //     this.checkIfSaved();  // Check if this venue is already saved when loaded
+    //   }
+    // });
   }
 
   ngOnInit() {
-    // Get place_id from route params
-    this.route.paramMap.subscribe(params => {
-        const placeId = params.get('place_id'); 
-        if (placeId) {
-            this.venueId = placeId;
-            // Get additional venue details using place_id for place details API
-            this.fetchApiVenueDetails(placeId).then(() => {
-                this.checkIfSaved();  // Now check if the venue is saved
-            });
-        } else {
-            console.error('No place_id found in route params');
-        }
+    this.authService.getUser().subscribe(user => {
+      if (user) {
+        this.currentUserId = user.uid;
+      }
     });
-}
+    // Attempt to retrieve venue data from NavigationExtras or route parameters
+    const navigationState = this.router.getCurrentNavigation()?.extras.state;
+    if (navigationState && navigationState['venue']) {
+      this.venue = navigationState['venue'];
+      console.log('Venue from navigation state:', this.venue);
+      this.venueId = this.venue.place_id || ''; // Use place_id from navigation state
+    } else {
+      this.venueId = this.route.snapshot.queryParamMap.get('place_id') || '';
+      if (!this.venueId) {
+        console.error('No venue data available from navigation state or route parameters');
+        return;
+      }
+    }
+  
+    // Fetch additional details if place_id is available
+    if (this.venueId) {
+      this.loadVenueDetails(this.venueId);
+    } else {
+      console.error('place_id is missing; unable to fetch venue details.');
+    }
+  }
+  
+  async loadVenueDetails(placeId: string): Promise<void> {
+    console.log('Loading details for placeId:', placeId);
+    // Fetch venue details using Google Places API
+    try {
+      await this.fetchApiVenueDetails(placeId);
+      this.checkIfSaved(); // Check if the venue is already saved
+    } catch (error) {
+      console.error('Error loading venue details:', error);
+    }
+  }
 
 
   // Check if the venue is saved to the user's saved venues
@@ -130,5 +158,24 @@ async toggleSave() {
       queryParams: { tag: tag }
     };
     this.router.navigate(['tag-search'], navigationExtras);
+  }
+
+  async shareVenueDetails() {
+    if (this.venue && this.venue.place_id) {
+      // Construct the shareable URL
+      const shareableUrl = `${window.location.origin}/venuedetails?place_id=${this.venue.place_id}`;
+      const clickableLink = `<a href="${shareableUrl}">Check out this venue!</a>`;
+      console.log('Generated shareable URL:', shareableUrl);
+  
+      // Open the modal for friend selection
+      const modal = await this.modalController.create({
+        component: ShareWithFriendsComponent,
+        componentProps: { clickableLink } // Pass the URL to the modal
+      });
+  
+      await modal.present();
+    } else {
+      console.error('Venue data is missing or invalid.');
+    }
   }
 }
