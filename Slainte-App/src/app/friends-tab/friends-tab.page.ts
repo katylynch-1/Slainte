@@ -4,6 +4,7 @@ import { AuthenticationService } from '../services/authentication.service';
 import { User } from '@firebase/auth-types';
 import { firstValueFrom } from 'rxjs';
 import { ActionSheetController } from '@ionic/angular';
+import { ProfilenavigationService } from '../services/profilenavigation.service';
 
 @Component({
   selector: 'app-friends-tab',
@@ -21,7 +22,8 @@ export class FriendsTabPage implements OnInit {
   constructor(
     private friendRequestService: FriendrequestsService, 
     private authService: AuthenticationService,
-    private actionSheetController: ActionSheetController
+    private actionSheetController: ActionSheetController,
+    private profileNavigation: ProfilenavigationService
   ) {}
 
   async refreshAllContent(event: any) {
@@ -83,36 +85,8 @@ export class FriendsTabPage implements OnInit {
     });
   }
 
-  removeFriend(fromUserId: string, toUserId: string): void {
-    this.friendRequestService.removeFriend(fromUserId, toUserId)
-      .then(() => {
-        console.log('Friend removed successfully');
-        // Optionally, show a success message or update UI
-      })
-      .catch((error) => {
-        console.error('Error removing friend:', error);
-        // Optionally, show an error message or handle the error in the UI
-      });
-  }
-
-  async removeFriendActionSheet(friendId: string) {
-    const actionSheet = await this.actionSheetController.create({
-      header: 'Are you sure?',
-      buttons: [
-        {
-          text: 'Unfriend',
-          role: 'destructive',
-          handler: () => {
-            this.removeFriend(this.currentUserId, friendId);
-          },
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel',
-        },
-      ],
-    });
-    await actionSheet.present();
+  viewUserProfile(userId: string) {
+    this.profileNavigation.navigateToProfile(userId);
   }
 
   // Update selected segment for tab navigation

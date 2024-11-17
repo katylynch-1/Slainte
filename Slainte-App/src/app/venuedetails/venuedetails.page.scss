@@ -13,7 +13,8 @@
   }
   
   ion-button {
-    margin: 0 10px;            /* Add some space between the buttons */
+    margin: 0 10px;  
+    color: white; /* For dark blue buttons */
   }
 
   .rating-badge {
@@ -22,6 +23,7 @@
     font-size: 16px;    /* Adjust font size */
     line-height: 1;     /* Ensures the icon and text align properly */
     border-radius: 12px;  /* Round the badge for better aesthetics */
+    color: black;
   }
   
   .rating-icon {

@@ -30,7 +30,6 @@
     display: flex; /* Use flexbox for layout */
     align-items: center; /* Center vertically */
     padding: 16px; /* Add padding */
-    border-bottom: 1px solid #ccc; /* Optional: Add a border at the bottom */
   }
   
   .profilePic {
@@ -50,3 +49,18 @@
     margin-top: 8px; /* Space above interests */
     align-items: center;
   }
+
+  .button {
+    display: flex; /* Make the button a flex container */
+    justify-content: center; /* Align items horizontally (centered) */
+    align-items: center; /* Align items vertically (centered) */
+  }
+
+  .button ion-icon {
+    margin-right: 8px; /* Add space between icons */
+  }
+  
+  .button .button-text {
+    display: inline-block;
+  }
+  

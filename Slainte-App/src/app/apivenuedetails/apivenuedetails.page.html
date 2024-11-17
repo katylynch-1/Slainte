@@ -20,7 +20,6 @@
             <div class="card-header-container">
               <ion-card-title> {{apiVenue.name}} </ion-card-title>
               <div class="icons-container">
-                <ion-icon name="heart-outline" class="icon"></ion-icon>
                 <ion-icon name="bookmark-outline" class="icon"></ion-icon>
               </div>
             </div>
@@ -43,7 +42,7 @@
             </div>
             <br>
             <div *ngIf="apiVenue?.rating">
-              <ion-badge color="" class="rating-badge">
+              <ion-badge color="warning" class="rating-badge">
                 <ion-icon name="star" class="rating-icon"></ion-icon>
                 <span>{{ apiVenue?.rating }}</span>
               </ion-badge>
