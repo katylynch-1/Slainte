@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class ShareWithFriendsComponent  implements OnInit {
   
-  @Input() clickableLink: string; // Receive the shareable URL from the parent
+  @Input() shareableUrl: string; // Receive the shareable URL from the parent
   user: any;
   currentUserId: any;
   friendsList: any[] = []; // List of friends
@@ -52,13 +52,14 @@ export class ShareWithFriendsComponent  implements OnInit {
     // Use startChat to handle chat creation or navigation
     this.startChat(friendId).then(chatId => {
       // Send the shareable URL as a message
-      this.messagingService.sendMessage(chatId, `Check out this venue: ${this.clickableLink}`);
+      this.messagingService.sendMessage(chatId, `Check out this venue: ${this.shareableUrl}`);
       console.log(`Venue shared with ${friend.name}`);
       this.dismiss(); // Close the modal after sharing
     }).catch(err => {
       console.error('Error starting chat or sharing venue:', err);
     });
   }
+  
 
   async startChat(user2Id: string): Promise<string> {
     const chatId = this.messagingService.generateChatId(this.currentUserId, user2Id);
