@@ -58,6 +58,13 @@ ion-item.received {
   margin-top: 5px;
 }
 
+.sent .message-time {
+  font-size: 11px;
+  opacity: 0.6;
+  margin-top: 5px;
+  color: white;
+}
+
 .message-input-container {
   display: flex;
   align-items: center;
