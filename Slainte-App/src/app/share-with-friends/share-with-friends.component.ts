@@ -13,20 +13,19 @@ import { Router } from '@angular/router';
 })
 export class ShareWithFriendsComponent  implements OnInit {
   
-  @Input() shareableUrl: string; // Receive the shareable URL from the parent
+  @Input() shareableUrl: string; 
   user: any;
   currentUserId: any;
-  friendsList: any[] = []; // List of friends
+  friendsList: any[] = [];
 
   constructor(private friendRequestService: FriendrequestsService, private authService: AuthenticationService, private messagingService: MessagingService, private modalController: ModalController, private router: Router) { }
 
   ngOnInit() {
-    this.loadUserDetails(); // Load user details when the component is initialized
+    this.loadUserDetails(); 
   }
 
   async loadUserDetails() {
     try {
-      // Get the currently authenticated user
       this.user = await firstValueFrom(this.authService.getUser());
 
       if (this.user) {
@@ -34,7 +33,7 @@ export class ShareWithFriendsComponent  implements OnInit {
 
         // Fetch the list of accepted friends (friends list)
         this.friendRequestService.getFriends(this.currentUserId).subscribe(friends => {
-          console.log('Fetched Friends:', friends); // Log the friends data for debugging
+          console.log('Fetched Friends:', friends); 
           this.friendsList = friends; // Store the fetched friends in friendsList
         });
 
@@ -54,7 +53,7 @@ export class ShareWithFriendsComponent  implements OnInit {
       // Send the shareable URL as a message
       this.messagingService.sendMessage(chatId, `Check out this venue: ${this.shareableUrl}`);
       console.log(`Venue shared with ${friend.name}`);
-      this.dismiss(); // Close the modal after sharing
+      this.dismiss(); 
     }).catch(err => {
       console.error('Error starting chat or sharing venue:', err);
     });

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ChatComponent } from './chat/chat.component';
-import { UserListComponent } from './user-list/user-list.component'; 
 import { NewChatComponent } from './new-chat/new-chat.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { ShareWithFriendsComponent } from './share-with-friends/share-with-friends.component';
@@ -26,10 +25,6 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
-    path: 'edit-user/:userID',
-    loadChildren: () => import('./edit-user/edit-user.module').then( m => m.EditUserPageModule)
-  },
-  {
     path: 'signup',
     loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule)
   },
@@ -52,9 +47,6 @@ const routes: Routes = [
 
   { 
     path: '', redirectTo: 'user-list', pathMatch: 'full' 
-  },
-  { 
-    path: 'user-list', component: UserListComponent 
   },
   { 
     path: 'chat/:recipientId', component: ChatComponent 

@@ -39,28 +39,10 @@ export class MessagesTabPage implements OnInit {
 
   loadUsers() {
     this.messagingService.getUsers().subscribe(usersData => {
-      this.users = usersData; // Store user details for name lookup
+      this.users = usersData; 
     });
   }
 
-  // loadChats() {
-  //   this.messagingService.getUserChats().subscribe(async data => {
-  //     // Add recipient name and image URL to each chat entry
-  //     this.chats = await Promise.all(data.map(async chat => {
-  //       const recipientId = this.getRecipientId(chat);
-  //       const recipientData = await this.loadRecipientData(recipientId);
-        
-  //       return {
-  //         ...chat,
-  //         recipientName: recipientData ? `${recipientData.firstName} ${recipientData.lastName}` : 'Unknown User',
-  //         recipientImageURL: recipientData?.imageURL || 'assets/images/default-profile.png' // Use a default image if no imageURL is found
-  //       };
-  //     }));
-
-  //     // Sort by the latest message timestamp
-  //     this.chats = this.chats.sort((a, b) => b.lastMessageTimestamp - a.lastMessageTimestamp);
-  //   });
-  // }
 
   async loadChats() {
     this.messagingService.getUserChats().subscribe(async data => {
@@ -98,7 +80,6 @@ export class MessagesTabPage implements OnInit {
 
   openChat(user2Id: string) {
     if (user2Id) {
-      // this.router.navigate([`/chat`, { recipientId: user2Id }]);
       this.router.navigate([`/chat/${user2Id}`]);
     } else {
       console.error('Error: user2Id is undefined');
@@ -121,9 +102,9 @@ export class MessagesTabPage implements OnInit {
   }
 
   async refreshAllContent(event: any) {
-    this.loadUsers(); // Reload users
-    this.loadChats(); // Reload chats
-    event.target.complete(); // Dismiss the refresher
+    this.loadUsers(); 
+    this.loadChats(); 
+    event.target.complete(); 
   }
 
   async presentDeleteChatActionSheet(chat: any) {
@@ -146,12 +127,6 @@ export class MessagesTabPage implements OnInit {
     await actionSheet.present();
   }
 
-  // async deleteChat(chat: any) {
-  //   const chatId = this.messagingService.generateChatId(this.currentUserId, this.getRecipientId(chat));
-  //   await this.messagingService.deleteChat(chatId, this.currentUserId);
-  //   this.chats = this.chats.filter(c => c !== chat);
-  // }
-
   async deleteChat(chat: any) {
     const chatId = this.messagingService.generateChatId(this.currentUserId, this.getRecipientId(chat));
     try {
@@ -163,6 +138,4 @@ export class MessagesTabPage implements OnInit {
       console.error('Error deleting chat:', error);
     }
   }
-  
-
 }

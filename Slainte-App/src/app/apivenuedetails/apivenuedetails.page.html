@@ -12,7 +12,6 @@
     <ion-row>
       <ion-col>
         <ion-card *ngIf="apiVenue" class="venue-card">
-          <!-- At the moment I only have the first image showing as i dont have the functionality working for a carousel -->
           <div *ngIf="apiVenue.photos && apiVenue.photos.length > 0">
             <img *ngFor="let photo of apiVenue.photos.slice(0, 1)" [src]="photo.photoUrl" alt="{{ apiVenue.name }}">
           </div>
@@ -50,8 +49,8 @@
           </ion-card-content>
             <ion-footer>
               <div id="buttons">
-              <ion-button><ion-icon name="share-outline"></ion-icon>Share</ion-button>
-              <ion-button (click)="openGoogleMaps(apiVenue.name)"><ion-icon name="compass-outline"></ion-icon>Get Directions</ion-button>
+              <ion-button shape="round"><ion-icon name="share-outline"></ion-icon>Share</ion-button>
+              <ion-button shape="round" (click)="openGoogleMaps(apiVenue.name)"><ion-icon name="compass-outline"></ion-icon>Get Directions</ion-button>
             </div>
             </ion-footer>
         </ion-card>
@@ -59,7 +58,3 @@
     </ion-row>
   </ion-grid>
 </ion-content>
-
-<!-- 
-<b>Opening Hours:</b>
-<p>{{ apiVenue.current_opening_hours.weekday_text }}</p> -->

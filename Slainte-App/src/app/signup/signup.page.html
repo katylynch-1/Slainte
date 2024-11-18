@@ -137,12 +137,18 @@
           </ion-chip>
         </div>
         <br>
-        <ion-button (click)="signUp()">Sign Up</ion-button>
       </div>
       <!-- Navigation Buttons -->
-      <div>
-        <ion-button *ngIf="selectedStep !== 'step1'" fill="outline" (click)="goToStep('step1')">Back</ion-button>
-        <ion-button *ngIf="selectedStep !== 'step2'" (click)="goToStep('step2')">Next</ion-button>
+      <div class="button-container">
+        <div>
+          <ion-button shape="round" class="button" *ngIf="selectedStep !== 'step1'" fill="outline" (click)="goToStep('step1')">Back</ion-button>
+        </div>
+        <div>
+          <ion-button shape="round" class="button" *ngIf="selectedStep !== 'step2'" (click)="goToStep('step2')">Next</ion-button>
+        </div>
+        <div>
+          <ion-button shape="round" *ngIf="selectedStep !== 'step1'" (click)="signUp()">Sign Up</ion-button>
+        </div>
       </div>
   </form>
 

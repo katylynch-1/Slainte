@@ -162,7 +162,7 @@ async toggleSave() {
 
   async shareVenueDetails() {
     if (this.venue && this.venue.place_id) {
-      // Construct the shareable URL
+      // Create shareable URL
       const shareableUrl = `${window.location.origin}/venuedetails?place_id=${this.venue.place_id}`;
       console.log('Generated shareable URL:', shareableUrl);
   

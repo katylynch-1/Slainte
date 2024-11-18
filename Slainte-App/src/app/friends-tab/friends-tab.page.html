@@ -8,7 +8,6 @@
   <ion-refresher slot="fixed" (ionRefresh)="refreshAllContent($event)">
     <ion-refresher-content pullingIcon="bubbles" refreshingSpinner="bubbles"></ion-refresher-content>
   </ion-refresher>
-  <!-- Segment for Friends, Requests, and Activity -->
   <ion-segment class="segment" [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)" color="primary">
     <ion-segment-button value="friends">
       My Friends
@@ -26,7 +25,6 @@
           <img [src]="friend.imageURL || 'https://ionicframework.com/docs/img/demos/avatar.svg'" />
         </ion-avatar>
         <ion-label>{{ friend.firstName }} {{ friend.lastName }}</ion-label>
-        <!-- <ion-icon slot="end" name="close-outline" (click)="removeFriendActionSheet(friend.id)"></ion-icon> -->
       </ion-item>
     </ion-list>  
     
@@ -55,7 +53,6 @@
           <p>sent you a friend request.</p>
         </ion-label>
         
-        <!-- Buttons to accept or reject -->
         <ion-button (click)="acceptRequest(request.id)" expand="block">Accept</ion-button>
         <ion-button (click)="rejectRequest(request.id)" expand="block">Reject</ion-button>
       </ion-item>

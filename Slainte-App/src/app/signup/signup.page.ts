@@ -137,7 +137,6 @@ export class SignupPage implements OnInit {
         preferences[option.controlName] = this.regForm.controls[option.controlName].value;
       });
   
-        // Pass the capturedImage (base64) as part of additional data
         const user = await this.authService.registerUser(email, password, { firstName, lastName, userBio, preferences }, this.capturedImage  // Add profilePicture
         );
         if (user) {
@@ -165,7 +164,6 @@ export class SignupPage implements OnInit {
   
     console.log("result", image);
     
-    // To display inside the browser we need to prepend 'data:image/jpeg;base64,'
     this.capturedImage = `data:image/jpeg;base64,${image.base64String}`;
     
     this.updateImage = false;

@@ -88,9 +88,7 @@
         <ion-icon *ngIf="editForm.controls[option.controlName].value" name="checkmark" class="entertainment-check"></ion-icon>
       </ion-chip>
     </div>
-    
-    <!-- Repeat for other categories (Music, Amenities, Entertainment, etc.) -->
-    
-    <ion-button expand="block" type="submit" [disabled]="!editForm.valid">Save Changes</ion-button>
+        
+    <ion-button class="button" expand="block" shape="round" type="submit">Save Changes</ion-button>
   </form>
 </ion-content>

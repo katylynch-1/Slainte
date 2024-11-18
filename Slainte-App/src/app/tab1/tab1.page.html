@@ -2,7 +2,6 @@
   <div class="container">
   <div class="center-container">
     <img src="/assets/images/Slainte-Logo.png" class="logo">
-    
   </div>
   <div>
   <ion-icon class="location-search-icon" slot="end" name="location-outline" (click)="openSearchLocationPage()"></ion-icon>
@@ -21,9 +20,6 @@
     <h2>Hi {{ userDetails.firstName }}!</h2>
   </div>
   <br>
-  <!-- <ion-refresher slot="fixed" (ionRefresh)="refreshAllContent($event)">
-    <ion-refresher-content pullingIcon="arrow-down" refreshingSpinner="bubbles"></ion-refresher-content>
-  </ion-refresher> -->
 
   <h3>Venues For You</h3>
    <app-venues-for-user></app-venues-for-user>

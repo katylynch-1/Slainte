@@ -9,7 +9,7 @@ import { ActionSheetController } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { SavevenuesService, SavedVenue } from '../services/savevenues.service';
 import { ToastController } from '@ionic/angular';
-import { FriendrequestsService } from '../services/friendrequests.service'; // Import FriendrequestsService
+import { FriendrequestsService } from '../services/friendrequests.service';
 import { ProfilenavigationService } from '../services/profilenavigation.service';
 
 @Component({
@@ -19,10 +19,10 @@ import { ProfilenavigationService } from '../services/profilenavigation.service'
 })
 export class Tab3Page implements OnInit {
 
-  user: User | null = null; // Initialize as null to handle cases where the user is not authenticated
+  user: User; 
   userDetails: any = null;
   savedVenues: SavedVenue[] = [];
-  friendsList: any[] = []; // New array to store friends list
+  friendsList: any[] = []; 
   selectedSegment: string = 'saved'; // Default selected segment
 
   constructor(
@@ -37,12 +37,11 @@ export class Tab3Page implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loadUserDetails(); // Load user details on component initialization
+    this.loadUserDetails(); 
   }
 
   async loadUserDetails() {
     try {
-      // 1. Get the currently authenticated user
       this.user = await firstValueFrom(this.authService.getUser());
   
       if (!this.user) {
@@ -52,7 +51,7 @@ export class Tab3Page implements OnInit {
   
       const uid = this.user.uid;  // Get the user's UID
       
-      // 2. Fetch user details
+      // Get user details
       try {
         this.userDetails = await firstValueFrom(this.authService.getUserDetails(uid));
         console.log('Fetched user details:', this.userDetails);
@@ -61,7 +60,7 @@ export class Tab3Page implements OnInit {
         throw error;
       }
   
-      // 3. Fetch saved venues, only proceed if there are venues
+      // Get saved venues, only proceed if there are venues
       try {
         const savedVenues = await this.saveVenues.getSavedVenues(uid);
         if (savedVenues && savedVenues.length > 0) {
@@ -76,7 +75,7 @@ export class Tab3Page implements OnInit {
         this.savedVenues = [];  // Fallback to empty array if fetching venues fails
       }
   
-      // 4. Fetch accepted friend requests and update friendsList
+      // Get accepted friend requests and update friendsList
       try {
         this.friendsList = await firstValueFrom(this.friendRequestsService.getFriends(uid));
         console.log('Fetched Friends:', this.friendsList);
@@ -93,10 +92,10 @@ export class Tab3Page implements OnInit {
     this.profileNavigation.navigateToProfile(userId);
   }
   
-  // Add the refresh method
+  // Add the refresh method to reload user details, saved venues, and friends list
   async refreshAllContent(event: any) {
-    await this.loadUserDetails(); // Reload user details, saved venues, and friends list
-    event.target.complete(); // Dismiss the refresher
+    await this.loadUserDetails(); 
+    event.target.complete(); 
   }
 
   // Check if the venue is saved
@@ -115,7 +114,7 @@ export class Tab3Page implements OnInit {
         await this.saveVenues.saveVenue(venue.id);
       }
   
-      // Fetch the updated saved venues list
+      // Get the updated saved venues list
       this.savedVenues = await this.saveVenues.getSavedVenues(this.user.uid);
   
       console.log('Updated saved venues:', this.savedVenues);
@@ -215,7 +214,6 @@ export class Tab3Page implements OnInit {
         const downloadURL = await this.authService.updateProfilePicture(this.user.uid, file);
         this.userDetails.imageURL = downloadURL;
 
-        // Show success toast
         await this.presentToast('Profile picture updated successfully!');
       }
     } catch (error) {
@@ -231,7 +229,7 @@ export class Tab3Page implements OnInit {
       }
 
       await this.authService.deleteProfilePicture(this.user.uid);
-      this.userDetails.imageURL = 'https://ionicframework.com/docs/img/demos/avatar.svg'; // Default avatar
+      this.userDetails.imageURL = 'https://ionicframework.com/docs/img/demos/avatar.svg'; 
 
       await this.presentToast('Profile picture deleted successfully!');
     } catch (error) {
@@ -240,13 +238,12 @@ export class Tab3Page implements OnInit {
     }
   }
 
-  // Helper method to display a toast
   async presentToast(message: string, color: string = 'success') {
     const toast = await this.toastController.create({
       message: message,
-      duration: 2000, // Display for 2 seconds
-      color: color,   // Success or error color (can use 'success', 'danger', 'warning', etc.)
-      position: 'bottom' // You can change to 'top' or 'middle'
+      duration: 2000, 
+      color: color, 
+      position: 'bottom' 
     });
     toast.present();
   }

@@ -5,19 +5,13 @@
   <div *ngIf="!loading">
     <!-- Show a message when no venues are found -->
     <div *ngIf="venues.length > 0; else noBars">
-      <!-- Horizontal scroll container for cards -->
       <div class="horizontal-scroll-container">
         <!-- Loop through the venues array to display each venue as an ion-card -->
         <ion-card *ngFor="let venue of venues" class="venue-card" (click)="openVenueDetails(venue)">
-          <!-- Venue image -->
             <img class="venue-image" [src]="venue.imageURL" alt="{{ venue.name }}">
-          <!-- Venue information -->
           <ion-card-header>
             <ion-card-title>{{ venue.name }}</ion-card-title>
-            <!-- <ion-card-subtitle>{{ venue.type }}</ion-card-subtitle> -->
           </ion-card-header>
-
-          <!-- Venue tags in ion-card-content -->
           <ion-card-content>
             <div>
               <div>

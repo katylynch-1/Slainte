@@ -2,19 +2,14 @@
 
   <div *ngIf="!loading">
     <div *ngIf="bars.length > 0; else noBars">
-      <!-- Horizontal scroll container for cards -->
       <div class="horizontal-scroll-container">
         <!-- Loop through the venues array to display each venue as an ion-card -->
         <ion-card *ngFor="let bar of bars" class="venue-card" (click)="openApiVenueDetails(bar)">
-          <!-- Venue image -->
           <img class="venue-image" *ngIf="bar.photos && bar.photos.length > 0" [src]="bar.photos[0].photoUrl" alt="{{ bar.name }}">
-          <!-- Venue information -->
           <ion-card-header>
             <ion-card-title>{{ bar.name }}</ion-card-title>
-            <!-- <ion-card-subtitle>{{ venue.type }}</ion-card-subtitle> -->
           </ion-card-header>
 
-          <!-- Venue tags in ion-card-content -->
           <ion-card-content>
             <p>
               <ion-icon name="location-outline" class="icon"></ion-icon>

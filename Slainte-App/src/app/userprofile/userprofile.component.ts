@@ -6,7 +6,6 @@ import { SavevenuesService } from '../services/savevenues.service';
 import { firstValueFrom, of, switchMap } from 'rxjs';
 import { ActionSheetController } from '@ionic/angular';
 import { AuthenticationService } from '../services/authentication.service';
-import { User } from '@firebase/auth-types';
 
 
 @Component({
@@ -19,8 +18,8 @@ export class UserprofileComponent  implements OnInit {
   userId: string; // The ID of the other user
   userProfile: any;
   selectedSegment: string = 'savedVenues'; // Default selected segment
-  currentUserId: string; // Current user ID
-  isFriend: boolean; // Tracks friendship status
+  currentUserId: string; 
+  isFriend: boolean; 
   sentRequests = new Set<string>();  // Needed for add friend functionality
   isRequestPending: boolean;
 
@@ -51,15 +50,14 @@ export class UserprofileComponent  implements OnInit {
   }
   
   
-  // Load the friend's profile using the friendId
   async loadUserProfile() {
     if (this.userId) {
       try {
         // Get the user profile data
         const profiles = await firstValueFrom(this.friendRequestService.getUserDetails([this.userId]));
-        this.userProfile = profiles[0];  // Assume only one profile is returned
+        this.userProfile = profiles[0];  
   
-        // Get saved venues with images for the user
+        // To display profile picture
         const savedVenues = await this.saveVenues.getSavedVenues(this.userId);
         if (savedVenues && savedVenues.length > 0) {
           this.userProfile.savedVenues = await this.saveVenues.getVenuesWithImages(savedVenues);
@@ -79,11 +77,10 @@ export class UserprofileComponent  implements OnInit {
     }
   }
 
-  // Call the service to check friendship status
   checkFriendshipStatus() {
     if (!this.currentUserId || !this.userId) return;
   
-    // Check friendship status
+    // Check whether they are friends to determine button behaviour
     this.friendRequestService.checkFriendshipStatus(this.currentUserId, this.userId).pipe(
       switchMap((status) => {
         this.isFriend = status;
@@ -154,9 +151,9 @@ export class UserprofileComponent  implements OnInit {
   }
 
   openVenueDetailsPage(venue: any) {
-    console.log('Clicked venue:', venue); // Log the venue that was clicked
+    console.log('Clicked venue:', venue); 
     const placeId = venue.id; 
-    console.log('Place ID:', placeId); // Log the place ID
+    console.log('Place ID:', placeId); 
     if (!placeId) {
       console.error('No place ID found for the venue:', venue);
       return; // Exit if there is no place ID

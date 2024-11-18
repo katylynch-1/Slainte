@@ -171,7 +171,6 @@
 
     <ng-container *ngIf="selectedSegment === 'saved'">
       <ng-container *ngIf="savedVenues.length > 0; else noSavedVenues">
-        <!-- Create a grid for the venues -->
         <div class="venue-grid">
           <div class="venue-item" *ngFor="let venue of savedVenues" (click)="openVenueDetailsPage(venue)">
             <img [src]="venue.imageURL" alt="{{ venue.name }}" class="venue-image" />

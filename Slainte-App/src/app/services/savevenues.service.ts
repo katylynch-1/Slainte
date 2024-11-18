@@ -3,21 +3,20 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthenticationService } from './authentication.service';
 import { firstValueFrom, forkJoin, map, of } from 'rxjs';
 import { Venue } from '../services/venuedata.service'
-import firebase from 'firebase/compat/app'; // Import firebase from compat
+import firebase from 'firebase/compat/app'; 
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { ToastController } from '@ionic/angular';
 
 export interface SavedVenue {
-  id: string; // This will be the place_id
-  name: string; // Venue name
-  imagePath: string; // Venue image URL
-  imageURL?: string; // Make this optional if it might not always be present
+  id: string; 
+  name: string; 
+  imagePath: string; 
+  imageURL?: string; 
 }
 
-// Define the structure of the userDetails document
 interface UserDetails {
   uid: string;
-  savedVenues: SavedVenue[]; // Array of saved venue objects
+  savedVenues: SavedVenue[]; 
 }
 
 @Injectable({
@@ -53,7 +52,6 @@ export class SavevenuesService {
         savedVenues: firebase.firestore.FieldValue.arrayUnion(savedVenue)
       });
 
-      // Show success toast
       await this.presentToast('Venue has been saved!');
     } else {
       throw new Error('Venue details are incomplete. Cannot save.');
@@ -75,7 +73,6 @@ export class SavevenuesService {
 
       await userDocRef.update({ savedVenues: updatedSavedVenues });
 
-      // Show success toast
       await this.presentToast('Venue has been unsaved!');
     }
   }
@@ -83,8 +80,8 @@ export class SavevenuesService {
 private async presentToast(message: string) {
   const toast = await this.toastController.create({
     message,
-    duration: 2000, // Duration in milliseconds
-    position: 'bottom' // Position of the toast
+    duration: 2000, 
+    position: 'bottom' 
   });
   await toast.present();
 }
@@ -94,7 +91,6 @@ private async presentToast(message: string) {
 async getSavedVenues(uid: string): Promise<SavedVenue[]> {
   const userDocRef = this.firestore.collection('userDetails').doc(uid);
 
-  // Use firstValueFrom to convert the Observable to a Promise
   const userDoc = await firstValueFrom(userDocRef.get());
 
   if (userDoc.exists) {
@@ -117,7 +113,7 @@ async isVenueSaved(venueId: string): Promise<boolean> {
 
   // Check if the document exists and has savedVenues
   if (userDoc.exists) {
-    const userData = userDoc.data() as UserDetails; // Use the UserDetails interface
+    const userData = userDoc.data() as UserDetails; 
     // Check if savedVenues array exists and contains the venueId
     return userData.savedVenues.some(venue => venue.id === venueId);
   }

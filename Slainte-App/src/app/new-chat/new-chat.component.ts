@@ -29,7 +29,6 @@ export class NewChatComponent  implements OnInit {
 
   ngOnInit() {
     this.recipientId = this.route.snapshot.paramMap.get('recipientId');
-        //get the current user's uid
     this.authService.getUser().subscribe(user => {
       if (user) {
         this.currentUserId = user.uid;
@@ -38,23 +37,9 @@ export class NewChatComponent  implements OnInit {
     });
   }
 
-  // loadUsers() {
-  //   this.users$ = this.userService.getUsers().pipe(
-  //     map(users => users.filter(user => user.uid !== this.currentUserId)) // Filter out currently logged in user
-  //   );
-  // }
-
   loadUsers() {
     this.users$ = this.friendRequestsService.getFriends(this.currentUserId);
   }
-
-  // startChat(user2Id: string) {
-  //   const chatId = this.messagingService.generateChatId(this.currentUserId, user2Id);
-  //   this.messagingService.createChat(chatId, this.currentUserId, user2Id).then(() => {
-  //     console.log('Chat created successfully');
-  //     this.router.navigateByUrl(`/chat/${user2Id}`);
-  //   }).catch(error => console.error('Error creating chat:', error));
-  // }
 
   async startChat(user2Id: string) {
     const chatId = this.messagingService.generateChatId(this.currentUserId, user2Id);

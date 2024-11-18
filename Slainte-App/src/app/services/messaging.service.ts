@@ -32,7 +32,6 @@ export class MessagingService {
         senderId: senderId,
         content: message,
         timestamp: timestamp,
-        read: false // Mark message as unread by default
       });
 
       this.db.object(`/userChats/${senderId}/${chatId}`).update({
@@ -44,9 +43,6 @@ export class MessagingService {
       this.db.object(`/userChats/${recipientId}/${chatId}`).update({
         lastMessage: message,
         lastMessageTimestamp: timestamp,
-        // unreadCount: this.db.database.ref(`/userChats/${recipientId}/${chatId}/unreadCount`).once('value').then(snapshot => {
-        //   return (snapshot.val() || 0) + 1;
-        // })
       });
     });
   }
@@ -90,7 +86,7 @@ export class MessagingService {
       return Promise.all([
         this.db.object(`/userChats/${user1Id}/${chatId}`).set(chatData),
         this.db.object(`/userChats/${user2Id}/${chatId}`).set(chatData)
-      ]).then(() => {}); // Add an empty .then() to resolve as void
+      ]).then(() => {}); 
     });
   }
 
@@ -103,19 +99,9 @@ export class MessagingService {
   }
   
   generateChatId(user1Id: string, user2Id: string): string {
-    // A simple way to generate a unique ID is to concatenate and sort the two user IDs
+    // Generate a unique ID to concatenate and sort the two user IDs
     return user1Id < user2Id ? `${user1Id}_${user2Id}` : `${user2Id}_${user1Id}`;
   }
-
-  // deleteChat(chatId: string, userId: string): Promise<void> {
-  //   const otherUserId = this.getRecipientId(chatId, userId);
-  //   const deletePromises = [
-  //     this.db.object(`/chats/${chatId}`).remove(),                  // Remove the chat from /chats
-  //     this.db.object(`/userChats/${userId}/${chatId}`).remove(),    // Remove the chat for the current user
-  //     this.db.object(`/userChats/${otherUserId}/${chatId}`).remove() // Remove the chat for the other user
-  //   ];
-  //   return Promise.all(deletePromises).then(() => {});
-  // }
 
   deleteChat(chatId: string, userId: string): Promise<void> {
     const otherUserId = this.getRecipientId(chatId, userId);

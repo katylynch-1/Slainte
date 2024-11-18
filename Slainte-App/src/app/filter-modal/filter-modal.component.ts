@@ -20,7 +20,6 @@ export class FilterModalComponent implements OnInit {
   }
 
   applyFilters() {
-    // Close the modal and pass the selected values back to the parent
     this.modalController.dismiss({
       selectedAtmospheres: this.selectedAtmospheres,
       selectedDrinks: this.selectedDrinks,
@@ -31,7 +30,6 @@ export class FilterModalComponent implements OnInit {
   }
 
   dismissModal() {
-    // Close the modal without passing any data back
     this.modalController.dismiss();
   }
 }

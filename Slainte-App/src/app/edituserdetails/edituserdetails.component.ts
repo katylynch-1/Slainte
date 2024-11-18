@@ -5,13 +5,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { firstValueFrom } from 'rxjs';
 
-// Define an interface for user preferences
 interface UserPreferences {
   firstName: string;
   lastName: string;
   email: string;
   userBio: string;
-  preferences: { [key: string]: boolean }; // Structure for preferences
+  preferences: { [key: string]: boolean }; 
 }
 
 @Component({
@@ -23,7 +22,7 @@ export class EdituserdetailsComponent  implements OnInit {
 
   editForm: FormGroup;
   userId: string;
-  userData: UserPreferences | null = null; // User data with type
+  userData: UserPreferences | null = null; 
 
   atmosphereOptions = [
     { label: 'Alternative', controlName: 'alternative' },
@@ -99,10 +98,9 @@ export class EdituserdetailsComponent  implements OnInit {
       festival: [false], openMic: [false], pubQuiz: [false], rave: [false], liveGig: [false], dj: [false], karaoke: [false], comedy: [false], sports: [false], specialisedEvents: [false], games: [false] 
     });
   
-    // Subscribe to the current user Observable
     this.authService.getUser().subscribe(user => {
       if (user) {
-        this.userId = user.uid; // Get the user ID
+        this.userId = user.uid; 
   
         // Fetch user details from Firestore using the userId
         this.authService.getUserDetails(this.userId).subscribe(doc => {
@@ -133,7 +131,6 @@ toggleChip(controlName: string) {
   this.editForm.controls[controlName].setValue(!currentValue); // Toggle the value
 }
 
-// Submit the form and update Firebase
 async submitForm() {
   if (this.editForm.valid) {
     // Get the current form values
@@ -169,15 +166,15 @@ async submitForm() {
           lastName: updatedData.lastName,
           email: updatedData.email,
           userBio: updatedData.userBio,
-          preferences: updatedPreferences // Update preferences directly
+          preferences: updatedPreferences 
         });
 
-        this.dismissModal(); // Close the modal after successful update
-        this.showToast('User details updated successfully!'); // Show success message
+        this.dismissModal(); 
+        this.showToast('User details updated successfully!'); 
       }
     } catch (error) {
       console.error('Error updating user details: ', error);
-      this.showToast('Failed to update user details. Please try again.'); // Show error message
+      this.showToast('Failed to update user details. Please try again.'); 
     }
   }
 }
@@ -191,7 +188,6 @@ async showToast(message: string) {
   toast.present();
 }
 
-// Dismiss the modal
 dismissModal() {
   this.modalController.dismiss();
 }

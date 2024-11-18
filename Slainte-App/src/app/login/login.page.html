@@ -1,53 +1,14 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Login To Sláinte</ion-title>
+    <ion-title>Log into Sláinte</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-<!-- <div class="header">
-  <ion-title>Welcome Back</ion-title>
-  <p class="subTitle">Sign in to access your account</p>
-</div>
-
-<form [formGroup]="loginForm">
-  <div class="ion-padding">
-    <ion-item>
-      <ion-input formControlName="email" placeholder="Email" class="input"></ion-input>
-        <ion-icon name="person-outline"></ion-icon>
-    </ion-item>
-    <div *ngIf="this.loginForm.controls?.['email'].touched && this.loginForm.controls?.['email'].invalid">
-      <ion-text *ngIf="errorControl.email.errors?.required">
-        <ion-text>
-        Email is required
-      </ion-text>
-      <ion-text *ngIf="errorControl.email.errors?.pattern">
-        <ion-text>
-        Email should be valid
-      </ion-text>
-    </div>
-
-    <ion-item>
-      <ion-input formControlName="password" placeholder="Password" class="input"></ion-input>
-        <ion-icon name="lock-closed-outline"></ion-icon>
-    </ion-item>
-    <div *ngIf="this.loginForm.controls?.['password'].touched && this.loginForm.controls?.['password'].invalid">
-      <ion-text *ngIf="errorControl.password.errors?.required">
-      <ion-text>
-        Password is required
-      </ion-text>
-      <ion-text *ngIf="errorControl.password.errors?.pattern">
-      <ion-text>
-        Password must have at least 8 characters with 
-        One capital letter, 
-        One special symbol 
-        and at least one number
-      </ion-text>
-    </div>
-  </div> 
-  </form> -->
-
-  <form>
+  <div class="logo-container">
+    <img src="/assets/images/Slainte-Logo.png" class="logo">
+  </div>
+  <form class="ion-padding">
     <ion-item>
       <ion-label position="floating">Email</ion-label>
       <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input>
@@ -56,21 +17,13 @@
       <ion-label position="floating">Password</ion-label>
       <ion-input type="password" [(ngModel)]="password" name="password" required></ion-input>
     </ion-item>
-    <ion-button type="submit" (click)="login()">Login</ion-button>
+    <ion-button shape="round" class="loginButton" type="submit" (click)="login()">Login</ion-button>
   </form>
 
   <div class="forgotPassword">
     <a [routerLink]="['/reset-password']">Forgot password?</a>
   </div>
   <br>
-
-  <ion-button [routerLink]="['/tabs/tab1']">Magic Skip Button</ion-button>
-
-<!-- <ion-fab vertical="bottom" horizontal="end" style="margin-bottom: 30px">
-  <ion-fab-button (click)="login()">
-    <ion-icon name="chevron-forward"></ion-icon>
-  </ion-fab-button>
-</ion-fab> -->
 
   <div class="signupLink">
     <p>New Member? <a [routerLink]="['/signup']">Sign up</a></p>

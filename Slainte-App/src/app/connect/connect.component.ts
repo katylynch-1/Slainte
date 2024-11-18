@@ -17,7 +17,6 @@ export class ConnectComponent implements OnInit {
   sentRequests = new Set<string>();  // Store user IDs who have received a friend request
 
   ngOnInit(): void {
-    // Subscribe to getUser to get the current authenticated user’s ID
     this.authService.getUser().subscribe(user => {
       if (user) {
         this.currentUserId = user.uid;
@@ -50,7 +49,6 @@ export class ConnectComponent implements OnInit {
     }
   }
 
-    // Send a friend request and update the sentRequests set
     unsendRequest(toUserId: string) {
       if (this.currentUserId) {
         this.friendRequestService.unsendFriendRequest(this.currentUserId, toUserId)

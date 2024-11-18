@@ -43,23 +43,6 @@ export class VenuesComponent  implements OnInit {
       console.error('Error getting location', error);
     }
   }
-  
-  // async showPlaces(){
-  //   this.loading = true; 
-  //   this.placesService.getBars(this.lat, this.lng, this.radius, this.type, this.keyword).subscribe({
-  //     next: (data) => {
-  //       this.bars = data;
-  //     },
-  //     error: (error) => {
-  //       console.error('Error fetching bars', error);
-  //       this.loading = false; 
-  //     },
-  //     complete: () => {
-  //       console.log('Pub data fetch complete');
-  //       this.loading = false; 
-  //     }
-  //   })
-  // }
 
   async showPlaces() {
     this.loading = true; 
@@ -89,7 +72,7 @@ export class VenuesComponent  implements OnInit {
         apiVenue: venue
       }
     };
-    console.log('Passing venue:', venue);  // Debugging to confirm data passed
+    console.log('Passing venue:', venue); 
     this.router.navigate(['/apivenuedetails'], navigationExtras);
   }
 

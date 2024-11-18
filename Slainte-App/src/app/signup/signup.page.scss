@@ -45,6 +45,19 @@
     padding: 16px; /* You can adjust the value as needed */
     margin: 16px; /* Optional: add margin for spacing around the segment */
   }
+
+  .button {
+    color: white;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: space-between; /* Space out the logo and icon */
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  
   
 
   

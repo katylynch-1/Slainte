@@ -18,7 +18,7 @@ export class Tab2Page {
   selectedMusic: string[] = [];
   selectedAmenities: string[] = [];
   selectedEntertainment: string[] = [];
-  selectedFilters: { label: string, type: string }[] = []; // For displaying chips
+  selectedFilters: { label: string, type: string }[] = []; 
 
 
   constructor(private venueService: VenuedataService, private modalController: ModalController, private router: Router) {
@@ -28,7 +28,6 @@ export class Tab2Page {
     });
   }
 
-  // Filter Modal
   async openFilterModal() {
     const modal = await this.modalController.create({
       component: FilterModalComponent

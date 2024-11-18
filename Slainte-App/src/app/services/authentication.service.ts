@@ -109,9 +109,6 @@ export class AuthenticationService {
   } 
     
   
-  
-
-   // Get the current authenticated user
    getUser(): Observable<User | null> {
     return this.ngFireAuth.authState;
   }
@@ -133,12 +130,10 @@ export class AuthenticationService {
     return userCredential.user;
   }
 
-  //Reset Password
   async resetPassword(email: string): Promise<void> {
     return await this.ngFireAuth.sendPasswordResetEmail(email)
   }
 
-  // Sign Out
   async signOut(): Promise<void> {
     await this.ngFireAuth.signOut();
     this.router.navigate(['/login']);

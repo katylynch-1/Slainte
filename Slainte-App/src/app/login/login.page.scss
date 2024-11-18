@@ -3,9 +3,9 @@ font-size: 300;
 }
 
 ion-item{
-    --background:#f1f1f1;
-    color:black;
-    border-radius: 10 px;
+    --background: black;
+    color:white;
+    border-radius: 20 px;
     margin-bottom: 16px;
 }
 
@@ -43,6 +43,8 @@ ion-item{
 }
 
 .forgotPassword{
+    display: flex;
+    align-items: center;
     justify-content: center;
     a{
         font-weight: 400;
@@ -50,3 +52,21 @@ ion-item{
         text-decoration: none;
     }
 }
+
+.loginButton {
+    color: white;
+    justify-content: center;
+    align-items: center; /* Center vertically within the container */
+    display: flex;
+}
+
+.logo {
+    height: 150px;
+    width: 150px;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center; /* Center horizontally within the container */
+    align-items: center; /* Center vertically within the container */
+  }

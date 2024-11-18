@@ -28,7 +28,6 @@ export class VenuesForUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Retrieve the current user
     this.authService.getUser().subscribe(user => {
       if (user) {
         this.user = user;

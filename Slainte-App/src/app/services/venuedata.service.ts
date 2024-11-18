@@ -73,7 +73,7 @@ export interface Venue {
   dragShows: boolean;
 
 
-  [key: string]: any; // Add index signature
+  [key: string]: any;
 
 }
 
@@ -113,9 +113,6 @@ export class VenuedataService {
     );
   }
 
-
-  // private serverDetailsUrl = 'http://localhost:3000/api/place/details'; 
-  // private serverDetailsUrl = 'http://slainte-1.web.app/api/place/details'; 
   private serverDetailsUrl = 'https://slainte-app-958291041038.europe-west1.run.app/api/place/details';
 
   getVenueDetails(placeId: string): Observable<any> { // For Place Details API
