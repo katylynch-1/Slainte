@@ -162,17 +162,20 @@ async toggleSave() {
 
   async shareVenueDetails() {
     if (this.venue && this.venue.place_id) {
-      console.log('Sharing venue:', this.venue);
+      // Construct the shareable URL
+      const shareableUrl = `${window.location.origin}/venuedetails?place_id=${this.venue.place_id}`;
+      console.log('Generated shareable URL:', shareableUrl);
   
       // Open the modal for friend selection
       const modal = await this.modalController.create({
         component: ShareWithFriendsComponent,
-        componentProps: { venue: this.venue }, // Pass the venue object
+        componentProps: { shareableUrl } // Pass the URL to the modal
       });
   
       await modal.present();
     } else {
       console.error('Venue data is missing or invalid.');
     }
-  }  
+  }
+    
 }
