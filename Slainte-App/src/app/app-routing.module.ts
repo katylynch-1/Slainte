@@ -29,14 +29,6 @@ const routes: Routes = [
     loadChildren: () => import('./edit-user/edit-user.module').then( m => m.EditUserPageModule)
   },
   {
-    path: 'user-details',
-    loadChildren: () => import('./user-details/user-details.module').then( m => m.UserDetailsPageModule)
-  },
-  {
-    path: 'user-details/:userID',
-    loadChildren: () => import('./user-details/user-details.module').then( m => m.UserDetailsPageModule)
-  },
-  {
     path: 'signup',
     loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule)
   },
