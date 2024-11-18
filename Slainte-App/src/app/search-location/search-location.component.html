@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar class="ion-padding">
+  <ion-buttons slot="start">
+    <ion-back-button defaultHref="/"></ion-back-button>
+  </ion-buttons>
+  <div class="toolbar-content">
+    <ion-searchbar
+    [(ngModel)]="userInput" search-icon="location" placeholder="Search location..." (ionInput)="onInputChange($event)">
+  </ion-searchbar>
+  <ion-icon name="search" (click)="onUserInputSubmit()"></ion-icon>
+</div>
+
+  <div *ngIf="loading" class="spinner-container">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+</ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid>
+    <div *ngIf="!loading">
+      <div *ngIf="bars.length > 0; else noBars">
+        <ion-row>
+          <!-- Loop through the bars array -->
+          <ion-col 
+            *ngFor="let bar of bars" 
+            size="12" size-sm="6" size-md="3" size-lg="3" size-xl="3"
+            class="uniform-col"
+          >
+            <ion-card class="venue-card" (click)="openApiVenueDetails(bar)">
+              <!-- Venue image -->
+              <img class="venue-image" *ngIf="bar.photos && bar.photos.length > 0" [src]="bar.photos[0].photoUrl" alt="{{ bar.name }}">
+              <!-- Venue information -->
+              <ion-card-header>
+                <ion-card-title>{{ bar.name }}</ion-card-title>
+              </ion-card-header>
+              <!-- Venue tags -->
+              <ion-card-content>
+                <p>
+                  <ion-icon name="location-outline" class="icon"></ion-icon>
+                  <span>{{ bar.vicinity }}</span>
+                </p>
+                <!-- <p>
+                  <ion-badge color="warning">
+                    <ion-icon name="star"></ion-icon>
+                    <span>{{ bar.rating }}</span>
+                  </ion-badge>
+                </p> -->
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </div>
+      <ng-template #noBars>
+        <div class="no-bars-message">
+          <p>No venues found in this area. Try searching for another location.</p>
+        </div>
+      </ng-template>
+    </div>
+  </ion-grid>
+</ion-content>
+

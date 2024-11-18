@@ -22,10 +22,11 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';  // Add this for Realtime Database (compat)
 import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
 import { ShareWithFriendsComponent } from './share-with-friends/share-with-friends.component';
+import { SearchLocationComponent } from './search-location/search-location.component';
 
 
 @NgModule({
-  declarations: [AppComponent, FilterModalComponent, EdituserdetailsComponent, ChatComponent, NewChatComponent, UserprofileComponent, ShareWithFriendsComponent],
+  declarations: [AppComponent, FilterModalComponent, EdituserdetailsComponent, ChatComponent, NewChatComponent, UserprofileComponent, ShareWithFriendsComponent, SearchLocationComponent],
   imports: [BrowserModule, IonicModule.forRoot({mode: 'ios'}), AppRoutingModule, FormsModule, AngularFireModule.initializeApp(environment.firebase), AngularFireAuthModule, AngularFirestoreModule, AngularFireDatabaseModule, ReactiveFormsModule, AngularFireMessagingModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
               { provide: FIREBASE_OPTIONS, useValue: environment.firebase},

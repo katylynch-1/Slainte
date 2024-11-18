@@ -1,0 +1,57 @@
+.uniform-col {
+    display: flex; /* Ensures consistent card alignment */
+    justify-content: center; /* Centers cards horizontally */
+  }
+  
+  .venue-card {
+    width: 100%; /* Ensures cards take up the full column width */
+    max-width: 300px; /* Optional: Sets a maximum width for consistency */
+    margin: 10px auto; /* Adds space around the cards */
+    display: flex;
+    flex-direction: column;
+    justify-content:left; /* Ensures content is spaced out evenly */
+  }
+  
+  .venue-image {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  ion-card-content {
+    padding-bottom: 16px; /* Add padding to ensure badge isn't cut off */
+  }
+  
+  .ion-grid {
+    --ion-padding: 16px; /* Adds padding to the grid */
+  }
+  
+  ion-row {
+    --ion-margin-bottom: 16px; /* Adds spacing between rows */
+  }
+  
+  ion-col {
+    display: flex;
+    justify-content: center; /* Centers the cards horizontally */
+  }
+
+  ion-toolbar.ion-padding {
+    padding-top: 20px; /* Adds space inside the toolbar */
+  }
+
+  .toolbar-content {
+    display: flex;
+    align-items: center; /* Vertically align items */
+    gap: 8px; /* Add spacing between elements */
+    width: 100%; /* Ensure it stretches across the toolbar */
+  }
+  
+  ion-searchbar {
+    flex-grow: 1; /* Let the search bar take up remaining space */
+  }
+  
+  ion-icon {
+    margin-left: 3px; /* Optional spacing for better alignment */
+    width: 30px;
+    height: 30px;
+  }

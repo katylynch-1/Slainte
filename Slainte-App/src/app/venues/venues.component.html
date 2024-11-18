@@ -1,11 +1,4 @@
 <ion-content>
-  <!-- <ion-searchbar
-    [(ngModel)]="userInput" search-icon="location" placeholder="Search a new location..." (ionInput)="onInputChange($event)">
-  </ion-searchbar>
-
-  <div *ngIf="loading" class="spinner-container">
-    <ion-spinner name="crescent"></ion-spinner>
-  </div> -->
 
   <div *ngIf="!loading">
     <div *ngIf="bars.length > 0; else noBars">
@@ -42,3 +35,5 @@
         <p>No venues found in this area. Try searching for another location.</p>
       </div>
     </ng-template>
+  </div>
+

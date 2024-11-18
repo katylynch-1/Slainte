@@ -5,6 +5,7 @@ import { UserListComponent } from './user-list/user-list.component';
 import { NewChatComponent } from './new-chat/new-chat.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { ShareWithFriendsComponent } from './share-with-friends/share-with-friends.component';
+import { SearchLocationComponent } from './search-location/search-location.component';
 
 const routes: Routes = [
   {
@@ -79,6 +80,10 @@ const routes: Routes = [
   {
     path: 'userprofile/:userId',
     component: UserprofileComponent
+  },
+  {
+    path: 'search-location',
+    component: SearchLocationComponent
   }  
 
 ];

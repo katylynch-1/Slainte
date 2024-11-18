@@ -14,6 +14,12 @@
     justify-content: center; /* Center horizontally */
     align-items: center;     /* Center vertically */
   }
+
+  .location-search-icon{
+    width: 30px;
+    height: 30px;
+    float: right;
+  }
   
   .centered-content {
     text-align: center;      /* Optional: Center-align text inside the content */
@@ -31,4 +37,14 @@
     width: 60px;
     height: 60px;
   }
+
+  .container {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    justify-content: space-between; /* Space out the logo and icon */
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+
 
