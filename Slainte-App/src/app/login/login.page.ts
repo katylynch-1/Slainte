@@ -4,6 +4,7 @@ import { FormBuilder } from '@angular/forms';
 import { LoadingController } from '@ionic/angular';
 import { AuthenticationService } from '../services/authentication.service';
 import { Router } from '@angular/router';
+import { FirebaseError } from '@firebase/util'; // Import this if you use Firebase
 
 
 @Component({
@@ -11,62 +12,43 @@ import { Router } from '@angular/router';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage{
 
   loginForm: FormGroup
   email: string = '';
   password: string = '';
+  errorMessage: string;
 
 
 
   constructor(public formBuilder: FormBuilder, public loadingCtrl: LoadingController, public authService: AuthenticationService, private router: Router) { }
 
-  // async login(){
-  //   const loading = await this.loadingCtrl.create();
-  //   await loading.present();
-  //   if(this.loginForm.valid){
-  //     // const user = await this.authService.registerUser(email, password)
-  //   }
-  // }
 
-  // navigateToTab1(){
-  //   this.router.navigate(['/tabs/tab1']);
-  // }
-
-  async login(){
+  async login() {
+    this.errorMessage = ''; // Clear any previous error messages
     if (!this.email || !this.password) {
-      // Error message to display if a user has not entered an email or password
-      console.error('Email or Password is missing.');
+      this.errorMessage = 'Please enter both email and password.';
       return;
     }
-    try{
-      // Call on Authentication Service to log in User using provided email and password
+  
+    try {
+      // Call Authentication Service to log in the user
       await this.authService.loginUser(this.email, this.password);
-      this.router.navigate(['/tabs/tab1'])
-    } catch (error){
+      this.router.navigate(['/tabs/tab1']);
+    } catch (error) {
       console.error('Login error:', error);
+  
+      // Typecast error as FirebaseError to access the `code` property
+      const firebaseError = error as FirebaseError;
+  
+      // Check for specific error codes and set appropriate error messages
+      if (firebaseError.code === 'auth/invalid-credential') {
+        this.errorMessage = 'The email or password is incorrect. Please try again.';
+      } else {
+        this.errorMessage = 'An error occurred. Please try again later.';
+      }
     }
   }
-
-  ngOnInit() {
-    // this.loginForm = this.formBuilder.group({
-    //   email: ['', [
-    //     Validators.required, 
-    //     Validators.email,
-    //     Validators.pattern("[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$")
-    //   ]],
-    //   password: ['', [
-    //     Validators.required, 
-    //     Validators.pattern("(?=.*\d)(?=.*[a-z])(?=.*[0-8])(?=.*[A-Z])")
-    //   ]]
-    // })
-  }
-
-
-  get errorControl(){
-    return this.loginForm.controls;
-  }
-
-
+  
 
 }
