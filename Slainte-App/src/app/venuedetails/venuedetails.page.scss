@@ -1,10 +1,3 @@
-.icons {
-    font-size: 24px; 
-    vertical-align: middle; 
-    padding-right: 5px;
-    padding-bottom: 8px;
-  }
-
   #buttons {
     display: flex;               /* Use flexbox layout */
     justify-content: center;     /* Center items horizontally */
@@ -47,26 +40,28 @@
   
   .card-header-container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: space-between; /* Space out title and icon/logo container */
+    align-items: center; /* Align items vertically */
   }
   
-  .icons-container {
-    display: flex;
-    .icon{
-      float: right;
-    }
+  .icon-logo-container {
+    display: flex; /* Enables flexbox layout for the icon and logo */
+    align-items: center; /* Align items vertically */
   }
   
   .icon {
-    font-size: 24px; /* Adjust the size of the icons if necessary */
-    cursor: pointer; /* Add a pointer on hover */
+    font-size: 30px; /* Adjust icon size */
+    margin-right: 8px; /* Add space between icon and logo */
+    cursor: pointer; /* Makes the icon clickable */
   }
   
   .slainte-verified-logo {
-    height: 50px;
-    width: 50px;
+    height: 42px; /* Set a smaller height for the logo */
+    width: auto; /* Maintain aspect ratio */
   }
+  
+  
+  
   
 
 

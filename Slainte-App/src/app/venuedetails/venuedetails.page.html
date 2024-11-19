@@ -14,14 +14,14 @@
         <img [src]="venue.imageURL" alt="{{ venue.name }}">
         <ion-card-header>
           <div class="card-header-container">
-            <ion-card-title> {{venue.name}} </ion-card-title>
-            <div class="icons-container">
+            <ion-card-title>{{ venue.name }}</ion-card-title>
+            <div class="icon-logo-container">
               <ion-icon class="icon" [name]="isSaved ? 'bookmark' : 'bookmark-outline'" (click)="toggleSave()"></ion-icon>
-          </div>
-          <img class="slainte-verified-logo" src="/assets/images/Slainte-Verified-Logo.png">
+              <img class="slainte-verified-logo" src="/assets/images/Slainte-Verified-Logo.png">
+            </div>
           </div>
           <ion-card-subtitle>{{ venue.type }}</ion-card-subtitle>
-        </ion-card-header>
+        </ion-card-header>      
         <ion-card-content>
           <div class="chip-container">
             <!-- Atmosphere -->
