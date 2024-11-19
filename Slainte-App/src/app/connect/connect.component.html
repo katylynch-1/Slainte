@@ -7,7 +7,7 @@
       (click)="sendRequest(user.id)">
     </ion-icon>
           <div class="image-container">
-        <img [src]="user.imageURL" class="user-image" alt="{{ user.firstName }} {{ user.lastName }}">
+        <img [src]="user.imageURL || 'https://ionicframework.com/docs/img/demos/avatar.svg'" class="user-image" alt="{{ user.firstName }} {{ user.lastName }}">
       </div>
       <ion-card-header>
         <ion-card-title>{{ user.firstName }} {{ user.lastName }}</ion-card-title>

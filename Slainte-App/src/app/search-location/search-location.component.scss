@@ -5,7 +5,7 @@
   
   .venue-card {
     width: 100%; /* Ensures cards take up the full column width */
-    max-width: 300px; /* Optional: Sets a maximum width for consistency */
+    max-width: 350px; /* Optional: Sets a maximum width for consistency */
     margin: 10px auto; /* Adds space around the cards */
     display: flex;
     flex-direction: column;
@@ -19,7 +19,7 @@
   }
 
   ion-card-content {
-    padding-bottom: 16px; /* Add padding to ensure badge isn't cut off */
+    padding-bottom: 16px; 
   }
   
   .ion-grid {
@@ -34,24 +34,20 @@
     display: flex;
     justify-content: center; /* Centers the cards horizontally */
   }
-
-  ion-toolbar.ion-padding {
-    padding-top: 20px; /* Adds space inside the toolbar */
-  }
-
-  .toolbar-content {
-    display: flex;
-    align-items: center; /* Vertically align items */
-    gap: 8px; /* Add spacing between elements */
-    width: 100%; /* Ensure it stretches across the toolbar */
-  }
-  
-  ion-searchbar {
-    flex-grow: 1; /* Let the search bar take up remaining space */
-  }
   
   ion-icon {
     margin-left: 3px; /* Optional spacing for better alignment */
     width: 30px;
     height: 30px;
   }
+
+  .search-wrapper {
+    display: flex;               /* Enables a horizontal layout */
+    align-items: center;         /* Aligns items vertically */
+  }
+  
+  .search-button {
+    margin-left: 10px;           /* Adds space between the search bar and button */
+  }
+  
+  

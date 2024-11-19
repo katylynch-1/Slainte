@@ -93,7 +93,7 @@ export class SignupPage implements OnInit {
         //One upper case, one lower case, one number, one special character, min length of 8 characters
         Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
       ]],
-      userBio: ['', [Validators.required]],
+      userBio: [''],
       bars: [false], nightclubs: [false],  pubs: [false],  lateBars: [false],
       pints: [false], cocktails: [false], wine: [false], gin: [false], whiskey: [false], nonAlcoholic: [false], goodGuinness: [false],
       trad: [false], pop: [false], techno: [false], house: [false], rock: [false], indie: [false], hipHop: [false], reggaeton: [false], jazz: [false], rAndB: [false],

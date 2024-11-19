@@ -25,7 +25,7 @@
       <!-- Step 1: Personal Details -->
       <div *ngIf="selectedStep === 'step1'">
         <ion-item>
-          <ion-input formControlName="firstName" placeholder="First Name" class="input"></ion-input>
+          <ion-input formControlName="firstName" placeholder="* First Name" class="input"></ion-input>
           <ion-icon name="person-outline"></ion-icon>
         </ion-item>
         <div *ngIf="this.regForm.controls?.['firstName'].touched && this.regForm.controls?.['firstName'].invalid">
@@ -33,14 +33,14 @@
         </div>
 
         <ion-item>
-          <ion-input formControlName="lastName" placeholder="Last Name" class="input"></ion-input>
+          <ion-input formControlName="lastName" placeholder="* Last Name" class="input"></ion-input>
           <ion-icon name="person-outline"></ion-icon>
         </ion-item>
         <div *ngIf="this.regForm.controls?.['lastName'].touched && this.regForm.controls?.['lastName'].invalid">
           <ion-text color="danger">Last name is required</ion-text>
         </div>
         <ion-item>
-          <ion-input formControlName="email" placeholder="Email" class="input"></ion-input>
+          <ion-input formControlName="email" placeholder="* Email" class="input"></ion-input>
           <ion-icon name="mail-outline"></ion-icon>
         </ion-item>
         <div *ngIf="this.regForm.controls?.['email'].touched && this.regForm.controls?.['email'].invalid">
@@ -48,11 +48,10 @@
         </div>
 
         <ion-item>
-          <ion-input formControlName="password" placeholder="Password" class="input" type="password"></ion-input>
+          <ion-input formControlName="password" placeholder="* Password" class="input" type="password"></ion-input>
           <ion-icon name="lock-closed-outline"></ion-icon>
         </ion-item>
         <div *ngIf="this.regForm.controls?.['password'].touched && this.regForm.controls?.['password'].invalid">
-          <ion-text color="danger">Password is required</ion-text>
           <ion-text color="danger">Password must have at least 8 characters, one capital letter, one special symbol, and at least one number</ion-text>
         </div>
 
@@ -62,10 +61,10 @@
         </ion-item>
 
         <ion-item>
-          <ion-label position="stacked">Upload a Profile Picture</ion-label>
+          <ion-label class="text" position="stacked">Profile Picture</ion-label>
           <div (click)="addImage()" tappable>
             <p *ngIf="!capturedImage && !updateImage">
-              <ion-icon name="camera"></ion-icon>
+              <ion-icon class="icon" name="camera"></ion-icon>
             </p>
             <ion-avatar *ngIf="capturedImage && !updateImage">
               <img [src]="capturedImage">
