@@ -25,6 +25,8 @@ target 'App' do
   # Add your Pods here
 end
 
+project 'App.xcodeproj'
+
 post_install do |installer|
   assertDeploymentTarget(installer)
 end
