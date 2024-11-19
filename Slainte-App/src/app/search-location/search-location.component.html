@@ -1,20 +1,20 @@
 <ion-header>
-  <ion-toolbar class="ion-padding">
+  <ion-toolbar class="toolbar">
   <ion-buttons slot="start">
     <ion-back-button defaultHref="/"></ion-back-button>
   </ion-buttons>
-  <div class="toolbar-content">
-    <ion-searchbar
-    [(ngModel)]="userInput" search-icon="location" placeholder="Search location..." (ionInput)="onInputChange($event)">
-  </ion-searchbar>
-  <ion-icon name="search" (click)="onUserInputSubmit()"></ion-icon>
-</div>
 
   <div *ngIf="loading" class="spinner-container">
     <ion-spinner name="crescent"></ion-spinner>
   </div>
 </ion-toolbar>
 </ion-header>
+
+<div class="search-wrapper ion-padding">
+  <ion-searchbar [(ngModel)]="userInput" search-icon="location" placeholder="Search location..." (ionInput)="onInputChange($event)"></ion-searchbar>
+  <ion-button class="search-button" fill="clear" size="medium" (click)="onUserInputSubmit()">Search</ion-button>
+</div>
+
 
 <ion-content class="ion-padding">
   <ion-grid>

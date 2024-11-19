@@ -1,18 +1,23 @@
 <ion-header>
-  <div class="container">
+  <ion-toolbar>
+    <div class="container">
+      <div class="center-container">
+        <img src="/assets/images/Slainte-Logo.png" class="logo">
+      </div>
+      <ion-icon class="location-search-icon" slot="end" name="location-outline" (click)="openSearchLocationPage()"></ion-icon>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<!-- <div class="container">
   <div class="center-container">
     <img src="/assets/images/Slainte-Logo.png" class="logo">
   </div>
   <div>
   <ion-icon class="location-search-icon" slot="end" name="location-outline" (click)="openSearchLocationPage()"></ion-icon>
   </div>
-</div>
-
-</ion-header>
-
-
+</div> -->
 <ion-content class="ion-padding">
-
   <div *ngIf="userDetails">
     <ion-avatar class="profilePic">
       <img [src]="userDetails?.imageURL ? userDetails.imageURL : 'https://ionicframework.com/docs/img/demos/avatar.svg'" alt="User Profile Picture">
