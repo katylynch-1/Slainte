@@ -4,6 +4,8 @@ import { LoadingController } from '@ionic/angular';
 import { AuthenticationService } from '../services/authentication.service';
 import { Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { ToastController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-signup',
@@ -76,7 +78,7 @@ export class SignupPage implements OnInit {
     { label: 'Sports', controlName: 'sports' },
   ];
 
-  constructor(public formBuilder: FormBuilder, public loadingCtrl: LoadingController, public authService: AuthenticationService, public router: Router) { }
+  constructor(public formBuilder: FormBuilder, public loadingCtrl: LoadingController, public authService: AuthenticationService, public router: Router, private toastController: ToastController) { }
 
 
   ngOnInit() {
@@ -155,18 +157,35 @@ export class SignupPage implements OnInit {
   
 
   async addImage() {
-    const image = await Camera.getPhoto({
-      quality: 100,
-      allowEditing: true,
-      source: CameraSource.Camera,
-      resultType: CameraResultType.Base64
-    });
+    try {
+      const permissions = await Camera.requestPermissions();
+      if (permissions.camera !== 'granted') {
+        throw new Error('Camera permission not granted');
+      }
   
-    console.log("result", image);
-    
-    this.capturedImage = `data:image/jpeg;base64,${image.base64String}`;
-    
-    this.updateImage = false;
+      const image = await Camera.getPhoto({
+        quality: 100,
+        allowEditing: true,
+        source: CameraSource.Photos,
+        resultType: CameraResultType.Base64,
+      });
+  
+      this.capturedImage = `data:image/jpeg;base64,${image.base64String}`;
+      this.updateImage = false;
+    } catch (error) {
+      console.error('Camera error:', error);
+      await this.presentToast('Camera error or permission not granted', 'danger');
+    }
+  }  
+  
+  async presentToast(message: string, color: string = 'danger') {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000, 
+      color: color, 
+      position: 'bottom' 
+    });
+    toast.present();
   }
   
 

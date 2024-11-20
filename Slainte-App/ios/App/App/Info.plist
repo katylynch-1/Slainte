@@ -10,6 +10,8 @@
     <string>Allow Sláinte to use your camera to take profile pictures.</string>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>Allow Sláinte to access your photo library to select profile pictures.</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>Allow Sláinte to access your photo library to select profile pictures.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
