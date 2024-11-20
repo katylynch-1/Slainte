@@ -4,7 +4,7 @@ import { FormBuilder } from '@angular/forms';
 import { LoadingController } from '@ionic/angular';
 import { AuthenticationService } from '../services/authentication.service';
 import { Router } from '@angular/router';
-import { FirebaseError } from '@firebase/util'; // Import this if you use Firebase
+import { FirebaseError } from '@firebase/util'; // Firebase error handling
 
 
 @Component({

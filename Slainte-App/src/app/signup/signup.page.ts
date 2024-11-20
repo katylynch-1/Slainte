@@ -91,7 +91,7 @@ export class SignupPage implements OnInit {
       password: ['', [
         Validators.required, 
         //One upper case, one lower case, one number, one special character, min length of 8 characters
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&+=";:,.#€£$<>_-])[A-Za-z\d@$!%*?&+=";:,.#€£$<>_-]{8,}$/)
       ]],
       userBio: [''],
       bars: [false], nightclubs: [false],  pubs: [false],  lateBars: [false],
