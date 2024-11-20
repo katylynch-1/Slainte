@@ -199,7 +199,7 @@ export class Tab3Page implements OnInit {
       const image = await Camera.getPhoto({
         quality: 100,
         allowEditing: true,
-        source: CameraSource.Camera,
+        source: CameraSource.Photos,
         resultType: CameraResultType.Uri,
       });
 
