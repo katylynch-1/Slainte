@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlacesdataService } from '../services/placesdata.service';
 import { Geolocation } from '@capacitor/geolocation';
-import { firstValueFrom } from 'rxjs'; // Import firstValueFrom
+import { firstValueFrom } from 'rxjs'; 
 import { NavigationExtras, Router } from '@angular/router';
 import { VenuedataService } from '../services/venuedata.service';
 

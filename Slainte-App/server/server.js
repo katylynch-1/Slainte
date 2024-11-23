@@ -9,7 +9,6 @@ const GOOGLE_API_KEY = 'AIzaSyB7PYP1oKkK-1qkgTus3x0C_uRbqPdfAa0';
 // Enable CORS for all routes
 app.use(cors());
 
-// images
 app.use(express.static('public'));
 
 
