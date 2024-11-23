@@ -18,6 +18,7 @@ export class SignupPage implements OnInit {
   capturedImage = "";
   updateImage = false;
   selectedStep: string = 'step1';
+  showPassword: boolean = false;
 
 
   atmosphereOptions = [
@@ -187,6 +188,9 @@ export class SignupPage implements OnInit {
     });
     toast.present();
   }
-  
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
 
 }

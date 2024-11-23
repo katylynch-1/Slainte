@@ -48,8 +48,10 @@
         </div>
 
         <ion-item>
-          <ion-input formControlName="password" placeholder="* Password" class="input" type="password"></ion-input>
-          <ion-icon name="lock-closed-outline"></ion-icon>
+          <ion-input formControlName="password" placeholder="* Password" class="input" [type]="showPassword ? 'text' : 'password'"></ion-input>
+          <ion-button fill="clear" (click)="togglePasswordVisibility()">
+            <ion-icon [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+          </ion-button>
         </ion-item>
         <div *ngIf="this.regForm.controls?.['password'].touched && this.regForm.controls?.['password'].invalid">
           <ion-text color="danger">Password must have at least 8 characters, one capital letter, one special symbol, and at least one number</ion-text>

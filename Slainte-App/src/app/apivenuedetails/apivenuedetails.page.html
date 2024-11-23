@@ -19,7 +19,8 @@
             <div class="card-header-container">
               <ion-card-title> {{apiVenue.name}} </ion-card-title>
               <div class="icons-container">
-                <ion-icon name="bookmark-outline" class="icon"></ion-icon>
+                <!-- <ion-icon name="bookmark-outline" class="icon"></ion-icon> -->
+                <ion-icon name="logo-google" class="icon"></ion-icon>
               </div>
             </div>
           </ion-card-header>
@@ -48,10 +49,8 @@
             </div>  
           </ion-card-content>
             <ion-footer>
-              <div id="buttons">
-              <ion-button shape="round"><ion-icon name="share-outline"></ion-icon>Share</ion-button>
-              <ion-button shape="round" (click)="openGoogleMaps(apiVenue.name)"><ion-icon name="compass-outline"></ion-icon>Get Directions</ion-button>
-            </div>
+              <!-- <ion-button shape="round"><ion-icon name="share-outline"></ion-icon>Share</ion-button> -->
+              <ion-button shape="round" expand="block" (click)="openGoogleMaps(apiVenue.name)"><ion-icon name="compass-outline"></ion-icon>Get Directions</ion-button>
             </ion-footer>
         </ion-card>
       </ion-col>
