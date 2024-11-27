@@ -28,8 +28,8 @@ export class ChatComponent  implements OnInit {
 
     this.authService.getUser().subscribe(user => {
       if (user) {
-        this.currentUserId = user.uid; // Get current logged in user and assign it as user1Id
-        this.user1Id = user.uid;
+        this.currentUserId = user.uid; // Get current logged in user 
+        this.user1Id = user.uid; // Assign it as user1Id
 
         this.route.paramMap.subscribe(params => {
           this.user2Id = params.get('recipientId') || ''; // Get recipient Id as user2Id 
