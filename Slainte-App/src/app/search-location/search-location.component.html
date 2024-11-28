@@ -16,25 +16,21 @@
 </div>
 
 
-<ion-content class="ion-padding">
+<!-- <ion-content class="ion-padding">
   <ion-grid>
     <div *ngIf="!loading">
       <div *ngIf="bars.length > 0; else noBars">
-        <ion-row>
+        <ion-row> -->
           <!-- Loop through the bars array -->
-          <ion-col 
-            *ngFor="let bar of bars" 
-            size="12" size-sm="6" size-md="3" size-lg="3" size-xl="3"
-            class="uniform-col"
-          >
-            <ion-card class="venue-card" (click)="openApiVenueDetails(bar)">
+          <!-- <ion-col 
+            *ngFor="let bar of bars" size="12" size-sm="6" size-md="3" size-lg="3" size-xl="3"class="uniform-col">
+            <ion-card class="venue-card" (click)="openApiVenueDetails(bar)"> -->
               <!-- Venue image -->
-              <img class="venue-image" *ngIf="bar.photos && bar.photos.length > 0" [src]="bar.photos[0].photoUrl" alt="{{ bar.name }}">
+              <!-- <img class="venue-image" *ngIf="bar.photos && bar.photos.length > 0" [src]="bar.photos[0].photoUrl" alt="{{ bar.name }}"> -->
               <!-- Venue information -->
-              <ion-card-header>
+              <!-- <ion-card-header>
                 <ion-card-title>{{ bar.name }}</ion-card-title>
               </ion-card-header>
-              <!-- Venue tags -->
               <ion-card-content>
                 <p>
                   <ion-icon name="location-outline" class="icon"></ion-icon>
@@ -51,6 +47,42 @@
         </div>
       </ng-template>
     </div>
-  </ion-grid>
-</ion-content>
+  </ion-grid> -->
+<!-- </ion-content> -->
+ <ion-content class="ion-padding">
+  <div *ngIf="!loading">
+    <div *ngIf="bars.length > 0; else noBars">
+      <ion-card *ngFor="let bar of bars" class="venue-card" (click)="openApiVenueDetails(bar)">
+        <img class="venue-image" *ngIf="bar.photos && bar.photos.length > 0" [src]="bar.photos[0].photoUrl" alt="{{ bar.name }}">
+        <ion-card-header>
+          <div class="card-header-container">
+          <ion-card-title> 
+            {{ bar.name }}
+          </ion-card-title>
+          <div class="icons-container">
+            <ion-icon name="logo-google" class="icon"></ion-icon>
+          </div>
+          </div>
+        </ion-card-header>
+        <ion-card-content>
+          <p class="venue-address">
+            <ion-icon name="location-outline" class="icon"></ion-icon>
+            <span> {{ bar.vicinity }}</span>
+          </p>
+          <p>
+            <ion-badge color="warning" class="rating-badge">
+              <ion-icon name="star" class="rating-icon"></ion-icon>
+              <span> {{ bar.rating }} </span>
+            </ion-badge>
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+  <ng-template #noBars>
+    <div class="no-bars-message">
+      <p> No venues found in this area. try searching another location. </p>
+    </div>
+  </ng-template>
+ </ion-content>
 

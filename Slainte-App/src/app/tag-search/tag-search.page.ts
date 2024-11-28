@@ -28,7 +28,7 @@ export class TagSearchPage implements OnInit {
   searchVenuesByTag(tag: string){
     this.venueService.getVenues().subscribe(venues => {
       // Filter venues based on the selected tag
-      this.venues = venues.filter(venue => venue[tag.toLowerCase()]);
+      this.venues = venues.filter(venue => venue[tag]);
     })
   }
 

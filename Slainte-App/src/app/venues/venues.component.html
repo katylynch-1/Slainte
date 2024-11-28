@@ -7,9 +7,10 @@
         <ion-card *ngFor="let bar of bars" class="venue-card" (click)="openApiVenueDetails(bar)">
           <img class="venue-image" *ngIf="bar.photos && bar.photos.length > 0" [src]="bar.photos[0].photoUrl" alt="{{ bar.name }}">
           <ion-card-header>
-            <ion-card-title>{{ bar.name }}</ion-card-title>
+            <ion-card-title>
+              {{ bar.name }}
+            </ion-card-title>
           </ion-card-header>
-
           <ion-card-content>
             <p>
               <ion-icon name="location-outline" class="icon"></ion-icon>
@@ -31,4 +32,4 @@
       </div>
     </ng-template>
   </div>
-
+</ion-content>

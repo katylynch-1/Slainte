@@ -25,58 +25,58 @@
         <ion-card-content>
           <div class="chip-container">
             <!-- Atmosphere -->
-            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="venue.traditional" (click)="goToTagSearch('Traditional')">Traditional</ion-chip> 
-            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="venue.casual" (click)="goToTagSearch('Casual')">Casual</ion-chip> 
-            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="venue.cosy" (click)="goToTagSearch('Cosy')">Cosy</ion-chip> 
-            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="venue.energetic" (click)="goToTagSearch('Energetic')">Energetic</ion-chip> 
-            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="venue.alternative" (click)="goToTagSearch('Alternative')">Alternative</ion-chip> 
-            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="venue.relaxed" (click)="goToTagSearch('Relaxed')">Relaxed</ion-chip> 
-            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="venue.fancy" (click)="goToTagSearch('Fancy')">Fancy</ion-chip> 
-            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="venue.lgbtq" (click)="goToTagSearch('LGBTQ+')">LGBTQ+</ion-chip> 
-            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="venue.loud" (click)="goToTagSearch('Loud')">Loud</ion-chip> 
+            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="venue.traditional" (click)="goToTagSearch('traditional')">Traditional</ion-chip> 
+            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="venue.casual" (click)="goToTagSearch('casual')">Casual</ion-chip> 
+            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="venue.cosy" (click)="goToTagSearch('cosy')">Cosy</ion-chip> 
+            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="venue.energetic" (click)="goToTagSearch('energetic')">Energetic</ion-chip> 
+            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="venue.alternative" (click)="goToTagSearch('alternative')">Alternative</ion-chip> 
+            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="venue.relaxed" (click)="goToTagSearch('relaxed')">Relaxed</ion-chip> 
+            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="venue.fancy" (click)="goToTagSearch('fancy')">Fancy</ion-chip> 
+            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="venue.lgbtq" (click)="goToTagSearch('lgbtq')">LGBTQ+</ion-chip> 
+            <ion-chip class="atmosphere-chips" [outline]="true" *ngIf="venue.loud" (click)="goToTagSearch('loud')">Loud</ion-chip> 
 
             <!-- Drinks -->
-            <ion-chip class="drinks-chips" [outline]="true" *ngIf="venue.cocktails" (click)="goToTagSearch('Cocktails')">Cocktails</ion-chip> 
-            <ion-chip class="drinks-chips" [outline]="true" *ngIf="venue.gin" (click)="goToTagSearch('Gin')">Gin</ion-chip> 
-            <ion-chip class="drinks-chips" [outline]="true" *ngIf="venue.goodGuinness" (click)="goToTagSearch('Good Guinness')">Good Guinness</ion-chip> 
-            <ion-chip class="drinks-chips" [outline]="true" *ngIf="venue.pints" (click)="goToTagSearch('Pints')">Pints</ion-chip> 
-            <ion-chip class="drinks-chips" [outline]="true" *ngIf="venue.nonAlcoholic" (click)="goToTagSearch('Non-Alcoholic')">Non-Alcoholic</ion-chip> 
-            <ion-chip class="drinks-chips" [outline]="true" *ngIf="venue.whiskey" (click)="goToTagSearch('Whiksey')">Whiskey</ion-chip>
-            <ion-chip class="drinks-chips" [outline]="true" *ngIf="venue.wine" (click)="goToTagSearch('Wine')">Wine</ion-chip> 
+            <ion-chip class="drinks-chips" [outline]="true" *ngIf="venue.cocktails" (click)="goToTagSearch('cocktails')">Cocktails</ion-chip> 
+            <ion-chip class="drinks-chips" [outline]="true" *ngIf="venue.gin" (click)="goToTagSearch('gin')">Gin</ion-chip> 
+            <ion-chip class="drinks-chips" [outline]="true" *ngIf="venue.goodGuinness" (click)="goToTagSearch('goodGuinness')">Good Guinness</ion-chip> 
+            <ion-chip class="drinks-chips" [outline]="true" *ngIf="venue.pints" (click)="goToTagSearch('pints')">Pints</ion-chip> 
+            <ion-chip class="drinks-chips" [outline]="true" *ngIf="venue.nonAlcoholic" (click)="goToTagSearch('nonAlcoholic')">Non-Alcoholic</ion-chip> 
+            <ion-chip class="drinks-chips" [outline]="true" *ngIf="venue.whiskey" (click)="goToTagSearch('whiskey')">Whiskey</ion-chip>
+            <ion-chip class="drinks-chips" [outline]="true" *ngIf="venue.wine" (click)="goToTagSearch('wine')">Wine</ion-chip> 
 
             <!-- Music -->
-            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.hipHop" (click)="goToTagSearch('Hip-Hop')">Hip-Hop</ion-chip> 
-            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.house" (click)="goToTagSearch('House')">House</ion-chip> 
-            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.indie" (click)="goToTagSearch('Indie')">Indie</ion-chip> 
-            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.jazz" (click)="goToTagSearch('Jazz')">Jazz</ion-chip> 
-            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.pop" (click)="goToTagSearch('Pop')">Pop</ion-chip> 
-            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.rNb" (click)="goToTagSearch('R&B')">R&B</ion-chip>
-            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.reggaeton" (click)="goToTagSearch('Reggaeton')">Reggaeton</ion-chip> 
-            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.rock" (click)="goToTagSearch('Rock')">Rock</ion-chip>
-            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.techno" (click)="goToTagSearch('Techno')">Techno</ion-chip> 
-            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.trad" (click)="goToTagSearch('Trad')">Trad</ion-chip> 
+            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.hipHop" (click)="goToTagSearch('hipHop')">Hip-Hop</ion-chip> 
+            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.house" (click)="goToTagSearch('house')">House</ion-chip> 
+            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.indie" (click)="goToTagSearch('indie')">Indie</ion-chip> 
+            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.jazz" (click)="goToTagSearch('jazz')">Jazz</ion-chip> 
+            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.pop" (click)="goToTagSearch('pop')">Pop</ion-chip> 
+            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.rNb" (click)="goToTagSearch('rAndB')">R&B</ion-chip>
+            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.reggaeton" (click)="goToTagSearch('reggaeton')">Reggaeton</ion-chip> 
+            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.rock" (click)="goToTagSearch('rock')">Rock</ion-chip>
+            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.techno" (click)="goToTagSearch('techno')">Techno</ion-chip> 
+            <ion-chip class="music-chips" [outline]="true" *ngIf="venue.trad" (click)="goToTagSearch('trad')">Trad</ion-chip> 
 
             <!-- Amenities -->
-            <ion-chip class="amenities-chips" [outline]="true" *ngIf="venue.accessible" (click)="goToTagSearch('Accessible')">Accessible</ion-chip> 
-            <ion-chip class="amenities-chips" [outline]="true" *ngIf="venue.beerGarden" (click)="goToTagSearch('Beer Garden')">Beer Garden</ion-chip> 
-            <ion-chip class="amenities-chips" [outline]="true" *ngIf="venue.cloakRoom" (click)="goToTagSearch('Cloak Room')">Cloak Room</ion-chip> 
-            <ion-chip class="amenities-chips" [outline]="true" *ngIf="venue.danceFloor" (click)="goToTagSearch('Dance Floor')">Dance Floor</ion-chip> 
-            <ion-chip class="amenities-chips" [outline]="true" *ngIf="venue.outdoorSeats" (click)="goToTagSearch('Outdoor Seats')">Outdoor Seats</ion-chip> 
-            <ion-chip class="amenities-chips" [outline]="true" *ngIf="venue.smokingArea" (click)="goToTagSearch('Smoking Area')">Smoking Area</ion-chip>
-            <ion-chip class="amenities-chips" [outline]="true" *ngIf="venue.budgetFriendly" (click)="goToTagSearch('Budget Friendly')">Budget-Friendly</ion-chip>
+            <ion-chip class="amenities-chips" [outline]="true" *ngIf="venue.accessible" (click)="goToTagSearch('accessible')">Accessible</ion-chip> 
+            <ion-chip class="amenities-chips" [outline]="true" *ngIf="venue.beerGarden" (click)="goToTagSearch('beerGarden')">Beer Garden</ion-chip> 
+            <ion-chip class="amenities-chips" [outline]="true" *ngIf="venue.cloakRoom" (click)="goToTagSearch('cloakRoom')">Cloak Room</ion-chip> 
+            <ion-chip class="amenities-chips" [outline]="true" *ngIf="venue.danceFloor" (click)="goToTagSearch('danceFloor')">Dance Floor</ion-chip> 
+            <ion-chip class="amenities-chips" [outline]="true" *ngIf="venue.outdoorSeats" (click)="goToTagSearch('outdoorSeats')">Outdoor Seats</ion-chip> 
+            <ion-chip class="amenities-chips" [outline]="true" *ngIf="venue.smokingArea" (click)="goToTagSearch('smokingArea')">Smoking Area</ion-chip>
+            <ion-chip class="amenities-chips" [outline]="true" *ngIf="venue.budgetFriendly" (click)="goToTagSearch('budgetFriendly')">Budget-Friendly</ion-chip>
 
             <!-- Entertainment -->
-            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.comedy" (click)="goToTagSearch('Comedy')">Comedy</ion-chip> 
-            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.dJ" (click)="goToTagSearch('DJ')">DJ</ion-chip> 
-            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.festival" (click)="goToTagSearch('Festival')">Festival</ion-chip> 
-            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.games" (click)="goToTagSearch('Games')">Games</ion-chip> 
-            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.karaoke" (click)="goToTagSearch('Karaoke')">Karaoke</ion-chip> 
-            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.liveGigs" (click)="goToTagSearch('Live Gigs')">Live Gigs</ion-chip>
-            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.openMic" (click)="goToTagSearch('Open Mic')">Open Mic</ion-chip> 
-            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.pubQuiz" (click)="goToTagSearch('Pub Quiz')">Pub Quiz</ion-chip>
-            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.raves" (click)="goToTagSearch('Raves')">Raves</ion-chip> 
-            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.specialisedEvents" (click)="goToTagSearch('Specialised Events')">Specialised Events</ion-chip>
-            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.sports" (click)="goToTagSearch('Sports')">Sports</ion-chip> 
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.comedy" (click)="goToTagSearch('comedy')">Comedy</ion-chip> 
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.dJ" (click)="goToTagSearch('dj')">DJ</ion-chip> 
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.festival" (click)="goToTagSearch('festival')">Festival</ion-chip> 
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.games" (click)="goToTagSearch('games')">Games</ion-chip> 
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.karaoke" (click)="goToTagSearch('karaoke')">Karaoke</ion-chip> 
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.liveGigs" (click)="goToTagSearch('liveGigs')">Live Gigs</ion-chip>
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.openMic" (click)="goToTagSearch('openMic')">Open Mic</ion-chip> 
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.pubQuiz" (click)="goToTagSearch('pubQuiz')">Pub Quiz</ion-chip>
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.raves" (click)="goToTagSearch('raves')">Raves</ion-chip> 
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.specialisedEvents" (click)="goToTagSearch('specialisedEvents')">Specialised Events</ion-chip>
+            <ion-chip class="entertainment-chips" [outline]="true" *ngIf="venue.sports" (click)="goToTagSearch('sports')">Sports</ion-chip> 
           </div>
           <br>
 

@@ -1,53 +1,86 @@
-.uniform-col {
-    display: flex; /* Ensures consistent card alignment */
-    justify-content: center; /* Centers cards horizontally */
+// .uniform-col {
+//     display: flex; /* Ensures consistent card alignment */
+//     justify-content: center; /* Centers cards horizontally */
+//   }
+  
+//   .venue-card {
+//     width: 100%; /* Ensures cards take up the full column width */
+//     max-width: 350px; /* Optional: Sets a maximum width for consistency */
+//     margin: 10px auto; /* Adds space around the cards */
+//     display: flex;
+//     flex-direction: column;
+//     justify-content:left; /* Ensures content is spaced out evenly */
+//   }
+  
+//   .venue-image {
+//     height: 200px;
+//     width: 100%;
+//     object-fit: cover;
+//   }
+
+//   ion-card-content {
+//     padding-bottom: 16px; 
+//   }
+  
+//   .ion-grid {
+//     --ion-padding: 16px; /* Adds padding to the grid */
+//   }
+  
+//   ion-row {
+//     --ion-margin-bottom: 16px; /* Adds spacing between rows */
+//   }
+  
+//   ion-col {
+//     display: flex;
+//     justify-content: center; /* Centers the cards horizontally */
+//   }
+  
+//   ion-icon {
+//     margin-left: 3px; /* Optional spacing for better alignment */
+//     width: 30px;
+//     height: 30px;
+//   }
+
+  .search-wrapper {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-button {
+    margin-left: 10px; // Space between search bar and button
   }
   
   .venue-card {
-    width: 100%; /* Ensures cards take up the full column width */
-    max-width: 350px; /* Optional: Sets a maximum width for consistency */
-    margin: 10px auto; /* Adds space around the cards */
-    display: flex;
-    flex-direction: column;
-    justify-content:left; /* Ensures content is spaced out evenly */
+    min-width: 300px;
+    max-height: 450px;
+    margin: 0;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-bottom: 10px;
   }
-  
-  .venue-image {
-    height: 200px;
+
+  .venue-image{
+    height: 100px;
     width: 100%;
     object-fit: cover;
   }
 
-  ion-card-content {
-    padding-bottom: 16px; 
+  .venue-address{
+    padding-bottom: 10px;
   }
   
-  .ion-grid {
-    --ion-padding: 16px; /* Adds padding to the grid */
-  }
-  
-  ion-row {
-    --ion-margin-bottom: 16px; /* Adds spacing between rows */
-  }
-  
-  ion-col {
+  .icons-container{
     display: flex;
-    justify-content: center; /* Centers the cards horizontally */
-  }
-  
-  ion-icon {
-    margin-left: 3px; /* Optional spacing for better alignment */
-    width: 30px;
-    height: 30px;
+    justify-content: flex-end;
+    .icon{
+      height: 20px;
+      width: 20px;
+    }
   }
 
-  .search-wrapper {
-    display: flex;               /* Enables a horizontal layout */
-    align-items: center;         /* Aligns items vertically */
+  .card-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
-  
-  .search-button {
-    margin-left: 10px;           /* Adds space between the search bar and button */
-  }
-  
-  
