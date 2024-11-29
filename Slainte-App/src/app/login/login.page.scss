@@ -30,7 +30,6 @@ ion-item{
     position: absolute;
     justify-content: center;
     left: 0;
-    bottom: 0;
     width: 80%;
     right:0;
 
@@ -44,8 +43,9 @@ ion-item{
 
 .forgotPassword{
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: left;
+    justify-content: left;
+    padding-left: 15px;
     a{
         font-weight: 400;
         font-size: 0.8rem;
@@ -58,6 +58,7 @@ ion-item{
     justify-content: center;
     align-items: center; /* Center vertically within the container */
     display: flex;
+    padding-top: 15px;
 }
 
 .logo {

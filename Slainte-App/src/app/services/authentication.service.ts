@@ -51,7 +51,7 @@ export class AuthenticationService {
         lastName: additionalData.lastName,
         userBio: additionalData.userBio,
         imageURL: imageURL,               // Store the download URL of the profile picture
-        imageFilename: imageFilename,     // Store the filename in case you need it later (e.g., to delete/replace)
+        imageFilename: imageFilename,     
         preferences: additionalData.preferences,
       });
   
