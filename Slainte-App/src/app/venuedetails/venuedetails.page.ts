@@ -104,7 +104,6 @@ async toggleSave() {
       console.log('Venue saved state after toggle:', this.isSaved);
   } catch (error) {
       console.error('Error toggling save state:', error);
-      // Handle error, e.g., show a message to the user
   }
 }
 
